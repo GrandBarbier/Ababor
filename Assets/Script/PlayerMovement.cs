@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private GameplayManager _gameplayManager;
     [SerializeField] List<GameObject> cases = new List<GameObject>();
+    [SerializeField] List<GameObject> altCases = new List<GameObject>();
 
   [SerializeField] private int actualCase;
 
@@ -13,8 +14,9 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _gameplayManager = FindObjectOfType<GameplayManager>();
-        cases = _gameplayManager.allCases;     
+        _gameplayManager = FindObjectOfType<GameplayManager>(); // Find gamemanager
+        cases = _gameplayManager.allCases; // assign the cases
+        altCases = _gameplayManager.allAltCases; // assign the alternative cases
     }
 
     // Update is called once per frame
@@ -22,16 +24,36 @@ public class PlayerMovement : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire1"))
         {
-           PlayerMove(); 
+            PlayerShowMove(); 
         }
     }
 
-    public void PlayerMove()
+    public void PlayerShowMove()
     {
+        bool startAlt = false;
+        int valueAlt = 0;
         for (int i = 0; i < moveValue; i++)
         {
+          //  Debug.Log(i);
             cases[actualCase + i + 1].GetComponent<Renderer>().material.color = Color.blue;
-            
+            if (cases[i].layer == 6)
+            {
+                valueAlt = i;
+                startAlt = true;
+            }
+
+            if (valueAlt >5)
+            {
+                valueAlt -= 5;
+            }
+
+            if (startAlt)
+            {
+                for (int j = 0; j < moveValue - valueAlt; j++)
+                {
+                    altCases[j].GetComponent<Renderer>().material.color = Color.blue;
+                }
+            }
         }
     }
 }
