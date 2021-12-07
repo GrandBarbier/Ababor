@@ -7,6 +7,16 @@
       <e p="Ababor.sln" t="IncludeFlat" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="Script" t="Include">
+          <e p="GameplayManager.cs" t="Include" />
+          <e p="PlayerMovement.cs" t="Include" />
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="CameraController.cs" t="Include" />
+          <e p="State.cs" t="Include" />
+          <e p="StateMachine.cs" t="Include" />
+          <e p="StressTest.cs" t="Include" />
+        </e>
         <e p="Shaders" t="Include">
           <e p="CGIncludes" t="Include">
             <e p="Flow.cginc" t="Include" />
@@ -19,7 +29,6 @@
             <e p="Water.shader" t="Include" />
           </e>
         </e>
-        <e p="Testing.cs" t="Include" />
       </e>
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
