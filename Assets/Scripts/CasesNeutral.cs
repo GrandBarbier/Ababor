@@ -9,8 +9,7 @@ public class CasesNeutral : Cases
     void Start()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>();
-        index = _gameplayManager.allCases.IndexOf(gameObject);
-        FindNext();
+       
     }
 
     // Update is called once per frame
@@ -18,4 +17,15 @@ public class CasesNeutral : Cases
     {
         
     }
+
+    public void Outline()
+    {
+        for (int i = 0; i < nextCases.Count; i++)
+        {
+           nextCases[i].GetComponent<CasesNeutral>().GetComponent<Renderer>().material.color = Color.blue;
+        //  gameObject.GetComponent<Renderer>().material.color = Color.blue;
+        }
+        
+    }
+    
 }

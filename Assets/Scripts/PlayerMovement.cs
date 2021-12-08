@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] List<GameObject> cases = new List<GameObject>();
     [SerializeField] List<GameObject> newCases = new List<GameObject>();
     public List<GameObject> nextPart;
+    public List<GameObject> caseNext;
   [SerializeField] private int actualCase;
 
   public int moveValue = 5;
@@ -16,8 +17,9 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>(); // Find gamemanager
-        cases = _gameplayManager.allCases; // assign the cases
+        cases = _gameplayManager.allCases ; // assign the cases
         casesPart = _gameplayManager.allPart; // assign the alternative cases
+        
     }
 
     // Update is called once per frame
@@ -31,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     
-    public void PlayerShowMove1()
+/*    public void PlayerShowMove1()
     {
         bool startAlt = false;
         int value = 0;
@@ -57,17 +59,23 @@ public class PlayerMovement : MonoBehaviour
           /*  if (startAlt)
             {
                 Test(value);
-            }*/
+            }
            
             
         }
-    }
+    }*/
 
     public void PlayerShowMove()
     {
+        List<int> next = new List<int>();
         for (int i = 0; i < moveValue; i++)
         {
-            
+            for (int j = 0; j < caseNext.Count; j++)
+            {
+                    caseNext[j].GetComponent<CasesNeutral>().Outline();
+                    caseNext = caseNext[j].GetComponent<CasesNeutral>().nextCases;
+            }
+            Debug.Log(i);
         }
     }
     

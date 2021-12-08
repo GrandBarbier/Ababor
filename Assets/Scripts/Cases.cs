@@ -14,7 +14,6 @@ public abstract class Cases : MonoBehaviour
     {
         _gameplayManager = FindObjectOfType<GameplayManager>();
         index = _gameplayManager.allCases.IndexOf(gameObject);
-        FindNext();
     }
 
     // Update is called once per frame
@@ -22,14 +21,5 @@ public abstract class Cases : MonoBehaviour
     {
         
     }
-
-     public virtual void FindNext()
-    {
-        nextCases.Add(_gameplayManager.allCases[index+1]);
-    }
-
-    public void ChangeColor()
-    {
-        gameObject.GetComponent<Renderer>().material.color = Color.blue;
-    }
+    
 }

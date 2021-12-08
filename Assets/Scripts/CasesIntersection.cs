@@ -10,8 +10,7 @@ public class CasesIntersection : Cases
     {
         _gameplayManager = FindObjectOfType<GameplayManager>();
         index = _gameplayManager.allCases.IndexOf(gameObject);
-        FindNext();
-        totalCase = FindObjectsOfType<CasesNeutral>().Length;
+//        totalCase = GameObject.FindGameObjectsWithTag("AltCase").Length;
     }
 
     // Update is called once per frame
@@ -20,11 +19,7 @@ public class CasesIntersection : Cases
         
     }
 
-    public override void FindNext()
-    {
-        nextCases.Add(_gameplayManager.allCases[index+1]);
-        nextCases.Add(_gameplayManager.allCases[totalCase]);
-    }
+
 
    
 }

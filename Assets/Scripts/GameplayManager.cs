@@ -13,12 +13,12 @@ public class GameplayManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        allPart = GameObject.FindGameObjectsWithTag("CasePart").ToList(); // Add all case in a list
+//        allPart = GameObject.FindGameObjectsWithTag("CasePart").ToList(); // Add all case in a list
       //  allAltCases = GameObject.FindGameObjectsWithTag("CaseAlt").ToList(); // Add all alternative case in a list
         allCases = GameObject.FindGameObjectsWithTag("Case").ToList();
         allCases.Reverse();
         numberCase = allCases.Count;
-        // allCases.Sort(SortByName);
+        allCases.Sort(SortByName);
         //    allAltCases.Sort(SortByName); //Sort cases by name
 
     }
@@ -32,6 +32,6 @@ public class GameplayManager : MonoBehaviour
     
     private int SortByName(GameObject object1, GameObject object2) // function to sort cases
     {
-       return  object1.name.CompareTo(object2.name);
+       return  object1.GetComponent<CasesNeutral>().index.CompareTo(object2.GetComponent<CasesNeutral>().index);
     }
 }
