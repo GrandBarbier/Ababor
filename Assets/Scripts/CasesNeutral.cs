@@ -18,14 +18,18 @@ public class CasesNeutral : Cases
         
     }
 
-    public void Outline()
+    public void Outline(List<GameObject> list, float remain)
     {
-        for (int i = 0; i < nextCases.Count; i++)
-        {
-           nextCases[i].GetComponent<CasesNeutral>().GetComponent<Renderer>().material.color = Color.blue;
-        //  gameObject.GetComponent<Renderer>().material.color = Color.blue;
-        }
         
+        if (remain > 0)
+        {
+            foreach (GameObject obj in nextCases )
+            {
+                
+                obj.GetComponent<CasesNeutral>().Outline(obj.GetComponent<CasesNeutral>().nextCases, remain-1);
+                obj.GetComponent<Renderer>().material.color = Color.blue;
+                
+            }
+        }
     }
-    
 }

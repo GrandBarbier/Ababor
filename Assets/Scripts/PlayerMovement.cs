@@ -67,16 +67,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayerShowMove()
     {
-        List<int> next = new List<int>();
-        for (int i = 0; i < moveValue; i++)
-        {
-            for (int j = 0; j < caseNext.Count; j++)
-            {
-                    caseNext[j].GetComponent<CasesNeutral>().Outline();
-                    caseNext = caseNext[j].GetComponent<CasesNeutral>().nextCases;
-            }
-            Debug.Log(i);
-        }
+       caseNext[0].GetComponent<CasesNeutral>().Outline(caseNext,moveValue);
     }
     
 
