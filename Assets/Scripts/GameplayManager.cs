@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ public class GameplayManager : MonoBehaviour
 {
     public List<GameObject> allPart = new List<GameObject>();
     public List<GameObject> allCases = new List<GameObject>();
-
+    public StateMachine stateMachine;
     public int numberCase;
   //  public List<GameObject> allAltCases = new List<GameObject>();
     // Start is called before the first frame update
@@ -21,6 +22,11 @@ public class GameplayManager : MonoBehaviour
         allCases.Sort(SortByName);
         //    allAltCases.Sort(SortByName); //Sort cases by name
 
+    }
+
+    void Start()
+    {
+        
     }
 
     // Update is called once per frame

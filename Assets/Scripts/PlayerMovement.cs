@@ -5,21 +5,20 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private GameplayManager _gameplayManager;
-    [SerializeField] List<GameObject> casesPart = new List<GameObject>();
-    [SerializeField] List<GameObject> cases = new List<GameObject>();
-    [SerializeField] List<GameObject> newCases = new List<GameObject>();
-    public List<GameObject> nextPart;
+    public List<GameObject> allCases;
     public List<GameObject> caseNext;
   [SerializeField] private int actualCase;
+    public StateMachine stateMachine;
+    public MousePosition mousePos;
+    public GameObject child;
+    public int moveValue = 5;
 
-  public int moveValue = 5;
+    public bool end;
     // Start is called before the first frame update
     void Start()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>(); // Find gamemanager
-        cases = _gameplayManager.allCases ; // assign the cases
-        casesPart = _gameplayManager.allPart; // assign the alternative cases
-        
+        allCases = _gameplayManager.allCases;
     }
 
     // Update is called once per frame
@@ -27,52 +26,46 @@ public class PlayerMovement : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire1"))
         {
-            PlayerShowMove(); 
-            Debug.Log(nextPart);
-        }
-    }
-
-    
-/*    public void PlayerShowMove1()
-    {
-        bool startAlt = false;
-        int value = 0;
-        for (int i = 0; i < moveValue; i++)
-        {
-            cases[actualCase + i + 1].GetComponent<Renderer>().material.color = Color.blue;
-            if (cases[i].layer == 6)
-            {
-              
-               // startAlt = true;
-                //value = i;
-                
-                foreach (GameObject part in nextPart)
-                {
-                    for (int j = 0; j < moveValue - i; j++)
-                    {
-                        newCases.Add(part.transform.GetChild(j).gameObject);
-                        newCases[j].GetComponent<Renderer>().material.color = Color.blue;
-                    }
-                }
-            }
-
-          /*  if (startAlt)
-            {
-                Test(value);
-            }
-           
+            PlayerShowMove();
             
         }
-    }*/
+        if (Input.GetButtonUp("Fire2") && mousePos.caseTouch.GetComponent<CasesNeutral>().isInRanged )
+        {
+            
+            child.transform.position = mousePos.caseTouch.transform.position;
+            caseNext[0] = mousePos.caseTouch;
+            end = true;
+            
+           
+        }
+
+        if (end)
+        {
+            float speed = 10f ;
+          
+         
+            foreach (GameObject obj in allCases)
+            {
+                obj.GetComponent<CasesNeutral>().ResetColor();
+            }
+            
+            if (transform.position != mousePos.caseTouch.transform.position)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, child.transform.position, speed * Time.deltaTime);
+                Debug.Log(1);
+               
+            }
+           
+           
+
+           
+        }
+    }
 
     public void PlayerShowMove()
     {
        caseNext[0].GetComponent<CasesNeutral>().Outline(caseNext,moveValue);
     }
-    
 
    
-    
-    
-    
 }
