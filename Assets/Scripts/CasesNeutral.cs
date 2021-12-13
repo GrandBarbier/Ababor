@@ -38,5 +38,6 @@ public class CasesNeutral : Cases
     public void ResetColor()
     {
         renderer.material.color = baseColor;
+        isInRanged = false;
     }
 }

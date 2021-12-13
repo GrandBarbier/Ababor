@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public MousePosition mousePos;
     public GameObject child;
     public int moveValue = 5;
-
+    public NavMeshAgent agent;
     public bool end;
     // Start is called before the first frame update
     void Start()
@@ -29,14 +30,14 @@ public class PlayerMovement : MonoBehaviour
             PlayerShowMove();
             
         }
-        if (Input.GetButtonUp("Fire2") && mousePos.caseTouch.GetComponent<CasesNeutral>().isInRanged )
+        if (Input.GetButtonUp("Fire2") && mousePos.caseTouch.CompareTag("Case") )
         {
-            
-            child.transform.position = mousePos.caseTouch.transform.position;
-            caseNext[0] = mousePos.caseTouch;
-            end = true;
-            
-           
+            if (mousePos.caseTouch.GetComponent<CasesNeutral>().isInRanged)
+            {
+                child.transform.position = mousePos.caseTouch.transform.position + Vector3.up*2;
+                caseNext[0] = mousePos.caseTouch;
+                end = true;
+            }
         }
 
         if (end)
@@ -49,13 +50,17 @@ public class PlayerMovement : MonoBehaviour
                 obj.GetComponent<CasesNeutral>().ResetColor();
             }
             
-            if (transform.position != mousePos.caseTouch.transform.position)
+            if (transform.position.x != child.transform.position.x && transform.position.z != child.transform.position.z)
             {
-                transform.position = Vector3.MoveTowards(transform.position, child.transform.position, speed * Time.deltaTime);
+                agent.destination = child.transform.position;
+              //transform.position = Vector3.MoveTowards(transform.position, child.transform.position, speed * Time.deltaTime);
                 Debug.Log(1);
                
             }
-           
+            else
+            {
+                end = false;
+            }
            
 
            
