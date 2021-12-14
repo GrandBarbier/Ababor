@@ -13,7 +13,8 @@ public class CasesNeutral : Cases
     void Start()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>();
-        baseColor = renderer.material.color;
+        
+        
     }
 
     // Update is called once per frame
@@ -31,6 +32,7 @@ public class CasesNeutral : Cases
                 obj.GetComponent<CasesNeutral>().Outline(obj.GetComponent<CasesNeutral>().nextCases, remain-1);
                 obj.GetComponent<Renderer>().material.color = Color.blue;
                 obj.GetComponent<CasesNeutral>().isInRanged = true;
+               
             }
         }
     }

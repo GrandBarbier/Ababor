@@ -14,21 +14,7 @@ public class StateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Jump"))
-        {
-            _currentState.DoState();
-           ChangeState(new Moving());
-        }
 
-        if (Input.GetButtonDown("Cancel"))
-        {
-            ChangeState(new CardPLay());
-        }
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            ChangeState(new EndTurn());
-        }
         
     }
 
