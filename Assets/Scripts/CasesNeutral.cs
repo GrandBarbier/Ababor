@@ -13,8 +13,8 @@ public class CasesNeutral : Cases
     void Start()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>();
-        
-        
+        renderer = gameObject.GetComponent<Renderer>();
+
     }
 
     // Update is called once per frame
