@@ -8,7 +8,7 @@ public class GameplayManager : MonoBehaviour
 {
     public List<GameObject> allPlayer = new List<GameObject>();
     public List<GameObject> allCases = new List<GameObject>();
-    public int numberCase;
+   
     public int playerIndex;
     public State currentstate;
   //  public List<GameObject> allAltCases = new List<GameObject>();
@@ -18,7 +18,6 @@ public class GameplayManager : MonoBehaviour
         allCases = GameObject.FindGameObjectsWithTag("Case").ToList();
         allPlayer = GameObject.FindGameObjectsWithTag("Player").ToList();
         allCases.Reverse();
-        numberCase = allCases.Count;
         allCases.Sort(SortByName);
         currentstate = new Moving();
     }

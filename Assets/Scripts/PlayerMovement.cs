@@ -13,14 +13,14 @@ public class PlayerMovement : MonoBehaviour
     public int moveValue = 5;
     public NavMeshAgent agent;
     public bool end;
-
+    public bool moving;
     public StateMachine stateMachine;
     // Start is called before the first frame update
     void Start()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>(); // Find gamemanager
         allCases = _gameplayManager.allCases;
-        stateMachine = FindObjectOfType<StateMachine>();
+       
     }
 
     // Update is called once per frame
@@ -29,35 +29,35 @@ public class PlayerMovement : MonoBehaviour
         
         if (Input.GetButtonUp("Fire1") && mousePos.caseTouch.CompareTag("Case") )
         {
-            if (mousePos.caseTouch.GetComponent<CasesNeutral>().isInRanged)
+            if (mousePos.caseTouch.GetComponent<CasesNeutral>().isInRanged) // get case to go to
             {
                 child.transform.position = mousePos.caseTouch.transform.position;
                 caseNext[0] = mousePos.caseTouch;
                 end = true;
-                Debug.Log(2);
+                moving = true;
             }
         }
 
         if (end)
         {
-            PlayerResetCase();
+            PlayerResetCase(); 
             agent.destination = child.transform.position;
-            if (Vector3.Distance(transform.position,child.transform.position) <= 2f )
+            if (Vector3.Distance(transform.position,child.transform.position) <= 2f ) // set end turn
             {
-                Debug.Log(3);
                 State endTurn = new EndTurn();
                 endTurn.DoState(gameObject);
                 end = false;
+                moving = false;
             }
         }
     }
 
-    public void PlayerShowMove()
+    public void PlayerShowMove()  // change color of all case in range
     {
        caseNext[0].GetComponent<CasesNeutral>().Outline(caseNext,moveValue);
     }
 
-    public void PlayerResetCase()
+    public void PlayerResetCase() // Reset the color of all cases
     {
         foreach (GameObject obj in allCases)
         {
