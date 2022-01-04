@@ -8,7 +8,7 @@ public class GameplayManager : MonoBehaviour
 {
     public List<GameObject> allPlayer = new List<GameObject>();
     public List<GameObject> allCases = new List<GameObject>();
-   
+    public GameObject activPlayer;
     public int playerIndex;
     public State currentstate;
   //  public List<GameObject> allAltCases = new List<GameObject>();
@@ -27,7 +27,6 @@ public class GameplayManager : MonoBehaviour
         foreach (GameObject obj in allPlayer)
         {
            obj.GetComponent<PlayerMovement>().enabled = false;
-           
         }
         currentstate.DoState(allPlayer[playerIndex]);
     }
@@ -35,7 +34,7 @@ public class GameplayManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        activPlayer = allPlayer[playerIndex];
     }
     
     
@@ -52,5 +51,6 @@ public class GameplayManager : MonoBehaviour
     public void ResetIndex()
     {
         playerIndex = 0;
+       
     }
 }

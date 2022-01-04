@@ -22,15 +22,16 @@ public class Moving : State
         PlayerMovement plMove = player.GetComponent<PlayerMovement>();
         plMove.enabled = true;
         plMove.PlayerShowMove();
+        Debug.Log("e");
     }
 }
 
 public class Acting : State
 {
     //Action player
-    public override void DoState(GameObject player)
+    public override void DoState(GameObject cases)
     {
-        Debug.Log(3);
+       
     }
 }
 
@@ -42,13 +43,8 @@ public class EndTurn : State
         PlayerMovement plMove = player.GetComponent<PlayerMovement>();
         GameplayManager gameplayManager = GameObject.FindObjectOfType<GameplayManager>();
         gameplayManager.currentstate = new Moving();
-        gameplayManager.playerIndex++;
         plMove.enabled = false;
-        if (gameplayManager.playerIndex>= gameplayManager.allPlayer.Count)
-        {
-            gameplayManager.ResetIndex();
-        }
-        gameplayManager.ButtonStart();
+        Debug.Log(player);
     }
 }
 
