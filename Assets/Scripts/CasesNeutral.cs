@@ -38,6 +38,7 @@ public class CasesNeutral : MonoBehaviour
 
     public void Outline(List<GameObject> list, float remain)
     {
+        Debug.Log(remain);
         if (remain > 0)
         {
             foreach (GameObject obj in nextCases )
@@ -65,8 +66,7 @@ public class CasesNeutral : MonoBehaviour
     {
         _playerPoint.gold += 3;
         _playerPoint.numberGainCase++;
-        
-       ChangePLayer();
+        ChangePLayer();
     }
 
     public void NeutralCase()
@@ -82,19 +82,25 @@ public class CasesNeutral : MonoBehaviour
             _playerPoint.gold = 0;
         }
         _playerPoint.numberLoseCase++;
+       
         ChangePLayer();
     }
 
     public void MoveCase()
     {
-       int u = _playerMove.FindCase();
-    //   _playerMove.child.transform.position = _playerMove.allCases[u + 2].transform.position;
-       //_playerMove.caseNext[0] = _playerMove.allCases[u+2];
-       _playerMove.moveValue = 2;
-       _playerMove.PlayerShowMove();
-       _playerMove.agent.destination = _playerMove.child.transform.position;
-       _playerMove.moveValue = 5 + _playerMove.bonusMove;
+        int u = _playerMove.FindCase(); 
+        _playerMove.moveValue = 2;
+        _playerMove.PlayerShowMove();
+        _playerMove.agent.destination = _playerMove.child.transform.position;
+        _playerMove.moveValue = 5 + _playerMove.bonusMove;
     //   ChangePLayer();
+    }
+
+    public void ShopCase()
+    {
+        Shop shop = FindObjectOfType<Shop>();
+        shop.ShopOpen(this);
+        _playerPoint.numberShopCase++;
        
     }
 
@@ -102,7 +108,6 @@ public class CasesNeutral : MonoBehaviour
 
     public void ChangePLayer()
     {
-        
         State endTurn = new EndTurn();
         endTurn.DoState(_gameplayManager.allPlayer[_gameplayManager.playerIndex]);
         _gameplayManager.playerIndex++;

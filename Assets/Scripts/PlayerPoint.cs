@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerPoint : MonoBehaviour
 {
     public int gold;
+    public TMP_Text text;
     public int point;
 
     public int numberGainCase;
@@ -25,6 +27,6 @@ public class PlayerPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        text.text = gold.ToString();
     }
 }
