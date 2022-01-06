@@ -18,11 +18,14 @@ public class CasesNeutral : MonoBehaviour
     private PlayerMovement _playerMove;
     public GameObject activPlayer;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        
         _gameplayManager = FindObjectOfType<GameplayManager>();
         renderer = gameObject.GetComponent<Renderer>();
+        ResetColor();
         index = _gameplayManager.allCases.IndexOf(gameObject);
+        
     }
 
     // Update is called once per frame
@@ -38,7 +41,6 @@ public class CasesNeutral : MonoBehaviour
 
     public void Outline(List<GameObject> list, float remain)
     {
-        Debug.Log(remain);
         if (remain > 0)
         {
             foreach (GameObject obj in nextCases )
@@ -82,18 +84,16 @@ public class CasesNeutral : MonoBehaviour
             _playerPoint.gold = 0;
         }
         _playerPoint.numberLoseCase++;
-       
         ChangePLayer();
     }
 
     public void MoveCase()
     {
         int u = _playerMove.FindCase(); 
-        _playerMove.moveValue = 2;
+        _playerMove.actualMove = 2;
         _playerMove.PlayerShowMove();
         _playerMove.agent.destination = _playerMove.child.transform.position;
-        _playerMove.moveValue = 5 + _playerMove.bonusMove;
-    //   ChangePLayer();
+        _playerMove.actualMove = _playerMove.InitialMove;
     }
 
     public void ShopCase()
@@ -101,13 +101,11 @@ public class CasesNeutral : MonoBehaviour
         Shop shop = FindObjectOfType<Shop>();
         shop.ShopOpen(this);
         _playerPoint.numberShopCase++;
-       
     }
-
-
 
     public void ChangePLayer()
     {
+        _gameplayManager.enabled = true;
         State endTurn = new EndTurn();
         endTurn.DoState(_gameplayManager.allPlayer[_gameplayManager.playerIndex]);
         _gameplayManager.playerIndex++;
@@ -116,17 +114,14 @@ public class CasesNeutral : MonoBehaviour
             _gameplayManager.ResetIndex();
         }
         _gameplayManager.ButtonStart();
-        Debug.Log("aze");
     }
     
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("u");
         if (other.gameObject.CompareTag("Player"))
         {
             _playerPoint.numberCase++;
-            Debug.Log("i");
         }
     }
 }

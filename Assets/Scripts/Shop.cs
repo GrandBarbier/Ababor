@@ -42,16 +42,12 @@ public class Shop : MonoBehaviour
 
     public void MoveButton()
     {
-        
-        playerPoint.gold -= 10;
-        playerMove.bonusMove++;
-        shopMenu.SetActive(false);
-        foreach (GameObject obj in gameplayManager.allPlayer)
-        {
-            obj.GetComponent<PlayerMovement>().enabled = true;
-        }
-        caseScript.ChangePLayer();
         gameplayManager.enabled = true;
+        playerPoint.gold -= 10;
+        playerMove.InitialMove ++;
+        shopMenu.SetActive(false);
+        caseScript.ChangePLayer();
+        playerMove.actualMove = playerMove.InitialMove;
     }
 
     public void CardButton()
@@ -59,10 +55,6 @@ public class Shop : MonoBehaviour
         
         playerPoint.gold -= 5;
         shopMenu.SetActive(false);
-        foreach (GameObject obj in gameplayManager.allPlayer)
-        {
-            obj.GetComponent<PlayerMovement>().enabled = true;
-        }
         caseScript.ChangePLayer();
         gameplayManager.enabled = true;
     }

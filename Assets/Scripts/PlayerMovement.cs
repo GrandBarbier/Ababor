@@ -11,10 +11,10 @@ public class PlayerMovement : MonoBehaviour
     public List<GameObject> caseNext;
     public MousePosition mousePos;
     public GameObject child;
-    public int moveValue = 5;
+    public int actualMove = 5;
     public NavMeshAgent agent;
     public bool end;
-    public int bonusMove;
+    public int InitialMove;
     public StateMachine stateMachine;
     // Start is called before the first frame update
     void Start()
@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayerShowMove()  // change color of all case in range
     {
-       caseNext[0].GetComponent<CasesNeutral>().Outline(caseNext,moveValue+bonusMove);
+       caseNext[0].GetComponent<CasesNeutral>().Outline(caseNext,actualMove);
     }
 
     public void PlayerResetCase() // Reset the color of all cases

@@ -11,7 +11,7 @@ public class GameplayManager : MonoBehaviour
     public GameObject activPlayer;
     public int playerIndex;
     public State currentstate;
-  //  public List<GameObject> allAltCases = new List<GameObject>();
+    //  public List<GameObject> allAltCases = new List<GameObject>();
     // Start is called before the first frame update
     void Awake()
     {
