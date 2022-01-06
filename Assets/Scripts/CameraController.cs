@@ -5,76 +5,159 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Camera cam;
+    protected Plane Plane;
+    
+    [SerializeField] 
+    private float targetOffset, minLimit, maxLimit, bounceSpeed, zoomBreak, transSpeed;
 
-    public float speed = 1;
+    [SerializeField] 
+    private Vector3 planeTarget, target, maxLimitPos, minLimitPos, savedPos;
+    private Vector3 velocity = Vector3.zero;
 
-    public LayerMask plane;
+    [SerializeField] 
+    private GameObject playerTarget;
+
+    [SerializeField] 
+    private bool bouncing, canBounce;
+
+    public bool isMoving;
     
-    private Ray rayBefore;
-    private Ray rayNow;
     
-    
-    void Start()
+    private void Awake()
     {
-        if(cam == null)
+        if (cam == null)
             cam = Camera.main;
+        
+        minLimitPos = new Vector3(cam.transform.position.x, cam.transform.position.y - 10, cam.transform.position.z);
+        maxLimitPos = new Vector3(cam.transform.position.x, cam.transform.position.y + 10, cam.transform.position.z);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        Vector3 delta1 = Vector3.zero;
+        if (!isMoving)
+        { 
+            //Update Plane
+            if (Input.touchCount >= 1)
+                Plane.SetNormalAndPosition(transform.up, transform.position);
+            
+            var Delta1 = Vector3.zero;
         
-        if (Input.touchCount >= 1)
-        {
-            delta1 = positionDelta(Input.GetTouch(0));
-            if(Input.GetTouch(0).phase == TouchPhase.Moved)
-                cam.transform.Translate(delta1 * speed, Space.World);
-        }
+            //Scroll
+            if (Input.touchCount >= 1 && !bouncing)
+            {
+                Delta1 = PlanePositionDelta(Input.GetTouch(0));
+                if (Input.GetTouch(0).phase == TouchPhase.Moved)
+                    cam.transform.Translate(Delta1, Space.World);
+            }
 
+            //Pinch
+            if (Input.touchCount >= 2 && !bouncing)
+            {
+                var pos1  = PlanePosition(Input.GetTouch(0).position);
+                var pos2  = PlanePosition(Input.GetTouch(1).position); 
+                var pos1b = PlanePosition(Input.GetTouch(0).position - Input.GetTouch(0).deltaPosition);
+                var pos2b = PlanePosition(Input.GetTouch(1).position - Input.GetTouch(1).deltaPosition);
 
-        if (Input.touchCount >= 2)
-        {
-            var pos1  = planePos(Input.GetTouch(0).position);
-            var pos2  = planePos(Input.GetTouch(1).position);
-            var pos1b = planePos(Input.GetTouch(0).position - Input.GetTouch(0).deltaPosition);
-            var pos2b = planePos(Input.GetTouch(1).position - Input.GetTouch(1).deltaPosition);
-        
-            var zoom = Vector3.Distance(pos1, pos2) /
+                //calc zoom
+                var zoom = Vector3.Distance(pos1, pos2) /
                        Vector3.Distance(pos1b, pos2b);
+
+            //edge case
+                if (zoom == 0 || zoom > 10)
+                    return;
+
+                planeTarget = (pos1 + pos2) / 2;
+                target = Vector3.MoveTowards(planeTarget, cam.transform.position, targetOffset);
             
-            if (zoom == 0 || zoom > 10)
-                return;
+                Vector3 dir = (cam.transform.position - target).normalized;
             
-            cam.transform.position = Vector3.LerpUnclamped(pos1, cam.transform.position, 1 / zoom);
+                minLimitPos = target + dir * minLimit;
+                maxLimitPos = target + dir * maxLimit;
+            
+                if (Vector3.Distance(cam.transform.position, target) > Vector3.Distance(minLimitPos, maxLimitPos))
+                {
+                    zoom = (Vector3.Distance(pos1, pos2) + zoomBreak * Vector3.Distance(cam.transform.position, maxLimitPos)) / 
+                           (Vector3.Distance(pos1b, pos2b) + zoomBreak * Vector3.Distance(cam.transform.position, maxLimitPos));
+                    savedPos = maxLimitPos;
+                    canBounce = true;
+                }
+                else if (Vector3.Distance(cam.transform.position, target) < Vector3.Distance(target, minLimitPos))
+                {
+                    savedPos = minLimitPos;
+                    canBounce = true;
+                }
+                else
+                {
+                    canBounce = false;
+                }
+            
+                //Move cam amount the mid ray
+                cam.transform.position = Vector3.LerpUnclamped(target, cam.transform.position, 1 / zoom);
+            
+                //Debug
+                Debug.DrawLine(planeTarget, minLimitPos, Color.red);
+                Debug.DrawLine(minLimitPos, maxLimitPos, Color.green);
+                if (Vector3.Distance(minLimitPos, cam.transform.position) > Vector3.Distance(minLimitPos, maxLimitPos))
+                {
+                    Debug.DrawLine(maxLimitPos, cam.transform.position, Color.red);
+                }
+            }
+        
+            if (Input.touchCount < 2)
+            {
+                if (canBounce)
+                {
+                    bouncing = true;
+                    cam.transform.position = Vector3.SmoothDamp(cam.transform.position, savedPos, ref velocity, Time.deltaTime * bounceSpeed);
+                }
+
+                if (cam.transform.position == savedPos)
+                {
+                    bouncing = false;
+                    canBounce = false;
+                }
+            }
+        }
+        else
+        {
+            cam.transform.position = Vector3.SmoothDamp(cam.transform.position, playerTarget.transform.position, ref velocity, Time.deltaTime * transSpeed);
+            
+            if (cam.transform.position == playerTarget.transform.position)
+            {
+                isMoving = false;
+            }
         }
     }
 
-    public Vector3 positionDelta(Touch touch)
+    protected Vector3 PlanePositionDelta(Touch touch)
     {
-        if(touch.phase != TouchPhase.Moved)
+        //not moved
+        if (touch.phase != TouchPhase.Moved)
             return Vector3.zero;
-        
-        Ray rayBefore = cam.ScreenPointToRay(touch.position - touch.deltaPosition);
-        Ray rayNow = cam.ScreenPointToRay(touch.position);
 
+        //delta
+        var rayBefore = cam.ScreenPointToRay(touch.position - touch.deltaPosition);
+        var rayNow = cam.ScreenPointToRay(touch.position);
+        if (Plane.Raycast(rayBefore, out var enterBefore) && Plane.Raycast(rayNow, out var enterNow))
+            return rayBefore.GetPoint(enterBefore) - rayNow.GetPoint(enterNow);
 
-        RaycastHit enterBefore, enterNow;
-        if (Physics.Raycast(rayBefore, out enterBefore, Mathf.Infinity, plane) &&
-            Physics.Raycast(rayNow, out enterNow, Mathf.Infinity, plane))
-            return enterBefore.point - enterNow.point; 
-        
+        //not on plane
         return Vector3.zero;
     }
 
-    public Vector3 planePos(Vector2 screenPos)
+    protected Vector3 PlanePosition(Vector2 screenPos)
     {
-        RaycastHit enterNow;
-        
-        Ray rayNow = cam.ScreenPointToRay(screenPos);
-        if (Physics.Raycast(rayNow, out enterNow, Mathf.Infinity, plane))
-            return enterNow.point;
-        
+        //position
+        var rayNow = cam.ScreenPointToRay(screenPos);
+        if (Plane.Raycast(rayNow, out var enterNow))
+            return rayNow.GetPoint(enterNow);
+
         return Vector3.zero;
+    }
+    
+    public void GoToPlayer()
+    {
+        //playerTarget = pTarget;
+        isMoving = true;
     }
 }
