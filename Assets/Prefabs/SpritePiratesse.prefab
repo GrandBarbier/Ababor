@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &822495283
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 822495284}
+  m_Layer: 0
+  m_Name: CamTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &822495284
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822495283}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 18.52, z: -24.77}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4929743630453595023}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4929743630453595121
 GameObject:
   m_ObjectHideFlags: 0
@@ -26,10 +56,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4929743630453595121}
-  m_LocalRotation: {x: 0.038280215, y: -0, z: -0, w: 0.99926704}
+  m_LocalRotation: {x: 0.038283143, y: 0, z: 0, w: 0.9992669}
   m_LocalPosition: {x: -7.266, y: -1.1079999, z: -73.01299}
   m_LocalScale: {x: 0.24101, y: 0.24101, z: 0.24101}
-  m_Children: []
+  m_Children:
+  - {fileID: 822495284}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 4.388, y: 0, z: 0}
@@ -74,7 +105,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f629942a4c6ef324d93077402480f4c3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.10849059, b: 0.10849059, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -91,7 +122,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4929743630453595121}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4191629614851b4b9a39052f4e0666f, type: 3}
   m_Name: 
@@ -104,6 +135,7 @@ MonoBehaviour:
   moveValue: 5
   agent: {fileID: 4929743630453595021}
   end: 0
+  bonusMove: 0
   stateMachine: {fileID: 0}
 --- !u!195 &4929743630453595021
 NavMeshAgent:

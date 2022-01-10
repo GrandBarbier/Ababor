@@ -18,18 +18,27 @@ public class CameraController : MonoBehaviour
     private GameObject playerTarget;
 
     [SerializeField] 
-    private bool bouncing, canBounce;
+    private bool bouncing, canBounce,isMoving;
+    
+    public GameplayManager gameplayManager;
+    
+    public List<GameObject> playersTargets = new List<GameObject>();
 
-    public bool isMoving;
-    
-    
-    private void Awake()
+
+    private void Start()
     {
         if (cam == null)
             cam = Camera.main;
         
         minLimitPos = new Vector3(cam.transform.position.x, cam.transform.position.y - 10, cam.transform.position.z);
         maxLimitPos = new Vector3(cam.transform.position.x, cam.transform.position.y + 10, cam.transform.position.z);
+
+        for (int i = 0; i < gameplayManager.allPlayer.Count; i++)
+        {
+            playersTargets.Add(gameplayManager.allPlayer[i].transform.GetChild(0).gameObject);
+        }
+       
+        GoToPlayer();
     }
 
     private void Update()
@@ -157,7 +166,7 @@ public class CameraController : MonoBehaviour
     
     public void GoToPlayer()
     {
-        //playerTarget = pTarget;
+        playerTarget = playersTargets[gameplayManager.playerIndex];
         isMoving = true;
     }
 }
