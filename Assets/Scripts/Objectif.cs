@@ -17,7 +17,7 @@ public class Objectif : MonoBehaviour
         {
             allPlayerPoint.Add(_gameplayManager.allPlayer[i].GetComponent<PlayerPoint>());
         }
-      //  ShopEarly();
+        
     }
 
     // Update is called once per frame

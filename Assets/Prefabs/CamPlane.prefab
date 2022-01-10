@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3225608616620040318}
   - component: {fileID: 3225608616620040317}
   - component: {fileID: 3225608616620040316}
-  - component: {fileID: 3225608616620040291}
+  - component: {fileID: 2106914407145559646}
   m_Layer: 31
   m_Name: CamPlane
   m_TagString: Untagged
@@ -97,7 +97,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &3225608616620040291
+--- !u!114 &2106914407145559646
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,16 +106,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3225608616620040290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cd359e9333268240a8a78c9662daaf3, type: 3}
+  m_Script: {fileID: 11500000, guid: dc38f6b0992bc0341a343fcbb573a66f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  targetOffset: 10
-  minLimit: 15
-  maxLimit: 70
-  bounceSpeed: 5
-  zoomBreak: 10
-  transSpeed: 25
+  targetOffset: 0
+  minLimit: 0
+  maxLimit: 0
+  bounceSpeed: 0
+  zoomBreak: 0
+  transSpeed: 0
   planeTarget: {x: 0, y: 0, z: 0}
   target: {x: 0, y: 0, z: 0}
   maxLimitPos: {x: 0, y: 0, z: 0}
