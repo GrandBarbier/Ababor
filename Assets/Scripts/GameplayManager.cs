@@ -11,8 +11,8 @@ public class GameplayManager : MonoBehaviour
     public GameObject activPlayer;
     public int playerIndex;
     public State currentstate;
-    //  public List<GameObject> allAltCases = new List<GameObject>();
-    // Start is called before the first frame update
+    private CameraController cameraControler;
+    
     void Awake()
     {
         allCases = GameObject.FindGameObjectsWithTag("Case").ToList();
@@ -52,5 +52,19 @@ public class GameplayManager : MonoBehaviour
     {
         playerIndex = 0;
        
+    }
+    
+    public void ChangePlayer()
+    {
+        
+        State endTurn = new EndTurn();
+        endTurn.DoState(allPlayer[playerIndex]);
+       playerIndex++;
+        if (playerIndex>= allPlayer.Count)
+        {
+            ResetIndex();
+        }
+        cameraControler.GoToPlayer();
+        ButtonStart();
     }
 }

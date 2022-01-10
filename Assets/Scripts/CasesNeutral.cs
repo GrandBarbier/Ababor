@@ -17,6 +17,8 @@ public class CasesNeutral : MonoBehaviour
     private PlayerPoint _playerPoint;
     private PlayerMovement _playerMove;
     public GameObject activPlayer;
+
+    public Objectif objectif;
     // Start is called before the first frame update
     void Awake()
     {
@@ -25,7 +27,8 @@ public class CasesNeutral : MonoBehaviour
         renderer = gameObject.GetComponent<Renderer>();
         ResetColor();
         index = _gameplayManager.allCases.IndexOf(gameObject);
-        
+        objectif = FindObjectOfType<Objectif>();
+
     }
 
     // Update is called once per frame
@@ -66,14 +69,15 @@ public class CasesNeutral : MonoBehaviour
 
     public void EarnCase()
     {
+        objectif.GoldEarly();
         _playerPoint.gold += 3;
         _playerPoint.numberGainCase++;
-        ChangePLayer();
+        _gameplayManager.ChangePlayer();
     }
 
     public void NeutralCase()
     {
-        ChangePLayer();
+        _gameplayManager.ChangePlayer();
     }
 
     public void LoseCase()
@@ -84,7 +88,7 @@ public class CasesNeutral : MonoBehaviour
             _playerPoint.gold = 0;
         }
         _playerPoint.numberLoseCase++;
-        ChangePLayer();
+        _gameplayManager.ChangePlayer();
     }
 
     public void MoveCase()
@@ -98,25 +102,13 @@ public class CasesNeutral : MonoBehaviour
 
     public void ShopCase()
     {
+        objectif.Invoke("ShopEarly",1);
         Shop shop = FindObjectOfType<Shop>();
         shop.ShopOpen(this);
         _playerPoint.numberShopCase++;
     }
-
-    public void ChangePLayer()
-    {
-        _gameplayManager.enabled = true;
-        State endTurn = new EndTurn();
-        endTurn.DoState(_gameplayManager.allPlayer[_gameplayManager.playerIndex]);
-        _gameplayManager.playerIndex++;
-        if (_gameplayManager.playerIndex>= _gameplayManager.allPlayer.Count)
-        {
-            _gameplayManager.ResetIndex();
-        }
-        _gameplayManager.ButtonStart();
-    }
     
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))

@@ -29,4 +29,6 @@ public class PlayerPoint : MonoBehaviour
     {
         text.text = gold.ToString();
     }
+    
+    
 }

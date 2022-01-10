@@ -46,16 +46,15 @@ public class Shop : MonoBehaviour
         playerPoint.gold -= 10;
         playerMove.InitialMove ++;
         shopMenu.SetActive(false);
-        caseScript.ChangePLayer();
+        gameplayManager.ChangePlayer();
         playerMove.actualMove = playerMove.InitialMove;
     }
 
     public void CardButton()
     {
-        
         playerPoint.gold -= 5;
         shopMenu.SetActive(false);
-        caseScript.ChangePLayer();
+        gameplayManager.ChangePlayer();
         gameplayManager.enabled = true;
     }
 }

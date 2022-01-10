@@ -42,6 +42,9 @@ GameObject:
   - component: {fileID: 4929743630453595120}
   - component: {fileID: 4929743630453595022}
   - component: {fileID: 4929743630453595021}
+  - component: {fileID: 6565205800000338920}
+  - component: {fileID: 334178031100442801}
+  - component: {fileID: 851020549070688190}
   m_Layer: 0
   m_Name: SpritePiratesse
   m_TagString: Player
@@ -132,10 +135,10 @@ MonoBehaviour:
   - {fileID: 0}
   mousePos: {fileID: 0}
   child: {fileID: 0}
-  moveValue: 5
+  actualMove: 5
   agent: {fileID: 4929743630453595021}
   end: 0
-  bonusMove: 0
+  InitialMove: 0
   stateMachine: {fileID: 0}
 --- !u!195 &4929743630453595021
 NavMeshAgent:
@@ -159,3 +162,52 @@ NavMeshAgent:
   m_BaseOffset: 2.56
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
+--- !u!54 &6565205800000338920
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4929743630453595121}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &334178031100442801
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4929743630453595121}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.12, y: 5.5, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &851020549070688190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4929743630453595121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a53b63cc9537ef4d8f7503c66f9d039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gold: 50
+  text: {fileID: 0}
+  point: 0
+  numberGainCase: 0
+  numberLoseCase: 0
+  numberEventCase: 0
+  numberShopCase: 0
+  numberCase: 0
