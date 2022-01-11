@@ -17,6 +17,19 @@ public class Objectif : MonoBehaviour
         {
             allPlayerPoint.Add(_gameplayManager.allPlayer[i].GetComponent<PlayerPoint>());
         }
+
+        for (int i = 0; i < 4; i++)
+        {
+            actualObjectif.Add(allObjectifs[i]);
+        }
+
+        foreach (PlayerPoint player in allPlayerPoint)
+        {
+            foreach (string stg in actualObjectif)
+            {
+                player.objectifVerif.Add(false);
+            }
+        }
         
     }
 
@@ -28,25 +41,45 @@ public class Objectif : MonoBehaviour
 
     public void ShopEarly()
     {
-        Debug.Log("nique");
         bool verif = false;
         foreach (PlayerPoint obj in allPlayerPoint )
         {
-            if (obj.numberShopCase >= 1 && verif == false)
+            verif = obj.objectifVerif[actualObjectif.IndexOf("ShopEarly")];   
+            if (obj.numberShopCase == 1 && verif == false)
             {
                 obj.point += 10;
+                actualObjectif.Remove("ShopEarly");
                 verif = true;
+                
             }
         }
+
+        
     }
 
     public void ShopMid()
     {
+        //bool verif = false;
         foreach (PlayerPoint obj in allPlayerPoint )
         {
-            if (obj.numberShopCase >= 3)
+           bool verif = obj.objectifVerif[actualObjectif.IndexOf("ShopMid")];   
+            if (obj.numberShopCase >= 1 && verif == false)
             {
                 obj.point += 20;
+                obj.objectifVerif[actualObjectif.IndexOf("ShopMid")] = true;
+            }
+        }
+    }
+    
+    public void ShopLate()
+    {
+       List<int> 
+        foreach (PlayerPoint obj in allPlayerPoint )
+        {
+            if (obj.numberShopCase >= )
+            {
+                obj.point += 20;
+                obj.objectifVerif[actualObjectif.IndexOf("ShopMid")] = true;
             }
         }
     }
@@ -57,11 +90,15 @@ public class Objectif : MonoBehaviour
         bool verif = false;
         foreach (PlayerPoint obj in allPlayerPoint )
         {
-            if (obj.numberGainCase >= 3 && verif == false)
+            if (obj.numberGainCase == 1 && verif == false)
             {
                 obj.point += 10;
                 verif = true;
             }
+        }
+        if (verif)
+        {
+            actualObjectif.Remove("GoldEarly");
         }
     }
     
@@ -75,5 +112,60 @@ public class Objectif : MonoBehaviour
             }
         }
     }
+
+    public void LoseEarly()
+    {
+        bool verif = false;
+        foreach (PlayerPoint obj in allPlayerPoint )
+        {
+            if (obj.numberLoseCase == 1 && verif == false)
+            {
+                obj.point += 10;
+                verif = true;
+            }
+        }
+        if (verif)
+        {
+            actualObjectif.Remove("LoseEarly");
+        }
+    }
     
+    public void LoseMid()
+    {
+        foreach (PlayerPoint obj in allPlayerPoint )
+        {
+            if (obj.numberLoseCase >= 1)
+            {
+                obj.point += 10;
+            }
+        }
+    }
+
+    public void MoveEarly()
+    {
+        bool verif = false;
+        foreach (PlayerPoint obj in allPlayerPoint )
+        {
+            if (obj.numberCase >= 10 && verif == false)
+            {
+                obj.point += 10; 
+                verif = true;
+            }
+        }
+        if (verif)
+        {
+            actualObjectif.Remove("MoveEarly");
+        }
+    }
+
+    public void MoveMid()
+    {
+        foreach (PlayerPoint obj in allPlayerPoint )
+        {
+            if (obj.numberCase >= 20)
+            {
+                obj.point += 10;
+            }
+        }
+    }
 }

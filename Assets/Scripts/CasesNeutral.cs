@@ -69,7 +69,6 @@ public class CasesNeutral : MonoBehaviour
 
     public void EarnCase()
     {
-        objectif.GoldEarly();
         _playerPoint.gold += 3;
         _playerPoint.numberGainCase++;
         _gameplayManager.ChangePlayer();
@@ -77,6 +76,7 @@ public class CasesNeutral : MonoBehaviour
 
     public void NeutralCase()
     {
+        
         _gameplayManager.ChangePlayer();
     }
 
@@ -102,7 +102,6 @@ public class CasesNeutral : MonoBehaviour
 
     public void ShopCase()
     {
-        objectif.Invoke("ShopEarly",1);
         Shop shop = FindObjectOfType<Shop>();
         shop.ShopOpen(this);
         _playerPoint.numberShopCase++;

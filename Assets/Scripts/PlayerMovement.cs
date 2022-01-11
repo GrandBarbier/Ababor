@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (end)
         {
+            _gameplayManager.cameraControler.GoToPlayer();
             PlayerResetCase(); 
             agent.destination = child.transform.position;
             

@@ -11,8 +11,8 @@ public class GameplayManager : MonoBehaviour
     public GameObject activPlayer;
     public int playerIndex;
     public State currentstate;
-    private CameraController cameraControler;
-    
+    public CameraController cameraControler;
+    public Objectif objectif;
     void Awake()
     {
         allCases = GameObject.FindGameObjectsWithTag("Case").ToList();
@@ -59,12 +59,17 @@ public class GameplayManager : MonoBehaviour
         
         State endTurn = new EndTurn();
         endTurn.DoState(allPlayer[playerIndex]);
-       playerIndex++;
+        playerIndex++;
         if (playerIndex>= allPlayer.Count)
         {
             ResetIndex();
         }
+        foreach (string stg in objectif.actualObjectif)
+        {
+            objectif.Invoke(stg,0);
+        }
         cameraControler.GoToPlayer();
         ButtonStart();
+        Debug.Log(5);
     }
 }

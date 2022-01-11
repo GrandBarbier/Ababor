@@ -43,7 +43,6 @@ public class EndTurn : State
         PlayerMovement plMove = player.GetComponent<PlayerMovement>();
         GameplayManager gameplayManager = GameObject.FindObjectOfType<GameplayManager>();
         Objectif objectif = GameObject.FindObjectOfType<Objectif>();
-        objectif.GoldEarly();
         gameplayManager.currentstate = new Moving();
         plMove.enabled = false;
         Debug.Log(player);
