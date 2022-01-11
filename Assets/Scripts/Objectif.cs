@@ -49,8 +49,6 @@ public class Objectif : MonoBehaviour
             {
                 obj.point += 10;
                 actualObjectif.Remove("ShopEarly");
-                verif = true;
-                
             }
         }
 
@@ -59,10 +57,9 @@ public class Objectif : MonoBehaviour
 
     public void ShopMid()
     {
-        //bool verif = false;
         foreach (PlayerPoint obj in allPlayerPoint )
         {
-           bool verif = obj.objectifVerif[actualObjectif.IndexOf("ShopMid")];   
+            bool verif = obj.objectifVerif[actualObjectif.IndexOf("ShopMid")];   
             if (obj.numberShopCase >= 1 && verif == false)
             {
                 obj.point += 20;
@@ -73,13 +70,19 @@ public class Objectif : MonoBehaviour
     
     public void ShopLate()
     {
-       List<int> 
+        List<int> intList = new List<int>();
         foreach (PlayerPoint obj in allPlayerPoint )
         {
-            if (obj.numberShopCase >= )
+            intList.Add(obj.numberShopCase);
+            
+        }
+        int best = Mathf.Max(intList.ToArray());
+        Debug.Log(best);
+        foreach (PlayerPoint player in allPlayerPoint )
+        {
+            if (best == player.numberShopCase)
             {
-                obj.point += 20;
-                obj.objectifVerif[actualObjectif.IndexOf("ShopMid")] = true;
+                Debug.Log("truc");
             }
         }
     }
