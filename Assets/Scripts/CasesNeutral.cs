@@ -106,6 +106,12 @@ public class CasesNeutral : MonoBehaviour
         shop.ShopOpen(this,_playerMove,_playerPoint);
         _playerPoint.numberShopCase++;
     }
+
+    public void EndCase()
+    {
+        objectif.lastCase = true;
+        _gameplayManager.ChangePlayer();
+    }
     
     
     private void OnTriggerEnter(Collider other)

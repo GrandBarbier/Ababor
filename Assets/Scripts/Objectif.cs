@@ -10,7 +10,7 @@ public class Objectif : MonoBehaviour
     public List<string> allEarlyObjectifs;
     public List<string> actualObjectif;
     public List<PlayerPoint> allPlayerPoint;
-   
+    public bool lastCase;
     // Start is called before the first frame update
     void Start()
     {
@@ -91,9 +91,15 @@ public class Objectif : MonoBehaviour
         {
             if (best == player.numberShopCase)
             {
-                Debug.Log("truc");
+                best = player.numberShopCase;
+            }
+            if(lastCase)
+            {
+                player.point += 30;
             }
         }
+
+     
     }
 
     public void GoldEarly()
