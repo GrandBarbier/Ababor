@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Wizama.Hardware.Antenna;
 
 public class StressTest : MonoBehaviour
 {
@@ -24,14 +25,11 @@ public class StressTest : MonoBehaviour
     // Use this for initialization
     void Start () {
         timeleft = updateInterval;
+        NFCController.StartPolling( NFC_DEVICE_ID.ANTENNA_1, NFC_DEVICE_ID.ANTENNA_8, NFC_DEVICE_ID.ANTENNA_14, NFC_DEVICE_ID.ANTENNA_21);
     }
    
     // Update is called once per frame
     void Update () {
-        /*Show_Stats = GameObject.Find("Player").GetComponent<Pause_Menu>().Show_Stats;
-        Show_FPS = GameObject.Find("Player").GetComponent<Pause_Menu>().Show_FPS;
-        Show_Tris = GameObject.Find("Player").GetComponent<Pause_Menu>().Show_Tris;
-        Show_Verts = GameObject.Find("Player").GetComponent<Pause_Menu>().Show_Verts;*/
         timeleft -= Time.deltaTime;
         accum += Time.timeScale/Time.deltaTime;
         ++frames;
@@ -47,6 +45,12 @@ public class StressTest : MonoBehaviour
              frames = 0;
             GetObjectStats();
         }  
+        
+        
+        List<NFCTag>[] allAntennaTags = NFCController.GetTags();   
+        int count = 0;  
+        foreach (List<NFCTag> Tags in allAntennaTags)  
+            count += Tags.Count;
     }
    
     void OnGUI() {
@@ -55,7 +59,7 @@ public class StressTest : MonoBehaviour
     }
    
     void ShowStatistics(){
-        GUILayout.BeginArea( new Rect(0, 0, 100, 500));
+        GUILayout.BeginArea( new Rect(150, 50, 100, 500));
         if (Show_FPS){
             string fpsdisplay = fps.ToString ("#,##0 fps");
             GUILayout.Label(fpsdisplay);
@@ -110,4 +114,17 @@ public class StressTest : MonoBehaviour
             Instantiate(sphere, spawnPoint.position, Quaternion.identity); 
         }
     }
+    
+    
+    void OnDisable()  {  
+        NFCController.StopPolling();  
+    }    
+    
+    private void OnNewTagDetected(NFC_DEVICE_ID _device, NFCTag _tag)  {  
+        SpawnSphere();
+    }    
+    
+    private void OnTagRemoveDetected(NFC_DEVICE_ID _device, NFCTag _tag)  {  
+        SpawnSphere();  
+    } 
 }

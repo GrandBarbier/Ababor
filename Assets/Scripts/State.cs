@@ -15,7 +15,6 @@ public abstract class State
 
 public class Moving : State
 {
-    
     //Movement player
     public override void DoState(PlayerMovement player, GameplayManager gameplayManager)
     {

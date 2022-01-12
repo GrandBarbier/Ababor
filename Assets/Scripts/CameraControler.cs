@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraControler : MonoBehaviour
 {
     public Camera cam;
     protected Plane Plane;
@@ -102,7 +102,7 @@ public class CameraController : MonoBehaviour
             
                 //Move cam amount the mid ray
                 cam.transform.position = Vector3.LerpUnclamped(target, cam.transform.position, 1 / zoom);
-            
+                        
                 //Debug
                 Debug.DrawLine(planeTarget, minLimitPos, Color.red);
                 Debug.DrawLine(minLimitPos, maxLimitPos, Color.green);
