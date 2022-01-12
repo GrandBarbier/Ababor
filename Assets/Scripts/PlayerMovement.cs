@@ -9,33 +9,58 @@ public class PlayerMovement : MonoBehaviour
     private GameplayManager _gameplayManager;
     public List<GameObject> allCases;
     public List<CasesNeutral> caseNext;
-    public MousePosition mousePos;
     public GameObject child;
     public int actualMove = 5;
     public NavMeshAgent agent;
     public bool end;
     public int InitialMove;
+
+    [SerializeField] 
+    private LayerMask mask;
+    
+    private Camera cam;
+    
     public StateMachine stateMachine;
+    
     // Start is called before the first frame update
     void Start()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>(); // Find gamemanager
         allCases = _gameplayManager.allCases;
         _gameplayManager.activPlayer = gameObject;
+        cam = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetButtonUp("Fire1") && mousePos.caseTouch.CompareTag("Case") )
+        if (Input.touchCount == 1)
         {
-            if (mousePos.caseTouch.GetComponent<CasesNeutral>().isInRanged) // get case to go to
+            var touchRay = cam.ScreenPointToRay(Input.GetTouch(0).position);
+
+            if (Physics.Raycast(touchRay, out RaycastHit hit, mask))
             {
-                child.transform.position = mousePos.caseTouch.transform.position;
-                caseNext[0] = mousePos.caseTouch.GetComponent<CasesNeutral>();
-                end = true;
+                if (hit.transform.gameObject.GetComponent<CasesNeutral>().isInRanged)
+                {
+                    child.transform.position = hit.transform.position; 
+                    caseNext[0] = hit.transform.gameObject.GetComponent<CasesNeutral>();
+                    end = true;
+                }
+                    
             }
+            
+            // if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out RaycastHit raycastHit, 100,mask))
+            // {
+            //     caseTouch = raycastHit.collider.gameObject;
+            //
+            // }
+            //
+            // if (mousePos.caseTouch.GetComponent<CasesNeutral>().isInRanged) // get case to go to
+            // {
+            //     child.transform.position = mousePos.caseTouch.transform.position;
+            //     caseNext[0] = mousePos.caseTouch;
+            //     end = true;
+            // }
         }
 
         if (end)
