@@ -13,6 +13,10 @@ public class GameplayManager : MonoBehaviour
     public State currentstate;
     public CameraController cameraControler;
     public Objectif objectif;
+    public List<PlayerMovement> allMove;
+    public List<PlayerPoint> allPoint;
+    public PlayerMovement actualMove;
+    public PlayerPoint actualPoint;
     void Awake()
     {
         allCases = GameObject.FindGameObjectsWithTag("Case").ToList();
@@ -27,14 +31,18 @@ public class GameplayManager : MonoBehaviour
         foreach (GameObject obj in allPlayer)
         {
            obj.GetComponent<PlayerMovement>().enabled = false;
+           allMove.Add(obj.GetComponent<PlayerMovement>());
+           allPoint.Add(obj.GetComponent<PlayerPoint>());
         }
-        currentstate.DoState(allPlayer[playerIndex]);
+        currentstate.DoState(allMove[playerIndex], this);
     }
 
     // Update is called once per frame
     void Update()
     {
         activPlayer = allPlayer[playerIndex];
+        actualMove = allMove[playerIndex];
+        actualPoint = allPoint[playerIndex];
     }
     
     
@@ -45,7 +53,7 @@ public class GameplayManager : MonoBehaviour
 
     public void ButtonStart()
     {
-        currentstate.DoState(allPlayer[playerIndex]);
+        currentstate.DoState(allMove[playerIndex], this);
     }
 
     public void ResetIndex()
@@ -58,7 +66,7 @@ public class GameplayManager : MonoBehaviour
     {
         
         State endTurn = new EndTurn();
-        endTurn.DoState(allPlayer[playerIndex]);
+        endTurn.DoState(allMove[playerIndex], this);
         playerIndex++;
         if (playerIndex>= allPlayer.Count)
         {

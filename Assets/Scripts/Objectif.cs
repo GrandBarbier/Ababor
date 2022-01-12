@@ -5,7 +5,9 @@ using UnityEngine;
 public class Objectif : MonoBehaviour
 {
     private GameplayManager _gameplayManager;
-    public List<string> allObjectifs;
+    public List<string> allLateObjectifs;
+    public List<string> allMidObjectifs;
+    public List<string> allEarlyObjectifs;
     public List<string> actualObjectif;
     public List<PlayerPoint> allPlayerPoint;
    
@@ -18,11 +20,18 @@ public class Objectif : MonoBehaviour
             allPlayerPoint.Add(_gameplayManager.allPlayer[i].GetComponent<PlayerPoint>());
         }
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i <= allPlayerPoint.Count/2; i++)
         {
-            actualObjectif.Add(allObjectifs[i]);
+            actualObjectif.Add(allEarlyObjectifs[Random.Range(0,allEarlyObjectifs.Count)]);
+            allEarlyObjectifs.Remove(actualObjectif[i]);
         }
-
+        for (int i = 0; i <= allPlayerPoint.Count/2; i++)
+        {
+            actualObjectif.Add(allMidObjectifs[Random.Range(0,allMidObjectifs.Count)]);
+            allMidObjectifs.Remove(actualObjectif[i+2]);
+        }
+        
+        
         foreach (PlayerPoint player in allPlayerPoint)
         {
             foreach (string stg in actualObjectif)
@@ -30,7 +39,6 @@ public class Objectif : MonoBehaviour
                 player.objectifVerif.Add(false);
             }
         }
-        
     }
 
     // Update is called once per frame
@@ -44,15 +52,18 @@ public class Objectif : MonoBehaviour
         bool verif = false;
         foreach (PlayerPoint obj in allPlayerPoint )
         {
-            verif = obj.objectifVerif[actualObjectif.IndexOf("ShopEarly")];   
+            
             if (obj.numberShopCase == 1 && verif == false)
             {
                 obj.point += 10;
+                verif = true;
                 actualObjectif.Remove("ShopEarly");
             }
         }
-
-        
+        if (verif)
+        {
+            actualObjectif.Remove("ShopEarly");
+        }
     }
 
     public void ShopMid()
@@ -60,7 +71,7 @@ public class Objectif : MonoBehaviour
         foreach (PlayerPoint obj in allPlayerPoint )
         {
             bool verif = obj.objectifVerif[actualObjectif.IndexOf("ShopMid")];   
-            if (obj.numberShopCase >= 1 && verif == false)
+            if (obj.numberShopCase >= 2 && verif == false)
             {
                 obj.point += 20;
                 obj.objectifVerif[actualObjectif.IndexOf("ShopMid")] = true;
@@ -74,10 +85,8 @@ public class Objectif : MonoBehaviour
         foreach (PlayerPoint obj in allPlayerPoint )
         {
             intList.Add(obj.numberShopCase);
-            
         }
         int best = Mathf.Max(intList.ToArray());
-        Debug.Log(best);
         foreach (PlayerPoint player in allPlayerPoint )
         {
             if (best == player.numberShopCase)
@@ -109,9 +118,11 @@ public class Objectif : MonoBehaviour
     {
         foreach (PlayerPoint obj in allPlayerPoint )
         {
-            if (obj.numberGainCase >= 5)
+            bool verif = obj.objectifVerif[actualObjectif.IndexOf("GoldMid")];   
+            if (obj.numberGainCase >= 2 && verif == false)
             {
-                obj.point += 15;
+                obj.point += 20;
+                obj.objectifVerif[actualObjectif.IndexOf("GoldMid")] = true;
             }
         }
     }
@@ -137,9 +148,11 @@ public class Objectif : MonoBehaviour
     {
         foreach (PlayerPoint obj in allPlayerPoint )
         {
-            if (obj.numberLoseCase >= 1)
+            bool verif = obj.objectifVerif[actualObjectif.IndexOf("LoseMid")];   
+            if (obj.numberLoseCase >= 2 && verif == false)
             {
-                obj.point += 10;
+                obj.point += 20;
+                obj.objectifVerif[actualObjectif.IndexOf("LoseMid")] = true;
             }
         }
     }
@@ -149,7 +162,7 @@ public class Objectif : MonoBehaviour
         bool verif = false;
         foreach (PlayerPoint obj in allPlayerPoint )
         {
-            if (obj.numberCase >= 10 && verif == false)
+            if (obj.numberCase >= 5 && verif == false)
             {
                 obj.point += 10; 
                 verif = true;
@@ -165,9 +178,11 @@ public class Objectif : MonoBehaviour
     {
         foreach (PlayerPoint obj in allPlayerPoint )
         {
-            if (obj.numberCase >= 20)
+            bool verif = obj.objectifVerif[actualObjectif.IndexOf("MoveMid")];   
+            if (obj.numberCase >= 10 && verif == false)
             {
-                obj.point += 10;
+                obj.point += 20;
+                obj.objectifVerif[actualObjectif.IndexOf("MoveMid")] = true;
             }
         }
     }

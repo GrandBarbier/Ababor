@@ -26,16 +26,16 @@ public class Shop : MonoBehaviour
         }*/
     }
 
-    public void ShopOpen(CasesNeutral cases)
+    public void ShopOpen(CasesNeutral cases,PlayerMovement plMove, PlayerPoint plPoint)
     {
         gameplayManager.enabled = false;
         shopMenu.SetActive(true); 
         player = gameplayManager.activPlayer;
-        playerPoint = player.GetComponent<PlayerPoint>();
-        playerMove = player.GetComponent<PlayerMovement>();
-        foreach (GameObject obj in gameplayManager.allPlayer)
+        playerPoint = plPoint;
+        playerMove = plMove;
+        foreach (PlayerMovement obj in gameplayManager.allMove)
         {
-            obj.GetComponent<PlayerMovement>().enabled = false;
+            obj.enabled = false;
         }
         caseScript = cases;
     }

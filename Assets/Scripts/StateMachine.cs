@@ -8,7 +8,7 @@ public class StateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _currentState = new Acting();
+        
     }
 
     // Update is called once per frame

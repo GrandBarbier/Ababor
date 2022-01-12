@@ -8,14 +8,14 @@ using Wizama.Hardware.Antenna;
 public class CasesNeutral : MonoBehaviour
 {
     public bool isInRanged;
-    public List<GameObject> nextCases;
+    public List<CasesNeutral> nextCases;
     public Color baseColor;
     private GameplayManager _gameplayManager;
     public Renderer renderer;
     public int index;
     public string nameFunction;
-    private PlayerPoint _playerPoint;
-    private PlayerMovement _playerMove;
+    [SerializeField] private PlayerPoint _playerPoint;
+    [SerializeField] private PlayerMovement _playerMove;
     public GameObject activPlayer;
 
     public Objectif objectif;
@@ -28,7 +28,7 @@ public class CasesNeutral : MonoBehaviour
         ResetColor();
         index = _gameplayManager.allCases.IndexOf(gameObject);
         objectif = FindObjectOfType<Objectif>();
-
+        
     }
 
     // Update is called once per frame
@@ -37,18 +37,18 @@ public class CasesNeutral : MonoBehaviour
         if (activPlayer != _gameplayManager.activPlayer)
         {
             activPlayer = _gameplayManager.activPlayer;
-            _playerPoint = activPlayer.GetComponent<PlayerPoint>();
-            _playerMove = activPlayer.GetComponent<PlayerMovement>();
+            _playerPoint = _gameplayManager.actualPoint;
+            _playerMove = _gameplayManager.actualMove;
         }
     }
 
-    public void Outline(List<GameObject> list, float remain)
+    public void Outline(List<CasesNeutral> list, float remain)
     {
         if (remain > 0)
         {
-            foreach (GameObject obj in nextCases )
+            foreach (CasesNeutral obj in nextCases )
             {
-                obj.GetComponent<CasesNeutral>().Outline(obj.GetComponent<CasesNeutral>().nextCases, remain-1);
+                obj.Outline(obj.nextCases, remain-1);
                 obj.GetComponent<Renderer>().material.color = Color.blue;
                 obj.GetComponent<CasesNeutral>().isInRanged = true;
                
@@ -103,7 +103,7 @@ public class CasesNeutral : MonoBehaviour
     public void ShopCase()
     {
         Shop shop = FindObjectOfType<Shop>();
-        shop.ShopOpen(this);
+        shop.ShopOpen(this,_playerMove,_playerPoint);
         _playerPoint.numberShopCase++;
     }
     

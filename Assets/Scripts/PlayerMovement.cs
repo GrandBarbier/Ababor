@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private GameplayManager _gameplayManager;
     public List<GameObject> allCases;
-    public List<GameObject> caseNext;
+    public List<CasesNeutral> caseNext;
     public MousePosition mousePos;
     public GameObject child;
     public int actualMove = 5;
@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
             if (mousePos.caseTouch.GetComponent<CasesNeutral>().isInRanged) // get case to go to
             {
                 child.transform.position = mousePos.caseTouch.transform.position;
-                caseNext[0] = mousePos.caseTouch;
+                caseNext[0] = mousePos.caseTouch.GetComponent<CasesNeutral>();
                 end = true;
             }
         }

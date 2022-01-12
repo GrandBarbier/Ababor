@@ -7,7 +7,7 @@ public abstract class State
 {
     
     //Action of the state
-    public virtual void DoState(GameObject player) 
+    public virtual void DoState(PlayerMovement player, GameplayManager gameplayManager) 
     {
         
     }
@@ -17,7 +17,7 @@ public class Moving : State
 {
     
     //Movement player
-    public override void DoState(GameObject player)
+    public override void DoState(PlayerMovement player, GameplayManager gameplayManager)
     {
         PlayerMovement plMove = player.GetComponent<PlayerMovement>();
         plMove.enabled = true;
@@ -26,42 +26,24 @@ public class Moving : State
     }
 }
 
-public class Acting : State
-{
-    //Action player
-    public override void DoState(GameObject cases)
-    {
-       
-    }
-}
-
 public class EndTurn : State
 {
     //End player Turn + next player
-    public override void DoState(GameObject player)
+    public override void DoState(PlayerMovement player, GameplayManager gameplayManager)
     {
-        PlayerMovement plMove = player.GetComponent<PlayerMovement>();
-        GameplayManager gameplayManager = GameObject.FindObjectOfType<GameplayManager>();
         Objectif objectif = GameObject.FindObjectOfType<Objectif>();
         gameplayManager.currentstate = new Moving();
-        plMove.enabled = false;
+        player.enabled = false;
         Debug.Log(player);
     }
 }
 
-public class CardPLay : State
+/*public class CardPLay : State
 {
     //player play card
     public override void DoState(GameObject player)
     {
         Debug.Log(5);
     }
-}
+}*/
 
-public class Playerturn : State
-{
-    public override void DoState(GameObject player)
-    {
-        
-    }
-}
