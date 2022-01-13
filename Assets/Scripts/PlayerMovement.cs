@@ -36,33 +36,22 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.touchCount == 1)
         {
-            var touchRay = cam.ScreenPointToRay(Input.GetTouch(0).position);
-
-            if (Physics.Raycast(touchRay, out RaycastHit hit, mask))
+            if (Input.GetTouch(0).phase == TouchPhase.Ended)
             {
-                if (hit.transform.gameObject.GetComponent<CasesNeutral>().isInRanged)
-                {
-                    child.transform.position = hit.transform.position; 
-                    caseNext[0] = hit.transform.gameObject.GetComponent<CasesNeutral>();
-                    end = true;
-                }
-                    
-            }
-            
-            // if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out RaycastHit raycastHit, 100,mask))
-            // {
-            //     caseTouch = raycastHit.collider.gameObject;
-            //
-            // }
-            //
-            // if (mousePos.caseTouch.GetComponent<CasesNeutral>().isInRanged) // get case to go to
-            // {
-            //     child.transform.position = mousePos.caseTouch.transform.position;
-            //     caseNext[0] = mousePos.caseTouch;
-            //     end = true;
-            // }
-        }
+                var touchRay = cam.ScreenPointToRay(Input.GetTouch(0).position);
 
+                if (Physics.Raycast(touchRay, out RaycastHit hit, Mathf.Infinity, mask))
+                {
+                    if (hit.transform.gameObject.GetComponent<CasesNeutral>().isInRanged)
+                    {
+                        child.transform.position = hit.transform.position;
+                        caseNext[0] = hit.transform.gameObject.GetComponent<CasesNeutral>();
+                        end = true;
+                    }
+                }
+            }
+        }
+        
         if (end)
         {
             _gameplayManager.cameraControler.GoToPlayer();

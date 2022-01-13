@@ -76,8 +76,9 @@ public class GameplayManager : MonoBehaviour
         {
             objectif.Invoke(stg,0);
         }
+        
         cameraControler.GoToPlayer();
         ButtonStart();
-        Debug.Log(5);
+        //Debug.Log(5);
     }
 }
