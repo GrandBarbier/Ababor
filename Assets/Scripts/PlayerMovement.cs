@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class PlayerMovement : MonoBehaviour
 {
     private GameplayManager _gameplayManager;
-    public List<GameObject> allCases;
+    public List<CasesNeutral> allCases;
     public List<CasesNeutral> caseNext;
     public GameObject child;
     public int actualMove = 5;
@@ -26,7 +26,11 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>(); // Find gamemanager
-        allCases = _gameplayManager.allCases;
+        foreach (GameObject obj in _gameplayManager.allCases)
+        {
+            allCases.Add(obj.GetComponent<CasesNeutral>());
+        }
+        
         _gameplayManager.activPlayer = gameObject;
         cam = Camera.main;
     }
@@ -73,9 +77,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayerResetCase() // Reset the color of all cases
     {
-        foreach (GameObject obj in allCases)
+        foreach (CasesNeutral obj in allCases)
         {
-            obj.GetComponent<CasesNeutral>().ResetColor();
+            obj.ResetColor();
         }
     }
 
