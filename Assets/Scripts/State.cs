@@ -18,10 +18,8 @@ public class Moving : State
     //Movement player
     public override void DoState(PlayerMovement player, GameplayManager gameplayManager)
     {
-        PlayerMovement plMove = player.GetComponent<PlayerMovement>();
-        plMove.enabled = true;
-        plMove.PlayerShowMove();
-        Debug.Log("e");
+        player.enabled = true;
+        player.PlayerShowMove();
     }
 }
 

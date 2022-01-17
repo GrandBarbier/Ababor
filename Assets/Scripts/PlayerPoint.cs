@@ -8,7 +8,7 @@ public class PlayerPoint : MonoBehaviour
     public int gold;
     public TMP_Text text;
     public int point;
-
+    public bool isEvent;
     public int numberGainCase;
 
     public int numberLoseCase;

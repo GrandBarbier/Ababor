@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,14 +15,11 @@ public class PlayerMovement : MonoBehaviour
     public NavMeshAgent agent;
     public bool end;
     public int InitialMove;
-
+    public  bool isEvent;
     [SerializeField] 
     private LayerMask mask;
-    
     private Camera cam;
-    
-    public StateMachine stateMachine;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
                     {
                         child.transform.position = hit.transform.position;
                         caseNext[0] = hit.transform.gameObject.GetComponent<CasesNeutral>();
+                        agent.speed = 7;
                         end = true;
                     }
                 }
@@ -62,12 +61,20 @@ public class PlayerMovement : MonoBehaviour
             PlayerResetCase(); 
             agent.destination = child.transform.position;
             
-            if (Vector3.Distance(transform.position,child.transform.position) <= 1f ) // set end turn
+            if (Vector3.Distance(transform.position,child.transform.position) <= 0.75f ) // set end turn
             {
                 caseNext[0].GetComponent<CasesNeutral>().ActualCaseFunction();
+                agent.speed = 0;
+                isEvent = false;
                 end = false;
             }
+
+            if (isEvent == false)
+            {
+                actualMove = InitialMove;
+            }
         }
+        
     }
 
     public void PlayerShowMove()  // change color of all case in range

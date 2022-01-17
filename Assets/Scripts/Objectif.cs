@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Objectif : MonoBehaviour
 {
@@ -11,24 +14,37 @@ public class Objectif : MonoBehaviour
     public List<string> actualObjectif;
     public List<PlayerPoint> allPlayerPoint;
     public bool lastCase;
+
+    public TMP_Text text;
     // Start is called before the first frame update
+
     void Start()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>();
+        
         for (int i = 0; i < _gameplayManager.allPlayer.Count; i++)
         {
-            allPlayerPoint.Add(_gameplayManager.allPlayer[i].GetComponent<PlayerPoint>());
+            allPlayerPoint.Add(_gameplayManager.allPoint[i]);
         }
 
         for (int i = 0; i <= allPlayerPoint.Count/2; i++)
         {
-            actualObjectif.Add(allEarlyObjectifs[Random.Range(0,allEarlyObjectifs.Count)]);
-            allEarlyObjectifs.Remove(actualObjectif[i]);
+            int rdm = Random.Range(0, allEarlyObjectifs.Count);
+            actualObjectif.Add(allEarlyObjectifs[rdm]);
+            allEarlyObjectifs.Remove(allEarlyObjectifs[rdm]);
         }
         for (int i = 0; i <= allPlayerPoint.Count/2; i++)
         {
-            actualObjectif.Add(allMidObjectifs[Random.Range(0,allMidObjectifs.Count)]);
-            allMidObjectifs.Remove(actualObjectif[i+2]);
+            int rdm = Random.Range(0, allMidObjectifs.Count);
+            actualObjectif.Add(allMidObjectifs[rdm]);
+            allMidObjectifs.Remove(allMidObjectifs[rdm]);
+        }
+        
+        for (int i = 0; i <= allPlayerPoint.Count/2; i++)
+        {
+            int rdm = Random.Range(0, allLateObjectifs.Count);
+            actualObjectif.Add(allLateObjectifs[rdm]);
+            allLateObjectifs.Remove(allLateObjectifs[rdm]);
         }
         
         
@@ -38,6 +54,11 @@ public class Objectif : MonoBehaviour
             {
                 player.objectifVerif.Add(false);
             }
+        }
+
+        foreach (string stg in actualObjectif)
+        {
+            text.text += stg + " ";
         }
     }
 
@@ -89,22 +110,16 @@ public class Objectif : MonoBehaviour
         int best = Mathf.Max(intList.ToArray());
         foreach (PlayerPoint player in allPlayerPoint )
         {
-            if (best == player.numberShopCase)
+            if (best == player.numberShopCase && lastCase)
             {
                 best = player.numberShopCase;
-            }
-            if(lastCase)
-            {
                 player.point += 30;
             }
         }
-
-     
     }
 
     public void GoldEarly()
     {
-        Debug.Log("1");
         bool verif = false;
         foreach (PlayerPoint obj in allPlayerPoint )
         {
@@ -129,6 +144,24 @@ public class Objectif : MonoBehaviour
             {
                 obj.point += 20;
                 obj.objectifVerif[actualObjectif.IndexOf("GoldMid")] = true;
+            }
+        }
+    }
+
+    public void GoldLate()
+    {
+        List<int> intList = new List<int>();
+        foreach (PlayerPoint obj in allPlayerPoint )
+        {
+            intList.Add(obj.numberGainCase);
+        }
+        int best = Mathf.Max(intList.ToArray());
+        foreach (PlayerPoint player in allPlayerPoint )
+        {
+            if (best == player.numberGainCase && lastCase)
+            {
+                best = player.numberGainCase;
+                player.point += 30;
             }
         }
     }
@@ -163,6 +196,24 @@ public class Objectif : MonoBehaviour
         }
     }
 
+    public void LoseLate()
+    {
+        List<int> intList = new List<int>();
+        foreach (PlayerPoint obj in allPlayerPoint )
+        {
+            intList.Add(obj.numberLoseCase);
+        }
+        int best = Mathf.Max(intList.ToArray());
+        foreach (PlayerPoint player in allPlayerPoint )
+        {
+            if (best == player.numberLoseCase && lastCase)
+            {
+                best = player.numberLoseCase;
+                player.point += 30;
+            }
+        }
+    }
+
     public void MoveEarly()
     {
         bool verif = false;
@@ -190,6 +241,25 @@ public class Objectif : MonoBehaviour
                 obj.point += 20;
                 obj.objectifVerif[actualObjectif.IndexOf("MoveMid")] = true;
             }
+        }
+    }
+
+    public void MoveLate()
+    {
+        List<int> intList = new List<int>();
+        foreach (PlayerPoint obj in allPlayerPoint )
+        {
+            intList.Add(obj.numberCase);
+        }
+        int best = Mathf.Max(intList.ToArray());
+        foreach (PlayerPoint player in allPlayerPoint )
+        {
+            if (best == player.numberCase && lastCase)
+            {
+                best = player.numberCase;
+                player.point += 30;
+            }
+           
         }
     }
 }

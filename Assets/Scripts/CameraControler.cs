@@ -43,10 +43,8 @@ public class CameraControler : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(4);
         if (!isMoving)
-        { 
-            Debug.Log(1);
+        {
             //Update Plane
             if (Input.touchCount >= 1)
                 Plane.SetNormalAndPosition(transform.up, transform.position);
@@ -56,7 +54,6 @@ public class CameraControler : MonoBehaviour
             //Scroll
             if (Input.touchCount >= 1 && !bouncing)
             {
-                Debug.Log(2);
                 Delta1 = PlanePositionDelta(Input.GetTouch(0));
                 if (Input.GetTouch(0).phase == TouchPhase.Moved)
                     cam.transform.Translate(Delta1, Space.World);
@@ -133,7 +130,6 @@ public class CameraControler : MonoBehaviour
         else
         {
             cam.transform.position = Vector3.SmoothDamp(cam.transform.position, playerTarget.transform.position, ref velocity, Time.deltaTime * transSpeed);
-            Debug.Log(3);
             float dist = Vector3.Distance(cam.transform.position, playerTarget.transform.position);
             if (dist <= 0.1f)
             {

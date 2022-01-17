@@ -23,17 +23,18 @@ public class GameplayManager : MonoBehaviour
         allPlayer = GameObject.FindGameObjectsWithTag("Player").ToList();
         allCases.Reverse();
         allCases.Sort(SortByName);
+        foreach (GameObject obj in allPlayer)
+        {
+            obj.GetComponent<PlayerMovement>().enabled = false;
+            allMove.Add(obj.GetComponent<PlayerMovement>());
+            allPoint.Add(obj.GetComponent<PlayerPoint>());
+        }
         currentstate = new Moving();
     }
 
     void Start()
     {
-        foreach (GameObject obj in allPlayer)
-        {
-           obj.GetComponent<PlayerMovement>().enabled = false;
-           allMove.Add(obj.GetComponent<PlayerMovement>());
-           allPoint.Add(obj.GetComponent<PlayerPoint>());
-        }
+        
         currentstate.DoState(allMove[playerIndex], this);
     }
 

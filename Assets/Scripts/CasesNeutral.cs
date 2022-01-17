@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using Wizama.Hardware.Antenna;
 
 public class CasesNeutral : MonoBehaviour
@@ -17,7 +18,7 @@ public class CasesNeutral : MonoBehaviour
     [SerializeField] private PlayerPoint _playerPoint;
     [SerializeField] private PlayerMovement _playerMove;
     public GameObject activPlayer;
-
+    public Event eventS;
     public Objectif objectif;
     // Start is called before the first frame update
     void Awake()
@@ -28,7 +29,8 @@ public class CasesNeutral : MonoBehaviour
         ResetColor();
         index = _gameplayManager.allCases.IndexOf(gameObject);
         objectif = FindObjectOfType<Objectif>();
-        
+        eventS = gameObject.GetComponent<Event>();
+
     }
 
     // Update is called once per frame
@@ -110,7 +112,15 @@ public class CasesNeutral : MonoBehaviour
     public void EndCase()
     {
         objectif.lastCase = true;
+       // SceneManager.LoadScene("End");
+       Debug.Log("win");
+       Time.timeScale = 0;
         _gameplayManager.ChangePlayer();
+    }
+
+    public void EventCase()
+    {
+        eventS.Invoke(eventS.eventName,0);
     }
     
     

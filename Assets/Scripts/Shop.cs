@@ -20,10 +20,7 @@ public class Shop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       /* if (player != gameplayManager.activPlayer)
-        {
-            
-        }*/
+      
     }
 
     public void ShopOpen(CasesNeutral cases,PlayerMovement plMove, PlayerPoint plPoint)
