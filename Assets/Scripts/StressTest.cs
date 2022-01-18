@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Wizama.Hardware.Antenna;
 
 public class StressTest : MonoBehaviour
 {
@@ -25,7 +24,6 @@ public class StressTest : MonoBehaviour
     // Use this for initialization
     void Start () {
         timeleft = updateInterval;
-        NFCController.StartPolling( NFC_DEVICE_ID.ANTENNA_1, NFC_DEVICE_ID.ANTENNA_8, NFC_DEVICE_ID.ANTENNA_14, NFC_DEVICE_ID.ANTENNA_21);
     }
    
     // Update is called once per frame
@@ -44,13 +42,7 @@ public class StressTest : MonoBehaviour
              accum = 0.0F;
              frames = 0;
             GetObjectStats();
-        }  
-        
-        
-        List<NFCTag>[] allAntennaTags = NFCController.GetTags();   
-        int count = 0;  
-        foreach (List<NFCTag> Tags in allAntennaTags)  
-            count += Tags.Count;
+        }
     }
    
     void OnGUI() {
@@ -114,17 +106,4 @@ public class StressTest : MonoBehaviour
             Instantiate(sphere, spawnPoint.position, Quaternion.identity); 
         }
     }
-    
-    
-    void OnDisable()  {  
-        NFCController.StopPolling();  
-    }    
-    
-    private void OnNewTagDetected(NFC_DEVICE_ID _device, NFCTag _tag)  {  
-        SpawnSphere();
-    }    
-    
-    private void OnTagRemoveDetected(NFC_DEVICE_ID _device, NFCTag _tag)  {  
-        SpawnSphere();  
-    } 
 }
