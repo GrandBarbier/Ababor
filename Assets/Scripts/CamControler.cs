@@ -32,7 +32,7 @@ public class CamControler : MonoBehaviour
 
             var zoom = pos1b / pos2b;
             Debug.Log(zoom);
-            cam.transform.position += cam.transform.rotation * new Vector3(0,0, );
+//            cam.transform.position += cam.transform.rotation * new Vector3(0,0, );
         }
     }
 

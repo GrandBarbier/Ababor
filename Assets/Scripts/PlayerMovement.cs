@@ -19,7 +19,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] 
     private LayerMask mask;
     private Camera cam;
-
+    public GameObject menuVerif;
+    public GameObject hitObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,13 +45,21 @@ public class PlayerMovement : MonoBehaviour
 
                 if (Physics.Raycast(touchRay, out RaycastHit hit, Mathf.Infinity, mask))
                 {
-                    if (hit.transform.gameObject.GetComponent<CasesNeutral>().isInRanged)
+                    foreach (CasesNeutral cases in allCases)
                     {
-                        child.transform.position = hit.transform.position;
-                        caseNext[0] = hit.transform.gameObject.GetComponent<CasesNeutral>();
-                        agent.speed = 7;
-                        end = true;
+                        if (hit.transform.gameObject == cases.gameObject && cases.isInRanged)
+                        {
+                            hitObject = cases.gameObject;
+                            child.transform.position = hitObject.transform.position;
+                            menuVerif.SetActive(true);
+                            FindCase();
+                            agent.speed = 7;
+                        }
                     }
+                }
+                else
+                {
+                    menuVerif.SetActive(false);
                 }
             }
         }
@@ -63,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
             
             if (Vector3.Distance(transform.position,child.transform.position) <= 0.75f ) // set end turn
             {
-                caseNext[0].GetComponent<CasesNeutral>().ActualCaseFunction();
+                caseNext[0].ActualCaseFunction();
                 agent.speed = 0;
                 isEvent = false;
                 end = false;
@@ -92,6 +101,15 @@ public class PlayerMovement : MonoBehaviour
 
     public int FindCase()
     {
+
+        for (int i = 0; i < allCases.Count; i++)
+        {
+            if (allCases[i].gameObject == hitObject)
+            {
+                caseNext[0] = allCases[i];
+            }
+        }
+        
         int number = 0;
         for (int i = 0; i < allCases.Count; i++)
         {

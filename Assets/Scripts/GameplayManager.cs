@@ -82,4 +82,11 @@ public class GameplayManager : MonoBehaviour
         ButtonStart();
         //Debug.Log(5);
     }
+
+    public void ButtonYes()
+    {
+        
+        actualMove.end = true;
+        actualMove.menuVerif.SetActive(false);
+    }
 }
