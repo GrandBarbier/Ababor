@@ -70,8 +70,9 @@ public class PlayerMovement : MonoBehaviour
             PlayerResetCase(); 
             agent.destination = child.transform.position;
             
-            if (Vector3.Distance(transform.position,child.transform.position) <= 0.75f ) // set end turn
+            if (Vector3.Distance(transform.position,child.transform.position) <= 1f ) // set end turn
             {
+                Debug.Log(4);
                 caseNext[0].ActualCaseFunction();
                 agent.speed = 0;
                 isEvent = false;

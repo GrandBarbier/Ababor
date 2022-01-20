@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using Wizama.Hardware.Antenna;
+using Random = UnityEngine.Random;
 
 public class CasesNeutral : MonoBehaviour
 {
@@ -52,7 +52,7 @@ public class CasesNeutral : MonoBehaviour
             {
                 obj.Outline(obj.nextCases, remain-1);
                 obj.GetComponent<Renderer>().material.color = Color.blue;
-                obj.GetComponent<CasesNeutral>().isInRanged = true;
+                obj.isInRanged = true;
                
             }
         }
@@ -69,7 +69,7 @@ public class CasesNeutral : MonoBehaviour
         Invoke(nameFunction,0);
     }
 
-    public void EarnCase()
+    public void GainCase()
     {
         _playerPoint.gold += 3;
         _playerPoint.numberGainCase++;
@@ -78,7 +78,7 @@ public class CasesNeutral : MonoBehaviour
 
     public void NeutralCase()
     {
-        
+        Debug.Log(5);
         _gameplayManager.ChangePlayer();
     }
 
@@ -120,6 +120,7 @@ public class CasesNeutral : MonoBehaviour
 
     public void EventCase()
     {
+        eventS.GetEvent();
         eventS.Invoke(eventS.eventName,0);
     }
     
