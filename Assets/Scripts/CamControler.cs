@@ -5,26 +5,39 @@ using UnityEngine;
 
 public class CamControler : MonoBehaviour
 {
+    public GameplayManager gameplayManager;
     public Camera cam;
 
     [SerializeField]
-    private float panSpeed, smoothSpeed, zoomSpeed, minLimit, maxLimit, targetOffset, bounceSpeed;
-    
-    [SerializeField] 
+    private float panSpeed, smoothSpeed, zoomSpeed, minLimit, maxLimit, targetOffset, bounceSpeed, transSpeed;
+
+    [SerializeField]
     private bool posSaved, moving, bouncing;
 
-    [SerializeField] 
+    [SerializeField]
     private Vector3 savedPos, minPos, maxPos;
-    
+
     private Vector3 panPos0, panPos1, panPos2, panPos3;
 
     public LayerMask mask, panMask;
+
+    [SerializeField]
+    private GameObject playerTarget;
+    
+    public List<GameObject> playersTargets = new List<GameObject>();
     
     // Start is called before the first frame update
     void Start()
     {
         if (cam == null)
             cam = Camera.main;
+        
+        for (int i = 0; i < gameplayManager.allPlayer.Count; i++)
+        {
+            playersTargets.Add(gameplayManager.allPlayer[i].transform.GetChild(0).gameObject);
+        }
+        
+        GoToPlayer();
     }
 
     // Update is called once per frame
@@ -57,6 +70,15 @@ public class CamControler : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            cam.transform.position = Vector3.LerpUnclamped(cam.transform.position, playerTarget.transform.position, Time.deltaTime * transSpeed);
+            float dist = Vector3.Distance(cam.transform.position, playerTarget.transform.position);
+            if (dist <= targetOffset)
+            {
+                moving = false;
+            }
+        }
     }
 
     private void PanTranslate()
@@ -72,7 +94,7 @@ public class CamControler : MonoBehaviour
     {
         Touch touch1 = Input.GetTouch(0);
         Touch touch2 = Input.GetTouch(1);
-            
+
         Vector2 pos1  = touch1.position - touch1.deltaPosition;
         Vector2 pos2  = touch2.position - touch2.deltaPosition;
 
@@ -82,7 +104,7 @@ public class CamControler : MonoBehaviour
         float diff = currentM - prevM;
 
         Vector3 delta = cam.transform.position + cam.transform.rotation * new Vector3(0, 0, diff * zoomSpeed);
-        
+
         if (Physics.Raycast(cam.transform.position, cam.transform.rotation * Vector3.forward, out RaycastHit hit, Mathf.Infinity, mask))
         {
             Debug.DrawLine(cam.transform.position, hit.point, Color.red);
@@ -176,5 +198,11 @@ public class CamControler : MonoBehaviour
     {
         bouncing = true;
         cam.transform.position = Vector3.LerpUnclamped(cam.transform.position, savedPos, bounceSpeed);
+    }
+    
+    public void GoToPlayer()
+    {
+        playerTarget = playersTargets[gameplayManager.playerIndex];
+        moving = true;
     }
 }
