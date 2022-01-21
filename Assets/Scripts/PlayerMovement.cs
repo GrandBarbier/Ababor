@@ -66,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (end)
         {
+            menuVerif.SetActive(false);
             _gameplayManager.cameraControler.GoToPlayer();
             PlayerResetCase(); 
             agent.destination = child.transform.position;
@@ -77,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
                 agent.speed = 0;
                 isEvent = false;
                 end = false;
+               
             }
 
             if (isEvent == false)

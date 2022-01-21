@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class GameplayManager : MonoBehaviour
@@ -17,6 +18,7 @@ public class GameplayManager : MonoBehaviour
     public List<PlayerPoint> allPoint;
     public PlayerMovement actualMove;
     public PlayerPoint actualPoint;
+    public TMP_Text endText;
     void Awake()
     {
         allCases = GameObject.FindGameObjectsWithTag("Case").ToList();
@@ -88,5 +90,21 @@ public class GameplayManager : MonoBehaviour
         
         actualMove.end = true;
         actualMove.menuVerif.SetActive(false);
+    }
+
+
+    public void FindBestPlayer()
+    {
+        int best = 0;
+        string bestPlayer;
+        foreach (PlayerPoint point in allPoint)
+        {
+            if (point.point >= best)
+            {
+                best = point.point;
+                bestPlayer = point.player.name;
+                endText.text = "Gagnant : " + bestPlayer + " Point : " + best;
+            }
+        }
     }
 }

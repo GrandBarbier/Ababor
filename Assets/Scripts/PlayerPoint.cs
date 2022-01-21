@@ -20,7 +20,7 @@ public class PlayerPoint : MonoBehaviour
     public int numberNoneMoveCase;
 
     public int numberCase;
-
+    public GameObject player;
     public List<bool> objectifVerif;
     // Start is called before the first frame update
     void Start()
