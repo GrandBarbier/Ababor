@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9163520321838035746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9163520321838035758}
+  - component: {fileID: 9163520321838035759}
+  - component: {fileID: 9163520321838035744}
+  - component: {fileID: 9163520321838035745}
+  m_Layer: 0
+  m_Name: GameplayManager
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9163520321838035758
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9163520321838035746}
+  m_LocalRotation: {x: 0.39357626, y: -0, z: -0, w: 0.919292}
+  m_LocalPosition: {x: -0.49, y: 32.7, z: -36.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 46.354, y: 0, z: 0}
+--- !u!114 &9163520321838035759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9163520321838035746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c5e6281330799647babe4ec970e7d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allLateObjectifs:
+  - ShopLate
+  - MoveLate
+  - LoseLate
+  - GoldLate
+  allMidObjectifs:
+  - ShopMid
+  - MoveMid
+  - LoseMid
+  - GoldMid
+  allEarlyObjectifs:
+  - ShopEarly
+  - MoveEarly
+  - LoseEarly
+  - GoldEarly
+  actualObjectif: []
+  allPlayerPoint: []
+  lastCase: 0
+  text: {fileID: 0}
+--- !u!114 &9163520321838035744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9163520321838035746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec6dd5b0ba808c4db64664ef8f23fd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allPlayer: []
+  allCases: []
+  activPlayer: {fileID: 0}
+  playerIndex: 0
+  cameraControler: {fileID: 0}
+  objectif: {fileID: 9163520321838035759}
+  allMove: []
+  allPoint: []
+  actualMove: {fileID: 0}
+  actualPoint: {fileID: 0}
+  endText: {fileID: 0}
+--- !u!114 &9163520321838035745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9163520321838035746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19494abe96c490b458711801ef32d4dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPoint: {fileID: 0}
+  gameplayManager: {fileID: 9163520321838035744}
+  playerMove: {fileID: 0}
+  player: {fileID: 0}
+  shopMenu: {fileID: 0}

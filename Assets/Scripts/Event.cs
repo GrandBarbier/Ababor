@@ -12,6 +12,11 @@ public class Event : MonoBehaviour
     public string eventName;
     public List<String> allEvent;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        gameplayManager = FindObjectOfType<GameplayManager>();
+    }
+
     void Start()
     {
         allMove = gameplayManager.allMove;

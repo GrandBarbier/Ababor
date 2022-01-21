@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Wizama.Hardware.Antenna;
 using Random = UnityEngine.Random;
 
 public class CasesNeutral : MonoBehaviour
@@ -11,7 +10,7 @@ public class CasesNeutral : MonoBehaviour
     public bool isInRanged;
     public List<CasesNeutral> nextCases;
     public Color baseColor;
-    private GameplayManager _gameplayManager;
+   [SerializeField] private GameplayManager _gameplayManager;
     public Renderer renderer;
     public int index;
     public string nameFunction;
@@ -20,6 +19,8 @@ public class CasesNeutral : MonoBehaviour
     public GameObject activPlayer;
     public Event eventS;
     public Objectif objectif;
+
+    public GameObject menuEnd;
     // Start is called before the first frame update
     void Awake()
     {
@@ -110,12 +111,13 @@ public class CasesNeutral : MonoBehaviour
     }
 
     public void EndCase()
-    {
+    { 
         objectif.lastCase = true;
-       // SceneManager.LoadScene("End");
-       Debug.Log("win");
-       Time.timeScale = 0;
-        _gameplayManager.ChangePlayer();
+        menuEnd.SetActive(true);
+        Debug.Log("win");
+        Time.timeScale = 0;
+        //_gameplayManager.ChangePlayer();
+        _gameplayManager.FindBestPlayer();
     }
 
     public void EventCase()
