@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraControler : MonoBehaviour
+public class CameraControlerCHIBRE : MonoBehaviour
 {
     public Camera cam;
     protected Plane Plane;
-    
+
     [SerializeField] 
     private float targetOffset, minLimit, maxLimit, bounceSpeed, zoomBreak, transSpeed;
 
@@ -19,9 +19,9 @@ public class CameraControler : MonoBehaviour
 
     [SerializeField] 
     private bool bouncing, canBounce,isMoving;
-    
+
     public GameplayManager gameplayManager;
-    
+
     public List<GameObject> playersTargets = new List<GameObject>();
 
 
@@ -29,7 +29,7 @@ public class CameraControler : MonoBehaviour
     {
         if (cam == null)
             cam = Camera.main;
-        
+
         minLimitPos = new Vector3(cam.transform.position.x, cam.transform.position.y - 10, cam.transform.position.z);
         maxLimitPos = new Vector3(cam.transform.position.x, cam.transform.position.y + 10, cam.transform.position.z);
 
@@ -37,7 +37,7 @@ public class CameraControler : MonoBehaviour
         {
             playersTargets.Add(gameplayManager.allPlayer[i].transform.GetChild(0).gameObject);
         }
-       
+
         GoToPlayer();
     }
 
@@ -48,9 +48,9 @@ public class CameraControler : MonoBehaviour
             //Update Plane
             if (Input.touchCount >= 1)
                 Plane.SetNormalAndPosition(transform.up, transform.position);
-            
+
             var Delta1 = Vector3.zero;
-        
+
             //Scroll
             if (Input.touchCount >= 1 && !bouncing)
             {
