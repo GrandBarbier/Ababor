@@ -106,7 +106,7 @@ public class CasesNeutral : MonoBehaviour
     public void ShopCase()
     {
         Shop shop = FindObjectOfType<Shop>();
-        shop.ShopOpen(this,_playerMove,_playerPoint);
+        shop.ShopOpen();
         _playerPoint.numberShopCase++;
     }
 

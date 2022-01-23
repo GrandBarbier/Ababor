@@ -20,21 +20,14 @@ public class Shop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+        player = gameplayManager.activPlayer;
+        playerPoint =gameplayManager.actualPoint;
+        playerMove = gameplayManager.actualMove;
     }
 
-    public void ShopOpen(CasesNeutral cases,PlayerMovement plMove, PlayerPoint plPoint)
+    public void ShopOpen()
     {
-        gameplayManager.enabled = false;
-        shopMenu.SetActive(true); 
-        player = gameplayManager.activPlayer;
-        playerPoint = plPoint;
-        playerMove = plMove;
-        foreach (PlayerMovement obj in gameplayManager.allMove)
-        {
-            obj.enabled = false;
-        }
-        caseScript = cases;
+        shopMenu.SetActive(true);
     }
 
     public void MoveButton()
