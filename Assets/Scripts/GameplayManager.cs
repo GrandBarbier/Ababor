@@ -12,7 +12,7 @@ public class GameplayManager : MonoBehaviour
     public GameObject activPlayer;
     public int playerIndex;
     public State currentstate;
-    public CameraControlerCHIBRE cameraControler;
+    public CamControler cameraControler;
     public Objectif objectif;
     public List<PlayerMovement> allMove;
     public List<PlayerPoint> allPoint;
