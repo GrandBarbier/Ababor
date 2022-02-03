@@ -12,13 +12,15 @@ public class GameplayManager : MonoBehaviour
     public GameObject activPlayer;
     public int playerIndex;
     public State currentstate;
-    public CamControler cameraControler;
     public Objectif objectif;
     public List<PlayerMovement> allMove;
     public List<PlayerPoint> allPoint;
     public PlayerMovement actualMove;
     public PlayerPoint actualPoint;
     public TMP_Text endText;
+    public Queue<GameObject> moveQueue = new Queue<GameObject>();
+    
+  //  public GameObject[] testarray; 
     void Awake()
     {
         allCases = GameObject.FindGameObjectsWithTag("Case").ToList();
@@ -31,13 +33,19 @@ public class GameplayManager : MonoBehaviour
             allMove.Add(obj.GetComponent<PlayerMovement>());
             allPoint.Add(obj.GetComponent<PlayerPoint>());
         }
+       
         currentstate = new Moving();
     }
 
     void Start()
     {
         
+        foreach (GameObject move in allPlayer)
+        {
+            moveQueue.Enqueue(move);
+        }
         currentstate.DoState(allMove[playerIndex], this);
+        
     }
 
     // Update is called once per frame
@@ -46,6 +54,7 @@ public class GameplayManager : MonoBehaviour
         activPlayer = allPlayer[playerIndex];
         actualMove = allMove[playerIndex];
         actualPoint = allPoint[playerIndex];
+      //  testarray = moveQueue.ToArray();
     }
     
     
@@ -70,24 +79,25 @@ public class GameplayManager : MonoBehaviour
         
         State endTurn = new EndTurn();
         endTurn.DoState(allMove[playerIndex], this);
+        
         playerIndex++;
-        if (playerIndex>= allPlayer.Count)
+        if (playerIndex >= allMove.Count)
         {
-            ResetIndex();
+            playerIndex = 0;
         }
         foreach (string stg in objectif.actualObjectif)
         {
             objectif.Invoke(stg,0);
         }
         
-        cameraControler.GoToPlayer();
+       
         ButtonStart();
         //Debug.Log(5);
     }
 
     public void ButtonYes()
     {
-        
+        Debug.Log(147);
         actualMove.end = true;
         actualMove.menuVerif.SetActive(false);
     }
@@ -106,5 +116,14 @@ public class GameplayManager : MonoBehaviour
                 endText.text = "Gagnant : " + bestPlayer + " Point : " + best;
             }
         }
+    }
+
+    public void ChangePlayerOrder()
+    {
+            actualMove.isLast = false;
+            moveQueue.Dequeue();
+            moveQueue.Enqueue(allPlayer[0]);
+            allPlayer = moveQueue.ToList();
+        
     }
 }

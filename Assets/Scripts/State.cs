@@ -19,6 +19,11 @@ public class Moving : State
     public override void DoState(PlayerMovement player, GameplayManager gameplayManager)
     {
         player.enabled = true;
+      
+        if (gameplayManager.allMove[gameplayManager.playerIndex].isLast)
+        {
+            gameplayManager.ChangePlayerOrder();
+        }
         player.PlayerShowMove();
     }
 }
@@ -28,10 +33,9 @@ public class EndTurn : State
     //End player Turn + next player
     public override void DoState(PlayerMovement player, GameplayManager gameplayManager)
     {
-        Objectif objectif = GameObject.FindObjectOfType<Objectif>();
         gameplayManager.currentstate = new Moving();
         player.enabled = false;
-        Debug.Log(player);
+        
     }
 }
 

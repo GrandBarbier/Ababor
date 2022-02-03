@@ -36,7 +36,11 @@ public class Event : MonoBehaviour
             move.actualMove -= 3;
             move.isEvent = true;
         }
+
+      
+        gameplayManager.actualMove.isEvent = true;
         gameplayManager.ChangePlayer();
+        enabled = false;
     }
     
     public void EventMoreMove()
@@ -46,7 +50,10 @@ public class Event : MonoBehaviour
             move.actualMove += 3;
             move.isEvent = true;
         }
+        
+        gameplayManager.actualMove.isEvent = true;
         gameplayManager.ChangePlayer();
+        enabled = false;
     }
 
 
