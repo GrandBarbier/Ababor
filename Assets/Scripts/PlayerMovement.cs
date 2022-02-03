@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     private Camera cam;
     public GameObject menuVerif;
     public GameObject hitObject;
+    public Event[] allEvent;
+    public bool isLast;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +31,8 @@ public class PlayerMovement : MonoBehaviour
         {
             allCases.Add(obj.GetComponent<CasesNeutral>());
         }
-        
+
+        allEvent = FindObjectsOfType<Event>();
         _gameplayManager.activPlayer = gameObject;
         cam = Camera.main;
     }
@@ -67,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
         if (end)
         {
             menuVerif.SetActive(false);
-            _gameplayManager.cameraControler.GoToPlayer();
+           
             PlayerResetCase(); 
             agent.destination = child.transform.position;
             
@@ -78,15 +81,21 @@ public class PlayerMovement : MonoBehaviour
                 agent.speed = 0;
                 isEvent = false;
                 end = false;
-               
+                
             }
 
+            if (isEvent)
+            { 
+                foreach (Event evt in allEvent) 
+                {
+                     evt.enabled = true;
+                }
+            }
             if (isEvent == false)
             {
                 actualMove = InitialMove;
             }
         }
-        
     }
 
     public void PlayerShowMove()  // change color of all case in range
