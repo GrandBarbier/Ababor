@@ -5,7 +5,7 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     public PlayerPoint playerPoint;
-    public GameplayManager gameplayManager;
+    public GameplayManager _gameplayManager;
     public PlayerMovement playerMove;
     public GameObject player;
     public GameObject shopMenu;
@@ -20,9 +20,9 @@ public class Shop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player = gameplayManager.activPlayer;
-        playerPoint =gameplayManager.actualPoint;
-        playerMove = gameplayManager.actualMove;
+        player = _gameplayManager.activPlayer;
+        playerPoint = _gameplayManager.actualPoint;
+        playerMove = _gameplayManager.actualMove;
     }
 
     public void ShopOpen()
@@ -32,11 +32,11 @@ public class Shop : MonoBehaviour
 
     public void MoveButton()
     {
-        gameplayManager.enabled = true;
+        _gameplayManager.enabled = true;
         playerPoint.gold -= 10;
         playerMove.InitialMove ++;
         shopMenu.SetActive(false);
-        gameplayManager.ChangePlayer();
+        _gameplayManager.ChangePlayer();
         playerMove.actualMove = playerMove.InitialMove;
     }
 
@@ -44,7 +44,7 @@ public class Shop : MonoBehaviour
     {
         playerPoint.gold -= 5;
         shopMenu.SetActive(false);
-        gameplayManager.ChangePlayer();
-        gameplayManager.enabled = true;
+        _gameplayManager.ChangePlayer();
+        _gameplayManager.enabled = true;
     }
 }

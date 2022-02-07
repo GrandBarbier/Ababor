@@ -7,20 +7,20 @@ using Random = UnityEngine.Random;
 public class Event : MonoBehaviour
 {
     public List<PlayerMovement> allMove;
-    public GameplayManager gameplayManager;
+    public GameplayManager _gameplayManager;
     public List<PlayerPoint> allPoint;
     public string eventName;
     public List<String> allEvent;
     // Start is called before the first frame update
     private void Awake()
     {
-        gameplayManager = FindObjectOfType<GameplayManager>();
+        _gameplayManager = FindObjectOfType<GameplayManager>();
     }
 
     void Start()
     {
-        allMove = gameplayManager.allMove;
-        allPoint = gameplayManager.allPoint;
+        allMove = _gameplayManager.allMove;
+        allPoint = _gameplayManager.allPoint;
     }
 
     // Update is called once per frame
@@ -38,8 +38,8 @@ public class Event : MonoBehaviour
         }
 
       
-        gameplayManager.actualMove.isEvent = true;
-        gameplayManager.ChangePlayer();
+        _gameplayManager.actualMove.isEvent = true;
+        _gameplayManager.ChangePlayer();
         enabled = false;
     }
     
@@ -51,19 +51,14 @@ public class Event : MonoBehaviour
             move.isEvent = true;
         }
         
-        gameplayManager.actualMove.isEvent = true;
-        gameplayManager.ChangePlayer();
+        _gameplayManager.actualMove.isEvent = true;
+        _gameplayManager.ChangePlayer();
         enabled = false;
     }
-
-
-
-
+    
     public void GetEvent()
     {
         int rdm = Random.Range(0, allEvent.Count);
         eventName = allEvent[rdm];
     }
-    
-    
 }

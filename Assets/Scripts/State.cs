@@ -19,11 +19,6 @@ public class Moving : State
     public override void DoState(PlayerMovement player, GameplayManager gameplayManager)
     {
         player.enabled = true;
-      
-        if (gameplayManager.allMove[gameplayManager.playerIndex].isLast)
-        {
-            gameplayManager.ChangePlayerOrder();
-        }
         player.PlayerShowMove();
     }
 }
@@ -33,18 +28,20 @@ public class EndTurn : State
     //End player Turn + next player
     public override void DoState(PlayerMovement player, GameplayManager gameplayManager)
     {
-        gameplayManager.currentstate = new Moving();
-        player.enabled = false;
+        gameplayManager.currentstate = new CardPlay();
+        gameplayManager.currentstate.DoState(player,gameplayManager);
+        gameplayManager.ResetMove();
         
     }
 }
 
-/*public class CardPLay : State
+
+public class CardPlay : State
 {
     //player play card
-    public override void DoState(GameObject player)
+    public override void DoState(PlayerMovement player, GameplayManager gameplayManager)
     {
-        Debug.Log(5);
+        gameplayManager.OpenVerifMenu();
     }
-}*/
+}
 

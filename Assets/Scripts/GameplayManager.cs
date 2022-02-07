@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class GameplayManager : MonoBehaviour
 {
-    public List<GameObject> allPlayer = new List<GameObject>();
+    public List<GameObject> players = new List<GameObject>();
     public List<GameObject> allCases = new List<GameObject>();
     public GameObject activPlayer;
     public int playerIndex;
@@ -18,43 +18,62 @@ public class GameplayManager : MonoBehaviour
     public PlayerMovement actualMove;
     public PlayerPoint actualPoint;
     public TMP_Text endText;
-    public Queue<GameObject> moveQueue = new Queue<GameObject>();
-    
-  //  public GameObject[] testarray; 
+    public Queue<GameObject> playerQueue = new Queue<GameObject>();
+    public Queue<PlayerMovement> moveQueue = new Queue<PlayerMovement>();
+    public Queue<PlayerPoint> pointQueue = new Queue<PlayerPoint>();
+    public GameObject verifMenu,endMenu;
+    public List<Player> allPlayers = new List<Player>();
     void Awake()
     {
         allCases = GameObject.FindGameObjectsWithTag("Case").ToList();
-        allPlayer = GameObject.FindGameObjectsWithTag("Player").ToList();
+        players = GameObject.FindGameObjectsWithTag("Player").ToList();
+
+        for (int i = 0; i < players.Count; i++)
+        {
+            Player pl = new Player();
+             pl.player = players[i];
+             pl.move = players[i].GetComponent<PlayerMovement>();
+             pl.point = players[i].GetComponent<PlayerPoint>();
+            allPlayers.Add(pl);
+           
+        }
         allCases.Reverse();
         allCases.Sort(SortByName);
-        foreach (GameObject obj in allPlayer)
+        foreach (Player obj in allPlayers)
         {
-            obj.GetComponent<PlayerMovement>().enabled = false;
-            allMove.Add(obj.GetComponent<PlayerMovement>());
-            allPoint.Add(obj.GetComponent<PlayerPoint>());
+            obj.move.enabled = false;
+            allMove.Add(obj.move);
+            allPoint.Add(obj.point);
         }
        
-        currentstate = new Moving();
+        currentstate = new CardPlay();
+        
     }
 
     void Start()
     {
-        
-        foreach (GameObject move in allPlayer)
+        foreach (GameObject player in players)
+        {
+            playerQueue.Enqueue(player);
+        }
+        foreach (PlayerMovement move in allMove)
         {
             moveQueue.Enqueue(move);
         }
+        foreach (PlayerPoint point in allPoint)
+        {
+            pointQueue.Enqueue(point);
+        }
         currentstate.DoState(allMove[playerIndex], this);
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        activPlayer = allPlayer[playerIndex];
-        actualMove = allMove[playerIndex];
-        actualPoint = allPoint[playerIndex];
-      //  testarray = moveQueue.ToArray();
+        activPlayer = allPlayers[playerIndex].player;
+        actualMove = allPlayers[playerIndex].move;
+        actualPoint = allPlayers[playerIndex].point;
+        
     }
     
     
@@ -71,17 +90,16 @@ public class GameplayManager : MonoBehaviour
     public void ResetIndex()
     {
         playerIndex = 0;
-       
     }
     
     public void ChangePlayer()
     {
-        
-        State endTurn = new EndTurn();
-        endTurn.DoState(allMove[playerIndex], this);
+       
+        currentstate = new EndTurn();
+        currentstate.DoState(allMove[playerIndex], this);
         
         playerIndex++;
-        if (playerIndex >= allMove.Count)
+        if (playerIndex >= allPlayers.Count)
         {
             playerIndex = 0;
         }
@@ -89,17 +107,18 @@ public class GameplayManager : MonoBehaviour
         {
             objectif.Invoke(stg,0);
         }
-        
-       
+        if (actualMove.isLast)
+        {
+            ChangePlayerOrder();
+        }
         ButtonStart();
-        //Debug.Log(5);
+        Debug.Log(5);
     }
 
     public void ButtonYes()
     {
-        Debug.Log(147);
-        actualMove.end = true;
         actualMove.menuVerif.SetActive(false);
+        actualMove.end = true;
     }
 
 
@@ -120,10 +139,57 @@ public class GameplayManager : MonoBehaviour
 
     public void ChangePlayerOrder()
     {
-            actualMove.isLast = false;
-            moveQueue.Dequeue();
-            moveQueue.Enqueue(allPlayer[0]);
-            allPlayer = moveQueue.ToList();
+        
+        actualMove.isLast = false;
+        allMove[0].isLast = true;
+        playerQueue.Dequeue(); 
+        playerQueue.Enqueue(players[0]); 
+      /*  moveQueue.Dequeue();
+        moveQueue.Enqueue(allMove[0]);
+        pointQueue.Dequeue();
+        pointQueue.Enqueue(allPoint[0]);*/
+        players = playerQueue.ToList();
+        allMove = moveQueue.ToList();
+        allPoint = pointQueue.ToList();
         
     }
+
+    public void ResetMove()
+    {
+        foreach (PlayerMovement move in allMove)
+        {
+            move.enabled = false;
+        }
+        
+    }
+
+    public void OpenVerifMenu()
+    {
+        verifMenu.SetActive(true);
+    }
+
+    public void OpenEndMenu()
+    {
+        endMenu.SetActive(true);
+    }
+    public void ButtonVerifMenuMove()
+    {
+        currentstate = new Moving();
+        currentstate.DoState(actualMove, this);
+        verifMenu.SetActive(false);
+    }
+
+    public void ButtonEnd()
+    {
+        currentstate = new EndTurn();
+        currentstate.DoState(actualMove,this);
+        verifMenu.SetActive(false);
+    }
+}
+
+public class Player
+{
+    public GameObject player;
+    public PlayerMovement move;
+    public PlayerPoint point;
 }

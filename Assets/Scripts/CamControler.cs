@@ -27,7 +27,7 @@ public class CamControler : MonoBehaviour
     public List<GameObject> playersTargets = new List<GameObject>();
     
     // Start is called before the first frame update
-    void Start()
+   /* void Start()
     {
         if (cam == null)
             cam = Camera.main;
@@ -204,5 +204,5 @@ public class CamControler : MonoBehaviour
     {
         playerTarget = playersTargets[gameplayManager.playerIndex];
         moving = true;
-    }
+    }*/
 }

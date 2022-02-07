@@ -70,10 +70,9 @@ public class PlayerMovement : MonoBehaviour
         if (end)
         {
             menuVerif.SetActive(false);
-           
             PlayerResetCase(); 
             agent.destination = child.transform.position;
-            
+          
             if (Vector3.Distance(transform.position,child.transform.position) <= 1f ) // set end turn
             {
                 Debug.Log(4);
@@ -81,9 +80,8 @@ public class PlayerMovement : MonoBehaviour
                 agent.speed = 0;
                 isEvent = false;
                 end = false;
-                
             }
-
+            
             if (isEvent)
             { 
                 foreach (Event evt in allEvent) 
@@ -91,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
                      evt.enabled = true;
                 }
             }
+            
             if (isEvent == false)
             {
                 actualMove = InitialMove;

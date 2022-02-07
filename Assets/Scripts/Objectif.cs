@@ -14,7 +14,6 @@ public class Objectif : MonoBehaviour
     public List<string> actualObjectif;
     public List<PlayerPoint> allPlayerPoint;
     public bool lastCase;
-
     public TMP_Text text;
     // Start is called before the first frame update
 
@@ -22,7 +21,7 @@ public class Objectif : MonoBehaviour
     {
         _gameplayManager = FindObjectOfType<GameplayManager>();
         
-        for (int i = 0; i < _gameplayManager.allPlayer.Count; i++)
+        for (int i = 0; i < _gameplayManager.allPlayers.Count; i++)
         {
             allPlayerPoint.Add(_gameplayManager.allPoint[i]);
         }

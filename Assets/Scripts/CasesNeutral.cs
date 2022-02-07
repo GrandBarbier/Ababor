@@ -19,7 +19,6 @@ public class CasesNeutral : MonoBehaviour
     public GameObject activPlayer;
     public Event eventS;
     public Objectif objectif;
-
     public GameObject menuEnd;
     // Start is called before the first frame update
     void Awake()
@@ -75,6 +74,7 @@ public class CasesNeutral : MonoBehaviour
         _playerPoint.gold += 3;
         _playerPoint.numberGainCase++;
         _gameplayManager.ChangePlayer();
+        
     }
 
     public void NeutralCase()
