@@ -73,7 +73,10 @@ public class GameplayManager : MonoBehaviour
         activPlayer = allPlayers[playerIndex].player;
         actualMove = allPlayers[playerIndex].move;
         actualPoint = allPlayers[playerIndex].point;
-        
+        if (playerIndex <= 0)
+        {
+            playerIndex = 0;
+        }
     }
     
     

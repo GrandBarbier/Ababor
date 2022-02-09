@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9163520321838035759}
   - component: {fileID: 9163520321838035744}
   - component: {fileID: 9163520321838035745}
+  - component: {fileID: 7541256346092628484}
   m_Layer: 0
   m_Name: GameplayManager
   m_TagString: MainCamera
@@ -76,17 +77,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec6dd5b0ba808c4db64664ef8f23fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allPlayer: []
+  players: []
   allCases: []
   activPlayer: {fileID: 0}
   playerIndex: 0
-  cameraControler: {fileID: 0}
   objectif: {fileID: 9163520321838035759}
   allMove: []
   allPoint: []
   actualMove: {fileID: 0}
   actualPoint: {fileID: 0}
   endText: {fileID: 0}
+  verifMenu: {fileID: 0}
+  endMenu: {fileID: 0}
 --- !u!114 &9163520321838035745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,7 +102,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPoint: {fileID: 0}
-  gameplayManager: {fileID: 9163520321838035744}
+  _gameplayManager: {fileID: 9163520321838035744}
   playerMove: {fileID: 0}
   player: {fileID: 0}
   shopMenu: {fileID: 0}
+--- !u!114 &7541256346092628484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9163520321838035746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 287badde4999b5a41a8fe07d8a9184ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menu: {fileID: 0}
+  gameplayManager: {fileID: 0}
+  move: {fileID: 0}
+  point: {fileID: 0}

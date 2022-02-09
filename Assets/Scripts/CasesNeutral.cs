@@ -14,12 +14,11 @@ public class CasesNeutral : MonoBehaviour
     public Renderer renderer;
     public int index;
     public string nameFunction;
-    [SerializeField] private PlayerPoint _playerPoint;
-    [SerializeField] private PlayerMovement _playerMove;
-    public GameObject activPlayer;
+    public Player activPlayer;
     public Event eventS;
     public Objectif objectif;
     public GameObject menuEnd;
+    public CasesNeutral lastCase;
     // Start is called before the first frame update
     void Awake()
     {
@@ -36,12 +35,7 @@ public class CasesNeutral : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (activPlayer != _gameplayManager.activPlayer)
-        {
-            activPlayer = _gameplayManager.activPlayer;
-            _playerPoint = _gameplayManager.actualPoint;
-            _playerMove = _gameplayManager.actualMove;
-        }
+        activPlayer = _gameplayManager.allPlayers[_gameplayManager.playerIndex];
     }
 
     public void Outline(List<CasesNeutral> list, float remain)
@@ -71,8 +65,8 @@ public class CasesNeutral : MonoBehaviour
 
     public void GainCase()
     {
-        _playerPoint.gold += 3;
-        _playerPoint.numberGainCase++;
+        activPlayer.point.gold += 3;
+        activPlayer.point.numberGainCase++;
         _gameplayManager.ChangePlayer();
         
     }
@@ -85,29 +79,31 @@ public class CasesNeutral : MonoBehaviour
 
     public void LoseCase()
     {
-        _playerPoint.gold -= 3;
-        if (_playerPoint.gold < 0)
+        activPlayer.point.gold -= 3;
+        if (activPlayer.point.gold < 0)
         {
-            _playerPoint.gold = 0;
+            activPlayer.point.gold = 0;
         }
-        _playerPoint.numberLoseCase++;
+        activPlayer.point.numberLoseCase++;
         _gameplayManager.ChangePlayer();
     }
 
     public void MoveCase()
     {
-        int u = _playerMove.FindCase(); 
-        _playerMove.actualMove = 2;
-        _playerMove.PlayerShowMove();
-        _playerMove.agent.destination = _playerMove.child.transform.position;
-        _playerMove.actualMove = _playerMove.InitialMove;
+        int u = activPlayer.move.FindCase(); 
+        activPlayer.move.actualMove = 2;
+        activPlayer.move.PlayerShowMove();
+        activPlayer.move.agent.destination = activPlayer.move.child.transform.position;
+        activPlayer.move.actualMove = activPlayer.move.InitialMove;
+        _gameplayManager.playerIndex++;
+      //  _gameplayManager.playerIndex--;
     }
 
     public void ShopCase()
     {
         Shop shop = FindObjectOfType<Shop>();
         shop.ShopOpen();
-        _playerPoint.numberShopCase++;
+        activPlayer.point.numberShopCase++;
     }
 
     public void EndCase()
@@ -131,7 +127,7 @@ public class CasesNeutral : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            _playerPoint.numberCase++;
+            activPlayer.point.numberCase++;
         }
     }
 }

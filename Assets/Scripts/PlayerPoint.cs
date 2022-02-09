@@ -31,6 +31,10 @@ public class PlayerPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gold < 0)
+        {
+            gold = 0;
+        }
         text.text = gold.ToString();
     }
     

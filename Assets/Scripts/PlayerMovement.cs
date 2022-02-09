@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayerShowMove()  // change color of all case in range
     {
-       caseNext[0].GetComponent<CasesNeutral>().Outline(caseNext,actualMove);
+       caseNext[0].Outline(caseNext,actualMove);
     }
 
     public void PlayerResetCase() // Reset the color of all cases
