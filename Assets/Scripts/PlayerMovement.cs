@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject hitObject;
     public Event[] allEvent;
     public bool isLast;
+
+    public int index;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,31 +44,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.touchCount == 1)
         {
-            if (Input.GetTouch(0).phase == TouchPhase.Ended)
-            {
-                var touchRay = cam.ScreenPointToRay(Input.GetTouch(0).position);
-
-                if (Physics.Raycast(touchRay, out RaycastHit hit, Mathf.Infinity, mask))
-                {
-                    foreach (CasesNeutral cases in allCases)
-                    {
-                        if (hit.transform.gameObject == cases.gameObject && cases.isInRanged)
-                        {
-                            hitObject = cases.gameObject;
-                            child.transform.position = hitObject.transform.position;
-                            menuVerif.SetActive(true);
-                            FindCase();
-                            agent.speed = 7;
-                        }
-                    }
-                }
-                else
-                {
-                    menuVerif.SetActive(false);
-                }
-            }
+            CaseToMove();
         }
-        
+
+
         if (end)
         {
             menuVerif.SetActive(false);
@@ -131,5 +112,32 @@ public class PlayerMovement : MonoBehaviour
         }
 
         return number;
+    }
+
+    public void CaseToMove()
+    {
+        if (Input.GetTouch(0).phase == TouchPhase.Ended)
+        {
+            var touchRay = cam.ScreenPointToRay(Input.GetTouch(0).position);
+
+            if (Physics.Raycast(touchRay, out RaycastHit hit, Mathf.Infinity, mask))
+            {
+                foreach (CasesNeutral cases in allCases)
+                {
+                    if (hit.transform.gameObject == cases.gameObject && cases.isInRanged)
+                    {
+                        hitObject = cases.gameObject;
+                        child.transform.position = hitObject.transform.position;
+                        menuVerif.SetActive(true);
+                        FindCase();
+                        agent.speed = 7;
+                    }
+                }
+            }
+            else
+            {
+                menuVerif.SetActive(false);
+            }
+        }
     }
 }

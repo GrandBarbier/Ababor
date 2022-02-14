@@ -96,7 +96,6 @@ public class CasesNeutral : MonoBehaviour
         activPlayer.move.agent.destination = activPlayer.move.child.transform.position;
         activPlayer.move.actualMove = activPlayer.move.InitialMove;
         _gameplayManager.playerIndex++;
-      //  _gameplayManager.playerIndex--;
     }
 
     public void ShopCase()

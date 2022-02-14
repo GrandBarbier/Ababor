@@ -13,16 +13,17 @@ public class GameplayManager : MonoBehaviour
     public int playerIndex;
     public State currentstate;
     public Objectif objectif;
-    public List<PlayerMovement> allMove;
-    public List<PlayerPoint> allPoint;
+ //   public List<PlayerMovement> allMove;
+ //   public List<PlayerPoint> allPoint;
     public PlayerMovement actualMove;
     public PlayerPoint actualPoint;
     public TMP_Text endText;
-    public Queue<GameObject> playerQueue = new Queue<GameObject>();
+    public Queue<Player> playerQueue = new Queue<Player>();
     public Queue<PlayerMovement> moveQueue = new Queue<PlayerMovement>();
     public Queue<PlayerPoint> pointQueue = new Queue<PlayerPoint>();
     public GameObject verifMenu,endMenu;
     public List<Player> allPlayers = new List<Player>();
+    public CardManager cardManager;
     void Awake()
     {
         allCases = GameObject.FindGameObjectsWithTag("Case").ToList();
@@ -39,32 +40,25 @@ public class GameplayManager : MonoBehaviour
         }
         allCases.Reverse();
         allCases.Sort(SortByName);
-        foreach (Player obj in allPlayers)
+        /* foreach (Player obj in allPlayers)
         {
             obj.move.enabled = false;
             allMove.Add(obj.move);
             allPoint.Add(obj.point);
-        }
-       
+        }*/
         currentstate = new CardPlay();
-        
     }
 
     void Start()
     {
-        foreach (GameObject player in players)
+        foreach (Player player in allPlayers)
         {
             playerQueue.Enqueue(player);
+            moveQueue.Enqueue(player.move);
+            pointQueue.Enqueue(player.point);
         }
-        foreach (PlayerMovement move in allMove)
-        {
-            moveQueue.Enqueue(move);
-        }
-        foreach (PlayerPoint point in allPoint)
-        {
-            pointQueue.Enqueue(point);
-        }
-        currentstate.DoState(allMove[playerIndex], this);
+      
+        currentstate.DoState(allPlayers[playerIndex].move, this);
     }
 
     // Update is called once per frame
@@ -78,8 +72,7 @@ public class GameplayManager : MonoBehaviour
             playerIndex = 0;
         }
     }
-    
-    
+
     private int SortByName(GameObject object1, GameObject object2) // function to sort cases
     {
        return  object1.GetComponent<CasesNeutral>().index.CompareTo(object2.GetComponent<CasesNeutral>().index);
@@ -87,7 +80,7 @@ public class GameplayManager : MonoBehaviour
 
     public void ButtonStart()
     {
-        currentstate.DoState(allMove[playerIndex], this);
+        currentstate.DoState(allPlayers[playerIndex].move, this);
     }
 
     public void ResetIndex()
@@ -99,7 +92,7 @@ public class GameplayManager : MonoBehaviour
     {
        
         currentstate = new EndTurn();
-        currentstate.DoState(allMove[playerIndex], this);
+        currentstate.DoState(allPlayers[playerIndex].move, this);
         
         playerIndex++;
         if (playerIndex >= allPlayers.Count)
@@ -110,6 +103,12 @@ public class GameplayManager : MonoBehaviour
         {
             objectif.Invoke(stg,0);
         }
+
+        if (cardManager.verif == false)
+        {
+            ResetLast();
+        }
+       
         if (actualMove.isLast)
         {
             ChangePlayerOrder();
@@ -129,12 +128,12 @@ public class GameplayManager : MonoBehaviour
     {
         int best = 0;
         string bestPlayer;
-        foreach (PlayerPoint point in allPoint)
+        foreach (Player player in allPlayers)
         {
-            if (point.point >= best)
+            if (player.point.point >= best)
             {
-                best = point.point;
-                bestPlayer = point.player.name;
+                best = player.point.point;
+                bestPlayer = player.point.player.name;
                 endText.text = "Gagnant : " + bestPlayer + " Point : " + best;
             }
         }
@@ -142,28 +141,23 @@ public class GameplayManager : MonoBehaviour
 
     public void ChangePlayerOrder()
     {
-        
         actualMove.isLast = false;
-        allMove[0].isLast = true;
+        allPlayers[0].move.isLast = true;
         playerQueue.Dequeue(); 
-        playerQueue.Enqueue(players[0]); 
-      /*  moveQueue.Dequeue();
-        moveQueue.Enqueue(allMove[0]);
-        pointQueue.Dequeue();
-        pointQueue.Enqueue(allPoint[0]);*/
-        players = playerQueue.ToList();
-        allMove = moveQueue.ToList();
-        allPoint = pointQueue.ToList();
-        
+        playerQueue.Enqueue(allPlayers[0]);
+        allPlayers = playerQueue.ToList();
+        for (int i = 0; i < allPlayers.Count; i++)
+        {
+            allPlayers[i].move.index = i;
+        }
     }
 
     public void ResetMove()
     {
-        foreach (PlayerMovement move in allMove)
+        foreach (Player  player in allPlayers )
         {
-            move.enabled = false;
+            player.move.enabled = false;
         }
-        
     }
 
     public void OpenVerifMenu()
@@ -187,6 +181,11 @@ public class GameplayManager : MonoBehaviour
         currentstate = new EndTurn();
         currentstate.DoState(actualMove,this);
         verifMenu.SetActive(false);
+    }
+
+    public void ResetLast()
+    {
+        allPlayers[allPlayers.Count -1].move.isLast = true;
     }
 }
 
