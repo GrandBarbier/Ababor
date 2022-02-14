@@ -23,7 +23,7 @@ public class Objectif : MonoBehaviour
         
         for (int i = 0; i < _gameplayManager.allPlayers.Count; i++)
         {
-            allPlayerPoint.Add(_gameplayManager.allPoint[i]);
+            allPlayerPoint.Add(_gameplayManager.allPlayers[i].point);
         }
 
         for (int i = 0; i <= allPlayerPoint.Count/2; i++)

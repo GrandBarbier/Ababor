@@ -8,7 +8,7 @@ public class Event : MonoBehaviour
 {
     public List<PlayerMovement> allMove;
     public GameplayManager _gameplayManager;
-    public List<PlayerPoint> allPoint;
+    public List<Player> allPlayers;
     public string eventName;
     public List<String> allEvent;
     // Start is called before the first frame update
@@ -19,8 +19,8 @@ public class Event : MonoBehaviour
 
     void Start()
     {
-        allMove = _gameplayManager.allMove;
-        allPoint = _gameplayManager.allPoint;
+        allPlayers = _gameplayManager.allPlayers;
+       
     }
 
     // Update is called once per frame
@@ -45,10 +45,10 @@ public class Event : MonoBehaviour
     
     public void EventMoreMove()
     {
-        foreach (PlayerMovement move in allMove)
+        foreach (Player player in allPlayers)
         {
-            move.actualMove += 3;
-            move.isEvent = true;
+            player.move.actualMove += 3;
+            player.move.isEvent = true;
         }
         
         _gameplayManager.actualMove.isEvent = true;
