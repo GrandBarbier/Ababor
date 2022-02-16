@@ -13,7 +13,7 @@ public class CardManager : MonoBehaviour
     public int gmIndex;
     public bool verif;
     public Player player;
-    public GameObject pl;
+    //public GameObject pl;
     public PlayerMovement m;
     public PlayerPoint p;
     public List<Player> allPlayer;
@@ -30,7 +30,7 @@ public class CardManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pl = player.player;
+         //pl = player.player;
         if (index != gameplayManager.playerIndex && verif)
         {
             gameplayManager.playerIndex = gmIndex;
@@ -136,7 +136,41 @@ public class CardManager : MonoBehaviour
          target.move.caseNext[0].ActualCaseFunction();
          gameplayManager.playerIndex = gmIndex;
     }
+    
+    public void BlueKing()
+    {
+        gmIndex = gameplayManager.playerIndex;
+        player.player.transform.position = target.move.caseNext[0].transform.position;
+        target.player.transform.position = player.move.caseNext[0].transform.position;
+        player.move.caseNext[0].ActualCaseFunction();
+        target.move.caseNext[0].ActualCaseFunction();
+        gameplayManager.playerIndex = gmIndex;
+    }
 
+    public void RedKing()
+    {
+        foreach (Player pl in gameplayManager.allPlayers)
+        {
+            if (pl != player)
+            {
+                player.point.gold -= 3;
+                pl.point.gold += 3;
+            }
+        }
+    }
+
+    public void YellowKing()
+    {
+        foreach (Player pl in gameplayManager.allPlayers)
+        {
+            if (pl != player)
+            {
+                pl.point.gold -= 5;
+                player.point.gold += 5;
+            }
+        }
+    }
+    
     public void ButtonSelectPlayer(int index)
     {
         player = allPlayer[index];
@@ -147,7 +181,7 @@ public class CardManager : MonoBehaviour
         target = allPlayer[index];
     }
 
-    public void CallCardFunction(string stg , Player pl )
+    public void CallCardFunction(string stg /*, Player pl*/ )
     {
       //  player = pl;
         Invoke(stg,0);
