@@ -18,7 +18,6 @@ public class CardManager : MonoBehaviour
     public PlayerPoint p;
     public List<Player> allPlayer;
     public Player target;
-    public string stg;
     public Button button;
     // Start is called before the first frame update
     void Start()
@@ -113,11 +112,34 @@ public class CardManager : MonoBehaviour
         player.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
     }
-    
+
+    public void GreenQueen()
+    {
+        gmIndex = gameplayManager.playerIndex;
+        player.player.transform.position = target.move.caseNext[0].transform.position;
+        player.move.caseNext[0].ActualCaseFunction();
+        gameplayManager.playerIndex = gmIndex;
+    }
+
+    public void RedQueen()
+    {
+        player.point.gold -= 5;
+        target.point.gold += 5;
+    }
+
+    public void GreenKing()
+    {
+         gmIndex = gameplayManager.playerIndex;
+         player.player.transform.position = target.move.caseNext[0].transform.position;
+         target.player.transform.position = player.move.caseNext[0].transform.position;
+         player.move.caseNext[0].ActualCaseFunction();
+         target.move.caseNext[0].ActualCaseFunction();
+         gameplayManager.playerIndex = gmIndex;
+    }
+
     public void ButtonSelectPlayer(int index)
     {
         player = allPlayer[index];
-        
     }
 
     public void ButtonSelectTarget(int index)
@@ -125,8 +147,9 @@ public class CardManager : MonoBehaviour
         target = allPlayer[index];
     }
 
-    public void CallCardFunction()
+    public void CallCardFunction(string stg , Player pl )
     {
+      //  player = pl;
         Invoke(stg,0);
     }
 }
