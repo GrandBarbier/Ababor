@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardManager : MonoBehaviour
 {
@@ -13,12 +16,15 @@ public class CardManager : MonoBehaviour
     public GameObject pl;
     public PlayerMovement m;
     public PlayerPoint p;
-    
+    public List<Player> allPlayer;
+    public Player target;
+    public Button button;
     // Start is called before the first frame update
     void Start()
     {
         gameplayManager = FindObjectOfType<GameplayManager>();
         player = gameplayManager.allPlayers[0];
+        allPlayer = gameplayManager.allPlayers;
     }
 
     // Update is called once per frame
@@ -66,7 +72,6 @@ public class CardManager : MonoBehaviour
         player.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
         verif = true;
-        // gameplayManager.playerIndex--;
     }
 
     public void SecondSpades()
@@ -77,8 +82,6 @@ public class CardManager : MonoBehaviour
         player.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
         verif = true;
-        // gameplayManager.playerIndex--;
-
     }
 
     public void ThirdHeart()
@@ -102,10 +105,51 @@ public class CardManager : MonoBehaviour
         player.point.gold += 5;
     }
 
-    public void ButtonSelectPlayer(int Index)
+    public void BlueQueen()
     {
-        player = gameplayManager.allPlayers[Index];
+        gmIndex = gameplayManager.playerIndex;
+        player.player.transform.position = target.move.caseNext[0].transform.position;
+        player.move.caseNext[0].ActualCaseFunction();
+        gameplayManager.playerIndex = gmIndex;
     }
-    
-   
+
+    public void GreenQueen()
+    {
+        gmIndex = gameplayManager.playerIndex;
+        player.player.transform.position = target.move.caseNext[0].transform.position;
+        player.move.caseNext[0].ActualCaseFunction();
+        gameplayManager.playerIndex = gmIndex;
+    }
+
+    public void RedQueen()
+    {
+        player.point.gold -= 5;
+        target.point.gold += 5;
+    }
+
+    public void GreenKing()
+    {
+         gmIndex = gameplayManager.playerIndex;
+         player.player.transform.position = target.move.caseNext[0].transform.position;
+         target.player.transform.position = player.move.caseNext[0].transform.position;
+         player.move.caseNext[0].ActualCaseFunction();
+         target.move.caseNext[0].ActualCaseFunction();
+         gameplayManager.playerIndex = gmIndex;
+    }
+
+    public void ButtonSelectPlayer(int index)
+    {
+        player = allPlayer[index];
+    }
+
+    public void ButtonSelectTarget(int index)
+    {
+        target = allPlayer[index];
+    }
+
+    public void CallCardFunction(string stg , Player pl )
+    {
+      //  player = pl;
+        Invoke(stg,0);
+    }
 }
