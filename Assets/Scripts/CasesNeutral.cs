@@ -80,6 +80,7 @@ public class CasesNeutral : MonoBehaviour
     public void LoseCase()
     {
         activPlayer.point.gold -= 3;
+        _gameplayManager.commonPot += 3;
         if (activPlayer.point.gold < 0)
         {
             activPlayer.point.gold = 0;

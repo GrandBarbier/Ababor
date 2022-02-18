@@ -24,6 +24,7 @@ public class GameplayManager : MonoBehaviour
     public GameObject verifMenu,endMenu;
     public List<Player> allPlayers = new List<Player>();
     public CardManager cardManager;
+    public int commonPot;
     void Awake()
     {
         allCases = GameObject.FindGameObjectsWithTag("Case").ToList();
@@ -104,11 +105,6 @@ public class GameplayManager : MonoBehaviour
             objectif.Invoke(stg,0);
         }
 
-        if (cardManager.verif == false)
-        {
-            ResetLast();
-        }
-       
         if (actualMove.isLast)
         {
             ChangePlayerOrder();
@@ -174,6 +170,8 @@ public class GameplayManager : MonoBehaviour
         currentstate = new Moving();
         currentstate.DoState(actualMove, this);
         verifMenu.SetActive(false);
+        ResetLast();
+        
     }
 
     public void ButtonEnd()

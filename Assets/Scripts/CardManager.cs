@@ -14,11 +14,12 @@ public class CardManager : MonoBehaviour
     public bool verif;
     public Player player;
     //public GameObject pl;
-    public PlayerMovement m;
+    public GameObject m;
     public PlayerPoint p;
     public List<Player> allPlayer;
     public Player target;
     public Button button;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -36,9 +37,11 @@ public class CardManager : MonoBehaviour
             gameplayManager.playerIndex = gmIndex;
             verif = false;
         }
+
+        m = player.player;
     }
 
-    public void FirstClub()
+    public void GreenFirst()
     {
         gmIndex = gameplayManager.playerIndex;
         index = player.move.index;
@@ -51,7 +54,7 @@ public class CardManager : MonoBehaviour
         player.move.actualMove = player.move.InitialMove;
     }
 
-    public void SecondClub()
+    public void GreenSecond()
     {
         gmIndex = gameplayManager.playerIndex;
         index = player.move.index;
@@ -64,7 +67,7 @@ public class CardManager : MonoBehaviour
         verif = true;
     }
 
-    public void FirstSpades()
+    public void BlueFirst()
     {
         gmIndex = gameplayManager.playerIndex;
         player.move.caseNext[0] = player.move.caseNext[0].lastCase;
@@ -74,7 +77,7 @@ public class CardManager : MonoBehaviour
         verif = true;
     }
 
-    public void SecondSpades()
+    public void BlueSecond()
     {
         gmIndex = gameplayManager.playerIndex;
         player.move.caseNext[0] = player.move.caseNext[0].lastCase.lastCase;
@@ -84,23 +87,23 @@ public class CardManager : MonoBehaviour
         verif = true;
     }
 
-    public void ThirdHeart()
+    public void RedThird()
     {
         player.point.gold -= 3;
         verif = true;
     }
 
-    public void FifthHeart()
+    public void RedFifth()
     {
         player.point.gold -= 5;
     }
 
-    public void ThirdDiamond()
+    public void YellowThird()
     {
         player.point.gold += 3;
     }
 
-    public void FifthDiamond()
+    public void YellowFifth()
     {
         player.point.gold += 5;
     }
@@ -109,6 +112,7 @@ public class CardManager : MonoBehaviour
     {
         gmIndex = gameplayManager.playerIndex;
         player.player.transform.position = target.move.caseNext[0].transform.position;
+        player.move.caseNext[0] = target.move.caseNext[0];
         player.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
     }
@@ -117,6 +121,7 @@ public class CardManager : MonoBehaviour
     {
         gmIndex = gameplayManager.playerIndex;
         player.player.transform.position = target.move.caseNext[0].transform.position;
+        player.move.caseNext[0] = target.move.caseNext[0];
         player.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
     }
@@ -127,19 +132,31 @@ public class CardManager : MonoBehaviour
         target.point.gold += 5;
     }
 
+    public void YellowQueen()
+    {
+        player.point.gold += gameplayManager.commonPot;
+        gameplayManager.commonPot = 0;
+    }
+
     public void GreenKing()
     {
+         CasesNeutral cases = player.move.caseNext[0];
          gmIndex = gameplayManager.playerIndex;
+         index = gameplayManager.playerIndex;
+         player.move.isLast = false;
          player.player.transform.position = target.move.caseNext[0].transform.position;
-         target.player.transform.position = player.move.caseNext[0].transform.position;
+         target.player.transform.position = cases.transform.position;
+         player.move.caseNext[0] = target.move.caseNext[0];
+         target.move.caseNext[0] = cases;
          player.move.caseNext[0].ActualCaseFunction();
          target.move.caseNext[0].ActualCaseFunction();
-         gameplayManager.playerIndex = gmIndex;
+         verif = true;
     }
     
     public void BlueKing()
     {
-        gmIndex = gameplayManager.playerIndex;
+        
+        gmIndex = player.move.index;
         player.player.transform.position = target.move.caseNext[0].transform.position;
         target.player.transform.position = player.move.caseNext[0].transform.position;
         player.move.caseNext[0].ActualCaseFunction();
@@ -185,5 +202,11 @@ public class CardManager : MonoBehaviour
     {
       //  player = pl;
         Invoke(stg,0);
+        menu.SetActive(false);
+    }
+
+    public void OpenCardMenu(string stg, Player pl)
+    {
+        menu.SetActive(true);
     }
 }
