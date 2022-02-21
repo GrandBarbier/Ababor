@@ -9,17 +9,14 @@ public class CardManager : MonoBehaviour
 {
     public GameObject menu;
     public GameplayManager gameplayManager;
-    public int index;
-    public int gmIndex;
+    public int index, gmIndex;
     public bool verif;
     public Player player;
-    //public GameObject pl;
+    public GameObject pl;
     public GameObject m;
-    public PlayerPoint p;
     public List<Player> allPlayer;
     public Player target;
-    public Button button;
-    
+    public string functionName;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +33,7 @@ public class CardManager : MonoBehaviour
         {
             gameplayManager.playerIndex = gmIndex;
             verif = false;
+            
         }
 
         m = player.player;
@@ -198,15 +196,16 @@ public class CardManager : MonoBehaviour
         target = allPlayer[index];
     }
 
-    public void CallCardFunction(string stg /*, Player pl*/ )
+    public void CallCardFunction( )
     {
       //  player = pl;
-        Invoke(stg,0);
-        menu.SetActive(false);
+        Invoke(functionName,0);
+      //  menu.SetActive(false);
     }
 
     public void OpenCardMenu(string stg, Player pl)
     {
         menu.SetActive(true);
+        functionName = stg;
     }
 }

@@ -86,6 +86,7 @@ public class CasesNeutral : MonoBehaviour
             activPlayer.point.gold = 0;
         }
         activPlayer.point.numberLoseCase++;
+        _gameplayManager.ResetLast();
         _gameplayManager.ChangePlayer();
     }
 
@@ -104,6 +105,7 @@ public class CasesNeutral : MonoBehaviour
         Shop shop = FindObjectOfType<Shop>();
         shop.ShopOpen();
         activPlayer.point.numberShopCase++;
+        _gameplayManager.ResetLast();
     }
 
     public void EndCase()
@@ -120,6 +122,7 @@ public class CasesNeutral : MonoBehaviour
     {
         eventS.GetEvent();
         eventS.Invoke(eventS.eventName,0);
+        _gameplayManager.ResetLast();
     }
     
     

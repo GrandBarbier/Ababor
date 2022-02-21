@@ -108,6 +108,7 @@ public class GameplayManager : MonoBehaviour
         if (actualMove.isLast)
         {
             ChangePlayerOrder();
+            Debug.Log("deu");
         }
         ButtonStart();
         Debug.Log(5);
@@ -146,6 +147,7 @@ public class GameplayManager : MonoBehaviour
         {
             allPlayers[i].move.index = i;
         }
+        Debug.Log("test");
     }
 
     public void ResetMove()
