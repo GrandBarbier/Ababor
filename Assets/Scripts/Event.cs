@@ -17,6 +17,7 @@ public class Event : MonoBehaviour
     public List<String> allEvent;
 
     public List<CasesNeutral> allCase;
+  
     // Start is called before the first frame update
     private void Awake()
     {
@@ -56,7 +57,7 @@ public class Event : MonoBehaviour
      Debug.Log(enabled);
  }
 
- public void EventMoreLoseCase()
+    public void EventMoreLoseCase()
     {
         foreach (CasesNeutral cases in _gameplayManager.allCases)
         {
@@ -74,9 +75,27 @@ public class Event : MonoBehaviour
         enabled = false;
     }
     
+    public void EventMoreGainCase()
+    {
+        foreach (CasesNeutral cases in _gameplayManager.allCases)
+        {
+            if (cases.nameFunction == "NeutralCase")
+            {
+                allCase.Add(cases);   
+            }
+        }
+        int rdm = Random.Range(0, allCase.Count);
+        allCase[rdm].nameFunction = "GainCase";
+        allCase[rdm].baseColor = Color.yellow;
+        allCase[rdm].ResetColor();
+        _gameplayManager.ChangePlayer();
+        enabled = false;
+    }
+    
     public void GetEvent()
     {
         int rdm = Random.Range(0, allEvent.Count);
         eventName = allEvent[rdm];
     }
+    
 }
