@@ -83,7 +83,6 @@ public class CasesNeutral : MonoBehaviour
 
     public void NeutralCase()
     {
-        Debug.Log(5);
         _gameplayManager.ChangePlayer();
     }
 
@@ -130,7 +129,7 @@ public class CasesNeutral : MonoBehaviour
 
     public void EventCase()
     {
-        eventS.GetEvent();
+      //  eventS.GetEvent();
         eventS.Invoke(eventS.eventName,0);
         _gameplayManager.ResetLast();
     }

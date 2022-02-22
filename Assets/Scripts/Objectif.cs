@@ -8,15 +8,19 @@ using Random = UnityEngine.Random;
 public class Objectif : MonoBehaviour
 {
     private GameplayManager _gameplayManager;
+    
     public List<string> allLateObjectifs;
     public List<string> allMidObjectifs;
     public List<string> allEarlyObjectifs;
     public List<string> actualObjectif;
+   
     public List<PlayerPoint> allPlayerPoint;
+    
     public bool lastCase;
+    
     public TMP_Text text;
+    
     // Start is called before the first frame update
-
     void Start()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>();

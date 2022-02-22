@@ -8,20 +8,30 @@ using UnityEngine.AI;
 public class PlayerMovement : MonoBehaviour
 {
     private GameplayManager _gameplayManager;
+   
     public List<CasesNeutral> allCases;
     public List<CasesNeutral> caseNext;
-    public GameObject child;
+
     public int actualMove = 5;
-    public NavMeshAgent agent;
-    public bool end;
     public int InitialMove;
+    
+    public NavMeshAgent agent;
+    
+    public bool end;
     public  bool isEvent;
+    
     [SerializeField] 
+    
     private LayerMask mask;
+    
     private Camera cam;
+    
     public GameObject menuVerif;
     public GameObject hitObject;
+    public GameObject child;
+    
     public Event[] allEvent;
+    
     public bool isLast;
 
     public int index;

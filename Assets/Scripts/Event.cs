@@ -15,7 +15,8 @@ public class Event : MonoBehaviour
     public string eventName;
     
     public List<String> allEvent;
-  
+
+    public List<CasesNeutral> allCase;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -25,16 +26,9 @@ public class Event : MonoBehaviour
     void Start()
     {
         allPlayers = _gameplayManager.allPlayers;
-       
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void EventLessMove()
+ /*   public void EventLessMove()
     {
         foreach (PlayerMovement move in allMove)
         {
@@ -56,14 +50,28 @@ public class Event : MonoBehaviour
         _gameplayManager.actualMove.isEvent = true;
         _gameplayManager.ChangePlayer();
         enabled = false;
-    }
+    }*/
+ private void Update()
+ {
+     Debug.Log(enabled);
+ }
 
-    public void EventMoreLoseCase()
+ public void EventMoreLoseCase()
     {
         foreach (CasesNeutral cases in _gameplayManager.allCases)
         {
-            
+            if (cases.nameFunction == "NeutralCase")
+            {
+             allCase.Add(cases);   
+            }
         }
+
+        int rdm = Random.Range(0, allCase.Count);
+        allCase[rdm].nameFunction = "LoseCase";
+        allCase[rdm].baseColor = Color.red;
+        allCase[rdm].ResetColor();
+        _gameplayManager.ChangePlayer();
+        enabled = false;
     }
     
     public void GetEvent()

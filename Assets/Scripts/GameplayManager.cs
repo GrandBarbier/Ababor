@@ -10,37 +10,31 @@ public class GameplayManager : MonoBehaviour
     public List<GameObject> players = new List<GameObject>();
  
     public List<CasesNeutral> allCases = new List<CasesNeutral>();
-    
-    public GameObject activPlayer;
-    
+
     public int playerIndex, treasure;
     
     public State currentstate;
     
     public Objectif objectif;
-
-    public PlayerMovement actualMove;
-    
-    public PlayerPoint actualPoint;
     
     public TMP_Text endText;
     
     public Queue<Player> playerQueue = new Queue<Player>();
+    public List<Player> allPlayers = new List<Player>();
     
     public Queue<PlayerMovement> moveQueue = new Queue<PlayerMovement>();
+    public PlayerMovement actualMove;
     
     public Queue<PlayerPoint> pointQueue = new Queue<PlayerPoint>();
+    public PlayerPoint actualPoint;
     
-    public GameObject verifMenu,endMenu;
-    
-    public List<Player> allPlayers = new List<Player>();
+    public GameObject verifMenu,endMenu,activPlayer;
     
     public CardManager cardManager;
     
-    
     void Awake()
     {
-      //  allCases = GameObject.FindGameObjectsWithTag("Case").ToList();
+  
       foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Case").ToList())
       {
           allCases.Add(obj.GetComponent<CasesNeutral>());
@@ -58,12 +52,6 @@ public class GameplayManager : MonoBehaviour
         }
         allCases.Reverse();
         allCases.Sort(SortByName);
-        /* foreach (Player obj in allPlayers)
-        {
-            obj.move.enabled = false;
-            allMove.Add(obj.move);
-            allPoint.Add(obj.point);
-        }*/
         currentstate = new CardPlay();
     }
 
@@ -125,10 +113,9 @@ public class GameplayManager : MonoBehaviour
         if (actualMove.isLast)
         {
             ChangePlayerOrder();
-            Debug.Log("deu");
+           
         }
         ButtonStart();
-        Debug.Log(5);
     }
 
     public void ButtonYes()
