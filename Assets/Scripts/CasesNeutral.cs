@@ -8,28 +8,38 @@ using Random = UnityEngine.Random;
 public class CasesNeutral : MonoBehaviour
 {
     public bool isInRanged;
+  
     public List<CasesNeutral> nextCases;
+    
     public Color baseColor;
-   [SerializeField] private GameplayManager _gameplayManager;
+    
+    [SerializeField] private GameplayManager _gameplayManager;
+    
     public Renderer renderer;
+    
     public int index;
+    
     public string nameFunction;
+    
     public Player activPlayer;
+    
     public Event eventS;
+    
     public Objectif objectif;
+    
     public GameObject menuEnd;
+    
     public CasesNeutral lastCase;
+ 
     // Start is called before the first frame update
     void Awake()
     {
-        
         _gameplayManager = FindObjectOfType<GameplayManager>();
         renderer = gameObject.GetComponent<Renderer>();
         ResetColor();
-        index = _gameplayManager.allCases.IndexOf(gameObject);
+        index = _gameplayManager.allCases.IndexOf(this);
         objectif = FindObjectOfType<Objectif>();
         eventS = gameObject.GetComponent<Event>();
-
     }
 
     // Update is called once per frame
@@ -80,7 +90,7 @@ public class CasesNeutral : MonoBehaviour
     public void LoseCase()
     {
         activPlayer.point.gold -= 3;
-        _gameplayManager.commonPot += 3;
+        _gameplayManager.treasure += 3;
         if (activPlayer.point.gold < 0)
         {
             activPlayer.point.gold = 0;

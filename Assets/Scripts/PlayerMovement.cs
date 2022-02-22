@@ -29,9 +29,9 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>(); // Find gamemanager
-        foreach (GameObject obj in _gameplayManager.allCases)
+        foreach (CasesNeutral cases in _gameplayManager.allCases)
         {
-            allCases.Add(obj.GetComponent<CasesNeutral>());
+            allCases.Add(cases.GetComponent<CasesNeutral>());
         }
 
         allEvent = FindObjectsOfType<Event>();

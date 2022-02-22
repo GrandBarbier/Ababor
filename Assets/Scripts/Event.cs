@@ -7,10 +7,15 @@ using Random = UnityEngine.Random;
 public class Event : MonoBehaviour
 {
     public List<PlayerMovement> allMove;
+  
     public GameplayManager _gameplayManager;
+    
     public List<Player> allPlayers;
+    
     public string eventName;
+    
     public List<String> allEvent;
+  
     // Start is called before the first frame update
     private void Awake()
     {
@@ -36,8 +41,6 @@ public class Event : MonoBehaviour
             move.actualMove -= 3;
             move.isEvent = true;
         }
-
-      
         _gameplayManager.actualMove.isEvent = true;
         _gameplayManager.ChangePlayer();
         enabled = false;
@@ -50,10 +53,17 @@ public class Event : MonoBehaviour
             player.move.actualMove += 3;
             player.move.isEvent = true;
         }
-        
         _gameplayManager.actualMove.isEvent = true;
         _gameplayManager.ChangePlayer();
         enabled = false;
+    }
+
+    public void EventMoreLoseCase()
+    {
+        foreach (CasesNeutral cases in _gameplayManager.allCases)
+        {
+            
+        }
     }
     
     public void GetEvent()
