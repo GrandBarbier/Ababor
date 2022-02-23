@@ -8,20 +8,30 @@ using UnityEngine.AI;
 public class PlayerMovement : MonoBehaviour
 {
     private GameplayManager _gameplayManager;
+   
     public List<CasesNeutral> allCases;
     public List<CasesNeutral> caseNext;
-    public GameObject child;
+
     public int actualMove = 5;
-    public NavMeshAgent agent;
-    public bool end;
     public int InitialMove;
+    
+    public NavMeshAgent agent;
+    
+    public bool end;
     public  bool isEvent;
+    
     [SerializeField] 
+    
     private LayerMask mask;
+    
     private Camera cam;
+    
     public GameObject menuVerif;
     public GameObject hitObject;
+    public GameObject child;
+    
     public Event[] allEvent;
+    
     public bool isLast;
 
     public int index;
@@ -29,9 +39,9 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>(); // Find gamemanager
-        foreach (GameObject obj in _gameplayManager.allCases)
+        foreach (CasesNeutral cases in _gameplayManager.allCases)
         {
-            allCases.Add(obj.GetComponent<CasesNeutral>());
+            allCases.Add(cases.GetComponent<CasesNeutral>());
         }
 
         allEvent = FindObjectsOfType<Event>();

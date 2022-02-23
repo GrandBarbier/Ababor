@@ -5,23 +5,21 @@ using UnityEngine;
 
 public class PlayerPoint : MonoBehaviour
 {
-    public int gold;
     public TMP_Text text;
+
+    public int gold;
     public int point;
-    public bool isEvent;
     public int numberGainCase;
-
     public int numberLoseCase;
-
     public int numberEventCase;
-
     public int numberShopCase;
-
-    public int numberNoneMoveCase;
-
     public int numberCase;
+   
     public GameObject player;
+    
     public List<bool> objectifVerif;
+    public bool isEvent;
+    
     // Start is called before the first frame update
     void Start()
     {

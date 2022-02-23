@@ -8,27 +8,38 @@ using UnityEngine;
 public class GameplayManager : MonoBehaviour
 {
     public List<GameObject> players = new List<GameObject>();
-    public List<GameObject> allCases = new List<GameObject>();
-    public GameObject activPlayer;
-    public int playerIndex;
+ 
+    public List<CasesNeutral> allCases = new List<CasesNeutral>();
+
+    public int playerIndex, treasure;
+    
     public State currentstate;
+    
     public Objectif objectif;
- //   public List<PlayerMovement> allMove;
- //   public List<PlayerPoint> allPoint;
-    public PlayerMovement actualMove;
-    public PlayerPoint actualPoint;
+    
     public TMP_Text endText;
+    
     public Queue<Player> playerQueue = new Queue<Player>();
-    public Queue<PlayerMovement> moveQueue = new Queue<PlayerMovement>();
-    public Queue<PlayerPoint> pointQueue = new Queue<PlayerPoint>();
-    public GameObject verifMenu,endMenu;
     public List<Player> allPlayers = new List<Player>();
+    
+    public Queue<PlayerMovement> moveQueue = new Queue<PlayerMovement>();
+    public PlayerMovement actualMove;
+    
+    public Queue<PlayerPoint> pointQueue = new Queue<PlayerPoint>();
+    public PlayerPoint actualPoint;
+    
+    public GameObject verifMenu,endMenu,activPlayer;
+    
     public CardManager cardManager;
-    public int commonPot;
+    
     void Awake()
     {
-        allCases = GameObject.FindGameObjectsWithTag("Case").ToList();
-        players = GameObject.FindGameObjectsWithTag("Player").ToList();
+  
+      foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Case").ToList())
+      {
+          allCases.Add(obj.GetComponent<CasesNeutral>());
+      }  
+      players = GameObject.FindGameObjectsWithTag("Player").ToList();
 
         for (int i = 0; i < players.Count; i++)
         {
@@ -41,12 +52,6 @@ public class GameplayManager : MonoBehaviour
         }
         allCases.Reverse();
         allCases.Sort(SortByName);
-        /* foreach (Player obj in allPlayers)
-        {
-            obj.move.enabled = false;
-            allMove.Add(obj.move);
-            allPoint.Add(obj.point);
-        }*/
         currentstate = new CardPlay();
     }
 
@@ -74,9 +79,9 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
-    private int SortByName(GameObject object1, GameObject object2) // function to sort cases
+    private int SortByName(CasesNeutral object1, CasesNeutral object2) // function to sort cases
     {
-       return  object1.GetComponent<CasesNeutral>().index.CompareTo(object2.GetComponent<CasesNeutral>().index);
+       return  object1.index.CompareTo(object2.index);
     }
 
     public void ButtonStart()
@@ -108,10 +113,9 @@ public class GameplayManager : MonoBehaviour
         if (actualMove.isLast)
         {
             ChangePlayerOrder();
-            Debug.Log("deu");
+           
         }
         ButtonStart();
-        Debug.Log(5);
     }
 
     public void ButtonYes()

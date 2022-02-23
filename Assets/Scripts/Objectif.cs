@@ -8,15 +8,19 @@ using Random = UnityEngine.Random;
 public class Objectif : MonoBehaviour
 {
     private GameplayManager _gameplayManager;
+    
     public List<string> allLateObjectifs;
     public List<string> allMidObjectifs;
     public List<string> allEarlyObjectifs;
     public List<string> actualObjectif;
+   
     public List<PlayerPoint> allPlayerPoint;
+    
     public bool lastCase;
+    
     public TMP_Text text;
+    
     // Start is called before the first frame update
-
     void Start()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>();
@@ -259,6 +263,54 @@ public class Objectif : MonoBehaviour
                 player.point += 30;
             }
            
+        }
+    }
+
+    public void EventEarly()
+    {
+        bool verif = false;
+        foreach (PlayerPoint obj in allPlayerPoint )
+        {
+            if (obj.numberEventCase >= 2 && verif == false)
+            {
+                obj.point += 10;
+                verif = true;
+            }
+        }
+        if (verif)
+        {
+            actualObjectif.Remove("EventEarly");
+        }
+    }
+
+    public void EventMid()
+    {
+        foreach (PlayerPoint obj in allPlayerPoint )
+        {
+            bool verif = obj.objectifVerif[actualObjectif.IndexOf("EventMid")];  
+            if (obj.numberEventCase >= 10 && verif == false)
+            {
+                obj.point += 20;
+                obj.objectifVerif[actualObjectif.IndexOf("EventMid")] = true;
+            }
+        }
+    }
+
+    public void EventLate()
+    {
+        List<int> intList = new List<int>();
+        foreach (PlayerPoint obj in allPlayerPoint )
+        {
+            intList.Add(obj.numberEventCase);
+        }
+        int best = Mathf.Max(intList.ToArray());
+        foreach (PlayerPoint player in allPlayerPoint )
+        {
+            if (best == player.numberEventCase && lastCase)
+            {
+                best = player.numberEventCase;
+                player.point += 30;
+            }
         }
     }
 }
