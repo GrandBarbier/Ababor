@@ -102,6 +102,7 @@ public class Event : MonoBehaviour
             player.move.caseNext[0] = thisCase;
             player.player.transform.position = thisCase.transform.position;
         }
+        _gameplayManager.ChangePlayer();
     }
 
     public void SwitchPlayerPlace()

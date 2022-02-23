@@ -39,11 +39,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>(); // Find gamemanager
-        foreach (CasesNeutral cases in _gameplayManager.allCases)
-        {
-            allCases.Add(cases.GetComponent<CasesNeutral>());
-        }
-
+        allCases = _gameplayManager.allCases;
         allEvent = FindObjectsOfType<Event>();
         _gameplayManager.activPlayer = gameObject;
         cam = Camera.main;
@@ -66,7 +62,6 @@ public class PlayerMovement : MonoBehaviour
           
             if (Vector3.Distance(transform.position,child.transform.position) <= 1f ) // set end turn
             {
-                Debug.Log(4);
                 caseNext[0].ActualCaseFunction();
                 agent.speed = 0;
                 isEvent = false;
