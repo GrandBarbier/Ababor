@@ -57,7 +57,7 @@ public class Event : MonoBehaviour
     }*/
  private void Update()
  {
-    Debug.Log(enabled);
+//    Debug.Log(enabled);
  }
 
     public void EventMoreLoseCase()

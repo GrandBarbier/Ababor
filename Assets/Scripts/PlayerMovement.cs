@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
    
     public List<CasesNeutral> allCases;
     public List<CasesNeutral> caseNext;
+    public List<CasesNeutral> allNextCases;
 
     public int actualMove = 5;
     public int InitialMove;
@@ -34,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     
     public bool isLast;
 
-    public int index;
+    public int index, indexCase;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,7 +60,12 @@ public class PlayerMovement : MonoBehaviour
             menuVerif.SetActive(false);
             PlayerResetCase(); 
             agent.destination = child.transform.position;
-          
+
+          /*  for (int i = 0; i < indexCase; i++)
+            {
+                Debug.Log(1);
+                Vector3.MoveTowards(transform.position,child.transform.position,1);
+            }*/
             if (Vector3.Distance(transform.position,child.transform.position) <= 1f ) // set end turn
             {
                 caseNext[0].ActualCaseFunction();
@@ -86,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
     public void PlayerShowMove()  // change color of all case in range
     {
        caseNext[0].Outline(caseNext,actualMove);
+       
     }
 
     public void PlayerResetCase() // Reset the color of all cases
@@ -133,6 +140,8 @@ public class PlayerMovement : MonoBehaviour
                     {
                         hitObject = cases.gameObject;
                         child.transform.position = hitObject.transform.position;
+                        indexCase = allNextCases.IndexOf(cases);
+                        caseNext[0] = cases;
                         menuVerif.SetActive(true);
                         FindCase();
                         agent.speed = 7;

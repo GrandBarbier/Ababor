@@ -59,6 +59,7 @@ public class CasesNeutral : MonoBehaviour
                 obj.isInRanged = true;
                
             }
+            activPlayer.move.allNextCases.Add(this);
         }
     }
 
@@ -123,13 +124,12 @@ public class CasesNeutral : MonoBehaviour
         menuEnd.SetActive(true);
         Debug.Log("win");
         Time.timeScale = 0;
-        //_gameplayManager.ChangePlayer();
         _gameplayManager.FindBestPlayer();
     }
 
     public void EventCase()
     {
-      //  eventS.GetEvent();
+        eventS.GetEvent();
         eventS.Invoke(eventS.eventName,0);
         _gameplayManager.ResetLast();
     }

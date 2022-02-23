@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameplayManager : MonoBehaviour
 {
@@ -169,7 +170,8 @@ public class GameplayManager : MonoBehaviour
 
     public void OpenEndMenu()
     {
-        endMenu.SetActive(true);
+       // endMenu.SetActive(true);
+       SceneManager.LoadScene("Test clovis 2nd scene");
     }
     public void ButtonVerifMenuMove()
     {
