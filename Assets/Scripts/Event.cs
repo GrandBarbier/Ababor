@@ -9,6 +9,8 @@ public class Event : MonoBehaviour
     public List<PlayerMovement> allMove;
   
     public GameplayManager _gameplayManager;
+
+    public CasesNeutral thisCase;
     
     public List<Player> allPlayers;
     
@@ -26,6 +28,7 @@ public class Event : MonoBehaviour
 
     void Start()
     {
+        thisCase = gameObject.GetComponent<CasesNeutral>();
         allPlayers = _gameplayManager.allPlayers;
     }
 
@@ -54,7 +57,7 @@ public class Event : MonoBehaviour
     }*/
  private void Update()
  {
-     Debug.Log(enabled);
+    Debug.Log(enabled);
  }
 
     public void EventMoreLoseCase()
@@ -90,6 +93,32 @@ public class Event : MonoBehaviour
         allCase[rdm].ResetColor();
         _gameplayManager.ChangePlayer();
         enabled = false;
+    }
+
+    public void GoToCase()
+    {
+        foreach (Player player in allPlayers)
+        {
+            player.move.caseNext[0] = thisCase;
+            player.player.transform.position = thisCase.transform.position;
+        }
+    }
+
+    public void SwitchPlayerPlace()
+    {
+        List<CasesNeutral> casePlayer = new List<CasesNeutral>();
+        foreach (Player player in allPlayers)
+        {
+            casePlayer.Add(player.move.caseNext[0]);
+        }
+
+        for (int i = 0; i < allPlayers.Count; i++)
+        {
+            int rdm = Random.Range(0, casePlayer.Count);
+            allPlayers[i].move.caseNext[0] = casePlayer[rdm];
+            allPlayers[i].player.transform.position = casePlayer[rdm].transform.position;
+       //     allPlayers[i].move.caseNext[0].ActualCaseFunction();
+        }
     }
     
     public void GetEvent()

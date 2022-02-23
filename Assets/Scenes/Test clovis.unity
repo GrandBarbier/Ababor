@@ -948,28 +948,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 256235887}
   m_CullTransparentMesh: 1
---- !u!1 &277604255 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4446925220761235889, guid: c86775bba6980c246815b4d09f5ec441, type: 3}
-  m_PrefabInstance: {fileID: 3564545490560577551}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &277604257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 277604255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6407864fccd7bdd42939eb5f68fece46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allMove: []
-  _gameplayManager: {fileID: 1459566556}
-  eventName: EventMoreGainCase
-  allEvent: []
-  allCase: []
 --- !u!1 &278775212
 GameObject:
   m_ObjectHideFlags: 0
@@ -4486,7 +4464,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3564545489011461373, guid: c86775bba6980c246815b4d09f5ec441, type: 3}
   m_PrefabInstance: {fileID: 3564545490560577551}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 277604255}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e67204e1c2c7cc34ea355c0a46b83675, type: 3}
@@ -6426,30 +6404,6 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3564545489011461373, guid: c86775bba6980c246815b4d09f5ec441, type: 3}
-      propertyPath: lastCase
-      value: 
-      objectReference: {fileID: 2057421697}
-    - target: {fileID: 3564545489011461373, guid: c86775bba6980c246815b4d09f5ec441, type: 3}
-      propertyPath: baseColor.b
-      value: 0.86923766
-      objectReference: {fileID: 0}
-    - target: {fileID: 3564545489011461373, guid: c86775bba6980c246815b4d09f5ec441, type: 3}
-      propertyPath: baseColor.g
-      value: 0.114142045
-      objectReference: {fileID: 0}
-    - target: {fileID: 3564545489011461373, guid: c86775bba6980c246815b4d09f5ec441, type: 3}
-      propertyPath: baseColor.r
-      value: 0.8962264
-      objectReference: {fileID: 0}
-    - target: {fileID: 3564545489011461373, guid: c86775bba6980c246815b4d09f5ec441, type: 3}
-      propertyPath: nameFunction
-      value: EventCase
-      objectReference: {fileID: 0}
-    - target: {fileID: 3564545489011461373, guid: c86775bba6980c246815b4d09f5ec441, type: 3}
-      propertyPath: nextCases.Array.data[0]
-      value: 
-      objectReference: {fileID: 1454668096}
     - target: {fileID: 3564545489039045680, guid: c86775bba6980c246815b4d09f5ec441, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -7694,6 +7648,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 31
       objectReference: {fileID: 0}
+    - target: {fileID: 5321454984608404327, guid: c86775bba6980c246815b4d09f5ec441, type: 3}
+      propertyPath: _gameplayManager
+      value: 
+      objectReference: {fileID: 1459566556}
     - target: {fileID: 7014183486481636548, guid: c86775bba6980c246815b4d09f5ec441, type: 3}
       propertyPath: m_Layer
       value: 31

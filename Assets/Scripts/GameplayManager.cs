@@ -31,7 +31,7 @@ public class GameplayManager : MonoBehaviour
     public GameObject verifMenu,endMenu,activPlayer;
     
     public CardManager cardManager;
-    
+
     void Awake()
     {
   
