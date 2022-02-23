@@ -214,7 +214,7 @@ public class CardManager : MonoBehaviour
         menu.SetActive(false);
     }
 
-    public void OpenCardMenu(string stg/*, Player pl*/)
+    public void OpenCardMenu(string stg, Player pl)
     {
         menu.SetActive(true);
         if (functionName != lastName)
@@ -222,6 +222,6 @@ public class CardManager : MonoBehaviour
             lastName = stg;
         }
         functionName = stg;
-      //  player = pl;
+        player = pl;
     }
 }
