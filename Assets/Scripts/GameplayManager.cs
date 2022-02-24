@@ -80,7 +80,7 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
-    private int SortByName(CasesNeutral object1, CasesNeutral object2) // function to sort cases
+    public int SortByName(CasesNeutral object1, CasesNeutral object2) // function to sort cases
     {
        return  object1.index.CompareTo(object2.index);
     }

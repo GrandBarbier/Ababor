@@ -59,7 +59,12 @@ public class CasesNeutral : MonoBehaviour
                 obj.isInRanged = true;
                
             }
-            activPlayer.move.allNextCases.Add(this);
+
+            for (int i = 0; i < nextCases.Count; i++)
+            {
+                activPlayer.move.allNextCases.Add(nextCases[i]);
+            }
+           
         }
     }
 
@@ -85,6 +90,7 @@ public class CasesNeutral : MonoBehaviour
     public void NeutralCase()
     {
         _gameplayManager.ChangePlayer();
+        activPlayer.point.numberNeutralCase++;
     }
 
     public void LoseCase()
@@ -135,11 +141,11 @@ public class CasesNeutral : MonoBehaviour
     }
     
     
-    private void OnTriggerEnter(Collider other)
+  /*  private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             activPlayer.point.numberCase++;
         }
-    }
+    }*/
 }

@@ -10,6 +10,7 @@ public class PlayerPoint : MonoBehaviour
     public int gold;
     public int point;
     public int numberGainCase;
+    public int numberNeutralCase;
     public int numberLoseCase;
     public int numberEventCase;
     public int numberShopCase;
@@ -34,6 +35,8 @@ public class PlayerPoint : MonoBehaviour
             gold = 0;
         }
         text.text = gold.ToString();
+        
+        
     }
     
     
