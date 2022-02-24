@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     
     public bool isLast;
 
+    public PlayerPoint point;
+    
     public int index, indexCase;
     // Start is called before the first frame update
     void Start()
@@ -54,18 +56,16 @@ public class PlayerMovement : MonoBehaviour
             CaseToMove();
         }
 
-
         if (end)
         {
             menuVerif.SetActive(false);
             PlayerResetCase(); 
-            agent.destination = child.transform.position;
-
-          /*  for (int i = 0; i < indexCase; i++)
-            {
-                Debug.Log(1);
-                Vector3.MoveTowards(transform.position,child.transform.position,1);
-            }*/
+           // agent.destination = child.transform.position;
+           
+            gameObject.transform.position = allNextCases[indexCase].transform.position;
+            point.numberCase += indexCase+1;
+            //Vector3.MoveTowards(transform.position, child.transform.position,10);
+                
             if (Vector3.Distance(transform.position,child.transform.position) <= 1f ) // set end turn
             {
                 caseNext[0].ActualCaseFunction();
@@ -86,6 +86,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 actualMove = InitialMove;
             }
+
+            allNextCases.Clear();
         }
     }
 
@@ -140,8 +142,8 @@ public class PlayerMovement : MonoBehaviour
                     {
                         hitObject = cases.gameObject;
                         child.transform.position = hitObject.transform.position;
-                        indexCase = allNextCases.IndexOf(cases);
                         caseNext[0] = cases;
+                        indexCase = allNextCases.IndexOf(cases);
                         menuVerif.SetActive(true);
                         FindCase();
                         agent.speed = 7;
@@ -153,5 +155,6 @@ public class PlayerMovement : MonoBehaviour
                 menuVerif.SetActive(false);
             }
         }
+        allNextCases.Sort(_gameplayManager.SortByName);
     }
 }
