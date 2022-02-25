@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -38,6 +39,13 @@ public class PlayerMovement : MonoBehaviour
     public PlayerPoint point;
     
     public int index, indexCase;
+
+    void Awake()
+    {
+        transform.position = caseNext[0].transform.position;
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -133,26 +141,30 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetTouch(0).phase == TouchPhase.Ended)
         {
             var touchRay = cam.ScreenPointToRay(Input.GetTouch(0).position);
-
+            Debug.Log(1);
             if (Physics.Raycast(touchRay, out RaycastHit hit, Mathf.Infinity, mask))
             {
+                Debug.Log(2);
+                hitObject = hit.transform.gameObject;
                 foreach (CasesNeutral cases in allCases)
                 {
+                    Debug.Log(3);
                     if (hit.transform.gameObject == cases.gameObject && cases.isInRanged)
                     {
+                        Debug.Log(4);
                         hitObject = cases.gameObject;
                         child.transform.position = hitObject.transform.position;
                         caseNext[0] = cases;
                         indexCase = allNextCases.IndexOf(cases);
                         menuVerif.SetActive(true);
                         FindCase();
-                        agent.speed = 7;
                     }
                 }
             }
             else
             {
                 menuVerif.SetActive(false);
+                Debug.Log(5);
             }
         }
         allNextCases.Sort(_gameplayManager.SortByName);

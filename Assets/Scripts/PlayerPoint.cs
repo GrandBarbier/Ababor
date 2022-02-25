@@ -10,7 +10,6 @@ public class PlayerPoint : MonoBehaviour
     public int gold;
     public int point;
     public int numberGainCase;
-    public int numberNeutralCase;
     public int numberLoseCase;
     public int numberEventCase;
     public int numberShopCase;

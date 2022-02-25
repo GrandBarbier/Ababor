@@ -32,34 +32,6 @@ public class Event : MonoBehaviour
         allPlayers = _gameplayManager.allPlayers;
     }
 
- /*   public void EventLessMove()
-    {
-        foreach (PlayerMovement move in allMove)
-        {
-            move.actualMove -= 3;
-            move.isEvent = true;
-        }
-        _gameplayManager.actualMove.isEvent = true;
-        _gameplayManager.ChangePlayer();
-        enabled = false;
-    }
-    
-    public void EventMoreMove()
-    {
-        foreach (Player player in allPlayers)
-        {
-            player.move.actualMove += 3;
-            player.move.isEvent = true;
-        }
-        _gameplayManager.actualMove.isEvent = true;
-        _gameplayManager.ChangePlayer();
-        enabled = false;
-    }*/
- private void Update()
- {
-//    Debug.Log(enabled);
- }
-
     public void EventMoreLoseCase()
     {
         foreach (CasesNeutral cases in _gameplayManager.allCases)
@@ -127,5 +99,4 @@ public class Event : MonoBehaviour
         int rdm = Random.Range(0, allEvent.Count);
         eventName = allEvent[rdm];
     }
-    
 }
