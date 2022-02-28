@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -27,7 +28,7 @@ public class CasesNeutral : MonoBehaviour
     
     public Objectif objectif;
     
-    public GameObject menuEnd;
+    public GameObject menuEnd, nextIsle, lastIsle;
     
     public CasesNeutral lastCase;
  
@@ -37,7 +38,6 @@ public class CasesNeutral : MonoBehaviour
         _gameplayManager = FindObjectOfType<GameplayManager>();
         renderer = gameObject.GetComponent<Renderer>();
         ResetColor();
-        index = _gameplayManager.allCases.IndexOf(this);
         objectif = FindObjectOfType<Objectif>();
         eventS = gameObject.GetComponent<Event>();
     }
@@ -59,7 +59,12 @@ public class CasesNeutral : MonoBehaviour
                 obj.isInRanged = true;
                
             }
-            activPlayer.move.allNextCases.Add(this);
+
+            for (int i = 0; i < nextCases.Count; i++)
+            {
+                activPlayer.move.allNextCases.Add(nextCases[i]);
+            }
+           
         }
     }
 
@@ -121,10 +126,16 @@ public class CasesNeutral : MonoBehaviour
     public void EndCase()
     { 
         objectif.lastCase = true;
-        menuEnd.SetActive(true);
-        Debug.Log("win");
-        Time.timeScale = 0;
-        _gameplayManager.FindBestPlayer();
+       // menuEnd.SetActive(true);
+       nextIsle.SetActive(true);
+       lastIsle.SetActive(false);
+       _gameplayManager.ChangePlayer();
+       _gameplayManager.GetCase();
+       foreach (Player player in _gameplayManager.allPlayers)
+       {
+           player.move.caseNext[0] = _gameplayManager.allCases[0];
+           player.player.transform.position = player.move.caseNext[0].transform.position;
+       }
     }
 
     public void EventCase()
@@ -132,14 +143,5 @@ public class CasesNeutral : MonoBehaviour
         eventS.GetEvent();
         eventS.Invoke(eventS.eventName,0);
         _gameplayManager.ResetLast();
-    }
-    
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            activPlayer.point.numberCase++;
-        }
     }
 }

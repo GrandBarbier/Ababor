@@ -77,18 +77,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec6dd5b0ba808c4db64664ef8f23fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: []
+  players:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   allCases: []
-  activPlayer: {fileID: 0}
   playerIndex: 0
+  treasure: 0
   objectif: {fileID: 9163520321838035759}
-  allMove: []
-  allPoint: []
+  endText: {fileID: 0}
   actualMove: {fileID: 0}
   actualPoint: {fileID: 0}
-  endText: {fileID: 0}
   verifMenu: {fileID: 0}
   endMenu: {fileID: 0}
+  activPlayer: {fileID: 0}
+  cardManager: {fileID: 7541256346092628484}
 --- !u!114 &9163520321838035745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,7 +107,6 @@ MonoBehaviour:
   playerPoint: {fileID: 0}
   _gameplayManager: {fileID: 9163520321838035744}
   playerMove: {fileID: 0}
-  player: {fileID: 0}
   shopMenu: {fileID: 0}
 --- !u!114 &7541256346092628484
 MonoBehaviour:
@@ -119,6 +121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menu: {fileID: 0}
-  gameplayManager: {fileID: 0}
-  move: {fileID: 0}
-  point: {fileID: 0}
+  gameplayManager: {fileID: 9163520321838035744}
+  index: 0
+  gmIndex: 0
+  functionName: 
+  lastName: 

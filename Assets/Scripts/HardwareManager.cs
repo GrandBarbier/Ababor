@@ -78,14 +78,26 @@ public class HardwareManager : MonoBehaviour
     void OnDisable()  
     {
         NFCController.StopPolling();  
+        ShutLights();
     }
     
     public void Colorize()
     {
-        LightController.Colorize(lightsP1, LIGHT_COLOR.COLOR_RED, true);
-        LightController.Colorize(lightsP2, LIGHT_COLOR.COLOR_BLUE, true);
-        LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_YELLOW, true);
-        LightController.Colorize(lightsP4, LIGHT_COLOR.COLOR_GREEN, true);
+        switch (nbPlayers)
+        {
+            case 4:
+                LightController.Colorize(lightsP1, LIGHT_COLOR.COLOR_RED, true);
+                LightController.Colorize(lightsP2, LIGHT_COLOR.COLOR_BLUE, true);
+                LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_YELLOW, true);
+                LightController.Colorize(lightsP4, LIGHT_COLOR.COLOR_GREEN, true);
+                break;
+            
+            case 3:
+                LightController.Colorize(lightsP1, LIGHT_COLOR.COLOR_RED, true);
+                LightController.Colorize(lightsP2, LIGHT_COLOR.COLOR_BLUE, true);
+                LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_YELLOW, true);
+                break;
+        }
     }
     
     public void ShutLights()

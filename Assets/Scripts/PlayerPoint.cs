@@ -34,6 +34,8 @@ public class PlayerPoint : MonoBehaviour
             gold = 0;
         }
         text.text = gold.ToString();
+        
+        
     }
     
     

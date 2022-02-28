@@ -34,25 +34,17 @@ public class GameplayManager : MonoBehaviour
     public CardManager cardManager;
 
     void Awake()
-    {
-  
-      foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Case").ToList())
-      {
-          allCases.Add(obj.GetComponent<CasesNeutral>());
-      }  
-      players = GameObject.FindGameObjectsWithTag("Player").ToList();
-
-        for (int i = 0; i < players.Count; i++)
+    { 
+        
+        GetCase();
+        for(int i = 0; i < players.Count; i++)
         {
             Player pl = new Player();
              pl.player = players[i];
              pl.move = players[i].GetComponent<PlayerMovement>();
              pl.point = players[i].GetComponent<PlayerPoint>();
             allPlayers.Add(pl);
-           
         }
-        allCases.Reverse();
-        allCases.Sort(SortByName);
         currentstate = new CardPlay();
     }
 
@@ -80,7 +72,7 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
-    private int SortByName(CasesNeutral object1, CasesNeutral object2) // function to sort cases
+    public int SortByName(CasesNeutral object1, CasesNeutral object2) // function to sort cases
     {
        return  object1.index.CompareTo(object2.index);
     }
@@ -192,6 +184,16 @@ public class GameplayManager : MonoBehaviour
     public void ResetLast()
     {
         allPlayers[allPlayers.Count -1].move.isLast = true;
+    }
+
+    public void GetCase()
+    {
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Case").ToList())
+        {
+            allCases.Add(obj.GetComponent<CasesNeutral>());
+            allCases.Reverse();
+            allCases.Sort(SortByName); 
+        }
     }
 }
 
