@@ -20,6 +20,8 @@ public class CasesNeutral : MonoBehaviour
     [SerializeField] private GameplayManager _gameplayManager;
     
     public Renderer renderer;
+
+    public Shop shop;
     
     public int index;
     
@@ -41,6 +43,7 @@ public class CasesNeutral : MonoBehaviour
         _gameplayManager = FindObjectOfType<GameplayManager>();
         objectif = FindObjectOfType<Objectif>();
         eventS = gameObject.GetComponent<Event>();
+        shop = FindObjectOfType<Shop>();
         allMat = renderer.materials;
         ResetColor();
     }
@@ -121,7 +124,6 @@ public class CasesNeutral : MonoBehaviour
 
     public void ShopCase()
     {
-        Shop shop = FindObjectOfType<Shop>();
         shop.ShopOpen();
         activPlayer.point.numberShopCase++;
         _gameplayManager.ResetLast();
