@@ -12,7 +12,8 @@ public class CasesNeutral : MonoBehaviour
   
     public List<CasesNeutral> nextCases;
     
-    public Color baseColor;
+    public Material baseMat;
+    public Material rangedMat;
     
     [SerializeField] private GameplayManager _gameplayManager;
     
@@ -55,7 +56,7 @@ public class CasesNeutral : MonoBehaviour
             foreach (CasesNeutral obj in nextCases )
             {
                 obj.Outline(obj.nextCases, remain-1);
-                obj.GetComponent<Renderer>().material.color = Color.blue;
+                obj.GetComponent<Renderer>().material = rangedMat;
                 obj.isInRanged = true;
                
             }
@@ -70,7 +71,7 @@ public class CasesNeutral : MonoBehaviour
 
     public void ResetColor()
     {
-        renderer.material.color = baseColor;
+        renderer.material = baseMat;
         isInRanged = false;
     }
 

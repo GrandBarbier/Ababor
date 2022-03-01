@@ -19,7 +19,9 @@ public class Event : MonoBehaviour
     public List<String> allEvent;
 
     public List<CasesNeutral> allCase;
-  
+
+    public Material basicCaseMat,loseCaseMat,gainCaseMat;
+    
     // Start is called before the first frame update
     private void Awake()
     {
@@ -44,7 +46,7 @@ public class Event : MonoBehaviour
 
         int rdm = Random.Range(0, allCase.Count);
         allCase[rdm].nameFunction = "LoseCase";
-        allCase[rdm].baseColor = Color.red;
+        allCase[rdm].baseMat = loseCaseMat;
         allCase[rdm].ResetColor();
         _gameplayManager.ChangePlayer();
         enabled = false;
@@ -61,7 +63,7 @@ public class Event : MonoBehaviour
         }
         int rdm = Random.Range(0, allCase.Count);
         allCase[rdm].nameFunction = "GainCase";
-        allCase[rdm].baseColor = Color.yellow;
+        allCase[rdm].baseMat = gainCaseMat;
         allCase[rdm].ResetColor();
         _gameplayManager.ChangePlayer();
         enabled = false;
@@ -93,10 +95,20 @@ public class Event : MonoBehaviour
        //     allPlayers[i].move.caseNext[0].ActualCaseFunction();
         }
     }
+
+    public void HideCase()
+    {
+        
+    }
     
     public void GetEvent()
     {
         int rdm = Random.Range(0, allEvent.Count);
         eventName = allEvent[rdm];
+    }
+
+    public void ResetEvent()
+    {
+        
     }
 }
