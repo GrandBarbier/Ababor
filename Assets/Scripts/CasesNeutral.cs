@@ -12,11 +12,16 @@ public class CasesNeutral : MonoBehaviour
   
     public List<CasesNeutral> nextCases;
     
-    public Color baseColor;
+    public Material baseMat;
+    public Material rangedMat;
+    public Material baseSecondMat;
+    public Material[] allMat;
     
     [SerializeField] private GameplayManager _gameplayManager;
     
     public Renderer renderer;
+
+    public Shop shop;
     
     public int index;
     
@@ -36,16 +41,18 @@ public class CasesNeutral : MonoBehaviour
     void Awake()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>();
-        renderer = gameObject.GetComponent<Renderer>();
-        ResetColor();
         objectif = FindObjectOfType<Objectif>();
         eventS = gameObject.GetComponent<Event>();
+        shop = FindObjectOfType<Shop>();
+        allMat = renderer.materials;
+        ResetColor();
     }
 
     // Update is called once per frame
     void Update()
     {
         activPlayer = _gameplayManager.allPlayers[_gameplayManager.playerIndex];
+        
     }
 
     public void Outline(List<CasesNeutral> list, float remain)
@@ -55,22 +62,23 @@ public class CasesNeutral : MonoBehaviour
             foreach (CasesNeutral obj in nextCases )
             {
                 obj.Outline(obj.nextCases, remain-1);
-                obj.GetComponent<Renderer>().material.color = Color.blue;
+                obj.allMat[0] = rangedMat;
+                obj.renderer.materials = obj.allMat;
                 obj.isInRanged = true;
-               
             }
 
             for (int i = 0; i < nextCases.Count; i++)
             {
                 activPlayer.move.allNextCases.Add(nextCases[i]);
             }
-           
         }
     }
 
     public void ResetColor()
     {
-        renderer.material.color = baseColor;
+        allMat[0] = baseMat;
+        allMat[1] = baseSecondMat;
+        renderer.materials = allMat;
         isInRanged = false;
     }
 
@@ -84,7 +92,6 @@ public class CasesNeutral : MonoBehaviour
         activPlayer.point.gold += 3;
         activPlayer.point.numberGainCase++;
         _gameplayManager.ChangePlayer();
-        
     }
 
     public void NeutralCase()
@@ -117,7 +124,6 @@ public class CasesNeutral : MonoBehaviour
 
     public void ShopCase()
     {
-        Shop shop = FindObjectOfType<Shop>();
         shop.ShopOpen();
         activPlayer.point.numberShopCase++;
         _gameplayManager.ResetLast();
