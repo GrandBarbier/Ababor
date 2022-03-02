@@ -67,17 +67,13 @@ public class PlayerMovement : MonoBehaviour
         if (end)
         {
             menuVerif.SetActive(false);
-            PlayerResetCase(); 
-           // agent.destination = child.transform.position;
-           
-            gameObject.transform.position = allNextCases[indexCase].transform.position;
+            PlayerResetCase();
+            gameObject.transform.position = allNextCases[indexCase].transform.position + new Vector3(0,0.1f,0);
             point.numberCase += indexCase+1;
-            //Vector3.MoveTowards(transform.position, child.transform.position,10);
-                
+            
             if (Vector3.Distance(transform.position,child.transform.position) <= 1f ) // set end turn
             {
                 caseNext[0].ActualCaseFunction();
-                agent.speed = 0;
                 isEvent = false;
                 end = false;
             }
