@@ -67,10 +67,9 @@ public class PlayerMovement : MonoBehaviour
         if (end)
         {
             menuVerif.SetActive(false);
-            PlayerResetCase();
             gameObject.transform.position = allNextCases[indexCase].transform.position + new Vector3(0,0.1f,0);
             point.numberCase += indexCase+1;
-            
+            PlayerResetCase();
             if (Vector3.Distance(transform.position,child.transform.position) <= 1f ) // set end turn
             {
                 caseNext[0].ActualCaseFunction();
@@ -103,10 +102,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayerResetCase() // Reset the color of all cases
     {
-        foreach (CasesNeutral obj in allCases)
+        foreach (CasesNeutral cases in allNextCases)
         {
-            obj.ResetColor();
+            cases.ResetColor(); 
         }
+        
+        
     }
 
     public int FindCase()
@@ -149,6 +150,7 @@ public class PlayerMovement : MonoBehaviour
                     {
                         Debug.Log(4);
                         hitObject = cases.gameObject;
+                        
                         child.transform.position = hitObject.transform.position;
                         caseNext[0] = cases;
                         indexCase = allNextCases.IndexOf(cases);

@@ -98,7 +98,28 @@ public class Event : MonoBehaviour
 
     public void HideCase()
     {
-        
+        List<CasesNeutral> caseSpecial = new List<CasesNeutral>();
+        allCase = _gameplayManager.allCases;
+        foreach (CasesNeutral cases in allCase)
+        {
+            if (cases.nameFunction != "NeutralCase")
+            {
+                caseSpecial.Add(cases);
+            }
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            int rdm = Random.Range(0, caseSpecial.Count);
+            caseSpecial[rdm].baseSecondMat = basicCaseMat;
+            caseSpecial[rdm].ResetColor();
+         /*Material[] caseMats = caseSpecial[rdm].renderer.materials;
+            caseMats[1] = basicCaseMat;
+            caseSpecial[rdm].renderer.materials = caseMats;*/
+            caseSpecial.RemoveAt(rdm);
+            allCase.RemoveAt(rdm);
+        }
+        _gameplayManager.ChangePlayer();
     }
     
     public void GetEvent()
