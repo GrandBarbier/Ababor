@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     
     public bool end;
     public  bool isEvent;
+    public bool isEnd;
     
     [SerializeField] 
     
@@ -52,7 +53,6 @@ public class PlayerMovement : MonoBehaviour
         _gameplayManager = FindObjectOfType<GameplayManager>(); // Find gamemanager
         allCases = _gameplayManager.allCases;
         allEvent = FindObjectsOfType<Event>();
-        _gameplayManager.activPlayer = gameObject;
         cam = Camera.main;
     }
 
@@ -64,35 +64,43 @@ public class PlayerMovement : MonoBehaviour
             CaseToMove();
         }
 
-        if (end)
+        if (isEnd == false)
         {
-            menuVerif.SetActive(false);
-            gameObject.transform.position = allNextCases[indexCase].transform.position + new Vector3(0,0.1f,0);
-            point.numberCase += indexCase+1;
-            PlayerResetCase();
-            if (Vector3.Distance(transform.position,child.transform.position) <= 1f ) // set end turn
+            if (end)
             {
-                caseNext[0].ActualCaseFunction();
-                isEvent = false;
-                end = false;
-            }
-            
-            if (isEvent)
-            { 
-                foreach (Event evt in allEvent) 
+                menuVerif.SetActive(false);
+                gameObject.transform.position = allNextCases[indexCase].transform.position + new Vector3(0, 0.1f, 0);
+                point.numberCase += indexCase + 1;
+                PlayerResetCase();
+                if (Vector3.Distance(transform.position, child.transform.position) <= 1f) // set end turn
                 {
-                     evt.enabled = true;
+                    caseNext[0].ActualCaseFunction();
+                    isEvent = false;
+                    end = false;
                 }
-            }
-            
-            if (isEvent == false)
-            {
-                actualMove = InitialMove;
-            }
 
-            allNextCases.Clear();
+                if (isEvent)
+                {
+                    foreach (Event evt in allEvent)
+                    {
+                        evt.enabled = true;
+                    }
+                }
+
+                if (isEvent == false)
+                {
+                    actualMove = InitialMove;
+                }
+
+                allNextCases.Clear();
+            }
+        }
+        else
+        {
+            _gameplayManager.ChangePlayer();
         }
     }
+    
 
     public void PlayerShowMove()  // change color of all case in range
     {
@@ -167,4 +175,6 @@ public class PlayerMovement : MonoBehaviour
         }
         allNextCases.Sort(_gameplayManager.SortByName);
     }
+    
+    
 }

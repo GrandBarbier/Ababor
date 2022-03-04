@@ -33,7 +33,7 @@ public class CasesNeutral : MonoBehaviour
     
     public Objectif objectif;
     
-    public GameObject menuEnd, nextIsle, lastIsle;
+    public GameObject menuEnd;
     
     public CasesNeutral lastCase;
  
@@ -51,12 +51,12 @@ public class CasesNeutral : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        activPlayer = _gameplayManager.allPlayers[_gameplayManager.playerIndex];
         
     }
 
     public void Outline(List<CasesNeutral> list, float remain)
     {
+        
         if (remain > 0)
         {
             foreach (CasesNeutral obj in nextCases )
@@ -69,7 +69,7 @@ public class CasesNeutral : MonoBehaviour
 
             for (int i = 0; i < nextCases.Count; i++)
             {
-                activPlayer.move.allNextCases.Add(nextCases[i]);
+              _gameplayManager.activPlayer.move.allNextCases.Add(nextCases[i]);
             }
         }
     }
@@ -84,13 +84,14 @@ public class CasesNeutral : MonoBehaviour
 
     public void ActualCaseFunction()
     {
+        
         Invoke(nameFunction,0);
     }
 
     public void GainCase()
     {
-        activPlayer.point.gold += 3;
-        activPlayer.point.numberGainCase++;
+        _gameplayManager.activPlayer.point.gold += 3;
+        _gameplayManager.activPlayer.point.numberGainCase++;
         _gameplayManager.ChangePlayer();
     }
 
@@ -101,47 +102,38 @@ public class CasesNeutral : MonoBehaviour
 
     public void LoseCase()
     {
-        activPlayer.point.gold -= 3;
+        _gameplayManager.activPlayer.point.gold -= 3;
         _gameplayManager.treasure += 3;
-        if (activPlayer.point.gold < 0)
+        if (_gameplayManager.activPlayer.point.gold < 0)
         {
-            activPlayer.point.gold = 0;
+            _gameplayManager.activPlayer.point.gold = 0;
         }
-        activPlayer.point.numberLoseCase++;
+        _gameplayManager.activPlayer.point.numberLoseCase++;
         _gameplayManager.ResetLast();
         _gameplayManager.ChangePlayer();
-    }
-
-    public void MoveCase()
-    {
-        int u = activPlayer.move.FindCase(); 
-        activPlayer.move.actualMove = 2;
-        activPlayer.move.PlayerShowMove();
-        activPlayer.move.agent.destination = activPlayer.move.child.transform.position;
-        activPlayer.move.actualMove = activPlayer.move.InitialMove;
-        _gameplayManager.playerIndex++;
     }
 
     public void ShopCase()
     {
         shop.ShopOpen();
-        activPlayer.point.numberShopCase++;
+        _gameplayManager.activPlayer.point.numberShopCase++;
         _gameplayManager.ResetLast();
     }
 
     public void EndCase()
-    { 
-        objectif.lastCase = true;
-       // menuEnd.SetActive(true);
-       nextIsle.SetActive(true);
-       lastIsle.SetActive(false);
-       _gameplayManager.ChangePlayer();
-       _gameplayManager.GetCase();
-       foreach (Player player in _gameplayManager.allPlayers)
-       {
-           player.move.caseNext[0] = _gameplayManager.allCases[0];
-           player.player.transform.position = player.move.caseNext[0].transform.position;
-       }
+    {
+        if (_gameplayManager.lastTurn == false)
+        {
+            _gameplayManager.turnWait = 3;
+            _gameplayManager.lastTurn = true;
+            _gameplayManager.endPlayer = _gameplayManager.activPlayer;
+            _gameplayManager.activPlayer.move.isEnd = true;
+            _gameplayManager.ChangePlayer();
+        }
+        else
+        {
+            _gameplayManager.WaitForNextIsland();
+        }
     }
 
     public void EventCase()

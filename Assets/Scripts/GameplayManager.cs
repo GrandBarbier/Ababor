@@ -9,10 +9,14 @@ using UnityEngine.SceneManagement;
 public class GameplayManager : MonoBehaviour
 {
     public List<GameObject> players = new List<GameObject>();
- 
+    public List<GameObject> island = new List<GameObject>();
+    public GameObject verifMenu,endMenu, secondIsle, firstIsle;
+    
     public List<CasesNeutral> allCases = new List<CasesNeutral>();
 
-    public int playerIndex, treasure;
+    public int playerIndex, treasure, turnWait, islandIndex;
+
+    public bool lastTurn;
     
     public State currentstate;
     
@@ -22,6 +26,8 @@ public class GameplayManager : MonoBehaviour
     
     public Queue<Player> playerQueue = new Queue<Player>();
     public List<Player> allPlayers = new List<Player>();
+    public Player endPlayer;
+    public Player activPlayer;
     
     public Queue<PlayerMovement> moveQueue = new Queue<PlayerMovement>();
     public PlayerMovement actualMove;
@@ -29,7 +35,7 @@ public class GameplayManager : MonoBehaviour
     public Queue<PlayerPoint> pointQueue = new Queue<PlayerPoint>();
     public PlayerPoint actualPoint;
     
-    public GameObject verifMenu,endMenu,activPlayer;
+   
     
     public CardManager cardManager;
 
@@ -56,19 +62,26 @@ public class GameplayManager : MonoBehaviour
             moveQueue.Enqueue(player.move);
             pointQueue.Enqueue(player.point);
         }
-      
         currentstate.DoState(allPlayers[playerIndex].move, this);
     }
 
     // Update is called once per frame
     void Update()
     {
-        activPlayer = allPlayers[playerIndex].player;
+        activPlayer = allPlayers[playerIndex];
         actualMove = allPlayers[playerIndex].move;
         actualPoint = allPlayers[playerIndex].point;
         if (playerIndex <= 0)
         {
             playerIndex = 0;
+        }
+
+        if (lastTurn)
+        {
+            if (turnWait == 0)
+            {
+                WaitForNextIsland();  
+            }
         }
     }
 
@@ -89,10 +102,8 @@ public class GameplayManager : MonoBehaviour
     
     public void ChangePlayer()
     {
-       
-        currentstate = new EndTurn();
+        currentstate = new EndTurn(); 
         currentstate.DoState(allPlayers[playerIndex].move, this);
-        
         playerIndex++;
         if (playerIndex >= allPlayers.Count)
         {
@@ -102,11 +113,9 @@ public class GameplayManager : MonoBehaviour
         {
             objectif.Invoke(stg,0);
         }
-
         if (actualMove.isLast)
         {
             ChangePlayerOrder();
-           
         }
         ButtonStart();
     }
@@ -140,11 +149,19 @@ public class GameplayManager : MonoBehaviour
         playerQueue.Dequeue(); 
         playerQueue.Enqueue(allPlayers[0]);
         allPlayers = playerQueue.ToList();
+        turnWait--;
+        if (playerIndex >= allPlayers.Count)
+        {
+            playerIndex = 0;
+        }
         for (int i = 0; i < allPlayers.Count; i++)
         {
             allPlayers[i].move.index = i;
         }
-        Debug.Log("test");
+        foreach (Player player in allPlayers)
+        {
+            player.move.index = allPlayers.IndexOf(player);
+        }
     }
 
     public void ResetMove()
@@ -194,6 +211,35 @@ public class GameplayManager : MonoBehaviour
             allCases.Reverse();
             allCases.Sort(SortByName); 
         }
+    }
+
+    public void WaitForNextIsland()
+    {
+        objectif.lastCase = true;
+        ChangePlayer();
+        foreach (Player player in allPlayers)
+        {
+            player.move.caseNext[0] = allCases[0];
+            player.player.transform.position = player.move.caseNext[0].transform.position;
+            player.move.isEnd = false;
+        }
+
+        if (allPlayers[0].move.isLast)
+        {
+        }
+        else
+        {
+            ChangePlayerOrder();
+        }
+        secondIsle.SetActive(true);
+        firstIsle.SetActive(false);
+        GetCase();
+        foreach (Player player in allPlayers)
+        {
+            player.move.caseNext[0] = allCases[0];
+        }
+        lastTurn = false;
+        turnWait = -1;
     }
 }
 
