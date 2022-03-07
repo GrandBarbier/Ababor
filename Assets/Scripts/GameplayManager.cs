@@ -46,9 +46,9 @@ public class GameplayManager : MonoBehaviour
         for(int i = 0; i < players.Count; i++)
         {
             Player pl = new Player();
-             pl.player = players[i];
-             pl.move = players[i].GetComponent<PlayerMovement>();
-             pl.point = players[i].GetComponent<PlayerPoint>();
+            pl.player = players[i]; 
+            pl.move = players[i].GetComponent<PlayerMovement>();
+            pl.point = players[i].GetComponent<PlayerPoint>();
             allPlayers.Add(pl);
         }
         currentstate = new CardPlay();
@@ -231,8 +231,8 @@ public class GameplayManager : MonoBehaviour
         {
             ChangePlayerOrder();
         }
-        secondIsle.SetActive(true);
-        firstIsle.SetActive(false);
+        island[islandIndex].SetActive(true);
+        island[islandIndex-1].SetActive(false);
         GetCase();
         foreach (Player player in allPlayers)
         {

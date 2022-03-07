@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.touchCount == 1)
+        if (Input.touchCount == 1 )
         {
             CaseToMove();
         }
@@ -104,8 +104,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayerShowMove()  // change color of all case in range
     {
-       caseNext[0].Outline(caseNext,actualMove);
-       
+        if (isEnd == false)
+        {
+            caseNext[0].Outline(caseNext,actualMove, this);
+        }
     }
 
     public void PlayerResetCase() // Reset the color of all cases
@@ -146,19 +148,14 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetTouch(0).phase == TouchPhase.Ended)
         {
             var touchRay = cam.ScreenPointToRay(Input.GetTouch(0).position);
-            Debug.Log(1);
             if (Physics.Raycast(touchRay, out RaycastHit hit, Mathf.Infinity, mask))
             {
-                Debug.Log(2);
                 hitObject = hit.transform.gameObject;
                 foreach (CasesNeutral cases in allCases)
                 {
-                    Debug.Log(3);
                     if (hit.transform.gameObject == cases.gameObject && cases.isInRanged)
                     {
-                        Debug.Log(4);
                         hitObject = cases.gameObject;
-                        
                         child.transform.position = hitObject.transform.position;
                         caseNext[0] = cases;
                         indexCase = allNextCases.IndexOf(cases);

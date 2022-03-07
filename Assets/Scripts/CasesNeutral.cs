@@ -54,14 +54,14 @@ public class CasesNeutral : MonoBehaviour
         
     }
 
-    public void Outline(List<CasesNeutral> list, float remain)
+    public void Outline(List<CasesNeutral> list, float remain, PlayerMovement player)
     {
         
         if (remain > 0)
         {
             foreach (CasesNeutral obj in nextCases )
             {
-                obj.Outline(obj.nextCases, remain-1);
+                obj.Outline(obj.nextCases, remain-1,player);
                 obj.allMat[0] = rangedMat;
                 obj.renderer.materials = obj.allMat;
                 obj.isInRanged = true;
@@ -69,7 +69,7 @@ public class CasesNeutral : MonoBehaviour
 
             for (int i = 0; i < nextCases.Count; i++)
             {
-              _gameplayManager.activPlayer.move.allNextCases.Add(nextCases[i]);
+              player.allNextCases.Add(nextCases[i]);
             }
         }
     }
@@ -125,6 +125,7 @@ public class CasesNeutral : MonoBehaviour
         if (_gameplayManager.lastTurn == false)
         {
             _gameplayManager.turnWait = 3;
+            _gameplayManager.islandIndex++;
             _gameplayManager.lastTurn = true;
             _gameplayManager.endPlayer = _gameplayManager.activPlayer;
             _gameplayManager.activPlayer.move.isEnd = true;
