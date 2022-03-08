@@ -577,19 +577,23 @@ MonoBehaviour:
   allCases: []
   caseNext:
   - {fileID: 0}
-  child: {fileID: 1659564447249622883}
+  allNextCases: []
   actualMove: 5
+  InitialMove: 5
   agent: {fileID: 1659564447471117488}
   end: 0
-  InitialMove: 5
   isEvent: 0
   mask:
     serializedVersion: 2
     m_Bits: 64
   menuVerif: {fileID: 1659564447084770096}
   hitObject: {fileID: 0}
+  child: {fileID: 1659564447249622883}
   allEvent: []
   isLast: 0
+  point: {fileID: 6386504540155736195}
+  index: 0
+  indexCase: 0
 --- !u!195 &1659564447471117488
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -600,7 +604,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1
-  m_Speed: 5
+  m_Speed: 0
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 0
@@ -653,18 +657,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a53b63cc9537ef4d8f7503c66f9d039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: 50
   text: {fileID: 0}
+  gold: 50
   point: 0
-  isEvent: 0
   numberGainCase: 0
   numberLoseCase: 0
   numberEventCase: 0
   numberShopCase: 0
-  numberNoneMoveCase: 0
   numberCase: 0
   player: {fileID: 0}
   objectifVerif: 
+  isEvent: 0
 --- !u!1 &3320854058128636885
 GameObject:
   m_ObjectHideFlags: 0

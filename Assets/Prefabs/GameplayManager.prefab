@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 9163520321838035744}
   - component: {fileID: 9163520321838035745}
   - component: {fileID: 7541256346092628484}
+  - component: {fileID: 7996281355349608391}
+  - component: {fileID: 1478072490487135364}
   m_Layer: 0
   m_Name: GameplayManager
   m_TagString: MainCamera
@@ -27,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9163520321838035746}
-  m_LocalRotation: {x: 0.39357626, y: -0, z: -0, w: 0.919292}
+  m_LocalRotation: {x: 0.39357296, y: 0, z: 0, w: 0.9192934}
   m_LocalPosition: {x: -0.49, y: 32.7, z: -36.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -77,18 +79,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec6dd5b0ba808c4db64664ef8f23fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: []
+  players:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   allCases: []
-  activPlayer: {fileID: 0}
   playerIndex: 0
+  treasure: 0
   objectif: {fileID: 9163520321838035759}
-  allMove: []
-  allPoint: []
+  endText: {fileID: 0}
   actualMove: {fileID: 0}
   actualPoint: {fileID: 0}
-  endText: {fileID: 0}
   verifMenu: {fileID: 0}
   endMenu: {fileID: 0}
+  activPlayer: {fileID: 0}
+  cardManager: {fileID: 7541256346092628484}
 --- !u!114 &9163520321838035745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,7 +109,6 @@ MonoBehaviour:
   playerPoint: {fileID: 0}
   _gameplayManager: {fileID: 9163520321838035744}
   playerMove: {fileID: 0}
-  player: {fileID: 0}
   shopMenu: {fileID: 0}
 --- !u!114 &7541256346092628484
 MonoBehaviour:
@@ -119,6 +123,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menu: {fileID: 0}
-  gameplayManager: {fileID: 0}
-  move: {fileID: 0}
-  point: {fileID: 0}
+  gameplayManager: {fileID: 9163520321838035744}
+  index: 0
+  gmIndex: 0
+  functionName: 
+  lastName: 
+--- !u!114 &7996281355349608391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9163520321838035746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd434c99f3455384b8ed1455669ce66a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightsP1: 00000000010000000200000003000000040000000500000006000000
+  lightsP2: 0700000008000000090000000a0000000b0000000c000000
+  lightsP3: 0d0000000e0000000f00000010000000110000001200000013000000
+  lightsP4: 140000001500000016000000170000001800000019000000
+  antennaP1: 010000000200000003000000040000000500000006000000
+  antennaP2: 08000000090000000a0000000b0000000c000000
+  antennaP3: 0e0000000f00000010000000110000001200000013000000
+  antennaP4: 1500000016000000170000001800000019000000
+  allAntennas3P: 01000000020000000300000004000000050000000600000008000000090000000a0000000b0000000c0000000e0000000f00000010000000110000001200000013000000
+  allAntennas4P: 01000000020000000300000004000000050000000600000008000000090000000a0000000b0000000c0000000e0000000f000000100000001100000012000000130000001500000016000000170000001800000019000000
+  gameplayManager: {fileID: 9163520321838035744}
+  nfcConvertor: {fileID: 1478072490487135364}
+  canNFC: 0
+  nbPlayers: 0
+  text: {fileID: 0}
+--- !u!114 &1478072490487135364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9163520321838035746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 739d9562b76064847a9e68634624d338, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hardwareManager: {fileID: 7996281355349608391}
+  cardManager: {fileID: 7541256346092628484}

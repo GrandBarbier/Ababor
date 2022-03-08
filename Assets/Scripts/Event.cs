@@ -19,7 +19,9 @@ public class Event : MonoBehaviour
     public List<String> allEvent;
 
     public List<CasesNeutral> allCase;
-  
+
+    public Material basicCaseMat,loseCaseMat,gainCaseMat;
+    
     // Start is called before the first frame update
     private void Awake()
     {
@@ -31,34 +33,6 @@ public class Event : MonoBehaviour
         thisCase = gameObject.GetComponent<CasesNeutral>();
         allPlayers = _gameplayManager.allPlayers;
     }
-
- /*   public void EventLessMove()
-    {
-        foreach (PlayerMovement move in allMove)
-        {
-            move.actualMove -= 3;
-            move.isEvent = true;
-        }
-        _gameplayManager.actualMove.isEvent = true;
-        _gameplayManager.ChangePlayer();
-        enabled = false;
-    }
-    
-    public void EventMoreMove()
-    {
-        foreach (Player player in allPlayers)
-        {
-            player.move.actualMove += 3;
-            player.move.isEvent = true;
-        }
-        _gameplayManager.actualMove.isEvent = true;
-        _gameplayManager.ChangePlayer();
-        enabled = false;
-    }*/
- private void Update()
- {
-//    Debug.Log(enabled);
- }
 
     public void EventMoreLoseCase()
     {
@@ -72,7 +46,7 @@ public class Event : MonoBehaviour
 
         int rdm = Random.Range(0, allCase.Count);
         allCase[rdm].nameFunction = "LoseCase";
-        allCase[rdm].baseColor = Color.red;
+        allCase[rdm].baseMat = loseCaseMat;
         allCase[rdm].ResetColor();
         _gameplayManager.ChangePlayer();
         enabled = false;
@@ -89,7 +63,7 @@ public class Event : MonoBehaviour
         }
         int rdm = Random.Range(0, allCase.Count);
         allCase[rdm].nameFunction = "GainCase";
-        allCase[rdm].baseColor = Color.yellow;
+        allCase[rdm].baseMat = gainCaseMat;
         allCase[rdm].ResetColor();
         _gameplayManager.ChangePlayer();
         enabled = false;
@@ -121,11 +95,41 @@ public class Event : MonoBehaviour
        //     allPlayers[i].move.caseNext[0].ActualCaseFunction();
         }
     }
+
+    public void HideCase()
+    {
+        List<CasesNeutral> caseSpecial = new List<CasesNeutral>();
+        allCase = _gameplayManager.allCases;
+        foreach (CasesNeutral cases in allCase)
+        {
+            if (cases.nameFunction != "NeutralCase")
+            {
+                caseSpecial.Add(cases);
+            }
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            int rdm = Random.Range(0, caseSpecial.Count);
+            caseSpecial[rdm].baseSecondMat = basicCaseMat;
+            caseSpecial[rdm].ResetColor();
+         /*Material[] caseMats = caseSpecial[rdm].renderer.materials;
+            caseMats[1] = basicCaseMat;
+            caseSpecial[rdm].renderer.materials = caseMats;*/
+            caseSpecial.RemoveAt(rdm);
+            allCase.RemoveAt(rdm);
+        }
+        _gameplayManager.ChangePlayer();
+    }
     
     public void GetEvent()
     {
         int rdm = Random.Range(0, allEvent.Count);
         eventName = allEvent[rdm];
     }
-    
+
+    public void ResetEvent()
+    {
+        
+    }
 }

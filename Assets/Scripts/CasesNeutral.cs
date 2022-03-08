@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -11,11 +12,16 @@ public class CasesNeutral : MonoBehaviour
   
     public List<CasesNeutral> nextCases;
     
-    public Color baseColor;
+    public Material baseMat;
+    public Material rangedMat;
+    public Material baseSecondMat;
+    public Material[] allMat;
     
     [SerializeField] private GameplayManager _gameplayManager;
     
     public Renderer renderer;
+
+    public Shop shop;
     
     public int index;
     
@@ -35,51 +41,58 @@ public class CasesNeutral : MonoBehaviour
     void Awake()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>();
-        renderer = gameObject.GetComponent<Renderer>();
-        ResetColor();
-        index = _gameplayManager.allCases.IndexOf(this);
         objectif = FindObjectOfType<Objectif>();
         eventS = gameObject.GetComponent<Event>();
+        shop = FindObjectOfType<Shop>();
+        allMat = renderer.materials;
+        ResetColor();
     }
 
     // Update is called once per frame
     void Update()
     {
-        activPlayer = _gameplayManager.allPlayers[_gameplayManager.playerIndex];
+        
     }
 
-    public void Outline(List<CasesNeutral> list, float remain)
+    public void Outline(List<CasesNeutral> list, float remain, PlayerMovement player)
     {
+        
         if (remain > 0)
         {
             foreach (CasesNeutral obj in nextCases )
             {
-                obj.Outline(obj.nextCases, remain-1);
-                obj.GetComponent<Renderer>().material.color = Color.blue;
+                obj.Outline(obj.nextCases, remain-1,player);
+                obj.allMat[0] = rangedMat;
+                obj.renderer.materials = obj.allMat;
                 obj.isInRanged = true;
-               
             }
-            activPlayer.move.allNextCases.Add(this);
+
+            for (int i = 0; i < nextCases.Count; i++)
+            {
+              player.allNextCases.Add(nextCases[i]);
+            }
         }
     }
 
     public void ResetColor()
     {
-        renderer.material.color = baseColor;
+        allMat[0] = baseMat;
+        allMat[1] = baseSecondMat;
+        renderer.materials = allMat;
         isInRanged = false;
     }
 
     public void ActualCaseFunction()
     {
+        
         Invoke(nameFunction,0);
     }
 
     public void GainCase()
     {
-        activPlayer.point.gold += 3;
-        activPlayer.point.numberGainCase++;
+        _gameplayManager.activPlayer.point.gold += 3;
+        _gameplayManager.activPlayer.point.numberGainCase++;
         _gameplayManager.ChangePlayer();
-        
     }
 
     public void NeutralCase()
@@ -89,42 +102,39 @@ public class CasesNeutral : MonoBehaviour
 
     public void LoseCase()
     {
-        activPlayer.point.gold -= 3;
+        _gameplayManager.activPlayer.point.gold -= 3;
         _gameplayManager.treasure += 3;
-        if (activPlayer.point.gold < 0)
+        if (_gameplayManager.activPlayer.point.gold < 0)
         {
-            activPlayer.point.gold = 0;
+            _gameplayManager.activPlayer.point.gold = 0;
         }
-        activPlayer.point.numberLoseCase++;
+        _gameplayManager.activPlayer.point.numberLoseCase++;
         _gameplayManager.ResetLast();
         _gameplayManager.ChangePlayer();
     }
 
-    public void MoveCase()
-    {
-        int u = activPlayer.move.FindCase(); 
-        activPlayer.move.actualMove = 2;
-        activPlayer.move.PlayerShowMove();
-        activPlayer.move.agent.destination = activPlayer.move.child.transform.position;
-        activPlayer.move.actualMove = activPlayer.move.InitialMove;
-        _gameplayManager.playerIndex++;
-    }
-
     public void ShopCase()
     {
-        Shop shop = FindObjectOfType<Shop>();
         shop.ShopOpen();
-        activPlayer.point.numberShopCase++;
+        _gameplayManager.activPlayer.point.numberShopCase++;
         _gameplayManager.ResetLast();
     }
 
     public void EndCase()
-    { 
-        objectif.lastCase = true;
-        menuEnd.SetActive(true);
-        Debug.Log("win");
-        Time.timeScale = 0;
-        _gameplayManager.FindBestPlayer();
+    {
+        if (_gameplayManager.lastTurn == false)
+        {
+            _gameplayManager.turnWait = 3;
+            _gameplayManager.islandIndex++;
+            _gameplayManager.lastTurn = true;
+            _gameplayManager.endPlayer = _gameplayManager.activPlayer;
+            _gameplayManager.activPlayer.move.isEnd = true;
+            _gameplayManager.ChangePlayer();
+        }
+        else
+        {
+            _gameplayManager.WaitForNextIsland();
+        }
     }
 
     public void EventCase()
@@ -132,14 +142,5 @@ public class CasesNeutral : MonoBehaviour
         eventS.GetEvent();
         eventS.Invoke(eventS.eventName,0);
         _gameplayManager.ResetLast();
-    }
-    
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            activPlayer.point.numberCase++;
-        }
     }
 }

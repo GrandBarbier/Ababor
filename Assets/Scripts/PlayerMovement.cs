@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     
     public bool end;
     public  bool isEvent;
+    public bool isEnd;
     
     [SerializeField] 
     
@@ -35,72 +37,87 @@ public class PlayerMovement : MonoBehaviour
     
     public bool isLast;
 
+    public PlayerPoint point;
+    
     public int index, indexCase;
+
+    void Awake()
+    {
+        transform.position = caseNext[0].transform.position;
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>(); // Find gamemanager
         allCases = _gameplayManager.allCases;
         allEvent = FindObjectsOfType<Event>();
-        _gameplayManager.activPlayer = gameObject;
         cam = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.touchCount == 1)
+        if (Input.touchCount == 1 )
         {
             CaseToMove();
         }
 
-
-        if (end)
+        if (isEnd == false)
         {
-            menuVerif.SetActive(false);
-            PlayerResetCase(); 
-            agent.destination = child.transform.position;
-
-          /*  for (int i = 0; i < indexCase; i++)
+            if (end)
             {
-                Debug.Log(1);
-                Vector3.MoveTowards(transform.position,child.transform.position,1);
-            }*/
-            if (Vector3.Distance(transform.position,child.transform.position) <= 1f ) // set end turn
-            {
-                caseNext[0].ActualCaseFunction();
-                agent.speed = 0;
-                isEvent = false;
-                end = false;
-            }
-            
-            if (isEvent)
-            { 
-                foreach (Event evt in allEvent) 
+                menuVerif.SetActive(false);
+                gameObject.transform.position = allNextCases[indexCase].transform.position + new Vector3(0, 0.1f, 0);
+                point.numberCase += indexCase + 1;
+                PlayerResetCase();
+                if (Vector3.Distance(transform.position, child.transform.position) <= 1f) // set end turn
                 {
-                     evt.enabled = true;
+                    caseNext[0].ActualCaseFunction();
+                    isEvent = false;
+                    end = false;
                 }
-            }
-            
-            if (isEvent == false)
-            {
-                actualMove = InitialMove;
+
+                if (isEvent)
+                {
+                    foreach (Event evt in allEvent)
+                    {
+                        evt.enabled = true;
+                    }
+                }
+
+                if (isEvent == false)
+                {
+                    actualMove = InitialMove;
+                }
+
+                allNextCases.Clear();
             }
         }
+        else
+        {
+            _gameplayManager.ChangePlayer();
+        }
     }
+    
 
     public void PlayerShowMove()  // change color of all case in range
     {
-       caseNext[0].Outline(caseNext,actualMove);
-       
+        if (isEnd == false)
+        {
+            caseNext[0].Outline(caseNext,actualMove, this);
+        }
     }
 
     public void PlayerResetCase() // Reset the color of all cases
     {
-        foreach (CasesNeutral obj in allCases)
+        foreach (CasesNeutral cases in allNextCases)
         {
-            obj.ResetColor();
+            cases.ResetColor(); 
         }
+        
+        
     }
 
     public int FindCase()
@@ -131,27 +148,30 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetTouch(0).phase == TouchPhase.Ended)
         {
             var touchRay = cam.ScreenPointToRay(Input.GetTouch(0).position);
-
             if (Physics.Raycast(touchRay, out RaycastHit hit, Mathf.Infinity, mask))
             {
+                hitObject = hit.transform.gameObject;
                 foreach (CasesNeutral cases in allCases)
                 {
                     if (hit.transform.gameObject == cases.gameObject && cases.isInRanged)
                     {
                         hitObject = cases.gameObject;
                         child.transform.position = hitObject.transform.position;
-                        indexCase = allNextCases.IndexOf(cases);
                         caseNext[0] = cases;
+                        indexCase = allNextCases.IndexOf(cases);
                         menuVerif.SetActive(true);
                         FindCase();
-                        agent.speed = 7;
                     }
                 }
             }
             else
             {
                 menuVerif.SetActive(false);
+                Debug.Log(5);
             }
         }
+        allNextCases.Sort(_gameplayManager.SortByName);
     }
+    
+    
 }

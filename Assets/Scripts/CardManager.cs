@@ -65,6 +65,7 @@ public class CardManager : MonoBehaviour
         player.move.PlayerShowMove();
         player.move.caseNext[0].nextCases[0].isInRanged = false;
         verif = true;
+        player.move.actualMove = player.move.InitialMove;
     }
 
     public void OneBlue()
@@ -143,8 +144,8 @@ public class CardManager : MonoBehaviour
          index = gameplayManager.playerIndex;
          player.move.isLast = false;
          target.move.isLast = false;
-         player.player.transform.position = target.move.caseNext[0].transform.position;
-         target.player.transform.position = cases.transform.position;
+         player.player.transform.position = target.move.caseNext[0].transform.position +Vector3.up;
+         target.player.transform.position = cases.transform.position + Vector3.up;
          player.move.caseNext[0] = target.move.caseNext[0];
          target.move.caseNext[0] = cases;
          player.move.caseNext[0].ActualCaseFunction();
@@ -159,8 +160,8 @@ public class CardManager : MonoBehaviour
         index = gameplayManager.playerIndex;
         player.move.isLast = false;
         target.move.isLast = false;
-        player.player.transform.position = target.move.caseNext[0].transform.position;
-        target.player.transform.position = cases.transform.position;
+        player.player.transform.position = target.move.caseNext[0].transform.position+ Vector3.up;
+        target.player.transform.position = cases.transform.position + Vector3.up;
         player.move.caseNext[0] = target.move.caseNext[0];
         target.move.caseNext[0] = cases;
         player.move.caseNext[0].ActualCaseFunction();
