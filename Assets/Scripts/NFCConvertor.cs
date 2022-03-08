@@ -23,6 +23,8 @@ public class NFCConvertor : MonoBehaviour
              
              case ";G":
                  cardManager.OpenCardMenu("Jack", player);
+                 cardManager.CancelInvoke();
+                 cardManager.waitMenu.SetActive(false);
                  break;
              
              case"<G":
@@ -47,6 +49,8 @@ public class NFCConvertor : MonoBehaviour
              
              case ";B":
                  cardManager.OpenCardMenu("Jack", player);
+                 cardManager.CancelInvoke();
+                 cardManager.waitMenu.SetActive(false);
                  break;
              
              case"<B":
@@ -70,6 +74,8 @@ public class NFCConvertor : MonoBehaviour
                  break;
              case ";R":
                  cardManager.OpenCardMenu("Jack", player);
+                 cardManager.CancelInvoke();
+                 cardManager.waitMenu.SetActive(false);
                  break;
              
              case"<R":
@@ -92,6 +98,8 @@ public class NFCConvertor : MonoBehaviour
                  break;
              case ";Y":
                  cardManager.OpenCardMenu("Jack", player);
+                 cardManager.CancelInvoke();
+                 cardManager.waitMenu.SetActive(false);
                  break;
              
              case "<Y":

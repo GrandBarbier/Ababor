@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class CardManager : MonoBehaviour
 {
     public GameObject menu;
- 
+    public GameObject waitMenu;
+    
     public GameplayManager gameplayManager;
     
     public int index, gmIndex;
@@ -35,9 +36,9 @@ public class CardManager : MonoBehaviour
          //pl = player.player;
         if (index != gameplayManager.playerIndex && verif)
         {
+            Debug.Log("nique");
             gameplayManager.playerIndex = gmIndex;
             verif = false;
-            
         }
     }
 
@@ -52,6 +53,7 @@ public class CardManager : MonoBehaviour
         player.move.PlayerShowMove();
         verif = true;
         player.move.actualMove = player.move.InitialMove;
+        waitMenu.SetActive(false);
     }
 
     public void TwoGreen()
@@ -66,6 +68,7 @@ public class CardManager : MonoBehaviour
         player.move.caseNext[0].nextCases[0].isInRanged = false;
         verif = true;
         player.move.actualMove = player.move.InitialMove;
+        waitMenu.SetActive(false);
     }
 
     public void OneBlue()
@@ -76,6 +79,7 @@ public class CardManager : MonoBehaviour
         player.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
         verif = true;
+        waitMenu.SetActive(false);
     }
 
     public void TwoBlue()
@@ -86,27 +90,32 @@ public class CardManager : MonoBehaviour
         player.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
         verif = true;
+        waitMenu.SetActive(false);
     }
 
     public void ThreeRed()
     {
         player.point.gold -= 3;
         verif = true;
+        waitMenu.SetActive(false);
     }
 
     public void FiveRed()
     {
         player.point.gold -= 5;
+        waitMenu.SetActive(false);
     }
 
     public void ThreeYellow()
     {
         player.point.gold += 3;
+        waitMenu.SetActive(false);
     }
 
     public void FiveYellow()
     {
         player.point.gold += 5;
+        waitMenu.SetActive(false);
     }
     public void QueenGreen()
     {
@@ -115,6 +124,7 @@ public class CardManager : MonoBehaviour
         player.move.caseNext[0] = target.move.caseNext[0];
         player.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
+        waitMenu.SetActive(false);
     }
 
     public void QueenBlue()
@@ -124,17 +134,20 @@ public class CardManager : MonoBehaviour
         player.move.caseNext[0] = target.move.caseNext[0];
         player.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
+        waitMenu.SetActive(false);
     }
     public void QueenRed()
     {
         target.point.gold -= 5;
         player.point.gold += 5;
+        waitMenu.SetActive(false);
     }
 
     public void QueenYellow()
     {
         player.point.gold += gameplayManager.treasure;
         gameplayManager.treasure = 0;
+        waitMenu.SetActive(false);
     }
 
     public void KingGreen()
@@ -151,6 +164,7 @@ public class CardManager : MonoBehaviour
          player.move.caseNext[0].ActualCaseFunction();
          target.move.caseNext[0].ActualCaseFunction();
          verif = true;
+         waitMenu.SetActive(false);
     }
     
     public void KingBlue()
@@ -167,6 +181,7 @@ public class CardManager : MonoBehaviour
         player.move.caseNext[0].ActualCaseFunction();
         target.move.caseNext[0].ActualCaseFunction();
         verif = true;
+        waitMenu.SetActive(false);
     }
 
     public void KingRed()
@@ -179,6 +194,7 @@ public class CardManager : MonoBehaviour
                 pl.point.gold += 3;
             }
         }
+        waitMenu.SetActive(false);
     }
 
     public void KingYellow()
@@ -191,11 +207,12 @@ public class CardManager : MonoBehaviour
                 player.point.gold += 5;
             }
         }
+        waitMenu.SetActive(false);
     }
 
     public void Jack()
     {
-        Invoke(lastName,0);
+        Invoke(lastName,2);
     }
     
     public void ButtonSelectPlayer(int index)
@@ -211,7 +228,14 @@ public class CardManager : MonoBehaviour
     public void CallCardFunction( )
     {
       //  player = pl;
-        Invoke(functionName,0);
+        Invoke(functionName,5);
+        menu.SetActive(false);
+        waitMenu.SetActive(true);
+    }
+   
+
+    public void CloseMenu()
+    {
         menu.SetActive(false);
     }
 
