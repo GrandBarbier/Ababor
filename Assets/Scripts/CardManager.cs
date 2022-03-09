@@ -9,12 +9,17 @@ public class CardManager : MonoBehaviour
 {
     public GameObject menu;
     public GameObject waitMenu;
+    public GameObject targetMenu;
     
     public GameplayManager gameplayManager;
+
+    public TMP_Text text;
+    public TMP_Text textTarget;
     
     public int index, gmIndex;
     
     private bool verif;
+    public bool oneTarget;
     
     public Player player;
     public List<Player> allPlayer;
@@ -213,6 +218,7 @@ public class CardManager : MonoBehaviour
     public void Jack()
     {
         Invoke(lastName,2);
+        
     }
     
     public void ButtonSelectPlayer(int index)
@@ -227,21 +233,50 @@ public class CardManager : MonoBehaviour
 
     public void CallCardFunction( )
     {
-      //  player = pl;
         Invoke(functionName,5);
         menu.SetActive(false);
         waitMenu.SetActive(true);
     }
-   
-
+    
+    public void CallCardFunction1Target( )
+    {
+        Invoke(functionName,5);
+        targetMenu.SetActive(false);
+        waitMenu.SetActive(true);
+    }
+    
     public void CloseMenu()
     {
         menu.SetActive(false);
+        text.gameObject.SetActive(false);
+        text.text = null;
     }
 
-    public void OpenCardMenu(string stg, Player pl)
+    public void CloseMenu1Target()
+    {
+        targetMenu.SetActive(false);
+        textTarget.gameObject.SetActive(false);
+        textTarget.text = null;
+    }
+    
+    public void OpenCardMenu(string stg, Player pl, string texte)
     {
         menu.SetActive(true);
+        text.gameObject.SetActive(true);
+        text.text = texte;
+        if (functionName != lastName)
+        {
+            lastName = stg;
+        }
+        functionName = stg;
+        player = pl;
+    }
+    
+    public void OpenCardMenu1Target(string stg, Player pl, string texte)
+    {
+        targetMenu.SetActive(true);
+        textTarget.gameObject.SetActive(true);
+        textTarget.text = texte;
         if (functionName != lastName)
         {
             lastName = stg;

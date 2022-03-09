@@ -38,6 +38,8 @@ public class HardwareManager : MonoBehaviour
     public Text text;
     
     private Player player;
+
+    public CardManager cardManager;
     
     void Start()
     {
@@ -117,6 +119,8 @@ public class HardwareManager : MonoBehaviour
     private void OnTagRemoveDetected(NFC_DEVICE_ID _device, NFCTag _tag)  
     {
         //text.text = _tag.Data + " " + _tag.Type.ToString() + " removed from " + _device.ToString();
+        cardManager.CloseMenu();
+        cardManager.CloseMenu1Target();
     }
     
     private Player ComparePlayer(NFC_DEVICE_ID device)

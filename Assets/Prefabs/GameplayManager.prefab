@@ -83,16 +83,21 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  island: []
+  verifMenu: {fileID: 0}
+  endMenu: {fileID: 0}
+  secondIsle: {fileID: 0}
+  firstIsle: {fileID: 0}
   allCases: []
   playerIndex: 0
   treasure: 0
+  turnWait: 0
+  islandIndex: 0
+  lastTurn: 0
   objectif: {fileID: 9163520321838035759}
   endText: {fileID: 0}
   actualMove: {fileID: 0}
   actualPoint: {fileID: 0}
-  verifMenu: {fileID: 0}
-  endMenu: {fileID: 0}
-  activPlayer: {fileID: 0}
   cardManager: {fileID: 7541256346092628484}
 --- !u!114 &9163520321838035745
 MonoBehaviour:
@@ -123,9 +128,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menu: {fileID: 0}
+  waitMenu: {fileID: 0}
+  targetMenu: {fileID: 0}
   gameplayManager: {fileID: 9163520321838035744}
+  text: {fileID: 0}
+  textTarget: {fileID: 0}
   index: 0
   gmIndex: 0
+  oneTarget: 0
   functionName: 
   lastName: 
 --- !u!114 &7996281355349608391
@@ -155,6 +165,7 @@ MonoBehaviour:
   canNFC: 0
   nbPlayers: 0
   text: {fileID: 0}
+  cardManager: {fileID: 7541256346092628484}
 --- !u!114 &1478072490487135364
 MonoBehaviour:
   m_ObjectHideFlags: 0
