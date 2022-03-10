@@ -79,10 +79,14 @@ public class HardwareManager : MonoBehaviour
 
     void OnDisable()  
     {
-        NFCController.StopPolling();  
+        NFCController.StopPolling();
+    }
+
+    private void OnApplicationQuit()
+    {
         ShutLights();
     }
-    
+
     public void Colorize()
     {
         switch (nbPlayers)
