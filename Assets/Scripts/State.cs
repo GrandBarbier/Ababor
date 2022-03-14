@@ -31,7 +31,6 @@ public class EndTurn : State
         gameplayManager.currentstate = new CardPlay();
         gameplayManager.currentstate.DoState(player,gameplayManager);
         gameplayManager.ResetMove();
-        
     }
 }
 

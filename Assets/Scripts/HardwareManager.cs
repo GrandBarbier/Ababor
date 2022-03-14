@@ -38,6 +38,7 @@ public class HardwareManager : MonoBehaviour
     public Text text;
     
     private Player player;
+    public List<Player> allPlayer;
 
     public CardManager cardManager;
     
@@ -48,7 +49,8 @@ public class HardwareManager : MonoBehaviour
         NFCController.OnNewTag = OnNewTagDetected;  
         NFCController.OnTagRemoved = OnTagRemoveDetected;
 
-
+        allPlayer = gameplayManager.allPlayers;
+        
         switch (nbPlayers)
         {
             case 4:
@@ -114,7 +116,7 @@ public class HardwareManager : MonoBehaviour
     private void OnNewTagDetected(NFC_DEVICE_ID _device, NFCTag _tag)  
     {  
         
-        //text.text = ComparePlayer(_device).player + " " + _tag.Data + " " + _tag.Type.ToString() + " added on " + _device.ToString();
+        text.text = ComparePlayer(_device).player + " " + _tag.Data + " " + _tag.Type.ToString() + " added on " + _device.ToString();
         if(canNFC) 
             nfcConvertor.Conversion(_tag, ComparePlayer(_device));
 
@@ -135,24 +137,24 @@ public class HardwareManager : MonoBehaviour
                 foreach (var deviceId in antennaP4)
                 {
                     if (deviceId == device)
-                        player = gameplayManager.allPlayers[0];
+                        player = allPlayer[3];
                 }
                 
                 foreach (var deviceId in antennaP3)
                 {
                     if (deviceId == device)
-                        player = gameplayManager.allPlayers[1];
+                        player = allPlayer[2];
                 }
                 
                 foreach (var deviceId in antennaP2)
                 {
                     if (deviceId == device)
-                        player = gameplayManager.allPlayers[2];
+                        player = allPlayer[1];
                 }
                 foreach (var deviceId in antennaP1)
                 {
                     if (deviceId == device)
-                        player = gameplayManager.allPlayers[3];
+                        player = allPlayer[0];
                 }
                 break;
             
@@ -160,19 +162,19 @@ public class HardwareManager : MonoBehaviour
                 foreach (var deviceId in antennaP3)
                 {
                     if (deviceId == device)
-                        player = gameplayManager.allPlayers[0];
+                        player = allPlayer[2];
                 }
                 
                 foreach (var deviceId in antennaP2)
                 {
                     if (deviceId == device)
-                        player = gameplayManager.allPlayers[1];
+                        player = allPlayer[1];
                 }
                 
                 foreach (var deviceId in antennaP1)
                 {
                     if (deviceId == device)
-                        player = gameplayManager.allPlayers[2];
+                        player = allPlayer[0];
                 }
                 break;
             
