@@ -46,7 +46,7 @@ public class Event : MonoBehaviour
 
         int rdm = Random.Range(0, allCase.Count);
         allCase[rdm].nameFunction = "LoseCase";
-        allCase[rdm].baseMat = loseCaseMat;
+        allCase[rdm].baseSecondMat = loseCaseMat;
         allCase[rdm].ResetColor();
         _gameplayManager.ChangePlayer();
         enabled = false;
@@ -63,7 +63,7 @@ public class Event : MonoBehaviour
         }
         int rdm = Random.Range(0, allCase.Count);
         allCase[rdm].nameFunction = "GainCase";
-        allCase[rdm].baseMat = gainCaseMat;
+        allCase[rdm].baseSecondMat = gainCaseMat;
         allCase[rdm].ResetColor();
         _gameplayManager.ChangePlayer();
         enabled = false;
@@ -91,9 +91,10 @@ public class Event : MonoBehaviour
         {
             int rdm = Random.Range(0, casePlayer.Count);
             allPlayers[i].move.caseNext[0] = casePlayer[rdm];
-            allPlayers[i].player.transform.position = casePlayer[rdm].transform.position;
+            allPlayers[i].player.transform.position = casePlayer[rdm].transform.position + Vector3.up;
        //     allPlayers[i].move.caseNext[0].ActualCaseFunction();
         }
+        _gameplayManager.ChangePlayer();
     }
 
     public void HideCase()
