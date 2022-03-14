@@ -1,8 +1,9 @@
-Shader "Custom/Book_Disappear"
+Shader "Custom/Stencil Deisapear"
 {
      Properties
     {
         [IntRange] _StencilID ("Stencil ID", Range(0,255)) = 0
+        [IntRange] _MaskID ("Mask ID", Range(0,255)) = 0
     }
     SubShader
     {
@@ -16,14 +17,15 @@ Shader "Custom/Book_Disappear"
         Pass
         {
             Blend Zero One
-            Zwrite Off
+            Zwrite off
             
             Stencil
             {
                 Ref [_StencilID]
-                Comp Always
-                Pass Replace
+                Comp notequal
+                Pass IncrWrap
+                fail DecrWrap
             }
-        }   
+        }
     }
 }

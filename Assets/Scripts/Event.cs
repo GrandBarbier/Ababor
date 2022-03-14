@@ -91,9 +91,10 @@ public class Event : MonoBehaviour
         {
             int rdm = Random.Range(0, casePlayer.Count);
             allPlayers[i].move.caseNext[0] = casePlayer[rdm];
-            allPlayers[i].player.transform.position = casePlayer[rdm].transform.position;
+            allPlayers[i].player.transform.position = casePlayer[rdm].transform.position + Vector3.up;
        //     allPlayers[i].move.caseNext[0].ActualCaseFunction();
         }
+        _gameplayManager.ChangePlayer();
     }
 
     public void HideCase()

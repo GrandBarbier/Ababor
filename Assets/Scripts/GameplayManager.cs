@@ -35,8 +35,6 @@ public class GameplayManager : MonoBehaviour
     public Queue<PlayerPoint> pointQueue = new Queue<PlayerPoint>();
     public PlayerPoint actualPoint;
     
-   
-    
     public CardManager cardManager;
 
     void Awake()
@@ -125,8 +123,7 @@ public class GameplayManager : MonoBehaviour
         actualMove.menuVerif.SetActive(false);
         actualMove.end = true;
     }
-
-
+    
     public void FindBestPlayer()
     {
         int best = 0;

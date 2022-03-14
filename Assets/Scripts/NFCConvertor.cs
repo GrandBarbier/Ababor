@@ -166,7 +166,7 @@ public class NFCConvertor : MonoBehaviour
                  break;
              case "=Y":
                  description = "Tout les joueurs donne 5 d'or à un joueur";
-                 cardManager.OpenCardMenu("KingYellow", player,description);
+                 cardManager.OpenCardMenu1Target("KingYellow", player,description);
                  cardManager.oneTarget = false;
                  break;
         }

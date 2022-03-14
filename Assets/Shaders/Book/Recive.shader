@@ -1,8 +1,9 @@
-Shader "Custom/Book_Recive"
+Shader "Custom/Recive"
 {
    Properties
   {
       [IntRange] _StencilID ("Stencil ID", Range(0,255)) = 0
+      [IntRange] _MaskID ("Mask ID", Range(0,255)) = 0
       _BaseMap ("Texture", 2D) = "white" {}
   }
   SubShader
@@ -12,25 +13,25 @@ Shader "Custom/Book_Recive"
           "RenderType"="Opaque"
           "RenderPipline" = "UniversalPipline"
           "Queue" = "Geometry"
-      }
+      }   
       
       Pass
       {
         Blend One Zero
-        Zwrite On
+        Zwrite on
         
         Stencil
         {
             Ref [_StencilID]
-            Comp NotEqual
-            Pass Replace
+            Comp equal
+            Pass keep
         }
         
         HLSLPROGRAM
         #pragma vertex vert
         #pragma fragment frag
 
-        #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"            
+        #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"          
 
         struct Attributes
         {
