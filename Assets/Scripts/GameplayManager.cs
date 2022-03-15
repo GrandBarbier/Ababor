@@ -238,6 +238,12 @@ public class GameplayManager : MonoBehaviour
         lastTurn = false;
         turnWait = -1;
     }
+
+    public void OpenObjectif(GameObject menu)
+    {
+        bool open = menu.activeSelf;
+        menu.SetActive(!open);
+    }
 }
 
 public class Player
