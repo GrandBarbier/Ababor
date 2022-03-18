@@ -167,11 +167,8 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 menuVerif.SetActive(false);
-                Debug.Log(5);
             }
         }
         allNextCases.Sort(_gameplayManager.SortByName);
     }
-    
-    
 }
