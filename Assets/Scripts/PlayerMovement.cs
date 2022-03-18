@@ -70,7 +70,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 menuVerif.SetActive(false);
                 gameObject.transform.position = allNextCases[indexCase].transform.position + new Vector3(0, 0.1f, 0);
-                point.numberCase += indexCase + 1;
+                
+                point.numberCase = indexCase;
                 PlayerResetCase();
                 if (Vector3.Distance(transform.position, child.transform.position) <= 1f) // set end turn
                 {
@@ -153,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
                 hitObject = hit.transform.gameObject;
                 foreach (CasesNeutral cases in allCases)
                 {
-                    if (hit.transform.gameObject == cases.gameObject && cases.isInRanged)
+                    if (hit.transform.gameObject == cases.gameObject && cases.isInRange)
                     {
                         hitObject = cases.gameObject;
                         child.transform.position = hitObject.transform.position;

@@ -83,7 +83,7 @@ public class CardManager : MonoBehaviour
         target.move.enabled = true;
         target.move.actualMove = 2;
         target.move.PlayerShowMove();
-        target.move.caseNext[0].nextCases[0].isInRanged = false;
+        target.move.caseNext[0].nextCases[0].isInRange = false;
         verif = true;
         target.move.actualMove = target.move.InitialMove;
         waitMenu.SetActive(false);
