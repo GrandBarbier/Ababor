@@ -284,7 +284,6 @@ public class CardManager : MonoBehaviour
         {
             gameplayManager.OpenVerifMenu();
         }
-        
     }
 
     public void CloseMenu1Target()
@@ -292,7 +291,7 @@ public class CardManager : MonoBehaviour
         targetMenu.SetActive(false);
         textTarget.gameObject.SetActive(false);
         textTarget.text = null;
-        if (waitMenu.activeSelf == false)
+        if (waitMenu.activeSelf == false && functionName == "Jack")
         {
             gameplayManager.OpenVerifMenu();
         }
@@ -300,6 +299,22 @@ public class CardManager : MonoBehaviour
     
     public void OpenCardMenu(string stg, Player pl, string texte)
     {
+        switch (gameplayManager.allPlayers.IndexOf(pl))
+        {
+            case 0 :
+                menu.transform.rotation = Quaternion.Euler(0,0,0);
+                break;
+            case 1:
+                menu.transform.rotation = Quaternion.Euler(0,0,0);
+                break;
+            case 2:
+                menu.transform.rotation = Quaternion.Euler(0,0,180);
+                break;
+            case 3:
+                menu.transform.rotation = Quaternion.Euler(0,0,180);
+                break;
+        }
+        
         if (waitMenu.activeSelf == false)
         {
             menu.SetActive(true);
@@ -310,7 +325,6 @@ public class CardManager : MonoBehaviour
             {
                 lastName = stg;
             }
-
             functionName = stg;
             player = pl;
         }
@@ -318,6 +332,22 @@ public class CardManager : MonoBehaviour
 
     public void OpenCardMenu1Target(string stg, Player pl, string texte)
     {
+        switch (gameplayManager.allPlayers.IndexOf(pl))
+        {
+            case 0 :
+                targetMenu.transform.rotation = Quaternion.Euler(0,0,0);
+                break;
+            case 1:
+                targetMenu.transform.rotation = Quaternion.Euler(0,0,0);
+                break;
+            case 2:
+                targetMenu.transform.rotation = Quaternion.Euler(0,0,180);
+                break;
+            case 3:
+                targetMenu.transform.rotation = Quaternion.Euler(0,0,180);
+                break;
+        }
+        
         if (waitMenu.activeSelf == false)
         {
             targetMenu.SetActive(true);
@@ -328,7 +358,6 @@ public class CardManager : MonoBehaviour
             {
                 lastName = stg;
             }
-
             functionName = stg;
             player = pl;
         }

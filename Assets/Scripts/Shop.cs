@@ -26,6 +26,11 @@ public class Shop : MonoBehaviour
         shopMenu.SetActive(true);
     }
 
+    public void ShopClose()
+    {
+        shopMenu.SetActive(false);
+    }
+
     public void MoveButton()
     {
         _gameplayManager.enabled = true;

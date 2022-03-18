@@ -13,13 +13,18 @@ public class Objectif : MonoBehaviour
     public List<string> allMidObjectifs;
     public List<string> allEarlyObjectifs;
     public List<string> actualObjectif;
-   
+    public List<string> descriptionsEarly;
+    public List<string> descriptionMid;
+    public List<string> descriptionLate;
+    public List<string> actualDescription;
+    
     public List<PlayerPoint> allPlayerPoint;
     
     public bool lastCase;
     
-    public TMP_Text text;
-    
+    public List<TMP_Text> text;
+    public List<TMP_Text> text2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,24 +35,30 @@ public class Objectif : MonoBehaviour
             allPlayerPoint.Add(_gameplayManager.allPlayers[i].point);
         }
 
-        for (int i = 0; i <= allPlayerPoint.Count/2; i++)
+        for (int i = 0; i <= allPlayerPoint.Count/3; i++)
         {
             int rdm = Random.Range(0, allEarlyObjectifs.Count);
             actualObjectif.Add(allEarlyObjectifs[rdm]);
             allEarlyObjectifs.Remove(allEarlyObjectifs[rdm]);
+            actualDescription.Add(descriptionsEarly[rdm]);
+            descriptionsEarly.Remove(descriptionsEarly[rdm]);
         }
-        for (int i = 0; i <= allPlayerPoint.Count/2; i++)
+        for (int i = 0; i <= allPlayerPoint.Count/3; i++)
         {
             int rdm = Random.Range(0, allMidObjectifs.Count);
             actualObjectif.Add(allMidObjectifs[rdm]);
             allMidObjectifs.Remove(allMidObjectifs[rdm]);
+            actualDescription.Add(descriptionMid[rdm]);
+            descriptionMid.Remove(descriptionMid[rdm]);
         }
         
-        for (int i = 0; i <= allPlayerPoint.Count/2; i++)
+        for (int i = 0; i <= allPlayerPoint.Count/3; i++)
         {
             int rdm = Random.Range(0, allLateObjectifs.Count);
             actualObjectif.Add(allLateObjectifs[rdm]);
             allLateObjectifs.Remove(allLateObjectifs[rdm]);
+            actualDescription.Add(descriptionLate[rdm]);
+            descriptionLate.Remove(descriptionLate[rdm]);
         }
         
         
@@ -59,9 +70,14 @@ public class Objectif : MonoBehaviour
             }
         }
 
-        foreach (string stg in actualObjectif)
+        for (int i = 0; i < text.Count; i++)
         {
-            text.text += stg + " ";
+            text[i].text = actualObjectif[i] + actualDescription[i];
+        }
+        
+        for (int i = 0; i < text.Count; i++)
+        {
+            text2[i].text = actualObjectif[i] + actualDescription[i];
         }
     }
 
@@ -76,7 +92,6 @@ public class Objectif : MonoBehaviour
         bool verif = false;
         foreach (PlayerPoint obj in allPlayerPoint )
         {
-            
             if (obj.numberShopCase == 1 && verif == false)
             {
                 obj.point += 10;
@@ -222,7 +237,7 @@ public class Objectif : MonoBehaviour
         bool verif = false;
         foreach (PlayerPoint obj in allPlayerPoint )
         {
-            if (obj.numberCase >= 5 && verif == false)
+            if (obj.numberCase >= 7 && verif == false)
             {
                 obj.point += 10; 
                 verif = true;
@@ -239,7 +254,7 @@ public class Objectif : MonoBehaviour
         foreach (PlayerPoint obj in allPlayerPoint )
         {
             bool verif = obj.objectifVerif[actualObjectif.IndexOf("MoveMid")];   
-            if (obj.numberCase >= 10 && verif == false)
+            if (obj.numberCase >= 13 && verif == false)
             {
                 obj.point += 20;
                 obj.objectifVerif[actualObjectif.IndexOf("MoveMid")] = true;
