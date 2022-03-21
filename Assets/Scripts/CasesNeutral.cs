@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public class CasesNeutral : MonoBehaviour
 {
-    public bool isInRanged;
+    public bool isInRange;
   
     public List<CasesNeutral> nextCases;
     
@@ -18,6 +18,8 @@ public class CasesNeutral : MonoBehaviour
     public Material[] allMat;
     
     [SerializeField] private GameplayManager _gameplayManager;
+    [SerializeField] private EventManager _eventManager;
+
     
     public Renderer renderer;
 
@@ -40,6 +42,7 @@ public class CasesNeutral : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        _eventManager = FindObjectOfType<EventManager>();
         _gameplayManager = FindObjectOfType<GameplayManager>();
         objectif = FindObjectOfType<Objectif>();
         eventS = gameObject.GetComponent<Event>();
@@ -56,7 +59,6 @@ public class CasesNeutral : MonoBehaviour
 
     public void Outline(List<CasesNeutral> list, float remain, PlayerMovement player)
     {
-        
         if (remain > 0)
         {
             foreach (CasesNeutral obj in nextCases )
@@ -64,7 +66,7 @@ public class CasesNeutral : MonoBehaviour
                 obj.Outline(obj.nextCases, remain-1,player);
                 obj.allMat[0] = rangedMat;
                 obj.renderer.materials = obj.allMat;
-                obj.isInRanged = true;
+                obj.isInRange = true;
             }
 
             for (int i = 0; i < nextCases.Count; i++)
@@ -79,13 +81,21 @@ public class CasesNeutral : MonoBehaviour
         allMat[0] = baseMat;
         allMat[1] = baseSecondMat;
         renderer.materials = allMat;
-        isInRanged = false;
+        isInRange = false;
     }
 
     public void ActualCaseFunction()
     {
         
         Invoke(nameFunction,0);
+        for (int i = 0; i < _eventManager.hiddenCases.Count; i++)
+        {
+            if (_eventManager.hiddenCases[i].gameObject == this.gameObject)
+            {
+                _eventManager.UnhideCase(_eventManager.hiddenCases[i]);
+                _eventManager.hiddenCases.RemoveAt(i);
+            }
+        }
     }
 
     public void GainCase()

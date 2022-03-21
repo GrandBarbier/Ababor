@@ -24,6 +24,27 @@ public class Shop : MonoBehaviour
     public void ShopOpen()
     {
         shopMenu.SetActive(true);
+        switch (_gameplayManager.playerIndex)
+        {
+            case 0 :
+                shopMenu.transform.rotation = Quaternion.Euler(0,0,180);
+                break;
+            case 1:
+                shopMenu.transform.rotation = Quaternion.Euler(0,0,180);
+                break;
+            case 2:
+                shopMenu.transform.rotation = Quaternion.Euler(0,0,0);
+                break;
+            case 3:
+                shopMenu.transform.rotation = Quaternion.Euler(0,0,0);
+                break;
+        }
+    }
+
+    public void ShopClose()
+    {
+        shopMenu.SetActive(false);
+        
     }
 
     public void MoveButton()

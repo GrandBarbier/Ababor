@@ -4,44 +4,50 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameplayManager : MonoBehaviour
 {
     public List<GameObject> players = new List<GameObject>();
     public List<GameObject> island = new List<GameObject>();
-    public GameObject verifMenu,endMenu, secondIsle, firstIsle;
+    public GameObject verifMenu,endMenu, secondIsle, firstIsle, menuTrade;
+   
+    public List<Button> buttonTrade; 
     
     public List<CasesNeutral> allCases = new List<CasesNeutral>();
 
-    public int playerIndex, treasure, turnWait, islandIndex;
+    public int playerIndex, treasure, turnWait, islandIndex, goldTrade;
 
-    public bool lastTurn;
+    public bool lastTurn,uiTurned;
     
     public State currentstate;
     
     public Objectif objectif;
     
-    public TMP_Text endText;
+    public TMP_Text endText,textGold;
     
     public Queue<Player> playerQueue = new Queue<Player>();
     public List<Player> allPlayers = new List<Player>();
     public Player endPlayer;
     public Player activPlayer;
-    
+
     public Queue<PlayerMovement> moveQueue = new Queue<PlayerMovement>();
     public PlayerMovement actualMove;
     
     public Queue<PlayerPoint> pointQueue = new Queue<PlayerPoint>();
     public PlayerPoint actualPoint;
+    public PlayerPoint playerGive;
+    public PlayerPoint playerReceive;
     
     public CardManager cardManager;
 
     void Awake()
     { 
         
-        GetCase();
-        for(int i = 0; i < players.Count; i++)
+        GetCases();
+        for (int i = 0; i < players.Count; i++)
         {
             Player pl = new Player();
             pl.player = players[i]; 
@@ -69,7 +75,7 @@ public class GameplayManager : MonoBehaviour
         activPlayer = allPlayers[playerIndex];
         actualMove = allPlayers[playerIndex].move;
         actualPoint = allPlayers[playerIndex].point;
-        if (playerIndex <= 0)
+        if (playerIndex < 0)
         {
             playerIndex = 0;
         }
@@ -78,7 +84,7 @@ public class GameplayManager : MonoBehaviour
         {
             if (turnWait == 0)
             {
-                WaitForNextIsland();  
+                WaitForNextIsland();
             }
         }
     }
@@ -179,13 +185,13 @@ public class GameplayManager : MonoBehaviour
        // endMenu.SetActive(true);
        SceneManager.LoadScene("Test clovis 2nd scene");
     }
+    
     public void ButtonVerifMenuMove()
     {
         currentstate = new Moving();
         currentstate.DoState(actualMove, this);
         verifMenu.SetActive(false);
         ResetLast();
-        
     }
 
     public void ButtonEnd()
@@ -200,7 +206,7 @@ public class GameplayManager : MonoBehaviour
         allPlayers[allPlayers.Count -1].move.isLast = true;
     }
 
-    public void GetCase()
+    public void GetCases()
     {
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Case").ToList())
         {
@@ -230,13 +236,104 @@ public class GameplayManager : MonoBehaviour
         }
         island[islandIndex].SetActive(true);
         island[islandIndex-1].SetActive(false);
-        GetCase();
+        GetCases();
         foreach (Player player in allPlayers)
         {
             player.move.caseNext[0] = allCases[0];
         }
         lastTurn = false;
         turnWait = -1;
+    }
+
+    public void OpenObjectif(GameObject menu)
+    {
+        bool open = menu.activeSelf;
+        menu.SetActive(!open);
+    }
+
+    public void GiveGold()
+    {
+        playerGive.gold -= goldTrade;
+        playerReceive.gold += goldTrade;
+        goldTrade = 0;
+        menuTrade.SetActive(false);
+    }
+
+    public void GoldChange(int value)
+    {
+        goldTrade += value;
+        if (goldTrade <=0)
+        {
+            goldTrade = 0;
+        }
+        textGold.text = goldTrade.ToString();
+    }
+
+    public void OpenMenuTrade(PlayerPoint point)
+    {
+        foreach (Button button in buttonTrade)
+        {
+            if (EventSystem.current.currentSelectedGameObject == button.gameObject)
+            {
+                menuTrade.transform.rotation = button.gameObject.transform.rotation;
+            }
+        }
+        bool open = menuTrade.activeSelf;
+        menuTrade.SetActive(!open);
+        playerGive = point;
+    }
+
+    public void TargetTrade(PlayerPoint point)
+    {
+        playerReceive = point;
+    }
+
+    public void TurnUi()
+    {
+        if (uiTurned == false)
+        {
+            for (int i = 0; i < buttonTrade.Count; i++)
+            {
+                switch (i)
+                {
+                    case 3:
+                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0,0,45);
+                        break;
+                    case 2:
+                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, 130);
+                        break;
+                    case 1:
+                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, -140);
+                        break;
+                    case 0:
+                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, -45);
+                        break;
+                }
+            }
+            uiTurned = true;
+        }
+        else
+        {
+            for (int i = 0; i < buttonTrade.Count; i++)
+            {
+                switch (i)
+                {
+                    case 3:
+                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0,0,0);
+                        break;
+                    case 2:
+                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
+                        break;
+                    case 1:
+                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
+                        break;
+                    case 0:
+                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+                        break;
+                }
+            }
+            uiTurned = false; 
+        }
     }
 }
 
