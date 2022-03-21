@@ -8,7 +8,8 @@ public class Event : MonoBehaviour
 {
     public List<PlayerMovement> allMove;
   
-    public GameplayManager _gameplayManager;
+    private GameplayManager _gameplayManager;
+    private EventManager _eventManager;
 
     public CasesNeutral thisCase;
     
@@ -18,7 +19,7 @@ public class Event : MonoBehaviour
     
     public List<String> allEvent;
 
-    public List<CasesNeutral> allCase;
+    public List<CasesNeutral> allCase, casesToUnhide;
 
     public Material basicCaseMat,loseCaseMat,gainCaseMat;
     
@@ -26,6 +27,8 @@ public class Event : MonoBehaviour
     private void Awake()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>();
+        _eventManager = FindObjectOfType<EventManager>();
+
     }
 
     void Start()
@@ -54,6 +57,7 @@ public class Event : MonoBehaviour
     
     public void EventMoreGainCase()
     {
+        
         foreach (CasesNeutral cases in _gameplayManager.allCases)
         {
             if (cases.nameFunction == "NeutralCase")
@@ -99,28 +103,7 @@ public class Event : MonoBehaviour
 
     public void HideCase()
     {
-        List<CasesNeutral> caseSpecial = new List<CasesNeutral>();
-        allCase = _gameplayManager.allCases;
-        foreach (CasesNeutral cases in allCase)
-        {
-            if (cases.nameFunction != "NeutralCase")
-            {
-                caseSpecial.Add(cases);
-            }
-        }
-
-        for (int i = 0; i < 5; i++)
-        {
-            int rdm = Random.Range(0, caseSpecial.Count);
-            caseSpecial[rdm].baseSecondMat = basicCaseMat;
-            caseSpecial[rdm].ResetColor();
-         /*Material[] caseMats = caseSpecial[rdm].renderer.materials;
-            caseMats[1] = basicCaseMat;
-            caseSpecial[rdm].renderer.materials = caseMats;*/
-            caseSpecial.RemoveAt(rdm);
-            allCase.RemoveAt(rdm);
-        }
-        _gameplayManager.ChangePlayer();
+            _eventManager.HideCase();
     }
     
     public void GetEvent()

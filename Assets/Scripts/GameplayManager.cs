@@ -46,8 +46,8 @@ public class GameplayManager : MonoBehaviour
     void Awake()
     { 
         
-        GetCase();
-        for(int i = 0; i < players.Count; i++)
+        GetCases();
+        for (int i = 0; i < players.Count; i++)
         {
             Player pl = new Player();
             pl.player = players[i]; 
@@ -75,7 +75,7 @@ public class GameplayManager : MonoBehaviour
         activPlayer = allPlayers[playerIndex];
         actualMove = allPlayers[playerIndex].move;
         actualPoint = allPlayers[playerIndex].point;
-        if (playerIndex <= 0)
+        if (playerIndex < 0)
         {
             playerIndex = 0;
         }
@@ -84,7 +84,7 @@ public class GameplayManager : MonoBehaviour
         {
             if (turnWait == 0)
             {
-                WaitForNextIsland();  
+                WaitForNextIsland();
             }
         }
     }
@@ -192,7 +192,6 @@ public class GameplayManager : MonoBehaviour
         currentstate.DoState(actualMove, this);
         verifMenu.SetActive(false);
         ResetLast();
-        
     }
 
     public void ButtonEnd()
@@ -207,7 +206,7 @@ public class GameplayManager : MonoBehaviour
         allPlayers[allPlayers.Count -1].move.isLast = true;
     }
 
-    public void GetCase()
+    public void GetCases()
     {
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Case").ToList())
         {
@@ -237,7 +236,7 @@ public class GameplayManager : MonoBehaviour
         }
         island[islandIndex].SetActive(true);
         island[islandIndex-1].SetActive(false);
-        GetCase();
+        GetCases();
         foreach (Player player in allPlayers)
         {
             player.move.caseNext[0] = allCases[0];
