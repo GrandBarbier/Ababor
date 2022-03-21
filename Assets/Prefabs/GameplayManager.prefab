@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7541256346092628484}
   - component: {fileID: 7996281355349608391}
   - component: {fileID: 1478072490487135364}
+  - component: {fileID: 6252815433902197027}
   m_Layer: 0
   m_Name: GameplayManager
   m_TagString: MainCamera
@@ -64,9 +65,15 @@ MonoBehaviour:
   - LoseEarly
   - GoldEarly
   actualObjectif: []
+  descriptionsEarly: []
+  descriptionMid: []
+  descriptionLate: []
+  actualDescription: []
   allPlayerPoint: []
   lastCase: 0
-  text: {fileID: 0}
+  text:
+  - {fileID: 0}
+  text2: []
 --- !u!114 &9163520321838035744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,16 +95,23 @@ MonoBehaviour:
   endMenu: {fileID: 0}
   secondIsle: {fileID: 0}
   firstIsle: {fileID: 0}
+  menuTrade: {fileID: 0}
+  buttonTrade: []
   allCases: []
   playerIndex: 0
   treasure: 0
   turnWait: 0
   islandIndex: 0
+  goldTrade: 0
   lastTurn: 0
+  uiTurned: 0
   objectif: {fileID: 9163520321838035759}
   endText: {fileID: 0}
+  textGold: {fileID: 0}
   actualMove: {fileID: 0}
   actualPoint: {fileID: 0}
+  playerGive: {fileID: 0}
+  playerReceive: {fileID: 0}
   cardManager: {fileID: 7541256346092628484}
 --- !u!114 &9163520321838035745
 MonoBehaviour:
@@ -136,6 +150,8 @@ MonoBehaviour:
   index: 0
   gmIndex: 0
   oneTarget: 0
+  button: {fileID: 0}
+  buttonTarget: {fileID: 0}
   functionName: 
   lastName: 
 --- !u!114 &7996281355349608391
@@ -163,7 +179,7 @@ MonoBehaviour:
   gameplayManager: {fileID: 9163520321838035744}
   nfcConvertor: {fileID: 1478072490487135364}
   canNFC: 0
-  nbPlayers: 0
+  nbPlayers: 4
   text: {fileID: 0}
   cardManager: {fileID: 7541256346092628484}
 --- !u!114 &1478072490487135364
@@ -180,3 +196,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hardwareManager: {fileID: 7996281355349608391}
   cardManager: {fileID: 7541256346092628484}
+--- !u!114 &6252815433902197027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9163520321838035746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3205b2ee59fdcb544bb3ffe64cc825ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allCase: []
+  hiddenCases: []
+  basicCaseMat: {fileID: 2100000, guid: 357b36a1b75b3b04bb159f7a8ad202fb, type: 2}
+  loseCaseMat: {fileID: 2100000, guid: 9dc3b6567df71b0408c9a1991c9cbdb6, type: 2}
+  gainCaseMat: {fileID: 2100000, guid: 302fd1a63a3c254478700bc75fce432f, type: 2}
+  eventCaseMat: {fileID: 2100000, guid: 98548521b4083ed42b35fc3c23318f6c, type: 2}
+  nonNeutralCases: []
+  newGainCases: []
+  newLoseCases: []
