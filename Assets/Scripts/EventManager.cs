@@ -9,6 +9,11 @@ public class EventManager : MonoBehaviour
     private GameplayManager _gameplayManager;
     public Material basicCaseMat,loseCaseMat,gainCaseMat,eventCaseMat;
 
+    public List<CasesNeutral> nonNeutralCases;
+    
+    public List<CasesNeutral> newGainCases = new List<CasesNeutral>();
+    public List<CasesNeutral> newLoseCases = new List<CasesNeutral>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,9 +36,30 @@ public class EventManager : MonoBehaviour
         return false;
     }
     
+    public void SwitchGainAndLoseCases()
+    {
+        foreach (CasesNeutral cases in _gameplayManager.allCases)
+        {
+            if (cases.nameFunction == "GainCase")
+            {
+                newLoseCases.Add(cases);
+                cases.nameFunction = "LoseCase";
+                cases.baseSecondMat = loseCaseMat;
+                cases.ResetColor();
+            }
+            else if (cases.nameFunction == "LoseCase")
+            {
+                newGainCases.Add(cases);
+                cases.nameFunction = "GainCase";
+                cases.baseSecondMat = gainCaseMat;
+                cases.ResetColor();
+            }
+        }
+    }
+    
     public void HideCase()
     {
-        List<CasesNeutral> nonNeutralCases = new List<CasesNeutral>();
+        nonNeutralCases = new List<CasesNeutral>();
         allCase = _gameplayManager.allCases;
         foreach (CasesNeutral cases in allCase)
         {
@@ -46,6 +72,8 @@ public class EventManager : MonoBehaviour
         int rdmToHide = Random.Range(4, 6);
         for (int i = 0; i < rdmToHide; i++)
         {
+            if (nonNeutralCases.Count == 0)
+                return;
             int rdm = Random.Range(0, nonNeutralCases.Count);
             nonNeutralCases[rdm].baseSecondMat = basicCaseMat;
             nonNeutralCases[rdm].ResetColor();
@@ -53,7 +81,6 @@ public class EventManager : MonoBehaviour
             //activate fog particle system
             hiddenCases.Add(nonNeutralCases[rdm]);
             nonNeutralCases.RemoveAt(rdm);
-            allCase.RemoveAt(rdm);
         }
         nonNeutralCases.Clear();
         _gameplayManager.ChangePlayer();
@@ -64,16 +91,19 @@ public class EventManager : MonoBehaviour
         if (caseToUnhide.nameFunction == "GainCase")
         {
             caseToUnhide.baseSecondMat = gainCaseMat;
+            //deactivate fog particle
             caseToUnhide.ResetColor();
         }
         else if (caseToUnhide.nameFunction == "LoseCase")
         {
             caseToUnhide.baseSecondMat = loseCaseMat;
+            //deactivate fog particle
             caseToUnhide.ResetColor();
         }
         else if (caseToUnhide.nameFunction == "EventCase")
         {
             caseToUnhide.baseSecondMat = eventCaseMat;
+            //deactivate fog particle
             caseToUnhide.ResetColor();
         }
     }

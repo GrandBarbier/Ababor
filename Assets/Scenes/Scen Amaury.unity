@@ -6397,7 +6397,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -344, y: 440}
+  m_AnchoredPosition: {x: -334, y: 337}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1867358269
@@ -6446,7 +6446,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9163520322296796745}
         m_TargetAssemblyTypeName: EventManager, Assembly-CSharp
-        m_MethodName: HideCase
+        m_MethodName: SwitchGainAndLoseCases
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8023,3 +8023,6 @@ MonoBehaviour:
   loseCaseMat: {fileID: 2100000, guid: 9dc3b6567df71b0408c9a1991c9cbdb6, type: 2}
   gainCaseMat: {fileID: 2100000, guid: 302fd1a63a3c254478700bc75fce432f, type: 2}
   eventCaseMat: {fileID: 2100000, guid: 98548521b4083ed42b35fc3c23318f6c, type: 2}
+  nonNeutralCases: []
+  newGainCases: []
+  newLoseCases: []
