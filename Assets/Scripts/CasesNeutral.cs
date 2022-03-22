@@ -143,7 +143,7 @@ public class CasesNeutral : MonoBehaviour
         }
         else
         {
-            _gameplayManager.WaitForNextIsland();
+            _gameplayManager.NextIsland();
         }
     }
 

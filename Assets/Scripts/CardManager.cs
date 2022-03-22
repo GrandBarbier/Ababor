@@ -145,8 +145,8 @@ public class CardManager : MonoBehaviour
     {
         gmIndex = gameplayManager.playerIndex;
         player.player.transform.position = target.move.caseNext[0].transform.position + Vector3.up;
-        target.move.caseNext[0] = player.move.caseNext[0];
-        target.move.caseNext[0].ActualCaseFunction();
+        player.move.caseNext[0] = target.move.caseNext[0];
+        player.move.caseNext[0].ActualCaseFunction();
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
         gameplayManager.playerIndex = gmIndex;
@@ -155,9 +155,9 @@ public class CardManager : MonoBehaviour
     public void QueenBlue()
     {
         gmIndex = gameplayManager.playerIndex;
-        target.player.transform.position = player.move.caseNext[0].transform.position + Vector3.up;
-        target.move.caseNext[0] = player.move.caseNext[0];
-        target.move.caseNext[0].ActualCaseFunction();
+        player.player.transform.position = target.move.caseNext[0].transform.position + Vector3.up;
+        player.move.caseNext[0] = target.move.caseNext[0];
+        player.move.caseNext[0].ActualCaseFunction();
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
         gameplayManager.playerIndex = gmIndex;
@@ -165,8 +165,8 @@ public class CardManager : MonoBehaviour
     
     public void QueenRed()
     {
-        target.point.gold -= 5;
-        player.point.gold += 5;
+        player.point.gold -= 5;
+        target.point.gold += 5;
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
     }
@@ -219,9 +219,9 @@ public class CardManager : MonoBehaviour
     {
         foreach (Player pl in gameplayManager.allPlayers)
         {
-            if (pl != player)
+            if (pl != target)
             {
-                player.point.gold -= 3;
+                target.point.gold -= 3;
                 pl.point.gold += 3;
             }
         }
@@ -234,10 +234,10 @@ public class CardManager : MonoBehaviour
     {
         foreach (Player pl in gameplayManager.allPlayers)
         {
-            if (pl != player)
+            if (pl != target)
             {
                 pl.point.gold -= 5;
-                player.point.gold += 5;
+                target.point.gold += 5;
             }
         }
         waitMenu.SetActive(false);
@@ -247,8 +247,11 @@ public class CardManager : MonoBehaviour
 
     public void Jack()
     {
-        Invoke(lastName,2);
-        verif = true;
+        if (waitMenu.activeSelf)
+        {
+            Invoke(lastName,2);
+            verif = true; 
+        }
     }
     
     public void ButtonSelectPlayer(int index)

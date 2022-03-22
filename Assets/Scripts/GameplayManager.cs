@@ -83,8 +83,8 @@ public class GameplayManager : MonoBehaviour
         if (lastTurn)
         {
             if (turnWait == 0)
-            {
-                WaitForNextIsland();
+            { 
+                NextIsland();
             }
         }
     }
@@ -216,7 +216,7 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
-    public void WaitForNextIsland()
+    public void NextIsland()
     {
         objectif.lastCase = true;
         ChangePlayer();
@@ -333,6 +333,18 @@ public class GameplayManager : MonoBehaviour
                 }
             }
             uiTurned = false; 
+        }
+    }
+
+    public void ChangeIsleButton()
+    {
+        islandIndex++;
+        island[islandIndex].SetActive(true);
+        island[islandIndex-1].SetActive(false);
+        GetCases();
+        foreach (Player player in allPlayers)
+        {
+            player.move.caseNext[0] = allCases[0];
         }
     }
 }
