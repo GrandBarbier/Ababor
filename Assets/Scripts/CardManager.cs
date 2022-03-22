@@ -173,7 +173,7 @@ public class CardManager : MonoBehaviour
 
     public void QueenYellow()
     {
-        player.point.gold += gameplayManager.treasure;
+        target.point.gold += gameplayManager.treasure;
         gameplayManager.treasure = 0;
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
@@ -247,11 +247,9 @@ public class CardManager : MonoBehaviour
 
     public void Jack()
     {
-        if (waitMenu.activeSelf)
-        {
-            Invoke(lastName,2);
-            verif = true; 
-        }
+        waitMenu.SetActive(false);
+        Invoke(lastName,1);
+        verif = true;
     }
     
     public void ButtonSelectPlayer(int index)
@@ -267,23 +265,32 @@ public class CardManager : MonoBehaviour
     public void CallCardFunction( )
     {
         Invoke(functionName,5);
+        if (functionName == "Jack")
+        {
+            functionName = lastName;
+        }
         menu.SetActive(false);
         waitMenu.SetActive(true);
     }
-    
-    public void CallCardFunction1Target( )
+
+    public void CallCardFunction1Target()
     {
-        Invoke(functionName,5);
-        targetMenu.SetActive(false);
+        Invoke(functionName, 5);
+        if (functionName == "Jack")
+        {
+            functionName = lastName;
+        }
+        targetMenu.SetActive(false); 
         waitMenu.SetActive(true);
+        
     }
-    
+
     public void CloseMenu()
     {
         menu.SetActive(false);
         text.gameObject.SetActive(false);
         text.text = null;
-        if (waitMenu.activeSelf == false)
+        if (waitMenu.activeSelf == false && functionName == "Jack")
         {
             gameplayManager.OpenVerifMenu();
         }
@@ -318,7 +325,7 @@ public class CardManager : MonoBehaviour
                 break;
         }
         
-        if (waitMenu.activeSelf == false)
+        if (waitMenu.activeSelf == false || stg == "Jack")
         {
             menu.SetActive(true);
             text.gameObject.SetActive(true);
@@ -351,7 +358,7 @@ public class CardManager : MonoBehaviour
                 break;
         }
         
-        if (waitMenu.activeSelf == false)
+        if (waitMenu.activeSelf == false|| stg == "Jack")
         {
             targetMenu.SetActive(true);
             textTarget.gameObject.SetActive(true);

@@ -27,11 +27,12 @@ public class NFCConvertor : MonoBehaviour
                  break;
              
              case ";G":
-                 if (cardManager.oneTarget)
+                 if (cardManager.oneTarget && cardManager.waitMenu.activeSelf)
                  {
                       cardManager.OpenCardMenu1Target("Jack", player,description);
+                      Debug.Log("edr");
                  }
-                 else
+                 else if (cardManager.waitMenu.activeSelf)
                  {
                      cardManager.OpenCardMenu("Jack", player,description);
                  }
@@ -68,11 +69,11 @@ public class NFCConvertor : MonoBehaviour
                  break;
              
              case ";B":
-                 if (cardManager.oneTarget)
+                 if (cardManager.oneTarget && cardManager.waitMenu.activeSelf)
                  {
                      cardManager.OpenCardMenu1Target("Jack", player,description);
                  }
-                 else
+                 else if (cardManager.waitMenu.activeSelf)
                  {
                      cardManager.OpenCardMenu("Jack", player,description);
                  }
@@ -108,11 +109,11 @@ public class NFCConvertor : MonoBehaviour
                  cardManager.oneTarget = true;
                  break;
              case ";R":
-                 if (cardManager.oneTarget)
+                 if (cardManager.oneTarget && cardManager.waitMenu.activeSelf)
                  {
                      cardManager.OpenCardMenu1Target("Jack", player,description);
                  }
-                 else
+                 else if (cardManager.waitMenu.activeSelf)
                  {
                      cardManager.OpenCardMenu("Jack", player,description);
                  }
@@ -147,11 +148,11 @@ public class NFCConvertor : MonoBehaviour
                  cardManager.oneTarget = true;
                  break;
              case ";Y":
-                 if (cardManager.oneTarget)
+                 if (cardManager.oneTarget && cardManager.waitMenu.activeSelf)
                  {
                      cardManager.OpenCardMenu1Target("Jack", player,description);
                  }
-                 else
+                 else if (cardManager.waitMenu.activeSelf)
                  {
                      cardManager.OpenCardMenu("Jack", player,description);
                  }
