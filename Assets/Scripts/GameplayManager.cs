@@ -126,7 +126,7 @@ public class GameplayManager : MonoBehaviour
 
     public void ButtonYes()
     {
-        actualMove.menuVerif.SetActive(false);
+      //  actualMove.menuVerif.SetActive(false);
         actualMove.end = true;
     }
     
@@ -266,6 +266,11 @@ public class GameplayManager : MonoBehaviour
         {
             goldTrade = 0;
         }
+
+        if (goldTrade >= playerGive.gold)
+        {
+            goldTrade = playerGive.gold;
+        }
         textGold.text = goldTrade.ToString();
     }
 
@@ -279,6 +284,7 @@ public class GameplayManager : MonoBehaviour
             }
         }
         bool open = menuTrade.activeSelf;
+        textGold.text = "0";
         menuTrade.SetActive(!open);
         playerGive = point;
     }
