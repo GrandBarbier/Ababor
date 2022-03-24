@@ -43,6 +43,8 @@ public class GameplayManager : MonoBehaviour
     
     public CardManager cardManager;
 
+    public EndCalcul endCalcul;
+
     void Awake()
     { 
         
@@ -182,8 +184,11 @@ public class GameplayManager : MonoBehaviour
 
     public void OpenEndMenu()
     {
-       // endMenu.SetActive(true);
-       SceneManager.LoadScene("Test clovis 2nd scene");
+       endMenu.SetActive(true);
+       for (int i = 0; i < allPlayers.Count; i++)
+       {
+           endCalcul.PointCalcul(allPlayers[i].point,i);
+       }
     }
     
     public void ButtonVerifMenuMove()
@@ -212,7 +217,7 @@ public class GameplayManager : MonoBehaviour
         {
             allCases.Add(obj.GetComponent<CasesNeutral>());
             allCases.Reverse();
-            allCases.Sort(SortByName); 
+            allCases.Sort(SortByName);
         }
     }
 
