@@ -254,6 +254,7 @@ public class CardManager : MonoBehaviour
     public void ButtonSelectPlayer(int index)
     {
         player = allPlayer[index];
+        //TODO faire un bail qui fait qu'on le voit 
     }
 
     public void ButtonSelectTarget(int index)
