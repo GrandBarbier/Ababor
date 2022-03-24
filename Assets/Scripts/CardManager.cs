@@ -257,6 +257,7 @@ public class CardManager : MonoBehaviour
     public void ButtonSelectPlayer(int index)
     {
         player = allPlayer[index];
+<<<<<<< HEAD
         switch (index)
         {
             case 0 :
@@ -272,6 +273,9 @@ public class CardManager : MonoBehaviour
                 playerSelected.color = Color.green;
                 break;
         }
+=======
+        //TODO faire un bail qui fait qu'on le voit 
+>>>>>>> Stable
     }
 
     public void ButtonSelectTarget(int index)
