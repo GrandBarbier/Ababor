@@ -12,7 +12,7 @@ public class GameplayManager : MonoBehaviour
 {
     public List<GameObject> players = new List<GameObject>();
     public List<GameObject> island = new List<GameObject>();
-    public GameObject verifMenu,endMenu, secondIsle, firstIsle, menuTrade;
+    public GameObject verifMenu,verifMenu2,endMenu, secondIsle, firstIsle, menuTrade,description;
    
     public List<Button> buttonTrade; 
     
@@ -85,7 +85,7 @@ public class GameplayManager : MonoBehaviour
         if (lastTurn)
         {
             if (turnWait == 0)
-            { 
+            {
                 NextIsland();
             }
         }
@@ -180,6 +180,7 @@ public class GameplayManager : MonoBehaviour
     public void OpenVerifMenu()
     {
         verifMenu.SetActive(true);
+        verifMenu2.SetActive(true);
     }
 
     public void OpenEndMenu()
@@ -196,6 +197,8 @@ public class GameplayManager : MonoBehaviour
         currentstate = new Moving();
         currentstate.DoState(actualMove, this);
         verifMenu.SetActive(false);
+        verifMenu2.SetActive(false);
+        description.gameObject.SetActive(false);
         ResetLast();
     }
 
@@ -204,6 +207,7 @@ public class GameplayManager : MonoBehaviour
         currentstate = new EndTurn();
         currentstate.DoState(actualMove,this);
         verifMenu.SetActive(false);
+        verifMenu2.SetActive(false);
     }
 
     public void ResetLast()
@@ -308,16 +312,16 @@ public class GameplayManager : MonoBehaviour
                 switch (i)
                 {
                     case 3:
-                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0,0,45);
+                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0,0,140);
                         break;
                     case 2:
-                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, 130);
-                        break;
-                    case 1:
                         buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, -140);
                         break;
-                    case 0:
+                    case 1:
                         buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, -45);
+                        break;
+                    case 0:
+                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, 45);
                         break;
                 }
             }
@@ -330,13 +334,13 @@ public class GameplayManager : MonoBehaviour
                 switch (i)
                 {
                     case 3:
-                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0,0,0);
+                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0,0,180);
                         break;
                     case 2:
                         buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
                         break;
                     case 1:
-                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
+                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
                         break;
                     case 0:
                         buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);

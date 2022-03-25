@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,11 +15,14 @@ public class Event : MonoBehaviour
     public CasesNeutral thisCase;
     
     public List<Player> allPlayers;
+
+    public TMP_Text tmpDescription;
     
     public string eventName;
     
     public List<String> allEvent;
-
+    public string description;
+    
     public List<CasesNeutral> allCase, casesToUnhide;
 
     public Material basicCaseMat,loseCaseMat,gainCaseMat;
@@ -39,6 +43,7 @@ public class Event : MonoBehaviour
 
     public void EventMoreLoseCase()
     {
+        tmpDescription.text = "Transforme une case neutre en case perte";
         foreach (CasesNeutral cases in _gameplayManager.allCases)
         {
             if (cases.nameFunction == "NeutralCase")
@@ -57,7 +62,7 @@ public class Event : MonoBehaviour
     
     public void EventMoreGainCase()
     {
-        
+        tmpDescription.text = "Transforme une case neutre en case gain";
         foreach (CasesNeutral cases in _gameplayManager.allCases)
         {
             if (cases.nameFunction == "NeutralCase")
@@ -75,6 +80,7 @@ public class Event : MonoBehaviour
 
     public void GoToCase()
     {
+        tmpDescription.text = "Tout les joueurs vont sur cette case";
         foreach (Player player in allPlayers)
         {
             player.move.caseNext[0] = thisCase;
@@ -85,6 +91,7 @@ public class Event : MonoBehaviour
 
     public void SwitchPlayerPlace()
     {
+        tmpDescription.text = "Les joueurs prenne la place d'autre joueur de manière aléatoire";
         List<CasesNeutral> casePlayer = new List<CasesNeutral>();
         foreach (Player player in allPlayers)
         {
@@ -103,17 +110,14 @@ public class Event : MonoBehaviour
 
     public void HideCase()
     {
-            _eventManager.HideCase();
+        tmpDescription.text= "4 à 6 a effet sont caché jusqu'à ce qu'un joueur arrive dessus";
+        _eventManager.HideCase();
     }
     
     public void GetEvent()
     {
         int rdm = Random.Range(0, allEvent.Count);
         eventName = allEvent[rdm];
-    }
-
-    public void ResetEvent()
-    {
-        
+        tmpDescription.transform.parent.gameObject.SetActive(true);
     }
 }

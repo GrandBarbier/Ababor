@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Wizama.Hardware.Antenna;
@@ -40,6 +41,8 @@ public class HardwareManager : MonoBehaviour
     private Player player;
     public List<Player> allPlayer;
 
+    public GameObject descriptionEvent;
+    
     public CardManager cardManager;
     
     void Start()
@@ -114,12 +117,12 @@ public class HardwareManager : MonoBehaviour
     }
     
     private void OnNewTagDetected(NFC_DEVICE_ID _device, NFCTag _tag)  
-    {  
-        
+    {
         text.text = ComparePlayer(_device).player + " " + _tag.Data + " " + _tag.Type.ToString() + " added on " + _device.ToString();
+        descriptionEvent.SetActive(false);
         if(canNFC) 
             nfcConvertor.Conversion(_tag, ComparePlayer(_device));
-
+        
     }
     
     private void OnTagRemoveDetected(NFC_DEVICE_ID _device, NFCTag _tag)  

@@ -149,6 +149,7 @@ public class CasesNeutral : MonoBehaviour
 
     public void EventCase()
     {
+        
         eventS.GetEvent();
         eventS.Invoke(eventS.eventName,0);
         _gameplayManager.ResetLast();
