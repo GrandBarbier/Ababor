@@ -23,7 +23,7 @@ Shader "Custom/ReciveBook"
         Stencil
         {
             Ref [_StencilID]
-            Comp greater
+            Comp equal
             Pass keep
             fail keep
         }

@@ -587,7 +587,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7541256346092628484, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
   m_PrefabInstance: {fileID: 9163520322296796743}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9163520322296796744}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 287badde4999b5a41a8fe07d8a9184ec, type: 3}
@@ -4751,7 +4751,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9163520321838035745, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
   m_PrefabInstance: {fileID: 9163520322296796743}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9163520322296796744}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19494abe96c490b458711801ef32d4dc, type: 3}
@@ -5026,7 +5026,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
   m_PrefabInstance: {fileID: 9163520322296796743}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9163520322296796744}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c5e6281330799647babe4ec970e7d43, type: 3}
@@ -6282,7 +6282,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9163520321838035744, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
   m_PrefabInstance: {fileID: 9163520322296796743}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9163520322296796744}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aec6dd5b0ba808c4db64664ef8f23fd4, type: 3}
@@ -6398,7 +6398,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -334, y: 337}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 164, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1867358269
 MonoBehaviour:
@@ -6446,7 +6446,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9163520322296796745}
         m_TargetAssemblyTypeName: EventManager, Assembly-CSharp
-        m_MethodName: SwitchGainAndLoseCases
+        m_MethodName: RemoveLoseCases
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7870,10 +7870,6 @@ PrefabInstance:
       propertyPath: text
       value: 
       objectReference: {fileID: 2010886512}
-    - target: {fileID: 7996281355349608391, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
-      propertyPath: nbPlayers
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 9163520321838035744, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
       propertyPath: endText
       value: 
@@ -8000,29 +7996,14 @@ PrefabInstance:
       objectReference: {fileID: 1018159884}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
---- !u!1 &9163520322296796744 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9163520321838035746, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
+--- !u!114 &9163520322296796745 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6252815433902197027, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
   m_PrefabInstance: {fileID: 9163520322296796743}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9163520322296796745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9163520322296796744}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3205b2ee59fdcb544bb3ffe64cc825ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allCase: []
-  hiddenCases: []
-  basicCaseMat: {fileID: 2100000, guid: 357b36a1b75b3b04bb159f7a8ad202fb, type: 2}
-  loseCaseMat: {fileID: 2100000, guid: 9dc3b6567df71b0408c9a1991c9cbdb6, type: 2}
-  gainCaseMat: {fileID: 2100000, guid: 302fd1a63a3c254478700bc75fce432f, type: 2}
-  eventCaseMat: {fileID: 2100000, guid: 98548521b4083ed42b35fc3c23318f6c, type: 2}
-  nonNeutralCases: []
-  newGainCases: []
-  newLoseCases: []

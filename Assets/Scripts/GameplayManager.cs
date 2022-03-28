@@ -12,7 +12,7 @@ public class GameplayManager : MonoBehaviour
 {
     public List<GameObject> players = new List<GameObject>();
     public List<GameObject> island = new List<GameObject>();
-    public GameObject verifMenu,endMenu, secondIsle, firstIsle, menuTrade;
+    public GameObject verifMenu,verifMenu2,endMenu, secondIsle, firstIsle, menuTrade,description;
    
     public List<Button> buttonTrade; 
     
@@ -42,6 +42,8 @@ public class GameplayManager : MonoBehaviour
     public PlayerPoint playerReceive;
     
     public CardManager cardManager;
+
+    public EndCalcul endCalcul;
 
     void Awake()
     { 
@@ -83,8 +85,8 @@ public class GameplayManager : MonoBehaviour
         if (lastTurn)
         {
             if (turnWait == 0)
-            {
-                WaitForNextIsland();
+            { 
+                NextIsland();    
             }
         }
     }
@@ -126,7 +128,7 @@ public class GameplayManager : MonoBehaviour
 
     public void ButtonYes()
     {
-        actualMove.menuVerif.SetActive(false);
+      //  actualMove.menuVerif.SetActive(false);
         actualMove.end = true;
     }
     
@@ -178,12 +180,16 @@ public class GameplayManager : MonoBehaviour
     public void OpenVerifMenu()
     {
         verifMenu.SetActive(true);
+        verifMenu2.SetActive(true);
     }
 
     public void OpenEndMenu()
     {
-       // endMenu.SetActive(true);
-       SceneManager.LoadScene("Test clovis 2nd scene");
+       endMenu.SetActive(true);
+       for (int i = 0; i < allPlayers.Count; i++)
+       {
+           endCalcul.PointCalcul(allPlayers[i].point,i);
+       }
     }
     
     public void ButtonVerifMenuMove()
@@ -191,6 +197,8 @@ public class GameplayManager : MonoBehaviour
         currentstate = new Moving();
         currentstate.DoState(actualMove, this);
         verifMenu.SetActive(false);
+        verifMenu2.SetActive(false);
+        description.gameObject.SetActive(false);
         ResetLast();
     }
 
@@ -199,6 +207,7 @@ public class GameplayManager : MonoBehaviour
         currentstate = new EndTurn();
         currentstate.DoState(actualMove,this);
         verifMenu.SetActive(false);
+        verifMenu2.SetActive(false);
     }
 
     public void ResetLast()
@@ -212,11 +221,11 @@ public class GameplayManager : MonoBehaviour
         {
             allCases.Add(obj.GetComponent<CasesNeutral>());
             allCases.Reverse();
-            allCases.Sort(SortByName); 
+            allCases.Sort(SortByName);
         }
     }
 
-    public void WaitForNextIsland()
+    public void NextIsland()
     {
         objectif.lastCase = true;
         ChangePlayer();
@@ -266,6 +275,11 @@ public class GameplayManager : MonoBehaviour
         {
             goldTrade = 0;
         }
+
+        if (goldTrade >= playerGive.gold)
+        {
+            goldTrade = playerGive.gold;
+        }
         textGold.text = goldTrade.ToString();
     }
 
@@ -279,6 +293,7 @@ public class GameplayManager : MonoBehaviour
             }
         }
         bool open = menuTrade.activeSelf;
+        textGold.text = "0";
         menuTrade.SetActive(!open);
         playerGive = point;
     }
@@ -297,16 +312,16 @@ public class GameplayManager : MonoBehaviour
                 switch (i)
                 {
                     case 3:
-                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0,0,45);
+                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0,0,140);
                         break;
                     case 2:
-                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, 130);
-                        break;
-                    case 1:
                         buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, -140);
                         break;
-                    case 0:
+                    case 1:
                         buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, -45);
+                        break;
+                    case 0:
+                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, 45);
                         break;
                 }
             }
@@ -319,13 +334,13 @@ public class GameplayManager : MonoBehaviour
                 switch (i)
                 {
                     case 3:
-                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0,0,0);
+                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0,0,180);
                         break;
                     case 2:
                         buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
                         break;
                     case 1:
-                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
+                        buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
                         break;
                     case 0:
                         buttonTrade[i].gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -333,6 +348,18 @@ public class GameplayManager : MonoBehaviour
                 }
             }
             uiTurned = false; 
+        }
+    }
+
+    public void ChangeIsleButton()
+    {
+        islandIndex++;
+        island[islandIndex].SetActive(true);
+        island[islandIndex-1].SetActive(false);
+        GetCases();
+        foreach (Player player in allPlayers)
+        {
+            player.move.caseNext[0] = allCases[0];
         }
     }
 }
