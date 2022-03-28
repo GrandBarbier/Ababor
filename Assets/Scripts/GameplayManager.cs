@@ -100,19 +100,16 @@ public class GameplayManager : MonoBehaviour
     {
         currentstate.DoState(allPlayers[playerIndex].move, this);
     }
-
-    public void ResetIndex()
-    {
-        playerIndex = 0;
-    }
     
     public void ChangePlayer()
     {
         currentstate = new EndTurn(); 
         currentstate.DoState(allPlayers[playerIndex].move, this);
         playerIndex++;
+        Debug.Log(playerIndex);
         if (playerIndex >= allPlayers.Count)
         {
+            Debug.Log("zsezs");
             playerIndex = 0;
         }
         foreach (string stg in objectif.actualObjectif)
@@ -130,6 +127,7 @@ public class GameplayManager : MonoBehaviour
     {
       //  actualMove.menuVerif.SetActive(false);
         actualMove.end = true;
+        cardManager.verif = false;
     }
     
     public void FindBestPlayer()
@@ -157,6 +155,7 @@ public class GameplayManager : MonoBehaviour
         turnWait--;
         if (playerIndex >= allPlayers.Count)
         {
+            
             playerIndex = 0;
         }
         for (int i = 0; i < allPlayers.Count; i++)
