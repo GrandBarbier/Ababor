@@ -1,19 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
+using Random = UnityEngine.Random;
 
 public class EventManager : MonoBehaviour
 {
-    
+    public List<Player> allPlayers = new List<Player>();
+
     public List<CasesNeutral> allCase, hiddenCases;
     private GameplayManager _gameplayManager;
     public Material basicCaseMat,loseCaseMat,gainCaseMat,eventCaseMat;
+
+    public  Player[] worstPlayer;
 
     // Start is called before the first frame update
     void Awake()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>();
+    }
+
+    private void Start()
+    {
+        worstPlayer = new Player[allPlayers.Count];
     }
 
     // Update is called once per frame
@@ -146,5 +157,96 @@ public class EventManager : MonoBehaviour
             caseToUnhide.ResetColor();
         }
         _gameplayManager.ChangePlayer();
+    }
+    
+    public void GiveGoldRanking()
+    {
+        int worst = 1000;
+        
+        for (int i = 0; i < allPlayers.Count; i++)
+        {
+            foreach (Player player in allPlayers)
+            {
+                if (player.point.point < worst)
+                {
+                    worstPlayer[i] = player;
+                }
+            }
+        }
+
+        if (_gameplayManager.players.Count == 3)
+        {
+            worstPlayer[0].point.gold += 10;
+
+            if (worstPlayer[1].point.point == worstPlayer[0].point.point)
+            {
+                worstPlayer[1].point.gold += 10;
+                if (worstPlayer[2].point.point == worstPlayer[1].point.point)
+                {
+                   worstPlayer[2].point.gold += 10;
+                }
+                else
+                {
+                    worstPlayer[2].point.gold += 4;
+                }
+            }
+            else
+            {
+                worstPlayer[1].point.gold += 8;
+                if (worstPlayer[2].point.point == worstPlayer[1].point.point)
+                {
+                    worstPlayer[2].point.gold += 8;
+                }
+                else
+                {
+                    worstPlayer[2].point.gold += 4;
+                }
+            }
+        }
+        else if (_gameplayManager.players.Count > 3)
+        {
+            worstPlayer[0].point.gold += 10;
+
+            if (worstPlayer[1].point.point == worstPlayer[0].point.point)
+            {
+                worstPlayer[1].point.gold += 10;
+                if (worstPlayer[2].point.point == worstPlayer[1].point.point)
+                {
+                    worstPlayer[2].point.gold += 10;
+                    if (worstPlayer[3].point.point == worstPlayer[2].point.point)
+                    {
+                        worstPlayer[3].point.gold += 10;
+                    }
+                    else
+                    {
+                        worstPlayer[3].point.gold += 2;
+                    }
+                }
+                else
+                {
+                    worstPlayer[2].point.gold += 4;
+                    if (worstPlayer[3].point.point == worstPlayer[2].point.point)
+                    {
+                        worstPlayer[3].point.gold += 4;
+                    }
+                    else
+                    {
+                        worstPlayer[3].point.gold += 2;
+                    }
+                }
+            }
+            else
+            {
+                worstPlayer[1].point.gold += 8;
+                if (worstPlayer[2].point.point == worstPlayer[1].point.point)
+                {
+                    worstPlayer[2].point.gold += 8;
+                }
+                else
+                {
+                    worstPlayer[2].point.gold += 4;
+                }
+            }
+        }        
     }
 }
