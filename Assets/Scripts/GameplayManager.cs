@@ -85,8 +85,8 @@ public class GameplayManager : MonoBehaviour
         if (lastTurn)
         {
             if (turnWait == 0)
-            {
-                NextIsland();
+            { 
+                NextIsland();    
             }
         }
     }
