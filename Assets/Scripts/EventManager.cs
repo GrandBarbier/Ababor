@@ -203,7 +203,7 @@ public class EventManager : MonoBehaviour
                 }
             }
         }
-        else if (_gameplayManager.players.Count > 3)
+        else if (_gameplayManager.players.Count == 4)
         {
             worstPlayer[0].point.gold += 10;
 
@@ -241,12 +241,28 @@ public class EventManager : MonoBehaviour
                 if (worstPlayer[2].point.point == worstPlayer[1].point.point)
                 {
                     worstPlayer[2].point.gold += 8;
+                    if (worstPlayer[3].point.point == worstPlayer[2].point.point)
+                    {
+                        worstPlayer[3].point.gold += 8;
+                    }
+                    else
+                    {
+                        worstPlayer[3].point.gold += 2;
+                    }
                 }
                 else
                 {
                     worstPlayer[2].point.gold += 4;
+                    if (worstPlayer[3].point.point == worstPlayer[2].point.point)
+                    {
+                        worstPlayer[3].point.gold += 4;
+                    }
+                    else
+                    {
+                        worstPlayer[3].point.gold += 2;
+                    }
                 }
             }
-        }        
+        }
     }
 }
