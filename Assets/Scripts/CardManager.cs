@@ -10,6 +10,9 @@ public class CardManager : MonoBehaviour
     public GameObject menu;
     public GameObject waitMenu;
     public GameObject targetMenu;
+
+    public Image playerSelected;
+    public Image targetSelected;
     
     public GameplayManager gameplayManager;
 
@@ -18,7 +21,7 @@ public class CardManager : MonoBehaviour
     
     public int index, gmIndex;
     
-    private bool verif;
+    public bool verif;
     public bool oneTarget;
     
     public Player player;
@@ -44,6 +47,7 @@ public class CardManager : MonoBehaviour
         if (index != gameplayManager.playerIndex && verif)
         {
             gameplayManager.playerIndex = gmIndex;
+            Debug.Log("fdpcon");
             verif = false;
         }
 
@@ -94,7 +98,7 @@ public class CardManager : MonoBehaviour
     {
         gmIndex = gameplayManager.playerIndex;
         target.move.caseNext[0] = target.move.caseNext[0].lastCase;
-        target.player.transform.position = target.move.caseNext[0].transform.position;
+        target.player.transform.position = target.move.caseNext[0].transform.position + Vector3.up;
         target.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
         verif = true;
@@ -106,7 +110,7 @@ public class CardManager : MonoBehaviour
     {
         gmIndex = gameplayManager.playerIndex;
         target.move.caseNext[0] = target.move.caseNext[0].lastCase.lastCase;
-        target.player.transform.position = target.move.caseNext[0].transform.position;
+        target.player.transform.position = target.move.caseNext[0].transform.position + Vector3.up;
         target.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
         verif = true;
@@ -145,8 +149,8 @@ public class CardManager : MonoBehaviour
     {
         gmIndex = gameplayManager.playerIndex;
         player.player.transform.position = target.move.caseNext[0].transform.position + Vector3.up;
-        target.move.caseNext[0] = player.move.caseNext[0];
-        target.move.caseNext[0].ActualCaseFunction();
+        player.move.caseNext[0] = target.move.caseNext[0];
+        player.move.caseNext[0].ActualCaseFunction();
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
         gameplayManager.playerIndex = gmIndex;
@@ -155,9 +159,9 @@ public class CardManager : MonoBehaviour
     public void QueenBlue()
     {
         gmIndex = gameplayManager.playerIndex;
-        target.player.transform.position = player.move.caseNext[0].transform.position + Vector3.up;
-        target.move.caseNext[0] = player.move.caseNext[0];
-        target.move.caseNext[0].ActualCaseFunction();
+        player.player.transform.position = target.move.caseNext[0].transform.position + Vector3.up;
+        player.move.caseNext[0] = target.move.caseNext[0];
+        player.move.caseNext[0].ActualCaseFunction();
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
         gameplayManager.playerIndex = gmIndex;
@@ -165,15 +169,15 @@ public class CardManager : MonoBehaviour
     
     public void QueenRed()
     {
-        target.point.gold -= 5;
-        player.point.gold += 5;
+        player.point.gold -= 5;
+        target.point.gold += 5;
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
     }
 
     public void QueenYellow()
     {
-        player.point.gold += gameplayManager.treasure;
+        target.point.gold += gameplayManager.treasure;
         gameplayManager.treasure = 0;
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
@@ -219,9 +223,9 @@ public class CardManager : MonoBehaviour
     {
         foreach (Player pl in gameplayManager.allPlayers)
         {
-            if (pl != player)
+            if (pl != target)
             {
-                player.point.gold -= 3;
+                target.point.gold -= 3;
                 pl.point.gold += 3;
             }
         }
@@ -234,53 +238,99 @@ public class CardManager : MonoBehaviour
     {
         foreach (Player pl in gameplayManager.allPlayers)
         {
-            if (pl != player)
+            if (pl != target)
             {
                 pl.point.gold -= 5;
-                player.point.gold += 5;
+                target.point.gold += 5;
             }
         }
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
-        
     }
 
     public void Jack()
     {
-        Invoke(lastName,2);
+        waitMenu.SetActive(false);
+        Invoke(lastName,1);
+        index = gameplayManager.playerIndex;
         verif = true;
     }
     
     public void ButtonSelectPlayer(int index)
     {
         player = allPlayer[index];
+
+        switch (index)
+        {
+            case 0 :
+                playerSelected.color = Color.red;
+                break;
+            case 1 :
+                playerSelected.color = Color.blue;
+                break;
+            case 2 :
+                playerSelected.color = Color.yellow;
+                break;
+            case 3 :
+                playerSelected.color = Color.green;
+                break;
+        }
+
     }
 
     public void ButtonSelectTarget(int index)
     {
         target = allPlayer[index];
+        switch (index)
+        {
+            case 0 :
+                targetSelected.color = Color.red;
+                break;
+            case 1 :
+                targetSelected.color = Color.blue;
+                break;
+            case 2 :
+                targetSelected.color = Color.yellow;
+                break;
+            case 3 :
+                targetSelected.color = Color.green;
+                break;
+        }
     }
 
     public void CallCardFunction( )
     {
         Invoke(functionName,5);
+        if (functionName == "Jack")
+        {
+            functionName = lastName;
+        }
         menu.SetActive(false);
+        targetSelected.gameObject.SetActive(false);
+        targetSelected.color = Color.white;
+        playerSelected.color = Color.white;
         waitMenu.SetActive(true);
     }
-    
-    public void CallCardFunction1Target( )
+
+    public void CallCardFunction1Target()
     {
-        Invoke(functionName,5);
-        targetMenu.SetActive(false);
+        Invoke(functionName, 5);
+        if (functionName == "Jack")
+        {
+            functionName = lastName;
+        }
+        targetMenu.SetActive(false); 
+        targetSelected.gameObject.SetActive(false);
+        targetSelected.color = Color.white;
         waitMenu.SetActive(true);
     }
-    
+
     public void CloseMenu()
     {
         menu.SetActive(false);
         text.gameObject.SetActive(false);
         text.text = null;
-        if (waitMenu.activeSelf == false)
+        if (waitMenu.activeSelf == false && functionName == "Jack")
         {
             gameplayManager.OpenVerifMenu();
         }
@@ -315,11 +365,12 @@ public class CardManager : MonoBehaviour
                 break;
         }
         
-        if (waitMenu.activeSelf == false)
+        if (waitMenu.activeSelf == false || stg == "Jack")
         {
             menu.SetActive(true);
             text.gameObject.SetActive(true);
             gameplayManager.verifMenu.SetActive(false);
+            gameplayManager.verifMenu2.SetActive(false);
             text.text = texte;
             if (functionName != lastName)
             {
@@ -328,6 +379,7 @@ public class CardManager : MonoBehaviour
             functionName = stg;
             player = pl;
         }
+        targetSelected.gameObject.SetActive(true);
     }
 
     public void OpenCardMenu1Target(string stg, Player pl, string texte)
@@ -348,11 +400,12 @@ public class CardManager : MonoBehaviour
                 break;
         }
         
-        if (waitMenu.activeSelf == false)
+        if (waitMenu.activeSelf == false|| stg == "Jack")
         {
             targetMenu.SetActive(true);
             textTarget.gameObject.SetActive(true);
             gameplayManager.verifMenu.SetActive(false);
+            gameplayManager.verifMenu2.SetActive(false);
             textTarget.text = texte;
             if (functionName != lastName)
             {
@@ -361,5 +414,6 @@ public class CardManager : MonoBehaviour
             functionName = stg;
             player = pl;
         }
+        targetSelected.gameObject.SetActive(true);
     }
 }

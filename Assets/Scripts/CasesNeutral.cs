@@ -143,12 +143,13 @@ public class CasesNeutral : MonoBehaviour
         }
         else
         {
-            _gameplayManager.WaitForNextIsland();
+            _gameplayManager.NextIsland();
         }
     }
 
     public void EventCase()
     {
+        
         eventS.GetEvent();
         eventS.Invoke(eventS.eventName,0);
         _gameplayManager.ResetLast();
