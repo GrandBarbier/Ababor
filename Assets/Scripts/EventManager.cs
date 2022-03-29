@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 public class EventManager : MonoBehaviour
 {
     public List<Player> allPlayers = new List<Player>();
 
+    public int[] worstPlayerIndex;
     public List<CasesNeutral> allCase, hiddenCases;
     private GameplayManager _gameplayManager;
-    public Material basicCaseMat,loseCaseMat,gainCaseMat,eventCaseMat;
+    public Material basicCaseMat, loseCaseMat, gainCaseMat, eventCaseMat;
 
-    public  Player[] worstPlayer;
 
     // Start is called before the first frame update
     void Awake()
@@ -24,13 +25,14 @@ public class EventManager : MonoBehaviour
 
     private void Start()
     {
-        worstPlayer = new Player[allPlayers.Count];
+        worstPlayerIndex = new int[_gameplayManager.allPlayers.Count];
+        allPlayers = _gameplayManager.allPlayers;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private bool CheckIfHidden(CasesNeutral cases)
@@ -40,6 +42,7 @@ public class EventManager : MonoBehaviour
             if (cases == hiddenCases[i])
                 return true;
         }
+
         return false;
     }
 
@@ -62,6 +65,7 @@ public class EventManager : MonoBehaviour
             neutralCases[i].ResetColor();
             neutralCases.Clear();
         }
+
         _gameplayManager.ChangePlayer();
     }
 
@@ -84,9 +88,10 @@ public class EventManager : MonoBehaviour
             loseCases[i].baseSecondMat = basicCaseMat;
             loseCases[i].ResetColor();
         }
+
         _gameplayManager.ChangePlayer();
     }
-    
+
     public void SwitchGainAndLoseCases()
     {
         foreach (CasesNeutral cases in _gameplayManager.allCases)
@@ -104,9 +109,10 @@ public class EventManager : MonoBehaviour
                 cases.ResetColor();
             }
         }
+
         _gameplayManager.ChangePlayer();
     }
-    
+
     public void HideCase()
     {
         List<CasesNeutral> nonNeutralCases = new List<CasesNeutral>();
@@ -127,11 +133,12 @@ public class EventManager : MonoBehaviour
             int rdm = Random.Range(0, nonNeutralCases.Count);
             nonNeutralCases[rdm].baseSecondMat = basicCaseMat;
             nonNeutralCases[rdm].ResetColor();
-            
+
             //activate fog particle system
             hiddenCases.Add(nonNeutralCases[rdm]);
             nonNeutralCases.RemoveAt(rdm);
         }
+
         nonNeutralCases.Clear();
         _gameplayManager.ChangePlayer();
     }
@@ -156,110 +163,113 @@ public class EventManager : MonoBehaviour
             //deactivate fog particle
             caseToUnhide.ResetColor();
         }
+
         _gameplayManager.ChangePlayer();
     }
+
+    
+    static int SortByPoints(Player p1, Player p2)
+    {
+        return p2.point.gold.CompareTo(p1.point.gold);
+    }
+    
+    
     
     public void GiveGoldRanking()
     {
-        int worst = 1000;
-        
+        allPlayers.Sort(SortByPoints);
+
         for (int i = 0; i < allPlayers.Count; i++)
         {
-            foreach (Player player in allPlayers)
-            {
-                if (player.point.point < worst)
-                {
-                    worstPlayer[i] = player;
-                }
-            }
+            Debug.Log(i + " = " + allPlayers[i].point.gold);
         }
-
+        
         if (_gameplayManager.players.Count == 3)
         {
-            worstPlayer[0].point.gold += 10;
+            allPlayers[0].point.gold += 10;
 
-            if (worstPlayer[1].point.point == worstPlayer[0].point.point)
+            if (allPlayers[1].point.gold == allPlayers[0].point.gold)
             {
-                worstPlayer[1].point.gold += 10;
-                if (worstPlayer[2].point.point == worstPlayer[1].point.point)
+                allPlayers[1].point.gold += 10;
+                if (allPlayers[2].point.gold == allPlayers[1].point.gold)
                 {
-                   worstPlayer[2].point.gold += 10;
+                    allPlayers[2].point.gold += 10;
                 }
                 else
                 {
-                    worstPlayer[2].point.gold += 4;
+                    allPlayers[2].point.gold += 4;
                 }
             }
             else
             {
-                worstPlayer[1].point.gold += 8;
-                if (worstPlayer[2].point.point == worstPlayer[1].point.point)
+                allPlayers[1].point.gold += 8;
+                if (allPlayers[2].point.gold == allPlayers[1].point.gold)
                 {
-                    worstPlayer[2].point.gold += 8;
+                    allPlayers[2].point.gold += 8;
                 }
                 else
                 {
-                    worstPlayer[2].point.gold += 4;
+                    allPlayers[2].point.gold += 4;
                 }
             }
         }
         else if (_gameplayManager.players.Count == 4)
         {
-            worstPlayer[0].point.gold += 10;
+            allPlayers[0].point.gold += 10;
 
-            if (worstPlayer[1].point.point == worstPlayer[0].point.point)
+            if (allPlayers[1].point.gold == allPlayers[0].point.gold)
             {
-                worstPlayer[1].point.gold += 10;
-                if (worstPlayer[2].point.point == worstPlayer[1].point.point)
+                allPlayers[1].point.gold += 10;
+                if (allPlayers[2].point.gold == allPlayers[1].point.gold)
                 {
-                    worstPlayer[2].point.gold += 10;
-                    if (worstPlayer[3].point.point == worstPlayer[2].point.point)
+                    allPlayers[2].point.gold += 10;
+                    if (allPlayers[3].point.gold == allPlayers[2].point.gold)
                     {
-                        worstPlayer[3].point.gold += 10;
+                        allPlayers[3].point.gold += 10;
                     }
                     else
                     {
-                        worstPlayer[3].point.gold += 2;
+                        allPlayers[3].point.gold += 2;
                     }
                 }
                 else
                 {
-                    worstPlayer[2].point.gold += 4;
-                    if (worstPlayer[3].point.point == worstPlayer[2].point.point)
+                    allPlayers[2].point.gold += 4;
+                    if (allPlayers[3].point.gold == allPlayers[2].point.gold)
                     {
-                        worstPlayer[3].point.gold += 4;
+                        allPlayers[3].point.gold += 4;
                     }
                     else
                     {
-                        worstPlayer[3].point.gold += 2;
+                        allPlayers[3].point.gold += 2;
                     }
                 }
             }
             else
             {
-                worstPlayer[1].point.gold += 8;
-                if (worstPlayer[2].point.point == worstPlayer[1].point.point)
+                allPlayers[1].point.gold += 8;
+                if (allPlayers[2].point.gold == allPlayers[1].point.gold)
                 {
-                    worstPlayer[2].point.gold += 8;
-                    if (worstPlayer[3].point.point == worstPlayer[2].point.point)
+                    allPlayers[2].point.gold += 8;
+                    if (allPlayers[3].point.gold == allPlayers[2].point.gold)
                     {
-                        worstPlayer[3].point.gold += 8;
+                        allPlayers[3].point.gold += 8;
                     }
                     else
                     {
-                        worstPlayer[3].point.gold += 2;
+                        allPlayers[3].point.gold += 2;
                     }
                 }
                 else
                 {
-                    worstPlayer[2].point.gold += 4;
-                    if (worstPlayer[3].point.point == worstPlayer[2].point.point)
+                    allPlayers[2].point.gold += 4;
+                    if (allPlayers[3].point.gold == allPlayers[2].point.gold)
                     {
-                        worstPlayer[3].point.gold += 4;
+                        allPlayers[3].point.gold += 4;
                     }
                     else
                     {
-                        worstPlayer[3].point.gold += 2;
+                        allPlayers[3].point.gold += 2;
                     }
                 }
             }
