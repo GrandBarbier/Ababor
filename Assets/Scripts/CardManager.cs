@@ -21,7 +21,7 @@ public class CardManager : MonoBehaviour
     
     public int index, gmIndex;
     
-    private bool verif;
+    public bool verif;
     public bool oneTarget;
     
     public Player player;
@@ -47,6 +47,7 @@ public class CardManager : MonoBehaviour
         if (index != gameplayManager.playerIndex && verif)
         {
             gameplayManager.playerIndex = gmIndex;
+            Debug.Log("fdpcon");
             verif = false;
         }
 
@@ -251,6 +252,7 @@ public class CardManager : MonoBehaviour
     {
         waitMenu.SetActive(false);
         Invoke(lastName,1);
+        index = gameplayManager.playerIndex;
         verif = true;
     }
     
