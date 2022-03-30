@@ -62,6 +62,7 @@ public class GameplayManager : MonoBehaviour
 
     void Start()
     {
+        activPlayer = allPlayers[0];
         foreach (Player player in allPlayers)
         {
             playerQueue.Enqueue(player);
@@ -155,7 +156,6 @@ public class GameplayManager : MonoBehaviour
         turnWait--;
         if (playerIndex >= allPlayers.Count)
         {
-            
             playerIndex = 0;
         }
         for (int i = 0; i < allPlayers.Count; i++)
@@ -359,6 +359,20 @@ public class GameplayManager : MonoBehaviour
         foreach (Player player in allPlayers)
         {
             player.move.caseNext[0] = allCases[0];
+        }
+    }
+
+    public void ShowActualPlayer()
+    {
+        int nbm = players.IndexOf(activPlayer.player);
+        buttonTrade[nbm].image.color = Color.gray;
+    }
+
+    public void ResetAllPlayerButton()
+    {
+        foreach (Button button in buttonTrade)
+        {
+            button.image.color = Color.white;
         }
     }
 }
