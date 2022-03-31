@@ -117,8 +117,6 @@ public class PlayerMovement : MonoBehaviour
         {
             cases.ResetColor(); 
         }
-        
-        
     }
 
     public int FindCase()

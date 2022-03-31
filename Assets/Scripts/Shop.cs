@@ -27,16 +27,16 @@ public class Shop : MonoBehaviour
         switch (_gameplayManager.playerIndex)
         {
             case 0 :
-                shopMenu.transform.rotation = Quaternion.Euler(0,0,180);
+                shopMenu.transform.rotation = Quaternion.Euler(0,0,0);
                 break;
             case 1:
-                shopMenu.transform.rotation = Quaternion.Euler(0,0,180);
+                shopMenu.transform.rotation = Quaternion.Euler(0,0,0);
                 break;
             case 2:
-                shopMenu.transform.rotation = Quaternion.Euler(0,0,0);
+                shopMenu.transform.rotation = Quaternion.Euler(0,0,180);
                 break;
             case 3:
-                shopMenu.transform.rotation = Quaternion.Euler(0,0,0);
+                shopMenu.transform.rotation = Quaternion.Euler(0,0,180);
                 break;
         }
     }
@@ -44,7 +44,7 @@ public class Shop : MonoBehaviour
     public void ShopClose()
     {
         shopMenu.SetActive(false);
-        
+        _gameplayManager.OpenVerifMenu();
     }
 
     public void MoveButton()
