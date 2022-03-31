@@ -226,7 +226,6 @@ public class GameplayManager : MonoBehaviour
 
     public void NextIsland()
     {
-        objectif.lastCase = true;
         ChangePlayer();
         foreach (Player player in allPlayers)
         {
@@ -244,6 +243,7 @@ public class GameplayManager : MonoBehaviour
         }
         island[islandIndex].SetActive(true);
         island[islandIndex-1].SetActive(false);
+        allCases.Clear();
         GetCases();
         foreach (Player player in allPlayers)
         {
@@ -365,7 +365,17 @@ public class GameplayManager : MonoBehaviour
     public void ShowActualPlayer()
     {
         int nbm = players.IndexOf(activPlayer.player);
-        buttonTrade[nbm].image.color = Color.gray;
+        foreach (Button button in buttonTrade)
+        {
+            if (buttonTrade.IndexOf(button) == nbm)
+            {
+                button.image.color = Color.white;
+            }
+            else
+            {
+                button.image.color = Color.gray;
+            }
+        }
     }
 
     public void ResetAllPlayerButton()

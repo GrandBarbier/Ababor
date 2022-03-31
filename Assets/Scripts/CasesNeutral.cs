@@ -147,6 +147,12 @@ public class CasesNeutral : MonoBehaviour
         }
     }
 
+    public void LastCase()
+    {
+        _gameplayManager.OpenEndMenu();
+        objectif.lastCase = true;
+    }
+
     public void EventCase()
     {
         
