@@ -8,16 +8,25 @@ using UnityEngine.UI;
 public class CardManager : MonoBehaviour
 {
     public GameObject menu;
- 
+    public GameObject waitMenu;
+    public GameObject targetMenu;
+    
     public GameplayManager gameplayManager;
+
+    public TMP_Text text;
+    public TMP_Text textTarget;
     
     public int index, gmIndex;
     
     private bool verif;
+    public bool oneTarget;
     
     public Player player;
     public List<Player> allPlayer;
     public Player target;
+
+    public Button button;
+    public Button buttonTarget;
     
     public string functionName, lastName;
   
@@ -32,109 +41,142 @@ public class CardManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         //pl = player.player;
         if (index != gameplayManager.playerIndex && verif)
         {
             gameplayManager.playerIndex = gmIndex;
             verif = false;
-            
+        }
+
+        if (target == null)
+        {
+            button.gameObject.SetActive(false);
+            buttonTarget.gameObject.SetActive(false);
+        }
+        else
+        {
+            button.gameObject.SetActive(true);
+            buttonTarget.gameObject.SetActive(true);
         }
     }
 
     public void OneGreen()
     {
         gmIndex = gameplayManager.playerIndex;
-        index = player.move.index;
-        player.move.isLast = false;
+        index = target.move.index;
+        target.move.isLast = false;
         gameplayManager.playerIndex = index;
-        player.move.enabled = true;
-        player.move.actualMove = 1;
-        player.move.PlayerShowMove();
+        target.move.enabled = true;
+        target.move.actualMove = 1;
+        target.move.PlayerShowMove();
         verif = true;
-        player.move.actualMove = player.move.InitialMove;
+        target.move.actualMove = target.move.InitialMove;
+        waitMenu.SetActive(false);
+        gameplayManager.OpenVerifMenu();
     }
 
     public void TwoGreen()
     {
         gmIndex = gameplayManager.playerIndex;
-        index = player.move.index;
-        player.move.isLast = false;
+        index = target.move.index;
+        target.move.isLast = false;
         gameplayManager.playerIndex = index;
-        player.move.enabled = true;
-        player.move.actualMove = 2;
-        player.move.PlayerShowMove();
-        player.move.caseNext[0].nextCases[0].isInRanged = false;
+        target.move.enabled = true;
+        target.move.actualMove = 2;
+        target.move.PlayerShowMove();
+        target.move.caseNext[0].nextCases[0].isInRange = false;
         verif = true;
-        player.move.actualMove = player.move.InitialMove;
+        target.move.actualMove = target.move.InitialMove;
+        waitMenu.SetActive(false);
+        gameplayManager.OpenVerifMenu();
     }
 
     public void OneBlue()
     {
         gmIndex = gameplayManager.playerIndex;
-        player.move.caseNext[0] = player.move.caseNext[0].lastCase;
-        player.player.transform.position = player.move.caseNext[0].transform.position;
-        player.move.caseNext[0].ActualCaseFunction();
+        target.move.caseNext[0] = target.move.caseNext[0].lastCase;
+        target.player.transform.position = target.move.caseNext[0].transform.position;
+        target.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
         verif = true;
+        waitMenu.SetActive(false);
+        gameplayManager.OpenVerifMenu();
     }
 
     public void TwoBlue()
     {
         gmIndex = gameplayManager.playerIndex;
-        player.move.caseNext[0] = player.move.caseNext[0].lastCase.lastCase;
-        player.player.transform.position = player.move.caseNext[0].transform.position;
-        player.move.caseNext[0].ActualCaseFunction();
+        target.move.caseNext[0] = target.move.caseNext[0].lastCase.lastCase;
+        target.player.transform.position = target.move.caseNext[0].transform.position;
+        target.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
         verif = true;
+        waitMenu.SetActive(false);
+        gameplayManager.OpenVerifMenu();
     }
 
     public void ThreeRed()
     {
-        player.point.gold -= 3;
-        verif = true;
+        target.point.gold -= 3;
+        waitMenu.SetActive(false);
+        gameplayManager.OpenVerifMenu();
     }
 
     public void FiveRed()
     {
-        player.point.gold -= 5;
+        target.point.gold -= 5;
+        waitMenu.SetActive(false);
+        gameplayManager.OpenVerifMenu();
     }
 
     public void ThreeYellow()
     {
-        player.point.gold += 3;
+        target.point.gold += 3;
+        waitMenu.SetActive(false);
+        gameplayManager.OpenVerifMenu();
     }
 
     public void FiveYellow()
     {
-        player.point.gold += 5;
+        target.point.gold += 5;
+        waitMenu.SetActive(false);
+        gameplayManager.OpenVerifMenu();
     }
     public void QueenGreen()
     {
         gmIndex = gameplayManager.playerIndex;
-        player.player.transform.position = target.move.caseNext[0].transform.position;
-        player.move.caseNext[0] = target.move.caseNext[0];
-        player.move.caseNext[0].ActualCaseFunction();
+        player.player.transform.position = target.move.caseNext[0].transform.position + Vector3.up;
+        target.move.caseNext[0] = player.move.caseNext[0];
+        target.move.caseNext[0].ActualCaseFunction();
+        waitMenu.SetActive(false);
+        gameplayManager.OpenVerifMenu();
         gameplayManager.playerIndex = gmIndex;
     }
 
     public void QueenBlue()
     {
         gmIndex = gameplayManager.playerIndex;
-        player.player.transform.position = target.move.caseNext[0].transform.position;
-        player.move.caseNext[0] = target.move.caseNext[0];
-        player.move.caseNext[0].ActualCaseFunction();
+        target.player.transform.position = player.move.caseNext[0].transform.position + Vector3.up;
+        target.move.caseNext[0] = player.move.caseNext[0];
+        target.move.caseNext[0].ActualCaseFunction();
+        waitMenu.SetActive(false);
+        gameplayManager.OpenVerifMenu();
         gameplayManager.playerIndex = gmIndex;
     }
+    
     public void QueenRed()
     {
         target.point.gold -= 5;
         player.point.gold += 5;
+        waitMenu.SetActive(false);
+        gameplayManager.OpenVerifMenu();
     }
 
     public void QueenYellow()
     {
         player.point.gold += gameplayManager.treasure;
         gameplayManager.treasure = 0;
+        waitMenu.SetActive(false);
+        gameplayManager.OpenVerifMenu();
     }
 
     public void KingGreen()
@@ -151,6 +193,8 @@ public class CardManager : MonoBehaviour
          player.move.caseNext[0].ActualCaseFunction();
          target.move.caseNext[0].ActualCaseFunction();
          verif = true;
+         waitMenu.SetActive(false);
+         gameplayManager.OpenVerifMenu();
     }
     
     public void KingBlue()
@@ -167,6 +211,8 @@ public class CardManager : MonoBehaviour
         player.move.caseNext[0].ActualCaseFunction();
         target.move.caseNext[0].ActualCaseFunction();
         verif = true;
+        waitMenu.SetActive(false);
+        gameplayManager.OpenVerifMenu();
     }
 
     public void KingRed()
@@ -179,6 +225,9 @@ public class CardManager : MonoBehaviour
                 pl.point.gold += 3;
             }
         }
+        waitMenu.SetActive(false);
+        
+        gameplayManager.OpenVerifMenu();
     }
 
     public void KingYellow()
@@ -191,16 +240,21 @@ public class CardManager : MonoBehaviour
                 player.point.gold += 5;
             }
         }
+        waitMenu.SetActive(false);
+        gameplayManager.OpenVerifMenu();
+        
     }
 
     public void Jack()
     {
-        Invoke(lastName,0);
+        Invoke(lastName,2);
+        verif = true;
     }
     
     public void ButtonSelectPlayer(int index)
     {
         player = allPlayer[index];
+        //TODO faire un bail qui fait qu'on le voit 
     }
 
     public void ButtonSelectTarget(int index)
@@ -210,19 +264,103 @@ public class CardManager : MonoBehaviour
 
     public void CallCardFunction( )
     {
-      //  player = pl;
-        Invoke(functionName,0);
+        Invoke(functionName,5);
         menu.SetActive(false);
+        waitMenu.SetActive(true);
+    }
+    
+    public void CallCardFunction1Target( )
+    {
+        Invoke(functionName,5);
+        targetMenu.SetActive(false);
+        waitMenu.SetActive(true);
+    }
+    
+    public void CloseMenu()
+    {
+        menu.SetActive(false);
+        text.gameObject.SetActive(false);
+        text.text = null;
+        if (waitMenu.activeSelf == false)
+        {
+            gameplayManager.OpenVerifMenu();
+        }
     }
 
-    public void OpenCardMenu(string stg, Player pl)
+    public void CloseMenu1Target()
     {
-        menu.SetActive(true);
-        if (functionName != lastName)
+        targetMenu.SetActive(false);
+        textTarget.gameObject.SetActive(false);
+        textTarget.text = null;
+        if (waitMenu.activeSelf == false && functionName == "Jack")
         {
-            lastName = stg;
+            gameplayManager.OpenVerifMenu();
         }
-        functionName = stg;
-        player = pl;
+    }
+    
+    public void OpenCardMenu(string stg, Player pl, string texte)
+    {
+        switch (gameplayManager.allPlayers.IndexOf(pl))
+        {
+            case 0 :
+                menu.transform.rotation = Quaternion.Euler(0,0,0);
+                break;
+            case 1:
+                menu.transform.rotation = Quaternion.Euler(0,0,0);
+                break;
+            case 2:
+                menu.transform.rotation = Quaternion.Euler(0,0,180);
+                break;
+            case 3:
+                menu.transform.rotation = Quaternion.Euler(0,0,180);
+                break;
+        }
+        
+        if (waitMenu.activeSelf == false)
+        {
+            menu.SetActive(true);
+            text.gameObject.SetActive(true);
+            gameplayManager.verifMenu.SetActive(false);
+            text.text = texte;
+            if (functionName != lastName)
+            {
+                lastName = stg;
+            }
+            functionName = stg;
+            player = pl;
+        }
+    }
+
+    public void OpenCardMenu1Target(string stg, Player pl, string texte)
+    {
+        switch (gameplayManager.allPlayers.IndexOf(pl))
+        {
+            case 0 :
+                targetMenu.transform.rotation = Quaternion.Euler(0,0,0);
+                break;
+            case 1:
+                targetMenu.transform.rotation = Quaternion.Euler(0,0,0);
+                break;
+            case 2:
+                targetMenu.transform.rotation = Quaternion.Euler(0,0,180);
+                break;
+            case 3:
+                targetMenu.transform.rotation = Quaternion.Euler(0,0,180);
+                break;
+        }
+        
+        if (waitMenu.activeSelf == false)
+        {
+            targetMenu.SetActive(true);
+            textTarget.gameObject.SetActive(true);
+            gameplayManager.verifMenu.SetActive(false);
+            textTarget.text = texte;
+            if (functionName != lastName)
+            {
+                lastName = stg;
+            }
+            functionName = stg;
+            player = pl;
+        }
     }
 }
