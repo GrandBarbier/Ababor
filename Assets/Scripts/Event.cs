@@ -56,7 +56,15 @@ public class Event : MonoBehaviour
         allCase[rdm].nameFunction = "LoseCase";
         allCase[rdm].baseSecondMat = loseCaseMat;
         allCase[rdm].ResetColor();
-        _gameplayManager.ChangePlayer();
+        if (_gameplayManager.cardManager.numberClub == false)
+        {
+            _gameplayManager.ChangePlayer();
+        }
+        else
+        {
+            _gameplayManager.cardManager.numberClub = false;
+            _gameplayManager.cardManager.ResetIndexPlayer();
+        }
         enabled = false;
     }
     
@@ -74,7 +82,15 @@ public class Event : MonoBehaviour
         allCase[rdm].nameFunction = "GainCase";
         allCase[rdm].baseSecondMat = gainCaseMat;
         allCase[rdm].ResetColor();
-        _gameplayManager.ChangePlayer();
+        if (_gameplayManager.cardManager.numberClub == false)
+        {
+            _gameplayManager.ChangePlayer();
+        }
+        else
+        {
+            _gameplayManager.cardManager.numberClub = false;
+            _gameplayManager.cardManager.ResetIndexPlayer();
+        }
         enabled = false;
     }
 
@@ -86,7 +102,15 @@ public class Event : MonoBehaviour
             player.move.caseNext[0] = thisCase;
             player.player.transform.position = thisCase.transform.position;
         }
-        _gameplayManager.ChangePlayer();
+        if (_gameplayManager.cardManager.numberClub == false)
+        {
+            _gameplayManager.ChangePlayer();
+        }
+        else
+        {
+            _gameplayManager.cardManager.numberClub = false;
+            _gameplayManager.cardManager.ResetIndexPlayer();
+        }
     }
 
     public void SwitchPlayerPlace()
@@ -105,7 +129,15 @@ public class Event : MonoBehaviour
             allPlayers[i].player.transform.position = casePlayer[rdm].transform.position + Vector3.up;
        //     allPlayers[i].move.caseNext[0].ActualCaseFunction();
         }
-        _gameplayManager.ChangePlayer();
+        if (_gameplayManager.cardManager.numberClub == false)
+        {
+            _gameplayManager.ChangePlayer();
+        }
+        else
+        {
+            _gameplayManager.cardManager.numberClub = false;
+            _gameplayManager.cardManager.ResetIndexPlayer();
+        }
     }
 
     public void HideCase()

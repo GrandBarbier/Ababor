@@ -86,7 +86,6 @@ public class CasesNeutral : MonoBehaviour
 
     public void ActualCaseFunction()
     {
-        
         Invoke(nameFunction,0);
         for (int i = 0; i < _eventManager.hiddenCases.Count; i++)
         {
@@ -96,18 +95,36 @@ public class CasesNeutral : MonoBehaviour
                 _eventManager.hiddenCases.RemoveAt(i);
             }
         }
+        _gameplayManager.OpenVerifMenu();
     }
 
     public void GainCase()
     {
         _gameplayManager.activPlayer.point.gold += 3;
         _gameplayManager.activPlayer.point.numberGainCase++;
-        _gameplayManager.ChangePlayer();
+        if (_gameplayManager.cardManager.numberClub == false)
+        {
+            _gameplayManager.ChangePlayer();
+        }
+        else
+        {
+            _gameplayManager.cardManager.numberClub = false;
+            _gameplayManager.cardManager.ResetIndexPlayer();
+        }
+        
     }
 
     public void NeutralCase()
     {
-        _gameplayManager.ChangePlayer();
+        if (_gameplayManager.cardManager.numberClub == false)
+        {
+            _gameplayManager.ChangePlayer();
+        }
+        else
+        {
+            _gameplayManager.cardManager.numberClub = false;
+            _gameplayManager.cardManager.ResetIndexPlayer();
+        }
     }
 
     public void LoseCase()
@@ -120,7 +137,15 @@ public class CasesNeutral : MonoBehaviour
         }
         _gameplayManager.activPlayer.point.numberLoseCase++;
         _gameplayManager.ResetLast();
-        _gameplayManager.ChangePlayer();
+        if (_gameplayManager.cardManager.numberClub == false)
+        {
+            _gameplayManager.ChangePlayer();
+        }
+        else
+        {
+            _gameplayManager.cardManager.numberClub = false;
+            _gameplayManager.cardManager.ResetIndexPlayer();
+        }
     }
 
     public void ShopCase()
@@ -139,7 +164,15 @@ public class CasesNeutral : MonoBehaviour
             _gameplayManager.lastTurn = true;
             _gameplayManager.endPlayer = _gameplayManager.activPlayer;
             _gameplayManager.activPlayer.move.isEnd = true;
-            _gameplayManager.ChangePlayer();
+            if (_gameplayManager.cardManager.numberClub == false)
+            {
+                _gameplayManager.ChangePlayer();
+            }
+            else
+            {
+                _gameplayManager.cardManager.numberClub = false;
+                _gameplayManager.cardManager.ResetIndexPlayer();
+            }
         }
         else
         {
@@ -155,7 +188,6 @@ public class CasesNeutral : MonoBehaviour
 
     public void EventCase()
     {
-        
         eventS.GetEvent();
         eventS.Invoke(eventS.eventName,0);
         _gameplayManager.ResetLast();

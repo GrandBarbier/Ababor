@@ -107,10 +107,9 @@ public class GameplayManager : MonoBehaviour
         currentstate = new EndTurn(); 
         currentstate.DoState(allPlayers[playerIndex].move, this);
         playerIndex++;
-        Debug.Log(playerIndex);
+        Debug.Log("connar");
         if (playerIndex >= allPlayers.Count)
         {
-            Debug.Log("zsezs");
             playerIndex = 0;
         }
         foreach (string stg in objectif.actualObjectif)
@@ -240,6 +239,7 @@ public class GameplayManager : MonoBehaviour
         else
         {
             ChangePlayerOrder();
+            playerIndex = 0;
         }
         island[islandIndex].SetActive(true);
         island[islandIndex-1].SetActive(false);

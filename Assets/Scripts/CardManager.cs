@@ -23,6 +23,7 @@ public class CardManager : MonoBehaviour
     
     public bool verif;
     public bool oneTarget;
+    public bool numberClub;
     
     public Player player;
     public List<Player> allPlayer;
@@ -46,8 +47,7 @@ public class CardManager : MonoBehaviour
     {
         if (index != gameplayManager.playerIndex && verif)
         {
-            gameplayManager.playerIndex = gmIndex;
-            Debug.Log("fdpcon");
+            ResetIndexPlayer();
             verif = false;
         }
 
@@ -75,7 +75,8 @@ public class CardManager : MonoBehaviour
         verif = true;
         target.move.actualMove = target.move.InitialMove;
         waitMenu.SetActive(false);
-        gameplayManager.OpenVerifMenu();
+        numberClub = true;
+        
     }
 
     public void TwoGreen()
@@ -87,11 +88,16 @@ public class CardManager : MonoBehaviour
         target.move.enabled = true;
         target.move.actualMove = 2;
         target.move.PlayerShowMove();
-        target.move.caseNext[0].nextCases[0].isInRange = false;
+        for (int i = 0; i < target.move.allNextCases.Count/2; i++)
+        {
+            target.move.caseNext[0].nextCases[i].isInRange = false;
+            target.move.caseNext[0].nextCases[i].ResetColor();
+        }
         verif = true;
         target.move.actualMove = target.move.InitialMove;
         waitMenu.SetActive(false);
-        gameplayManager.OpenVerifMenu();
+        numberClub = true;
+        
     }
 
     public void OneBlue()
@@ -104,6 +110,7 @@ public class CardManager : MonoBehaviour
         verif = true;
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
+        gameplayManager.playerIndex--;
     }
 
     public void TwoBlue()
@@ -116,6 +123,7 @@ public class CardManager : MonoBehaviour
         verif = true;
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
+        gameplayManager.playerIndex--;
     }
 
     public void ThreeRed()
@@ -153,7 +161,7 @@ public class CardManager : MonoBehaviour
         player.move.caseNext[0].ActualCaseFunction();
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
-        gameplayManager.playerIndex = gmIndex;
+        numberClub = true;
     }
 
     public void QueenBlue()
@@ -164,7 +172,7 @@ public class CardManager : MonoBehaviour
         player.move.caseNext[0].ActualCaseFunction();
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
-        gameplayManager.playerIndex = gmIndex;
+        numberClub = true;
     }
     
     public void QueenRed()
@@ -415,5 +423,11 @@ public class CardManager : MonoBehaviour
             player = pl;
         }
         targetSelected.gameObject.SetActive(true);
+    }
+
+    public void ResetIndexPlayer()
+    {
+        gameplayManager.activPlayer.move.enabled = false;
+        gameplayManager.playerIndex = gmIndex;
     }
 }
