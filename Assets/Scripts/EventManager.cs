@@ -66,7 +66,15 @@ public class EventManager : MonoBehaviour
             neutralCases.Clear();
         }
 
-        _gameplayManager.ChangePlayer();
+        if (_gameplayManager.cardManager.numberClub == false)
+        {
+            _gameplayManager.ChangePlayer();
+        }
+        else
+        {
+            _gameplayManager.cardManager.numberClub = false;
+            _gameplayManager.cardManager.ResetIndexPlayer();
+        }
     }
 
     public void RemoveLoseCases()
@@ -89,7 +97,15 @@ public class EventManager : MonoBehaviour
             loseCases[i].ResetColor();
         }
 
-        _gameplayManager.ChangePlayer();
+        if (_gameplayManager.cardManager.numberClub == false)
+        {
+            _gameplayManager.ChangePlayer();
+        }
+        else
+        {
+            _gameplayManager.cardManager.numberClub = false;
+            _gameplayManager.cardManager.ResetIndexPlayer();
+        }
     }
 
     public void SwitchGainAndLoseCases()
@@ -110,7 +126,15 @@ public class EventManager : MonoBehaviour
             }
         }
 
-        _gameplayManager.ChangePlayer();
+        if (_gameplayManager.cardManager.numberClub == false)
+        {
+            _gameplayManager.ChangePlayer();
+        }
+        else
+        {
+            _gameplayManager.cardManager.numberClub = false;
+            _gameplayManager.cardManager.ResetIndexPlayer();
+        }
     }
 
     public void HideCase()
@@ -140,7 +164,15 @@ public class EventManager : MonoBehaviour
         }
 
         nonNeutralCases.Clear();
-        _gameplayManager.ChangePlayer();
+        if (_gameplayManager.cardManager.numberClub == false)
+        {
+            _gameplayManager.ChangePlayer();
+        }
+        else
+        {
+            _gameplayManager.cardManager.numberClub = false;
+            _gameplayManager.cardManager.ResetIndexPlayer();
+        }
     }
 
     public void UnhideCase(CasesNeutral caseToUnhide)
@@ -163,8 +195,6 @@ public class EventManager : MonoBehaviour
             //deactivate fog particle
             caseToUnhide.ResetColor();
         }
-
-        _gameplayManager.ChangePlayer();
     }
 
     
@@ -273,6 +303,15 @@ public class EventManager : MonoBehaviour
                     }
                 }
             }
+        }
+        if (_gameplayManager.cardManager.numberClub == false)
+        {
+            _gameplayManager.ChangePlayer();
+        }
+        else
+        {
+            _gameplayManager.cardManager.numberClub = false;
+            _gameplayManager.cardManager.ResetIndexPlayer();
         }
     }
 }

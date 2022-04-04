@@ -35,6 +35,7 @@ public class GameplayManager : MonoBehaviour
 
     public Queue<PlayerMovement> moveQueue = new Queue<PlayerMovement>();
     public PlayerMovement actualMove;
+    public List<PlayerMovement> testmove;
     
     public Queue<PlayerPoint> pointQueue = new Queue<PlayerPoint>();
     public PlayerPoint actualPoint;
@@ -69,6 +70,8 @@ public class GameplayManager : MonoBehaviour
             moveQueue.Enqueue(player.move);
             pointQueue.Enqueue(player.point);
         }
+
+        testmove = moveQueue.ToList();
         currentstate.DoState(allPlayers[playerIndex].move, this);
     }
 
@@ -107,10 +110,9 @@ public class GameplayManager : MonoBehaviour
         currentstate = new EndTurn(); 
         currentstate.DoState(allPlayers[playerIndex].move, this);
         playerIndex++;
-        Debug.Log(playerIndex);
+        
         if (playerIndex >= allPlayers.Count)
         {
-            Debug.Log("zsezs");
             playerIndex = 0;
         }
         foreach (string stg in objectif.actualObjectif)
@@ -150,9 +152,12 @@ public class GameplayManager : MonoBehaviour
     {
         actualMove.isLast = false;
         allPlayers[0].move.isLast = true;
-        playerQueue.Dequeue(); 
         playerQueue.Enqueue(allPlayers[0]);
+        playerQueue.Dequeue();
         allPlayers = playerQueue.ToList();
+        moveQueue.Enqueue(allPlayers[0].move);
+        moveQueue.Dequeue();
+        testmove = moveQueue.ToList();
         turnWait--;
         if (playerIndex >= allPlayers.Count)
         {
@@ -166,6 +171,7 @@ public class GameplayManager : MonoBehaviour
         {
             player.move.index = allPlayers.IndexOf(player);
         }
+        Debug.Log("dert");
     }
 
     public void ResetMove()
@@ -226,7 +232,6 @@ public class GameplayManager : MonoBehaviour
 
     public void NextIsland()
     {
-        objectif.lastCase = true;
         ChangePlayer();
         foreach (Player player in allPlayers)
         {
@@ -235,15 +240,17 @@ public class GameplayManager : MonoBehaviour
             player.move.isEnd = false;
         }
 
-        if (allPlayers[0].move.isLast)
+      /*  if (allPlayers[0].move.isLast)
         {
         }
         else
         {
             ChangePlayerOrder();
-        }
+            playerIndex = 0;
+        }*/
         island[islandIndex].SetActive(true);
         island[islandIndex-1].SetActive(false);
+        allCases.Clear();
         GetCases();
         foreach (Player player in allPlayers)
         {
@@ -365,7 +372,23 @@ public class GameplayManager : MonoBehaviour
     public void ShowActualPlayer()
     {
         int nbm = players.IndexOf(activPlayer.player);
-        buttonTrade[nbm].image.color = Color.gray;
+        foreach (Button button in buttonTrade)
+        {
+            if (buttonTrade.IndexOf(button) == nbm)
+            {
+                button.image.color = Color.white;
+            }
+            else
+            {
+                button.image.color = Color.gray;
+            }
+        }
+    }
+
+    public void CheckLast()
+    {
+        Debug.Log(playerQueue.Peek().move);
+        playerQueue.Dequeue();
     }
 
     public void ResetAllPlayerButton()
