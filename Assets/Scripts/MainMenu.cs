@@ -1,13 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class EndCalcul : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
-    public List<TMP_Text> textPoint;
-
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -19,10 +16,14 @@ public class EndCalcul : MonoBehaviour
     {
         
     }
-
-    public void PointCalcul(PlayerPoint point,int number)
+    
+    public void ThreePlayerGame()
     {
-        int allPoint = point.gold + point.point;
-        textPoint[number].text = allPoint.ToString();
+        SceneManager.LoadScene("SceneThree");
+    }
+
+    public void FourPLayerGame()
+    {
+        SceneManager.LoadScene("Scen Expo");
     }
 }
