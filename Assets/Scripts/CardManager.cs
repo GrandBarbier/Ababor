@@ -47,7 +47,6 @@ public class CardManager : MonoBehaviour
         if (index != gameplayManager.playerIndex && verif)
         {
             gameplayManager.playerIndex = gmIndex;
-            Debug.Log("fdpcon");
             verif = false;
         }
 

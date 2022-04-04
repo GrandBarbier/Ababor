@@ -43,7 +43,7 @@ public class GameplayManager : MonoBehaviour
     
     public CardManager cardManager;
 
-    public EndCalcul endCalcul;
+    public EndMenu endCalcul;
 
     void Awake()
     { 
