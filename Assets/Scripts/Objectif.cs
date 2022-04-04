@@ -25,10 +25,14 @@ public class Objectif : MonoBehaviour
     public List<TMP_Text> text;
     public List<TMP_Text> text2;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>();
+
+    }
+
+    void Start()
+    {
         
         for (int i = 0; i < _gameplayManager.allPlayers.Count; i++)
         {
