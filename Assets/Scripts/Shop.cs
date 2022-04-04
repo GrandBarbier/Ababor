@@ -44,6 +44,7 @@ public class Shop : MonoBehaviour
     public void ShopClose()
     {
         shopMenu.SetActive(false);
+        _gameplayManager.OpenVerifMenu();
     }
 
     public void MoveButton()
