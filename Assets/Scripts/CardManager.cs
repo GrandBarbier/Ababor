@@ -47,6 +47,7 @@ public class CardManager : MonoBehaviour
     {
         if (index != gameplayManager.playerIndex && verif)
         {
+            gameplayManager.playerIndex = gmIndex;
             ResetIndexPlayer();
             verif = false;
         }
