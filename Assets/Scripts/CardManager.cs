@@ -338,7 +338,7 @@ public class CardManager : MonoBehaviour
         menu.SetActive(false);
         text.gameObject.SetActive(false);
         text.text = null;
-        if (waitMenu.activeSelf == false && functionName == "Jack")
+        if (waitMenu.activeSelf == false)
         {
             gameplayManager.OpenVerifMenu();
         }
@@ -349,7 +349,7 @@ public class CardManager : MonoBehaviour
         targetMenu.SetActive(false);
         textTarget.gameObject.SetActive(false);
         textTarget.text = null;
-        if (waitMenu.activeSelf == false && functionName == "Jack")
+        if (waitMenu.activeSelf == false)
         {
             gameplayManager.OpenVerifMenu();
         }
