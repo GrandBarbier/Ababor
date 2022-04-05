@@ -44,6 +44,16 @@ public class Shop : MonoBehaviour
     public void ShopClose()
     {
         shopMenu.SetActive(false);
+        _gameplayManager.OpenVerifMenu();
+        if (_gameplayManager.cardManager.numberClub == false)
+        {
+            _gameplayManager.ChangePlayer();
+        }
+        else
+        {
+            _gameplayManager.cardManager.numberClub = false;
+            _gameplayManager.cardManager.ResetIndexPlayer();
+        }
     }
 
     public void MoveButton()
@@ -52,7 +62,15 @@ public class Shop : MonoBehaviour
         playerPoint.gold -= 10;
         playerMove.InitialMove ++;
         shopMenu.SetActive(false);
-        _gameplayManager.ChangePlayer();
+        if (_gameplayManager.cardManager.numberClub == false)
+        {
+            _gameplayManager.ChangePlayer();
+        }
+        else
+        {
+            _gameplayManager.cardManager.numberClub = false;
+            _gameplayManager.cardManager.ResetIndexPlayer();
+        }
         playerMove.actualMove = playerMove.InitialMove;
     }
 
@@ -60,7 +78,15 @@ public class Shop : MonoBehaviour
     {
         playerPoint.gold -= 5;
         shopMenu.SetActive(false);
-        _gameplayManager.ChangePlayer();
+        if (_gameplayManager.cardManager.numberClub == false)
+        {
+            _gameplayManager.ChangePlayer();
+        }
+        else
+        {
+            _gameplayManager.cardManager.numberClub = false;
+            _gameplayManager.cardManager.ResetIndexPlayer();
+        }
         _gameplayManager.enabled = true;
     }
 }
