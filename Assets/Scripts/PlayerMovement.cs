@@ -96,9 +96,13 @@ public class PlayerMovement : MonoBehaviour
                 allNextCases.Clear();
             }
         }
-        else
+        else if (_gameplayManager.cardManager.numberClub == false)
         {
             _gameplayManager.ChangePlayer();
+        }
+        else
+        {
+            _gameplayManager.cardManager.numberClub = false; 
         }
     }
     

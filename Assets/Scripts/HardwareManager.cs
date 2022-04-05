@@ -122,7 +122,7 @@ public class HardwareManager : MonoBehaviour
         descriptionEvent.SetActive(false);
         if(canNFC) 
             nfcConvertor.Conversion(_tag, ComparePlayer(_device));
-        
+        Debug.Log("deza");
     }
     
     private void OnTagRemoveDetected(NFC_DEVICE_ID _device, NFCTag _tag)  

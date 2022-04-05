@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,11 +10,17 @@ public class EndMenu : MonoBehaviour
     public GameObject heads;
     public GameObject downGameObject;
     public GameObject objectives;
+    public Objectif objectif;
 
     public float step;
     public float scaleFactor;
 
     public bool oui;
+
+    private void Awake()
+    {
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,16 +35,19 @@ public class EndMenu : MonoBehaviour
             MoveDown();
             ScaleDown();
         }
-        Tempo();
-        if (heads.transform.position == downGameObject.transform.position)
-        {
-            objectives.SetActive(true);
-        }
+
+        StartCoroutine(Waiter());
     }
 
-    public void Tempo()
+    IEnumerator Waiter()
     {
-        
+        yield return new WaitForSecondsRealtime(4);
+        if (heads.transform.position == downGameObject.transform.position)
+        {
+            
+            //TODO remplacer le texte des objectifs
+            //TODO afficher sprite persos sous celui qui win
+        }
     }
     public void MoveDown()
     {
