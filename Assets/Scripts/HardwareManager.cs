@@ -44,6 +44,8 @@ public class HardwareManager : MonoBehaviour
     public GameObject descriptionEvent;
     
     public CardManager cardManager;
+
+    private string card;
     
     void Start()
     {
@@ -115,20 +117,25 @@ public class HardwareManager : MonoBehaviour
     {
         LightController.ShutdownAllLights();
     }
-    
-    private void OnNewTagDetected(NFC_DEVICE_ID _device, NFCTag _tag)  
+
+    private void OnNewTagDetected(NFC_DEVICE_ID _device, NFCTag _tag)
     {
-        text.text = ComparePlayer(_device).player + " " + _tag.Data + " " + _tag.Type.ToString() + " added on " + _device.ToString();
-        descriptionEvent.SetActive(false);
-        if(canNFC) 
-            nfcConvertor.Conversion(_tag, ComparePlayer(_device));
-        Debug.Log("deza");
+        if (cardManager.menu.activeSelf == false && cardManager.targetMenu.activeSelf == false)
+        {
+            text.text = ComparePlayer(_device).player + " " + _tag.Data + " " + _tag.Type.ToString() + " added on " +
+                        _device.ToString();
+            descriptionEvent.SetActive(false);
+            card = _tag.Data;
+            if (canNFC)
+                nfcConvertor.Conversion(_tag, ComparePlayer(_device));
+            Debug.Log("deza");
+        }
     }
-    
+
     private void OnTagRemoveDetected(NFC_DEVICE_ID _device, NFCTag _tag)  
     {
         //text.text = _tag.Data + " " + _tag.Type.ToString() + " removed from " + _device.ToString();
-        if (nfcConvertor.cardManager.functionName != "Jack")
+        if (nfcConvertor.cardManager.functionName != "Jack" && card == _tag.Data)
         {
             cardManager.CloseMenu();
             cardManager.CloseMenu1Target();   

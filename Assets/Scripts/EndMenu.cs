@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EndMenu : MonoBehaviour
 {
-    public List<TMP_Text> textPoint;
+  /*  public List<TMP_Text> textPoint;
     public GameObject heads;
     public GameObject downGameObject;
     public GameObject objectives;
@@ -63,5 +63,5 @@ public class EndMenu : MonoBehaviour
     {
         int allPoint = point.gold + point.point;
         textPoint[number].text = allPoint.ToString();
-    }
+    }*/
 }

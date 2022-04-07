@@ -17,6 +17,11 @@ public class Objectif : MonoBehaviour
     public List<string> descriptionMid;
     public List<string> descriptionLate;
     public List<string> actualDescription;
+
+    public List<int> scoreEarly;
+    public List<int> scoreMid;
+    public List<int> scoreLate;
+    public List<int> allScore;
     
     public List<PlayerPoint> allPlayerPoint;
     
@@ -24,11 +29,12 @@ public class Objectif : MonoBehaviour
     
     public List<TMP_Text> text;
     public List<TMP_Text> text2;
+    public List<TMP_Text> score;
+    
 
     private void Awake()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>();
-
     }
 
     void Start()
@@ -46,6 +52,8 @@ public class Objectif : MonoBehaviour
             allEarlyObjectifs.Remove(allEarlyObjectifs[rdm]);
             actualDescription.Add(descriptionsEarly[rdm]);
             descriptionsEarly.Remove(descriptionsEarly[rdm]);
+            allScore.Add(scoreEarly[rdm]);
+            scoreEarly.Remove(scoreEarly[rdm]);
         }
         for (int i = 0; i <= allPlayerPoint.Count/3; i++)
         {
@@ -54,6 +62,8 @@ public class Objectif : MonoBehaviour
             allMidObjectifs.Remove(allMidObjectifs[rdm]);
             actualDescription.Add(descriptionMid[rdm]);
             descriptionMid.Remove(descriptionMid[rdm]);
+            allScore.Add(scoreMid[rdm]);
+            scoreMid.Remove(scoreMid[rdm]);
         }
         
         for (int i = 0; i <= allPlayerPoint.Count/3; i++)
@@ -63,6 +73,8 @@ public class Objectif : MonoBehaviour
             allLateObjectifs.Remove(allLateObjectifs[rdm]);
             actualDescription.Add(descriptionLate[rdm]);
             descriptionLate.Remove(descriptionLate[rdm]);
+            allScore.Add(scoreLate[rdm]);
+            scoreLate.Remove(scoreLate[rdm]);
         }
         
         
@@ -76,13 +88,40 @@ public class Objectif : MonoBehaviour
 
         for (int i = 0; i < text.Count; i++)
         {
-            text[i].text = actualObjectif[i] + actualDescription[i];
+            text[i].text = actualDescription[i];
         }
         
         for (int i = 0; i < text.Count; i++)
         {
             text2[i].text = actualObjectif[i] + actualDescription[i];
         }
+
+        for (int i = 1; i <= 3; i++)
+        {
+            switch (i)
+            {
+                case 1:
+                    for (int j = 0; j < 4; j++)
+                    {
+                        score[j].text = scoreEarly[j/2].ToString();
+                    }
+                    break;
+                case 2:
+                    for (int j = 0; j < 4; j++)
+                    {
+                        score[j].text = scoreMid[j / 2].ToString();
+                    }
+                    break;
+                case 3:
+                    for (int j = 0; j < 4; j++)
+                    {
+                        score[j].text = scoreLate[j / 2].ToString();
+                    }
+                    break;
+            }
+        }
+        
+        
     }
 
     // Update is called once per frame

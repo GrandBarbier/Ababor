@@ -182,7 +182,8 @@ public class CasesNeutral : MonoBehaviour
 
     public void LastCase()
     {
-        _gameplayManager.OpenEndMenu();
+      //  _gameplayManager.OpenEndMenu();
+      Debug.Log("connard");
         objectif.lastCase = true;
     }
 
