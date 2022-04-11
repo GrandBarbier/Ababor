@@ -396,6 +396,7 @@ public class CardManager : MonoBehaviour
             text.gameObject.SetActive(true);
             gameplayManager.verifMenu.SetActive(false);
             gameplayManager.verifMenu2.SetActive(false);
+            targetSelected.gameObject.SetActive(true);
             text.text = texte;
             if (functionName != lastName)
             {
@@ -404,7 +405,6 @@ public class CardManager : MonoBehaviour
             functionName = stg;
             player = pl;
         }
-        targetSelected.gameObject.SetActive(true);
     }
 
     public void OpenCardMenu1Target(string stg, Player pl, string texte)
