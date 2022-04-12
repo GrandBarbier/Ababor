@@ -8,20 +8,27 @@ using UnityEngine.VFX;
 public class Marauder : MonoBehaviour
 {
     public GameObject stepL, stepR;
-    
-    public VisualEffect vfxL, vfxR;
+
+    public ParticleSystem psL, psR;
     
     public float delay;
     
     void Start()
     {
+        var mainL = psL.main;
+        mainL.startRotation3D = true;
         
+        var mainR = psR.main;
+        mainR.startRotation3D = true;
     }
 
     private void Update()
     {
-        vfxL.SetFloat("Rotation", -transform.rotation.eulerAngles.y);
-        vfxR.SetFloat("Rotation", -transform.rotation.eulerAngles.y);
+        var mainL = psL.main;
+        mainL.startRotationYMultiplier = -(transform.rotation.eulerAngles.y/57f);
+        
+        var mainR = psR.main;
+        mainR.startRotationYMultiplier = -(transform.rotation.eulerAngles.y/57f);
     }
 
     IEnumerator SetpsCoroutine(float delay)
