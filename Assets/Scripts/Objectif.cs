@@ -221,6 +221,7 @@ public class Objectif : MonoBehaviour
 
     public void GoldLate()
     {
+       
         List<int> intList = new List<int>();
         foreach (PlayerPoint obj in allPlayerPoint )
         {
@@ -231,6 +232,7 @@ public class Objectif : MonoBehaviour
         {
             if (best == player.numberGainCase && lastCase)
             {
+                Debug.Log("zerda");
                 best = player.numberGainCase;
                 player.point += 30;
                 player.objectifVerif[baseObjectif.IndexOf("GoldLate")] = true;
