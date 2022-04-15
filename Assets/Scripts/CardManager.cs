@@ -31,9 +31,9 @@ public class CardManager : MonoBehaviour
 
     public Button button;
     public Button buttonTarget;
-    
+
     public string functionName, lastName;
-  
+
     // Start is called before the first frame update
     void Start()
     {
@@ -319,31 +319,47 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public void CallCardFunction( )
+    public void CallCardFunction()
     {
-        Invoke(functionName,5);
-        if (functionName == "Jack")
+        if (player == target)
         {
-            functionName = lastName;
+            Debug.Log("non");
         }
-        menu.SetActive(false);
-        targetSelected.gameObject.SetActive(false);
-        targetSelected.color = Color.white;
-        playerSelected.color = Color.white;
-        waitMenu.SetActive(true);
+        else
+        {
+            Invoke(functionName, 5);
+            if (functionName == "Jack")
+            {
+                functionName = lastName;
+            }
+
+            menu.SetActive(false);
+            targetSelected.gameObject.SetActive(false);
+            targetSelected.color = Color.white;
+            playerSelected.color = Color.white;
+            waitMenu.SetActive(true);
+        }
     }
 
     public void CallCardFunction1Target()
     {
-        Invoke(functionName, 5);
-        if (functionName == "Jack")
+        if (target == gameplayManager.activPlayer && functionName == "KingGreen" || functionName == "QueenGreen")
         {
-            functionName = lastName;
+            Debug.Log("non");
         }
-        targetMenu.SetActive(false); 
-        targetSelected.gameObject.SetActive(false);
-        targetSelected.color = Color.white;
-        waitMenu.SetActive(true);
+        else
+        {
+            Invoke(functionName, 5);
+            if (functionName == "Jack")
+            {
+                functionName = lastName;
+            }
+
+            targetMenu.SetActive(false);
+            targetSelected.gameObject.SetActive(false);
+            targetSelected.color = Color.white;
+            waitMenu.SetActive(true);
+        }
     }
 
     public void CloseMenu()
