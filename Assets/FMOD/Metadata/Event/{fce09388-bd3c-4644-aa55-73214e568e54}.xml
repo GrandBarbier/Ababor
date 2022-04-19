@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{fce09388-bd3c-4644-aa55-73214e568e54}">
+		<property name="color">
+			<value>Red</value>
+		</property>
 		<property name="name">
 			<value>SFX_Menu_Sound_Slider</value>
 		</property>
@@ -33,6 +36,9 @@
 		</relationship>
 		<relationship name="parameters">
 			<destination>{69a62633-8e4c-403d-97ff-65ad431bbb3e}</destination>
+		</relationship>
+		<relationship name="banks">
+			<destination>{9a62e4b2-5020-4996-8e4d-e1154cff4b36}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{a9a00650-ccd7-4317-a853-6c72239fd971}">
@@ -97,6 +103,7 @@
 		<relationship name="sounds">
 			<destination>{384bae28-47ea-4937-bd9f-37029eb1145a}</destination>
 			<destination>{44fb99a9-84c3-41f0-82c6-88b54b566049}</destination>
+			<destination>{e674a454-a805-443f-882c-22bcfb2c4b4c}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{bc3b4e8e-4b88-45c3-916e-2107ddf26193}">
@@ -160,6 +167,23 @@
 			<destination>{2874432f-77ca-45ca-975f-b928f823e588}</destination>
 		</relationship>
 	</object>
+	<object class="SingleSound" id="{e674a454-a805-443f-882c-22bcfb2c4b4c}">
+		<property name="volume">
+			<value>-25</value>
+		</property>
+		<property name="pitch">
+			<value>4.5</value>
+		</property>
+		<property name="looping">
+			<value>true</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{e398b13c-b23f-47a4-a2c8-c4d89b85b271}</destination>
+		</relationship>
+		<relationship name="audioFile">
+			<destination>{077bdbb3-329c-4f1e-b690-7ed1e31d6432}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{db489337-270e-4095-bc4f-2607097f1299}" />
 	<object class="MixerBusEffectChain" id="{49187b11-dc8a-4b4f-99a8-06c2920a3032}">
 		<relationship name="effects">
@@ -187,6 +211,14 @@
 	<object class="RandomizerModulator" id="{aecf1b69-06a5-413c-8dc8-0f1b89cdb5a8}">
 		<property name="nameOfPropertyBeingModulated">
 			<value>volume</value>
+		</property>
+	</object>
+	<object class="RandomizerModulator" id="{e398b13c-b23f-47a4-a2c8-c4d89b85b271}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>pitch</value>
+		</property>
+		<property name="amount">
+			<value>15.5</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{159de9c1-5fd7-4f56-9dd4-c8ca4a0cb936}" />
