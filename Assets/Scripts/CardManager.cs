@@ -31,9 +31,9 @@ public class CardManager : MonoBehaviour
 
     public Button button;
     public Button buttonTarget;
-    
+
     public string functionName, lastName;
-  
+
     // Start is called before the first frame update
     void Start()
     {
@@ -104,7 +104,13 @@ public class CardManager : MonoBehaviour
     public void OneBlue()
     {
         gmIndex = gameplayManager.playerIndex;
-        target.move.caseNext[0] = target.move.caseNext[0].lastCase;
+        if (target.move.caseNext[0] == target.move.caseNext[0].lastCase)
+        {
+        }
+        else
+        {
+            target.move.caseNext[0] = target.move.caseNext[0].lastCase; 
+        }
         target.player.transform.position = target.move.caseNext[0].transform.position + Vector3.up;
         target.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
@@ -117,7 +123,13 @@ public class CardManager : MonoBehaviour
     public void TwoBlue()
     {
         gmIndex = gameplayManager.playerIndex;
-        target.move.caseNext[0] = target.move.caseNext[0].lastCase.lastCase;
+        if (target.move.caseNext[0] == target.move.caseNext[0].lastCase.lastCase)
+        {
+        }
+        else
+        {
+            target.move.caseNext[0] = target.move.caseNext[0].lastCase.lastCase;   
+        }
         target.player.transform.position = target.move.caseNext[0].transform.position + Vector3.up;
         target.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
@@ -307,31 +319,47 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public void CallCardFunction( )
+    public void CallCardFunction()
     {
-        Invoke(functionName,5);
-        if (functionName == "Jack")
+        if (player == target)
         {
-            functionName = lastName;
+            Debug.Log("non");
         }
-        menu.SetActive(false);
-        targetSelected.gameObject.SetActive(false);
-        targetSelected.color = Color.white;
-        playerSelected.color = Color.white;
-        waitMenu.SetActive(true);
+        else
+        {
+            Invoke(functionName, 5);
+            if (functionName == "Jack")
+            {
+                functionName = lastName;
+            }
+
+            menu.SetActive(false);
+            targetSelected.gameObject.SetActive(false);
+            targetSelected.color = Color.white;
+            playerSelected.color = Color.white;
+            waitMenu.SetActive(true);
+        }
     }
 
     public void CallCardFunction1Target()
     {
-        Invoke(functionName, 5);
-        if (functionName == "Jack")
+        if (target == gameplayManager.activPlayer && functionName == "KingGreen" || functionName == "QueenGreen")
         {
-            functionName = lastName;
+            Debug.Log("non");
         }
-        targetMenu.SetActive(false); 
-        targetSelected.gameObject.SetActive(false);
-        targetSelected.color = Color.white;
-        waitMenu.SetActive(true);
+        else
+        {
+            Invoke(functionName, 5);
+            if (functionName == "Jack")
+            {
+                functionName = lastName;
+            }
+
+            targetMenu.SetActive(false);
+            targetSelected.gameObject.SetActive(false);
+            targetSelected.color = Color.white;
+            waitMenu.SetActive(true);
+        }
     }
 
     public void CloseMenu()
@@ -339,6 +367,8 @@ public class CardManager : MonoBehaviour
         menu.SetActive(false);
         text.gameObject.SetActive(false);
         text.text = null;
+        playerSelected.gameObject.SetActive(false);
+        targetSelected.gameObject.SetActive(false);
         if (waitMenu.activeSelf == false)
         {
             gameplayManager.OpenVerifMenu();
@@ -350,6 +380,8 @@ public class CardManager : MonoBehaviour
         targetMenu.SetActive(false);
         textTarget.gameObject.SetActive(false);
         textTarget.text = null;
+        playerSelected.gameObject.SetActive(false);
+        targetSelected.gameObject.SetActive(false);
         if (waitMenu.activeSelf == false)
         {
             gameplayManager.OpenVerifMenu();
@@ -380,6 +412,7 @@ public class CardManager : MonoBehaviour
             text.gameObject.SetActive(true);
             gameplayManager.verifMenu.SetActive(false);
             gameplayManager.verifMenu2.SetActive(false);
+            targetSelected.gameObject.SetActive(true);
             text.text = texte;
             if (functionName != lastName)
             {
@@ -388,7 +421,6 @@ public class CardManager : MonoBehaviour
             functionName = stg;
             player = pl;
         }
-        targetSelected.gameObject.SetActive(true);
     }
 
     public void OpenCardMenu1Target(string stg, Player pl, string texte)

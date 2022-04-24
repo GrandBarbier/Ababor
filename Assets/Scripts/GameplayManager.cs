@@ -12,7 +12,7 @@ public class GameplayManager : MonoBehaviour
 {
     public List<GameObject> players = new List<GameObject>();
     public List<GameObject> island = new List<GameObject>();
-    public GameObject verifMenu,verifMenu2,endMenu, secondIsle, firstIsle, menuTrade,description;
+    public GameObject verifMenu,verifMenu2,/*endMenu,*/ secondIsle, firstIsle, menuTrade,description,objectifMenu;
    
     public List<Button> buttonTrade; 
     
@@ -20,7 +20,7 @@ public class GameplayManager : MonoBehaviour
 
     public int playerIndex, treasure, turnWait, islandIndex, goldTrade;
 
-    public bool lastTurn,uiTurned;
+    public bool lastTurn,uiTurned,objectifOpen;
     
     public State currentstate;
     
@@ -44,7 +44,7 @@ public class GameplayManager : MonoBehaviour
     
     public CardManager cardManager;
 
-    public EndMenu endCalcul;
+  //  public EndMenu endCalcul;
 
     void Awake()
     { 
@@ -93,6 +93,12 @@ public class GameplayManager : MonoBehaviour
                 NextIsland();    
             }
         }
+
+        if (objectifOpen && Input.touchCount>0)
+        {
+            objectifMenu.SetActive(false);
+            objectifOpen = false;
+        }
     }
 
     public int SortByName(CasesNeutral object1, CasesNeutral object2) // function to sort cases
@@ -128,7 +134,6 @@ public class GameplayManager : MonoBehaviour
 
     public void ButtonYes()
     {
-      //  actualMove.menuVerif.SetActive(false);
         actualMove.end = true;
         cardManager.verif = false;
     }
@@ -186,16 +191,17 @@ public class GameplayManager : MonoBehaviour
     {
         verifMenu.SetActive(true);
         verifMenu2.SetActive(true);
+        Debug.Log("testing");
     }
 
-    public void OpenEndMenu()
+   /*public void OpenEndMenu()
     {
        endMenu.SetActive(true);
        for (int i = 0; i < allPlayers.Count; i++)
        {
            endCalcul.PointCalcul(allPlayers[i].point,i);
        }
-    }
+    }*/
     
     public void ButtonVerifMenuMove()
     {
@@ -260,10 +266,11 @@ public class GameplayManager : MonoBehaviour
         turnWait = -1;
     }
 
-    public void OpenObjectif(GameObject menu)
+    public IEnumerator OpenObjectif()
     {
-        bool open = menu.activeSelf;
-        menu.SetActive(!open);
+        objectifMenu.SetActive(true);
+        yield return new WaitForSeconds(.2f);
+        objectifOpen = true;
     }
 
     public void GiveGold()
@@ -397,6 +404,11 @@ public class GameplayManager : MonoBehaviour
         {
             button.image.color = Color.white;
         }
+    }
+
+    public void ButtonObjectif()
+    {
+        StartCoroutine(OpenObjectif());
     }
 }
 
