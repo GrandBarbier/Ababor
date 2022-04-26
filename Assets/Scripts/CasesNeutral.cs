@@ -16,6 +16,7 @@ public class CasesNeutral : MonoBehaviour
     public Material rangedMat;
     public Material baseSecondMat;
     public Material[] allMat;
+    public List<Marauder> allSteps = new List<Marauder>();
     
     [SerializeField] private GameplayManager _gameplayManager;
     [SerializeField] private EventManager _eventManager;
@@ -49,6 +50,17 @@ public class CasesNeutral : MonoBehaviour
         shop = FindObjectOfType<Shop>();
         allMat = renderer.materials;
         ResetColor();
+        
+        AddDescendantsWithTag(transform, "Steps", allSteps);
+    }
+
+
+    private void Start()
+    {
+        foreach (var marauder in allSteps)
+        {
+            marauder.StopSteps();
+        }
     }
 
     // Update is called once per frame
@@ -67,6 +79,10 @@ public class CasesNeutral : MonoBehaviour
                 obj.allMat[0] = rangedMat;
                 obj.renderer.materials = obj.allMat;
                 obj.isInRange = true;
+                foreach (var marauder in obj.allSteps)
+                {
+                    marauder.StartSteps();
+                }
             }
 
             for (int i = 0; i < nextCases.Count; i++)
@@ -192,5 +208,17 @@ public class CasesNeutral : MonoBehaviour
         eventS.GetEvent();
         eventS.Invoke(eventS.eventName,0);
         _gameplayManager.ResetLast();
+    }
+    
+    private void AddDescendantsWithTag(Transform parent, string tag, List<Marauder> list)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.gameObject.tag == tag)
+            {
+                list.Add(child.gameObject.GetComponent<Marauder>());
+            }
+            AddDescendantsWithTag(child, tag, list);
+        }
     }
 }
