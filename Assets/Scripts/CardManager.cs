@@ -13,6 +13,7 @@ public class CardManager : MonoBehaviour
 
     public Image playerSelected;
     public Image targetSelected;
+    public Image player1Target;
     
     public GameplayManager gameplayManager;
 
@@ -24,6 +25,7 @@ public class CardManager : MonoBehaviour
     public bool verif;
     public bool oneTarget;
     public bool numberClub;
+    public bool openMove;
     
     public Player player;
     public List<Player> allPlayer;
@@ -31,9 +33,9 @@ public class CardManager : MonoBehaviour
 
     public Button button;
     public Button buttonTarget;
-    
+
     public string functionName, lastName;
-  
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,11 +74,14 @@ public class CardManager : MonoBehaviour
         gameplayManager.playerIndex = index;
         target.move.enabled = true;
         target.move.actualMove = 1;
+        gameplayManager.currentstate = new Moving();
+        gameplayManager.currentstate.DoState(target.move,gameplayManager);
         target.move.PlayerShowMove();
         verif = true;
         target.move.actualMove = target.move.InitialMove;
         waitMenu.SetActive(false);
         numberClub = true;
+        
         
     }
 
@@ -319,31 +324,68 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public void CallCardFunction( )
+    public void ButtonSelect1Target(int index)
     {
-        Invoke(functionName,5);
-        if (functionName == "Jack")
+        target = allPlayer[index];
+
+        switch (index)
         {
-            functionName = lastName;
+            case 0 :
+                player1Target.color = Color.red;
+                break;
+            case 1 :
+                player1Target.color = Color.blue;
+                break;
+            case 2 :
+                player1Target.color = Color.yellow;
+                break;
+            case 3 :
+                player1Target.color = Color.green;
+                break;
         }
-        menu.SetActive(false);
-        targetSelected.gameObject.SetActive(false);
-        targetSelected.color = Color.white;
-        playerSelected.color = Color.white;
-        waitMenu.SetActive(true);
+    }
+
+    public void CallCardFunction()
+    {
+        if (player == target)
+        {
+            Debug.Log("non");
+        }
+        else
+        {
+            Invoke(functionName, 5);
+            if (functionName == "Jack")
+            {
+                functionName = lastName;
+            }
+
+            menu.SetActive(false);
+            targetSelected.gameObject.SetActive(false);
+            targetSelected.color = Color.white;
+            playerSelected.color = Color.white;
+            waitMenu.SetActive(true);
+        }
     }
 
     public void CallCardFunction1Target()
     {
-        Invoke(functionName, 5);
-        if (functionName == "Jack")
+        if (target == gameplayManager.activPlayer && functionName == "KingGreen" || functionName == "QueenGreen")
         {
-            functionName = lastName;
+            Debug.Log("non");
         }
-        targetMenu.SetActive(false); 
-        targetSelected.gameObject.SetActive(false);
-        targetSelected.color = Color.white;
-        waitMenu.SetActive(true);
+        else
+        {
+            Invoke(functionName, 5);
+            if (functionName == "Jack")
+            {
+                functionName = lastName;
+            }
+
+            targetMenu.SetActive(false);
+            targetSelected.gameObject.SetActive(false);
+            targetSelected.color = Color.white;
+            waitMenu.SetActive(true);
+        }
     }
 
     public void CloseMenu()
@@ -374,19 +416,23 @@ public class CardManager : MonoBehaviour
     
     public void OpenCardMenu(string stg, Player pl, string texte)
     {
-        switch (gameplayManager.allPlayers.IndexOf(pl))
+        switch (pl.move.index)
         {
             case 0 :
                 menu.transform.rotation = Quaternion.Euler(0,0,0);
+                Debug.Log(0);
                 break;
             case 1:
                 menu.transform.rotation = Quaternion.Euler(0,0,0);
+                Debug.Log(1);
                 break;
             case 2:
                 menu.transform.rotation = Quaternion.Euler(0,0,180);
+                Debug.Log(2);
                 break;
             case 3:
                 menu.transform.rotation = Quaternion.Euler(0,0,180);
+                Debug.Log(3);
                 break;
         }
         
@@ -409,19 +455,23 @@ public class CardManager : MonoBehaviour
 
     public void OpenCardMenu1Target(string stg, Player pl, string texte)
     {
-        switch (gameplayManager.allPlayers.IndexOf(pl))
+        switch (pl.move.index)
         {
             case 0 :
-                targetMenu.transform.rotation = Quaternion.Euler(0,0,0);
+                menu.transform.rotation = Quaternion.Euler(0,0,0);
+                Debug.Log(0);
                 break;
             case 1:
-                targetMenu.transform.rotation = Quaternion.Euler(0,0,0);
+                menu.transform.rotation = Quaternion.Euler(0,0,0);
+                Debug.Log(1);
                 break;
             case 2:
-                targetMenu.transform.rotation = Quaternion.Euler(0,0,180);
+                menu.transform.rotation = Quaternion.Euler(0,0,180);
+                Debug.Log(2);
                 break;
             case 3:
-                targetMenu.transform.rotation = Quaternion.Euler(0,0,180);
+                menu.transform.rotation = Quaternion.Euler(0,0,180);
+                Debug.Log(3);
                 break;
         }
         
