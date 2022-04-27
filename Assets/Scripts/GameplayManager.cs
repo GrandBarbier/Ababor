@@ -198,7 +198,7 @@ public class GameplayManager : MonoBehaviour
     {
         verifMenu.SetActive(true);
         verifMenu2.SetActive(true);
-        Debug.Log("testing");
+       // Debug.Log("testing");
     }
 
    /*public void OpenEndMenu()
