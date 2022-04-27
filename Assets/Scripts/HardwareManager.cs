@@ -120,7 +120,7 @@ public class HardwareManager : MonoBehaviour
 
     private void OnNewTagDetected(NFC_DEVICE_ID _device, NFCTag _tag)
     {
-        if (cardManager.menu.activeSelf == false && cardManager.targetMenu.activeSelf == false)
+        if (cardManager.menu.activeSelf == false && cardManager.targetMenu.activeSelf == false && cardManager.numberClub == false)
         {
             text.text = ComparePlayer(_device).player + " " + _tag.Data + " " + _tag.Type.ToString() + " added on " +
                         _device.ToString();
@@ -135,7 +135,7 @@ public class HardwareManager : MonoBehaviour
     private void OnTagRemoveDetected(NFC_DEVICE_ID _device, NFCTag _tag)  
     {
         //text.text = _tag.Data + " " + _tag.Type.ToString() + " removed from " + _device.ToString();
-        if (nfcConvertor.cardManager.functionName != "Jack" && card == _tag.Data)
+        if (nfcConvertor.cardManager.functionName != "Jack" && nfcConvertor.cardManager.numberClub == false && card == _tag.Data)
         {
             cardManager.CloseMenu();
             cardManager.CloseMenu1Target();   
