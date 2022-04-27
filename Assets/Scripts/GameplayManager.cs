@@ -14,11 +14,12 @@ public class GameplayManager : MonoBehaviour
     public List<GameObject> island = new List<GameObject>();
     public GameObject verifMenu,verifMenu2,/*endMenu,*/ secondIsle, firstIsle, menuTrade,description,objectifMenu;
    
-    public List<Button> buttonTrade; 
+    public List<Button> buttonTrade;
+    public Queue<Button> buttonQueue;
     
     public List<CasesNeutral> allCases = new List<CasesNeutral>();
 
-    public int playerIndex, treasure, turnWait, islandIndex, goldTrade;
+    public int playerIndex, treasure, turnWait, islandIndex, goldTrade, playerInTurn;
 
     public bool lastTurn,uiTurned,objectifOpen;
     
@@ -73,6 +74,8 @@ public class GameplayManager : MonoBehaviour
 
         testmove = moveQueue.ToList();
         currentstate.DoState(allPlayers[playerIndex].move, this);
+        ShowActualPlayer();
+        
     }
 
     // Update is called once per frame
@@ -81,6 +84,7 @@ public class GameplayManager : MonoBehaviour
         activPlayer = allPlayers[playerIndex];
         actualMove = allPlayers[playerIndex].move;
         actualPoint = allPlayers[playerIndex].point;
+        
         if (playerIndex < 0)
         {
             playerIndex = 0;
@@ -130,6 +134,7 @@ public class GameplayManager : MonoBehaviour
             ChangePlayerOrder();
         }
         ButtonStart();
+        ShowActualPlayer();
     }
 
     public void ButtonYes()
@@ -163,6 +168,8 @@ public class GameplayManager : MonoBehaviour
         moveQueue.Enqueue(allPlayers[0].move);
         moveQueue.Dequeue();
         testmove = moveQueue.ToList();
+        buttonTrade.Add(buttonTrade[0]);
+        buttonTrade.RemoveAt(0);
         turnWait--;
         if (playerIndex >= allPlayers.Count)
         {
@@ -176,7 +183,7 @@ public class GameplayManager : MonoBehaviour
         {
             player.move.index = allPlayers.IndexOf(player);
         }
-        Debug.Log("dert");
+        ShowActualPlayer();
     }
 
     public void ResetMove()
@@ -378,10 +385,10 @@ public class GameplayManager : MonoBehaviour
 
     public void ShowActualPlayer()
     {
-        int nbm = players.IndexOf(activPlayer.player);
+        playerInTurn = allPlayers[playerIndex].move.index;
         foreach (Button button in buttonTrade)
         {
-            if (buttonTrade.IndexOf(button) == nbm)
+            if (buttonTrade.IndexOf(button) == playerInTurn)
             {
                 button.image.color = Color.white;
             }
