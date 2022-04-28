@@ -79,15 +79,26 @@ public class CasesNeutral : MonoBehaviour
                 obj.allMat[0] = rangedMat;
                 obj.renderer.materials = obj.allMat;
                 obj.isInRange = true;
-                foreach (var marauder in obj.allSteps)
-                {
-                    marauder.StartSteps();
-                }
             }
+            
 
             for (int i = 0; i < nextCases.Count; i++)
             {
               player.allNextCases.Add(nextCases[i]);
+            }
+
+            foreach (var marauder in allSteps)
+            {
+                marauder.StartSteps();
+            }
+            
+            for (int i = 0; i < player.allNextCases.Count-1; i++)
+            {
+                foreach (var marauder in nextCases[i].allSteps)
+                {
+                    marauder.StartSteps();
+                    Debug.Log(i);
+                }
             }
         }
     }
@@ -98,6 +109,11 @@ public class CasesNeutral : MonoBehaviour
         allMat[1] = baseSecondMat;
         renderer.materials = allMat;
         isInRange = false;
+        
+        foreach (var marauder in allSteps)
+        {
+            marauder.StopSteps();
+        }
     }
 
     public void ActualCaseFunction()
