@@ -142,6 +142,7 @@ public class CasesNeutral : MonoBehaviour
         {
             _gameplayManager.cardManager.numberClub = false;
             _gameplayManager.cardManager.ResetIndexPlayer();
+            _gameplayManager.currentstate = new CardPlay();
         }
         
     }
@@ -156,6 +157,7 @@ public class CasesNeutral : MonoBehaviour
         {
             _gameplayManager.cardManager.numberClub = false;
             _gameplayManager.cardManager.ResetIndexPlayer();
+            _gameplayManager.currentstate = new CardPlay();
         }
     }
 
@@ -177,6 +179,7 @@ public class CasesNeutral : MonoBehaviour
         {
             _gameplayManager.cardManager.numberClub = false;
             _gameplayManager.cardManager.ResetIndexPlayer();
+            _gameplayManager.currentstate = new CardPlay();
         }
     }
 
@@ -204,6 +207,7 @@ public class CasesNeutral : MonoBehaviour
             {
                 _gameplayManager.cardManager.numberClub = false;
                 _gameplayManager.cardManager.ResetIndexPlayer();
+                _gameplayManager.currentstate = new CardPlay();
             }
         }
         else

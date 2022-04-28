@@ -20,8 +20,7 @@ public class Moving : State
     {
         player.enabled = true;
         player.PlayerShowMove();
-        gameplayManager.ResetAllPlayerButton();
-        gameplayManager.ShowActualPlayer();
+        //  gameplayManager.ShowActualPlayer();
     }
 }
 
@@ -33,7 +32,6 @@ public class EndTurn : State
         gameplayManager.currentstate = new CardPlay();
         gameplayManager.currentstate.DoState(player,gameplayManager);
         gameplayManager.ResetMove();
-       
     }
 }
 
@@ -44,6 +42,7 @@ public class CardPlay : State
     public override void DoState(PlayerMovement player, GameplayManager gameplayManager)
     {
         gameplayManager.OpenVerifMenu();
+        
     }
 }
 

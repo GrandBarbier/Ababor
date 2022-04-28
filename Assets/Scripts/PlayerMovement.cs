@@ -70,7 +70,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 menuVerif.SetActive(false);
                 gameObject.transform.position = allNextCases[indexCase].transform.position + new Vector3(0, 0.1f, 0);
-                
                 point.numberCase = indexCase;
                 PlayerResetCase();
                 if (Vector3.Distance(transform.position, child.transform.position) <= 1f) // set end turn
@@ -99,10 +98,6 @@ public class PlayerMovement : MonoBehaviour
         else if (_gameplayManager.cardManager.numberClub == false)
         {
             _gameplayManager.ChangePlayer();
-        }
-        else
-        {
-            _gameplayManager.cardManager.numberClub = false; 
         }
     }
     
