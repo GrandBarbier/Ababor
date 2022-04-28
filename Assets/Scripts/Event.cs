@@ -64,6 +64,7 @@ public class Event : MonoBehaviour
         {
             _gameplayManager.cardManager.numberClub = false;
             _gameplayManager.cardManager.ResetIndexPlayer();
+            _gameplayManager.currentstate = new CardPlay();
         }
         enabled = false;
     }
@@ -90,6 +91,7 @@ public class Event : MonoBehaviour
         {
             _gameplayManager.cardManager.numberClub = false;
             _gameplayManager.cardManager.ResetIndexPlayer();
+            _gameplayManager.currentstate = new CardPlay();
         }
         enabled = false;
     }
@@ -110,6 +112,7 @@ public class Event : MonoBehaviour
         {
             _gameplayManager.cardManager.numberClub = false;
             _gameplayManager.cardManager.ResetIndexPlayer();
+            _gameplayManager.currentstate = new CardPlay();
         }
     }
 
@@ -137,6 +140,7 @@ public class Event : MonoBehaviour
         {
             _gameplayManager.cardManager.numberClub = false;
             _gameplayManager.cardManager.ResetIndexPlayer();
+            _gameplayManager.currentstate = new CardPlay();
         }
     }
 

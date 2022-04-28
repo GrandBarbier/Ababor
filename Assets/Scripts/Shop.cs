@@ -53,40 +53,61 @@ public class Shop : MonoBehaviour
         {
             _gameplayManager.cardManager.numberClub = false;
             _gameplayManager.cardManager.ResetIndexPlayer();
+            _gameplayManager.currentstate = new CardPlay();
         }
     }
 
     public void MoveButton()
     {
-        _gameplayManager.enabled = true;
-        playerPoint.gold -= 10;
-        playerMove.InitialMove ++;
-        shopMenu.SetActive(false);
-        if (_gameplayManager.cardManager.numberClub == false)
+        if (playerPoint.gold >= 10)
         {
-            _gameplayManager.ChangePlayer();
+
+            _gameplayManager.enabled = true;
+            playerPoint.gold -= 10;
+            playerMove.InitialMove++;
+            shopMenu.SetActive(false);
+            if (_gameplayManager.cardManager.numberClub == false)
+            {
+                _gameplayManager.ChangePlayer();
+            }
+            else
+            {
+                _gameplayManager.cardManager.numberClub = false;
+                _gameplayManager.cardManager.ResetIndexPlayer();
+                _gameplayManager.currentstate = new CardPlay();
+            }
+
+            playerMove.actualMove = playerMove.InitialMove;
         }
         else
         {
-            _gameplayManager.cardManager.numberClub = false;
-            _gameplayManager.cardManager.ResetIndexPlayer();
+            ShopClose();
         }
-        playerMove.actualMove = playerMove.InitialMove;
     }
 
     public void CardButton()
     {
-        playerPoint.gold -= 5;
-        shopMenu.SetActive(false);
-        if (_gameplayManager.cardManager.numberClub == false)
+        if (playerPoint.gold >= 5)
         {
-            _gameplayManager.ChangePlayer();
+
+
+            playerPoint.gold -= 5;
+            shopMenu.SetActive(false);
+            if (_gameplayManager.cardManager.numberClub == false)
+            {
+                _gameplayManager.ChangePlayer();
+            }
+            else
+            {
+                _gameplayManager.cardManager.numberClub = false;
+                _gameplayManager.cardManager.ResetIndexPlayer();
+            }
+
+            _gameplayManager.enabled = true;
         }
         else
         {
-            _gameplayManager.cardManager.numberClub = false;
-            _gameplayManager.cardManager.ResetIndexPlayer();
+            ShopClose();
         }
-        _gameplayManager.enabled = true;
     }
 }
