@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class CausticAnimation : MonoBehaviour
@@ -25,8 +24,8 @@ public class CausticAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        index = (int)(Time.time * framerate) % tex.Count;
+        //index = (int)(Time.time * framerate) % tex.Count;
         
-        m.SetTexture("MainTex", tex[index]);
+        //m.SetTexture("MainTex", tex[index]);
     }
 }

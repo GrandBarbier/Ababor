@@ -92,12 +92,11 @@ public class CasesNeutral : MonoBehaviour
                 marauder.StartSteps();
             }
             
-            for (int i = 0; i < player.allNextCases.Count-1; i++)
+            for (int i = 0; i < player.actualMove-2; i++)
             {
                 foreach (var marauder in nextCases[i].allSteps)
                 {
                     marauder.StartSteps();
-                    Debug.Log(i);
                 }
             }
         }
