@@ -10,7 +10,8 @@ public class CardManager : MonoBehaviour
     public GameObject menu;
     public GameObject waitMenu;
     public GameObject targetMenu;
-
+    public GameObject useCard;
+    
     public Image playerSelected;
     public Image targetSelected;
     public Image player1Target;
@@ -81,8 +82,7 @@ public class CardManager : MonoBehaviour
         target.move.actualMove = target.move.InitialMove;
         waitMenu.SetActive(false);
         numberClub = true;
-        
-        
+        useCard.SetActive(true);
     }
 
     public void TwoGreen()
@@ -103,7 +103,7 @@ public class CardManager : MonoBehaviour
         target.move.actualMove = target.move.InitialMove;
         waitMenu.SetActive(false);
         numberClub = true;
-        
+        useCard.SetActive(true);
     }
 
     public void OneBlue()
@@ -123,6 +123,7 @@ public class CardManager : MonoBehaviour
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
         gameplayManager.playerIndex--;
+        useCard.SetActive(true);
     }
 
     public void TwoBlue()
@@ -142,6 +143,7 @@ public class CardManager : MonoBehaviour
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
         gameplayManager.playerIndex--;
+        useCard.SetActive(true);
     }
 
     public void ThreeRed()
@@ -149,6 +151,7 @@ public class CardManager : MonoBehaviour
         target.point.gold -= 3;
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
+        useCard.SetActive(true);
     }
 
     public void FiveRed()
@@ -156,6 +159,7 @@ public class CardManager : MonoBehaviour
         target.point.gold -= 5;
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
+        useCard.SetActive(true);
     }
 
     public void ThreeYellow()
@@ -163,6 +167,7 @@ public class CardManager : MonoBehaviour
         target.point.gold += 3;
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
+        useCard.SetActive(true);
     }
 
     public void FiveYellow()
@@ -170,6 +175,7 @@ public class CardManager : MonoBehaviour
         target.point.gold += 5;
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
+        useCard.SetActive(true);
     }
     public void QueenGreen()
     {
@@ -180,6 +186,7 @@ public class CardManager : MonoBehaviour
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
         numberClub = true;
+        useCard.SetActive(true);
     }
 
     public void QueenBlue()
@@ -191,6 +198,7 @@ public class CardManager : MonoBehaviour
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
         numberClub = true;
+        useCard.SetActive(true);
     }
     
     public void QueenRed()
@@ -199,6 +207,7 @@ public class CardManager : MonoBehaviour
         target.point.gold += 5;
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
+        useCard.SetActive(true);
     }
 
     public void QueenYellow()
@@ -207,6 +216,7 @@ public class CardManager : MonoBehaviour
         gameplayManager.treasure = 0;
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
+        useCard.SetActive(true);
     }
 
     public void KingGreen()
@@ -225,6 +235,7 @@ public class CardManager : MonoBehaviour
          verif = true;
          waitMenu.SetActive(false);
          gameplayManager.OpenVerifMenu();
+         useCard.SetActive(true);
     }
     
     public void KingBlue()
@@ -243,6 +254,7 @@ public class CardManager : MonoBehaviour
         verif = true;
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
+        useCard.SetActive(true);
     }
 
     public void KingRed()
@@ -256,8 +268,8 @@ public class CardManager : MonoBehaviour
             }
         }
         waitMenu.SetActive(false);
-        
         gameplayManager.OpenVerifMenu();
+        useCard.SetActive(true);
     }
 
     public void KingYellow()
@@ -272,6 +284,7 @@ public class CardManager : MonoBehaviour
         }
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
+        useCard.SetActive(true);
     }
 
     public void Jack()
@@ -280,6 +293,7 @@ public class CardManager : MonoBehaviour
         Invoke(lastName,1);
         index = gameplayManager.playerIndex;
         verif = true;
+        useCard.SetActive(true);
     }
     
     public void ButtonSelectPlayer(int index)
