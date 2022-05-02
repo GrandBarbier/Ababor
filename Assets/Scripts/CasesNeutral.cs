@@ -16,6 +16,7 @@ public class CasesNeutral : MonoBehaviour
     public Material rangedMat;
     public Material baseSecondMat;
     public Material[] allMat;
+    public List<Marauder> allSteps = new List<Marauder>();
     
     [SerializeField] private GameplayManager _gameplayManager;
     [SerializeField] private EventManager _eventManager;
@@ -49,6 +50,17 @@ public class CasesNeutral : MonoBehaviour
         shop = FindObjectOfType<Shop>();
         allMat = renderer.materials;
         ResetColor();
+        
+        AddDescendantsWithTag(transform, "Steps", allSteps);
+    }
+
+
+    private void Start()
+    {
+        foreach (var marauder in allSteps)
+        {
+            marauder.StopSteps();
+        }
     }
 
     // Update is called once per frame
@@ -68,10 +80,24 @@ public class CasesNeutral : MonoBehaviour
                 obj.renderer.materials = obj.allMat;
                 obj.isInRange = true;
             }
+            
 
             for (int i = 0; i < nextCases.Count; i++)
             {
               player.allNextCases.Add(nextCases[i]);
+            }
+
+            foreach (var marauder in allSteps)
+            {
+                marauder.StartSteps();
+            }
+            
+            for (int i = 0; i < player.actualMove-2; i++)
+            {
+                foreach (var marauder in nextCases[i].allSteps)
+                {
+                    marauder.StartSteps();
+                }
             }
         }
     }
@@ -82,6 +108,11 @@ public class CasesNeutral : MonoBehaviour
         allMat[1] = baseSecondMat;
         renderer.materials = allMat;
         isInRange = false;
+        
+        foreach (var marauder in allSteps)
+        {
+            marauder.StopSteps();
+        }
     }
 
     public void ActualCaseFunction()
@@ -196,5 +227,17 @@ public class CasesNeutral : MonoBehaviour
         eventS.GetEvent();
         eventS.Invoke(eventS.eventName,0);
         _gameplayManager.ResetLast();
+    }
+    
+    private void AddDescendantsWithTag(Transform parent, string tag, List<Marauder> list)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.gameObject.tag == tag)
+            {
+                list.Add(child.gameObject.GetComponent<Marauder>());
+            }
+            AddDescendantsWithTag(child, tag, list);
+        }
     }
 }

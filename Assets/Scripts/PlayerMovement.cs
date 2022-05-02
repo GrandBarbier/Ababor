@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     public List<CasesNeutral> caseNext;
     public List<CasesNeutral> allNextCases;
 
+    private CasesNeutral actualCase;
+
     public int actualMove = 5;
     public int InitialMove;
     
@@ -44,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         transform.position = caseNext[0].transform.position;
-        
+        actualCase = caseNext[0];
     }
 
     // Start is called before the first frame update
@@ -72,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
                 gameObject.transform.position = allNextCases[indexCase].transform.position + new Vector3(0, 0.1f, 0);
                 point.numberCase = indexCase;
                 PlayerResetCase();
+                actualCase = caseNext[0];
                 if (Vector3.Distance(transform.position, child.transform.position) <= 1f) // set end turn
                 {
                     caseNext[0].ActualCaseFunction();
@@ -116,6 +119,8 @@ public class PlayerMovement : MonoBehaviour
         {
             cases.ResetColor(); 
         }
+
+        actualCase.ResetColor();
     }
 
     public int FindCase()
