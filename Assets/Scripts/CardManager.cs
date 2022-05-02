@@ -176,6 +176,7 @@ public class CardManager : MonoBehaviour
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
         useCard.SetActive(true);
+        StartCoroutine("ShowThrowCard");
     }
     public void QueenGreen()
     {
@@ -510,5 +511,12 @@ public class CardManager : MonoBehaviour
     {
         gameplayManager.activPlayer.move.enabled = false;
         gameplayManager.playerIndex = gmIndex;
+    }
+
+    IEnumerator ShowThrowCard()
+    {
+        useCard.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        useCard.SetActive(false);
     }
 }
