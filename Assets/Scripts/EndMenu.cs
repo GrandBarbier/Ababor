@@ -16,19 +16,19 @@ public class EndMenu : MonoBehaviour
     public GameObject downGameObject;
     public List<Image> backgrounds;
     public List<TMP_Text> textGoal;
-
-    public List<SpriteRenderer> placement = new List<SpriteRenderer>(6);
+    public List<int> objectivesPoint;
+    public List<TMP_Text> textObjPts;
+    
+    public List<Image> placement = new List<Image>(6);
     
     public Objectif goal;
     
-    public float step;
-    public float scaleFactor;
+    private float step = 2f;
+    private float scaleFactor = 0.0012f;
 
     private float alpha1 = 0f;
     private float alpha2 = 0f;
     private float alpha3 = 0f;
-    private float alphaTxt = 0f;
-
 
     private bool once = true;
     public bool oui;
@@ -48,6 +48,11 @@ public class EndMenu : MonoBehaviour
             textPoint[1].text = _gameplayManager.allPlayers[1].point.gold.ToString();
             textPoint[2].text = _gameplayManager.allPlayers[2].point.gold.ToString();
             textPoint[3].text = _gameplayManager.allPlayers[3].point.gold.ToString();
+
+            _gameplayManager.allPlayers[0].point.point += _gameplayManager.allPlayers[0].point.gold;
+            _gameplayManager.allPlayers[1].point.point += _gameplayManager.allPlayers[1].point.gold;
+            _gameplayManager.allPlayers[2].point.point += _gameplayManager.allPlayers[2].point.gold;
+            _gameplayManager.allPlayers[3].point.point += _gameplayManager.allPlayers[3].point.gold;
         }
         if (textGoal[0].text != goal.descriptionsEarly[0])
         {
@@ -58,6 +63,19 @@ public class EndMenu : MonoBehaviour
             textGoal[4].text = goal.descriptionLate[0];
             textGoal[5].text = goal.descriptionLate[1];
         }
+        objectivesPoint[0] = _gameplayManager.objectif.scoreEarly[0];
+        objectivesPoint[1] = _gameplayManager.objectif.scoreEarly[1];
+        objectivesPoint[2] = _gameplayManager.objectif.scoreMid[0];
+        objectivesPoint[3] = _gameplayManager.objectif.scoreMid[1];
+        objectivesPoint[4] = _gameplayManager.objectif.scoreLate[0];
+        objectivesPoint[5] = _gameplayManager.objectif.scoreLate[1];
+
+        textObjPts[0].text = objectivesPoint[0].ToString() + "pts"; 
+        textObjPts[1].text = objectivesPoint[1].ToString() + "pts"; 
+        textObjPts[2].text = objectivesPoint[2].ToString() + "pts";
+        textObjPts[3].text = objectivesPoint[3].ToString() + "pts";
+        textObjPts[4].text = objectivesPoint[4].ToString() + "pts";
+        textObjPts[5].text = objectivesPoint[5].ToString() + "pts";
     }
 
     // Update is called once per frame
@@ -68,12 +86,11 @@ public class EndMenu : MonoBehaviour
             MoveDown();
             ScaleDown();
         }
-        if (heads.transform.position == downGameObject.transform.position && alphaTxt < 1)
+        else if (heads.transform.position == downGameObject.transform.position && alpha3 < 0.90)
             ShowObj();
-        if (once)
+        else if (once && alpha3 > 0.90)
         {
             ShowFacesOnObj();
-            AddToScore();
             once = false;
         }
     }
@@ -87,7 +104,9 @@ public class EndMenu : MonoBehaviour
             backgrounds[1].color = new Color(1, 1, 1, alpha1);
             textGoal[0].color = new Color(1, 1, 1, alpha1);
             textGoal[1].color = new Color(1, 1, 1, alpha1);
-
+            textGoal[6].color = new Color(textGoal[6].color.r, textGoal[6].color.g, textGoal[6].color.b, alpha1);
+            textObjPts[0].color = new Color(textObjPts[0].color.r, textObjPts[0].color.g, textObjPts[0].color.b, alpha1);
+            textObjPts[1].color = new Color(textObjPts[0].color.r, textObjPts[0].color.g, textObjPts[0].color.b, alpha1);
         }
         else if (alpha2 < 0.9)
         {
@@ -96,7 +115,9 @@ public class EndMenu : MonoBehaviour
             backgrounds[3].color = new Color(1, 1, 1, alpha2);
             textGoal[2].color = new Color(1, 1, 1, alpha2);
             textGoal[3].color = new Color(1, 1, 1, alpha2);
-
+            textGoal[7].color = new Color(textGoal[7].color.r, textGoal[7].color.g, textGoal[7].color.b, alpha2);
+            textObjPts[2].color = new Color(textObjPts[0].color.r, textObjPts[0].color.g, textObjPts[0].color.b, alpha1);
+            textObjPts[3].color = new Color(textObjPts[0].color.r, textObjPts[0].color.g, textObjPts[0].color.b, alpha1);
         }
         else if (alpha3 < 0.9)
         {
@@ -105,38 +126,28 @@ public class EndMenu : MonoBehaviour
             backgrounds[5].color = new Color(1, 1, 1, alpha3);
             textGoal[4].color = new Color(1, 1, 1, alpha3);
             textGoal[5].color = new Color(1, 1, 1, alpha3);
-        }
-        else if (alphaTxt < 1)
-        {
-            alphaTxt += 0.01f;
-            textGoal[6].color = new Color(textGoal[6].color.r, textGoal[6].color.g, textGoal[6].color.b, alpha3);
-            textGoal[7].color = new Color(textGoal[7].color.r, textGoal[7].color.g, textGoal[7].color.b, alpha3);
             textGoal[8].color = new Color(textGoal[8].color.r, textGoal[8].color.g, textGoal[8].color.b, alpha3);
-
+            textObjPts[4].color = new Color(textObjPts[0].color.r, textObjPts[0].color.g, textObjPts[0].color.b, alpha1);
+            textObjPts[5].color = new Color(textObjPts[0].color.r, textObjPts[0].color.g, textObjPts[0].color.b, alpha1);
         }
     }
 
     private void ShowFacesOnObj()
     {
-        Debug.LogError("ouiiiiiiiiiiiii");
         for (int i = 0; i < allPlayers.Count; i++)
         {
             for (int j = 0; j < allPlayers[i].point.objectifVerif.Count; j++)
             {
                 if (allPlayers[i].point.objectifVerif[j])
                 {
-                    placement[j] = allPlayers[i].player.GetComponent<SpriteRenderer>();
+                    placement[j].sprite = allPlayers[i].player.GetComponent<SpriteRenderer>().sprite;
                     placement[j].gameObject.SetActive(true);
-                }
+                    allPlayers[i].point.point += objectivesPoint[j];
+                    textPoint[i].text = allPlayers[i].point.point.ToString();                }
             }
         }
     }
-
-    public void AddToScore()
-    {
-        
-    }
-
+    
     private void MoveDown()
     {
         heads.transform.position = Vector3.MoveTowards(heads.transform.position, downGameObject.transform.position, step);
