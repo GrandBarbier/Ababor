@@ -71,6 +71,7 @@ public class CasesNeutral : MonoBehaviour
 
     public void Outline(List<CasesNeutral> list, float remain, PlayerMovement player)
     {
+        Debug.Log(remain);
         if (remain > 0)
         {
             foreach (CasesNeutral obj in nextCases )
@@ -91,14 +92,15 @@ public class CasesNeutral : MonoBehaviour
             {
                 marauder.StartSteps();
             }
-            
-            for (int i = 0; i < player.actualMove-2; i++)
+            /*    for (int i = 0; i < player.actualMove- player.actualMove; i++)
             {
+                Debug.Log("éz");
                 foreach (var marauder in nextCases[i].allSteps)
                 {
+                    Debug.Log("con");
                     marauder.StartSteps();
                 }
-            }
+            }*/
         }
     }
 

@@ -265,14 +265,14 @@ public class GameplayManager : MonoBehaviour
             player.move.isEnd = false;
         }
 
-      /*  if (allPlayers[0].move.isLast)
+        if (allPlayers[0].move.isLast)
         {
         }
         else
         {
             ChangePlayerOrder();
             playerIndex = 0;
-        }*/
+        }
         island[islandIndex].SetActive(true);
         island[islandIndex-1].SetActive(false);
         allCases.Clear();
