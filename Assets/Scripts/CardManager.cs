@@ -96,8 +96,11 @@ public class CardManager : MonoBehaviour
         target.move.PlayerShowMove();
         for (int i = 0; i < target.move.allNextCases.Count/2; i++)
         {
-            target.move.caseNext[0].nextCases[i].isInRange = false;
-            target.move.caseNext[0].nextCases[i].ResetColor();
+            if (target.move.caseNext[0].nextCases[i].nameFunction != "EndCase")
+            {
+                target.move.caseNext[0].nextCases[i].isInRange = false;
+                target.move.caseNext[0].nextCases[i].ResetColor();
+            }
         }
         verif = true;
         target.move.actualMove = target.move.InitialMove;
