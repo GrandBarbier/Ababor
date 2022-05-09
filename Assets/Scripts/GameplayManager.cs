@@ -12,7 +12,7 @@ public class GameplayManager : MonoBehaviour
 {
     public List<GameObject> players = new List<GameObject>();
     public List<GameObject> island = new List<GameObject>();
-    public GameObject verifMenu,verifMenu2,/*endMenu,*/ secondIsle, firstIsle, menuTrade,description,objectifMenu,changeTurnBox,changeOrderBox;
+    public GameObject verifMenu,verifMenu2,endMenu, menuTrade,description,objectifMenu,changeTurnBox,changeOrderBox;
    
     public List<Button> buttonTrade;
     public Queue<Button> buttonQueue;
@@ -45,7 +45,7 @@ public class GameplayManager : MonoBehaviour
     
     public CardManager cardManager;
 
-  //  public EndMenu endCalcul;
+    public EndMenu endCalcul;
 
     void Awake()
     { 
