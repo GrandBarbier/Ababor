@@ -152,8 +152,6 @@ public class Objectif : MonoBehaviour
         {
             actualObjectif.Remove("ShopEarly");
         }
-
-       
     }
 
     public void ShopMid()
@@ -335,7 +333,6 @@ public class Objectif : MonoBehaviour
                 best = player.numberCase;
                 player.point += 30;
             }
-           
         }
     }
 
