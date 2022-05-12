@@ -128,7 +128,7 @@ public class HardwareManager : MonoBehaviour
             card = _tag.Data;
             if (canNFC)
                 nfcConvertor.Conversion(_tag, ComparePlayer(_device));
-            Debug.Log("deza");
+            Debug.Log("detect");
         }
     }
 

@@ -100,7 +100,7 @@ public class GameplayManager : MonoBehaviour
 
         if (Input.touchCount>0)
         {
-            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("feedback"))
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Feedback"))
             {
                 obj.SetActive(false);
             }
@@ -119,6 +119,7 @@ public class GameplayManager : MonoBehaviour
     
     public void ChangePlayer()
     {
+        Debug.Log("tour+1");
         currentstate = new EndTurn(); 
         currentstate.DoState(allPlayers[playerIndex].move, this);
         playerIndex++;

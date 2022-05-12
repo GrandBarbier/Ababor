@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3427108445763710314}
   m_LocalRotation: {x: -0, y: 0.70698327, z: 0.70723027, w: 0}
-  m_LocalPosition: {x: 0.17899445, y: -0.00039904594, z: -0.12956104}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.0035000017, y: 0.0025000002, z: 0.0035000022}
   m_Children: []
   m_Father: {fileID: 5635917483444601401}
@@ -247,6 +247,10 @@ MonoBehaviour:
   - GoToCase
   - SwitchPlayerPlace
   - HideCase
+  - AddOneEvent
+  - RemoveLoseCaeses
+  - SwitchGainAndLoseCases
+  - GiveGoldRanking
   description: 
   allCase: []
   casesToUnhide: []

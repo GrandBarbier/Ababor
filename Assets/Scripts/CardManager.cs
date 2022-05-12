@@ -25,7 +25,8 @@ public class CardManager : MonoBehaviour
     
     public bool verif;
     public bool oneTarget;
-    public bool numberClub;
+    public bool numberClub; // use to fix problem of number club card
+    public bool headBlueGreen; // use to fix problem fix blue/green heads card 
     public bool openMove;
     
     public Player player;
@@ -234,8 +235,6 @@ public class CardManager : MonoBehaviour
          target.player.transform.position = cases.transform.position + Vector3.up;
          player.move.caseNext[0] = target.move.caseNext[0];
          target.move.caseNext[0] = cases;
-         player.move.caseNext[0].ActualCaseFunction();
-         target.move.caseNext[0].ActualCaseFunction();
          verif = true;
          waitMenu.SetActive(false);
          gameplayManager.OpenVerifMenu();
@@ -253,8 +252,6 @@ public class CardManager : MonoBehaviour
         target.player.transform.position = cases.transform.position + Vector3.up;
         player.move.caseNext[0] = target.move.caseNext[0];
         target.move.caseNext[0] = cases;
-        player.move.caseNext[0].ActualCaseFunction();
-        target.move.caseNext[0].ActualCaseFunction();
         verif = true;
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
@@ -387,9 +384,13 @@ public class CardManager : MonoBehaviour
 
     public void CallCardFunction1Target()
     {
-        if (target == gameplayManager.activPlayer && functionName == "KingGreen" || functionName == "QueenGreen")
+        if (  functionName == "QueenGreen" && target == player)
         {
             Debug.Log("non");
+        }
+        else if (functionName == "KingGreen" && target == player)
+        {
+            Debug.Log("non x2");
         }
         else
         {
@@ -462,11 +463,15 @@ public class CardManager : MonoBehaviour
             gameplayManager.verifMenu2.SetActive(false);
             targetSelected.gameObject.SetActive(true);
             text.text = texte;
-            if (functionName != lastName)
+            if (functionName == "Jack")
             {
-                lastName = stg;
+                functionName = stg;
             }
-            functionName = stg;
+            else
+            {
+                lastName = functionName;
+                functionName = stg;
+            }
             player = pl;
         }
     }
@@ -500,11 +505,15 @@ public class CardManager : MonoBehaviour
             gameplayManager.verifMenu.SetActive(false);
             gameplayManager.verifMenu2.SetActive(false);
             textTarget.text = texte;
-            if (functionName != lastName)
+            if (functionName == "Jack")
             {
-                lastName = stg;
+                functionName = stg;
             }
-            functionName = stg;
+            else
+            {
+                lastName = functionName;
+                functionName = stg;
+            }
             player = pl;
         }
         targetSelected.gameObject.SetActive(true);
