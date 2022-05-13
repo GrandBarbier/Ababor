@@ -96,10 +96,8 @@ public class CasesNeutral : MonoBehaviour
             
             for (int i = 0; i < player.actualMove- player.actualMove; i++)
             {
-                Debug.Log("éz");
                 foreach (var marauder in nextCases[i].allSteps)
                 {
-                    Debug.Log("con");
                     marauder.StartSteps();
                 }
             }
