@@ -258,7 +258,6 @@ public class GameplayManager : MonoBehaviour
 
     public void NextIsland()
     {
-        ChangePlayer();
         foreach (Player player in allPlayers)
         {
             player.move.caseNext[0] = allCases[0];
