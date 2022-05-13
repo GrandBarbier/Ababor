@@ -172,6 +172,10 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 menuVerif.SetActive(false);
+                foreach (GameObject cases in GameObject.FindGameObjectsWithTag("CaseShow"))
+                {
+                    cases.SetActive(false);
+                }
             }
         }
         allNextCases.Sort(_gameplayManager.SortByName);

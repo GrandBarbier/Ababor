@@ -153,7 +153,6 @@ public class CasesNeutral : MonoBehaviour
         if (_gameplayManager.cardManager.numberClub == false)
         {
             _gameplayManager.ChangePlayer();
-            Debug.Log("wtf");
         }
         else
         {

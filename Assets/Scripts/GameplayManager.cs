@@ -47,6 +47,9 @@ public class GameplayManager : MonoBehaviour
 
     public EndMenu endCalcul;
 
+  [SerializeField]  private AudioSource audioSource;
+
+    public Slider sliderVolume;
     void Awake()
     { 
         
@@ -75,7 +78,7 @@ public class GameplayManager : MonoBehaviour
         testmove = moveQueue.ToList();
         currentstate.DoState(allPlayers[playerIndex].move, this);
         ShowActualPlayer();
-        
+        SoundSlider();
     }
 
     // Update is called once per frame
@@ -501,7 +504,11 @@ public class GameplayManager : MonoBehaviour
         showExchange.gameObject.SetActive(true);
         yield return new WaitForSeconds(5f);
         showExchange.gameObject.SetActive(false);
-        
+    }
+
+    public void SoundSlider()
+    {
+        audioSource.volume = sliderVolume.value;
     }
 }
 
