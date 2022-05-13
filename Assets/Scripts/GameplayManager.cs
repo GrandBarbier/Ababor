@@ -12,7 +12,7 @@ public class GameplayManager : MonoBehaviour
 {
     public List<GameObject> players = new List<GameObject>();
     public List<GameObject> island = new List<GameObject>();
-    public GameObject verifMenu,verifMenu2,endMenu, menuTrade,description,objectifMenu,changeTurnBox,changeOrderBox;
+    public GameObject verifMenu,verifMenu2,endMenu, menuTrade,description,objectifMenu,changeTurnBox,changeOrderBox,menuSetting,menuCardExpliquation;
    
     public List<Button> buttonTrade;
     public Queue<Button> buttonQueue;
@@ -436,6 +436,26 @@ public class GameplayManager : MonoBehaviour
     public void ButtonObjectif()
     {
         StartCoroutine(OpenObjectif());
+    }
+
+    public void ButtonSetting()
+    {
+      menuSetting.SetActive(true);  
+    }
+
+    public void CloseSetting()
+    {
+        menuSetting.SetActive(false);
+    }
+
+    public void ButtonCard()
+    {
+        menuCardExpliquation.SetActive(true);
+    }
+
+    public void CloseCardExpliquation()
+    {
+        menuCardExpliquation.SetActive(false);
     }
 
     public void CancelMove()
