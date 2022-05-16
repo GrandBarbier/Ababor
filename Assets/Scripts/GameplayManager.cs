@@ -48,8 +48,10 @@ public class GameplayManager : MonoBehaviour
     public EndMenu endCalcul;
 
   [SerializeField]  private AudioSource audioSource;
+  [SerializeField]  private AudioSource sfxSource;
 
-    public Slider sliderVolume;
+  [SerializeField]  private Slider sliderVolume;
+  [SerializeField]  private Slider sliderSFX;
     void Awake()
     { 
         
@@ -509,6 +511,16 @@ public class GameplayManager : MonoBehaviour
     public void SoundSlider()
     {
         audioSource.volume = sliderVolume.value;
+    }
+    
+    public void SFXSlider()
+    {
+        audioSource.volume = sliderSFX.value;
+    }
+
+    public void ReturnMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
 
