@@ -27,6 +27,7 @@ public class Event : MonoBehaviour
 
     public Material basicCaseMat,loseCaseMat,gainCaseMat;
     
+    
     // Start is called before the first frame update
     private void Awake()
     {
@@ -39,6 +40,7 @@ public class Event : MonoBehaviour
     {
         thisCase = gameObject.GetComponent<CasesNeutral>();
         allPlayers = _gameplayManager.allPlayers;
+        
     }
 
     public void EventMoreLoseCase()
@@ -148,6 +150,30 @@ public class Event : MonoBehaviour
     {
         tmpDescription.text= "4 à 6 a effet sont caché jusqu'à ce qu'un joueur arrive dessus";
         _eventManager.HideCase();
+    }
+
+    public void AddOneEvent()
+    {
+        tmpDescription.text = "Transforme une case neutre en case event";
+        _eventManager.AddOneEvent();
+    }
+
+    public void RemoveLoseCaeses()
+    {
+        tmpDescription.text = "Enlève une case perte d'or";
+        _eventManager.RemoveLoseCases();
+    }
+
+    public void SwitchGainAndLoseCases()
+    {
+        tmpDescription.text = "Echange les cases gain et perte";
+        _eventManager.SwitchGainAndLoseCases();
+    }
+
+    public void GiveGoldRanking()
+    {
+        tmpDescription.text = "DOnne de l'or a tout les joueurs en fonction du classement";
+        _eventManager.GiveGoldRanking();
     }
     
     public void GetEvent()

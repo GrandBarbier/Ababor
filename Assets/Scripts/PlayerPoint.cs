@@ -14,7 +14,7 @@ public class PlayerPoint : MonoBehaviour
     public int numberEventCase;
     public int numberShopCase;
     public int numberCase;
-   
+    public int index;
     public GameObject player;
     
     public List<bool> objectifVerif;

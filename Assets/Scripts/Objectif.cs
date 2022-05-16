@@ -93,41 +93,7 @@ public class Objectif : MonoBehaviour
         {
             text[i].text = actualDescription[i];
         }
-        
-        for (int i = 0; i < text.Count; i++)
-        {
-            text2[i].text = actualObjectif[i] + actualDescription[i];
-        }
-
         baseObjectif = actualObjectif;
-
-        /* for (int i = 1; i <= 3; i++)
-         {
-             switch (i)
-             {
-                 case 1:
-                     for (int j = 0; j < 4; j++)
-                     {
-                         score[j].text = scoreEarly[j / 2].ToString();
-                         Debug.Log(scoreEarly[j/2]);
-                     }
-                     break;
-                 case 2:
-                     for (int j = 0; j < 4; j++)
-                     {
-                         score[j].text = scoreMid[j / 2].ToString();
-                         Debug.Log(scoreEarly[j/2]);
-                     }
-                     break;
-                 case 3:
-                     for (int j = 0; j < 4; j++)
-                     {
-                         score[j].text = scoreLate[j / 2].ToString();
-                         Debug.Log(scoreEarly[j/2]);
-                     }
-                     break;
-             }
-         }*/
     }
 
     // Update is called once per frame
@@ -152,8 +118,6 @@ public class Objectif : MonoBehaviour
         {
             actualObjectif.Remove("ShopEarly");
         }
-
-       
     }
 
     public void ShopMid()
@@ -335,7 +299,6 @@ public class Objectif : MonoBehaviour
                 best = player.numberCase;
                 player.point += 30;
             }
-           
         }
     }
 

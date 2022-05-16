@@ -25,7 +25,8 @@ public class CardManager : MonoBehaviour
     
     public bool verif;
     public bool oneTarget;
-    public bool numberClub;
+    public bool numberClub; // use to fix problem of number club card
+    public bool headBlueGreen; // use to fix problem fix blue/green heads card 
     public bool openMove;
     
     public Player player;
@@ -96,8 +97,11 @@ public class CardManager : MonoBehaviour
         target.move.PlayerShowMove();
         for (int i = 0; i < target.move.allNextCases.Count/2; i++)
         {
-            target.move.caseNext[0].nextCases[i].isInRange = false;
-            target.move.caseNext[0].nextCases[i].ResetColor();
+            if (target.move.caseNext[0].nextCases[i].nameFunction != "EndCase")
+            {
+                target.move.caseNext[0].nextCases[i].isInRange = false;
+                target.move.caseNext[0].nextCases[i].ResetColor();
+            }
         }
         verif = true;
         target.move.actualMove = target.move.InitialMove;
@@ -176,6 +180,7 @@ public class CardManager : MonoBehaviour
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
         useCard.SetActive(true);
+        StartCoroutine("ShowThrowCard");
     }
     public void QueenGreen()
     {
@@ -230,8 +235,6 @@ public class CardManager : MonoBehaviour
          target.player.transform.position = cases.transform.position + Vector3.up;
          player.move.caseNext[0] = target.move.caseNext[0];
          target.move.caseNext[0] = cases;
-         player.move.caseNext[0].ActualCaseFunction();
-         target.move.caseNext[0].ActualCaseFunction();
          verif = true;
          waitMenu.SetActive(false);
          gameplayManager.OpenVerifMenu();
@@ -249,8 +252,6 @@ public class CardManager : MonoBehaviour
         target.player.transform.position = cases.transform.position + Vector3.up;
         player.move.caseNext[0] = target.move.caseNext[0];
         target.move.caseNext[0] = cases;
-        player.move.caseNext[0].ActualCaseFunction();
-        target.move.caseNext[0].ActualCaseFunction();
         verif = true;
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
@@ -383,9 +384,13 @@ public class CardManager : MonoBehaviour
 
     public void CallCardFunction1Target()
     {
-        if (target == gameplayManager.activPlayer && functionName == "KingGreen" || functionName == "QueenGreen")
+        if (  functionName == "QueenGreen" && target == player)
         {
             Debug.Log("non");
+        }
+        else if (functionName == "KingGreen" && target == player)
+        {
+            Debug.Log("non x2");
         }
         else
         {
@@ -430,7 +435,7 @@ public class CardManager : MonoBehaviour
     
     public void OpenCardMenu(string stg, Player pl, string texte)
     {
-        switch (pl.move.index)
+        switch (pl.point.index)
         {
             case 0 :
                 menu.transform.rotation = Quaternion.Euler(0,0,0);
@@ -458,18 +463,22 @@ public class CardManager : MonoBehaviour
             gameplayManager.verifMenu2.SetActive(false);
             targetSelected.gameObject.SetActive(true);
             text.text = texte;
-            if (functionName != lastName)
+            if (functionName == "Jack")
             {
-                lastName = stg;
+                functionName = stg;
             }
-            functionName = stg;
+            else
+            {
+                lastName = functionName;
+                functionName = stg;
+            }
             player = pl;
         }
     }
 
     public void OpenCardMenu1Target(string stg, Player pl, string texte)
     {
-        switch (pl.move.index)
+        switch (pl.point.index)
         {
             case 0 :
                 menu.transform.rotation = Quaternion.Euler(0,0,0);
@@ -496,11 +505,15 @@ public class CardManager : MonoBehaviour
             gameplayManager.verifMenu.SetActive(false);
             gameplayManager.verifMenu2.SetActive(false);
             textTarget.text = texte;
-            if (functionName != lastName)
+            if (functionName == "Jack")
             {
-                lastName = stg;
+                functionName = stg;
             }
-            functionName = stg;
+            else
+            {
+                lastName = functionName;
+                functionName = stg;
+            }
             player = pl;
         }
         targetSelected.gameObject.SetActive(true);
@@ -510,5 +523,12 @@ public class CardManager : MonoBehaviour
     {
         gameplayManager.activPlayer.move.enabled = false;
         gameplayManager.playerIndex = gmIndex;
+    }
+
+    IEnumerator ShowThrowCard()
+    {
+        useCard.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        useCard.SetActive(false);
     }
 }
