@@ -42,40 +42,83 @@ public class EndMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (textPoint[0].text != _gameplayManager.allPlayers[0].point.ToString())
+        if (_gameplayManager.allPlayers.Count == 4)
         {
-            textPoint[0].text = _gameplayManager.allPlayers[0].point.gold.ToString();
-            textPoint[1].text = _gameplayManager.allPlayers[1].point.gold.ToString();
-            textPoint[2].text = _gameplayManager.allPlayers[2].point.gold.ToString();
-            textPoint[3].text = _gameplayManager.allPlayers[3].point.gold.ToString();
+            if (textPoint[0].text != _gameplayManager.allPlayers[0].point.ToString())
+            {
+                textPoint[0].text = _gameplayManager.allPlayers[0].point.gold.ToString();
+                textPoint[1].text = _gameplayManager.allPlayers[1].point.gold.ToString();
+                textPoint[2].text = _gameplayManager.allPlayers[2].point.gold.ToString();
+                textPoint[3].text = _gameplayManager.allPlayers[3].point.gold.ToString();
 
-            _gameplayManager.allPlayers[0].point.point += _gameplayManager.allPlayers[0].point.gold;
-            _gameplayManager.allPlayers[1].point.point += _gameplayManager.allPlayers[1].point.gold;
-            _gameplayManager.allPlayers[2].point.point += _gameplayManager.allPlayers[2].point.gold;
-            _gameplayManager.allPlayers[3].point.point += _gameplayManager.allPlayers[3].point.gold;
+                _gameplayManager.allPlayers[0].point.point += _gameplayManager.allPlayers[0].point.gold;
+                _gameplayManager.allPlayers[1].point.point += _gameplayManager.allPlayers[1].point.gold;
+                _gameplayManager.allPlayers[2].point.point += _gameplayManager.allPlayers[2].point.gold;
+                _gameplayManager.allPlayers[3].point.point += _gameplayManager.allPlayers[3].point.gold;
+            }
+
+            if (textGoal[0].text != goal.descriptionsEarly[0])
+            {
+                textGoal[0].text = goal.descriptionsEarly[0];
+                textGoal[1].text = goal.descriptionsEarly[1];
+                textGoal[2].text = goal.descriptionMid[0];
+                textGoal[3].text = goal.descriptionMid[1];
+                textGoal[4].text = goal.descriptionLate[0];
+                textGoal[5].text = goal.descriptionLate[1];
+            }
+
+            objectivesPoint[0] = _gameplayManager.objectif.scoreEarly[0];
+            objectivesPoint[1] = _gameplayManager.objectif.scoreEarly[1];
+            objectivesPoint[2] = _gameplayManager.objectif.scoreMid[0];
+            objectivesPoint[3] = _gameplayManager.objectif.scoreMid[1];
+            objectivesPoint[4] = _gameplayManager.objectif.scoreLate[0];
+            objectivesPoint[5] = _gameplayManager.objectif.scoreLate[1];
+
+            textObjPts[0].text = objectivesPoint[0].ToString() + "pts";
+            textObjPts[1].text = objectivesPoint[1].ToString() + "pts";
+            textObjPts[2].text = objectivesPoint[2].ToString() + "pts";
+            textObjPts[3].text = objectivesPoint[3].ToString() + "pts";
+            textObjPts[4].text = objectivesPoint[4].ToString() + "pts";
+            textObjPts[5].text = objectivesPoint[5].ToString() + "pts";
         }
-        if (textGoal[0].text != goal.descriptionsEarly[0])
+
+        if (_gameplayManager.allPlayers.Count == 3)
         {
-            textGoal[0].text = goal.descriptionsEarly[0];
-            textGoal[1].text = goal.descriptionsEarly[1];
-            textGoal[2].text = goal.descriptionMid[0];
-            textGoal[3].text = goal.descriptionMid[1];
-            textGoal[4].text = goal.descriptionLate[0];
-            textGoal[5].text = goal.descriptionLate[1];
-        }
-        objectivesPoint[0] = _gameplayManager.objectif.scoreEarly[0];
-        objectivesPoint[1] = _gameplayManager.objectif.scoreEarly[1];
-        objectivesPoint[2] = _gameplayManager.objectif.scoreMid[0];
-        objectivesPoint[3] = _gameplayManager.objectif.scoreMid[1];
-        objectivesPoint[4] = _gameplayManager.objectif.scoreLate[0];
-        objectivesPoint[5] = _gameplayManager.objectif.scoreLate[1];
+            if (textPoint[0].text != _gameplayManager.allPlayers[0].point.ToString())
+            {
+                textPoint[0].text = _gameplayManager.allPlayers[0].point.gold.ToString(); 
+                textPoint[1].text = _gameplayManager.allPlayers[1].point.gold.ToString();
+                textPoint[2].text = _gameplayManager.allPlayers[2].point.gold.ToString();
 
-        textObjPts[0].text = objectivesPoint[0].ToString() + "pts"; 
-        textObjPts[1].text = objectivesPoint[1].ToString() + "pts"; 
-        textObjPts[2].text = objectivesPoint[2].ToString() + "pts";
-        textObjPts[3].text = objectivesPoint[3].ToString() + "pts";
-        textObjPts[4].text = objectivesPoint[4].ToString() + "pts";
-        textObjPts[5].text = objectivesPoint[5].ToString() + "pts";
+                _gameplayManager.allPlayers[0].point.point += _gameplayManager.allPlayers[0].point.gold;
+                _gameplayManager.allPlayers[1].point.point += _gameplayManager.allPlayers[1].point.gold;
+                _gameplayManager.allPlayers[2].point.point += _gameplayManager.allPlayers[2].point.gold;
+            }
+            
+            if (textGoal[0].text != goal.descriptionsEarly[0])
+            {
+                textGoal[0].text = goal.descriptionsEarly[0];
+                textGoal[1].text = goal.descriptionsEarly[1];
+                textGoal[2].text = goal.descriptionMid[0];
+                textGoal[3].text = goal.descriptionMid[1];
+                textGoal[4].text = goal.descriptionLate[0];
+                textGoal[5].text = goal.descriptionLate[1];
+            }
+            
+            objectivesPoint[0] = _gameplayManager.objectif.scoreEarly[0];
+            objectivesPoint[1] = _gameplayManager.objectif.scoreEarly[1];
+            objectivesPoint[2] = _gameplayManager.objectif.scoreMid[0];
+            objectivesPoint[3] = _gameplayManager.objectif.scoreMid[1];
+            objectivesPoint[4] = _gameplayManager.objectif.scoreLate[0];
+            objectivesPoint[5] = _gameplayManager.objectif.scoreLate[1];
+            
+            textObjPts[0].text = objectivesPoint[0].ToString() + "pts";
+            textObjPts[1].text = objectivesPoint[1].ToString() + "pts";
+            textObjPts[2].text = objectivesPoint[2].ToString() + "pts";
+            textObjPts[3].text = objectivesPoint[3].ToString() + "pts";
+            textObjPts[4].text = objectivesPoint[4].ToString() + "pts";
+            textObjPts[5].text = objectivesPoint[5].ToString() + "pts";
+        }
     }
 
     // Update is called once per frame

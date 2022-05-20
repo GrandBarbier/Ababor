@@ -15,7 +15,7 @@ public class EventManager : MonoBehaviour
     public List<CasesNeutral> allCase, hiddenCases;
     private GameplayManager _gameplayManager;
     public Material basicCaseMat, loseCaseMat, gainCaseMat, eventCaseMat;
-
+    public List<string> eventManagerFunction;
 
     // Start is called before the first frame update
     void Awake()

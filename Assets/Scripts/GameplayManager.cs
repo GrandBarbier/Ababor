@@ -12,29 +12,32 @@ public class GameplayManager : MonoBehaviour
 {
     public List<GameObject> players = new List<GameObject>();
     public List<GameObject> island = new List<GameObject>();
-    public GameObject verifMenu,verifMenu2,/*endMenu,*/ secondIsle, firstIsle, menuTrade,description,objectifMenu;
+    public List<GameObject> menuTrade = new List<GameObject>();
+    public GameObject verifMenu,verifMenu2,endMenu,description,objectifMenu,changeTurnBox,changeOrderBox,menuSetting,menuCardExpliquation;
    
     public List<Button> buttonTrade;
     public Queue<Button> buttonQueue;
     
     public List<CasesNeutral> allCases = new List<CasesNeutral>();
 
-    public int playerIndex, treasure, turnWait, islandIndex, goldTrade, playerInTurn;
+    public int playerIndex, treasure, turnWait, islandIndex, playerInTurn, indexTrade;
+    public List<int> goldTrade;
 
-    public bool lastTurn,uiTurned,objectifOpen;
+    public bool lastTurn,uiTurned,tradeOpen,objectifOpen;
     
     public State currentstate;
     
     public Objectif objectif;
     
-    public TMP_Text endText,textGold;
+    public TMP_Text endText, showPlayerEnd, showExchange;
+    public List<TMP_Text> textGold = new List<TMP_Text>();
     
     public Queue<Player> playerQueue = new Queue<Player>();
     public List<Player> allPlayers = new List<Player>();
     public Player endPlayer;
     public Player activPlayer;
 
-    public Queue<PlayerMovement> moveQueue = new Queue<PlayerMovement>();
+    private Queue<PlayerMovement> moveQueue = new Queue<PlayerMovement>();
     public PlayerMovement actualMove;
     public List<PlayerMovement> testmove;
     
@@ -45,8 +48,13 @@ public class GameplayManager : MonoBehaviour
     
     public CardManager cardManager;
 
-  //  public EndMenu endCalcul;
+    public EndMenu endCalcul;
 
+  [SerializeField]  private AudioSource audioSource;
+  [SerializeField]  private AudioSource sfxSource;
+
+  [SerializeField]  private Slider sliderVolume;
+  [SerializeField]  private Slider sliderSFX;
     void Awake()
     { 
         
@@ -75,7 +83,7 @@ public class GameplayManager : MonoBehaviour
         testmove = moveQueue.ToList();
         currentstate.DoState(allPlayers[playerIndex].move, this);
         ShowActualPlayer();
-        
+        SoundSlider();
     }
 
     // Update is called once per frame
@@ -98,10 +106,12 @@ public class GameplayManager : MonoBehaviour
             }
         }
 
-        if (objectifOpen && Input.touchCount>0)
+        if (Input.touchCount>0)
         {
-            objectifMenu.SetActive(false);
-            objectifOpen = false;
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Feedback"))
+            {
+                obj.SetActive(false);
+            }
         }
     }
 
@@ -117,6 +127,7 @@ public class GameplayManager : MonoBehaviour
     
     public void ChangePlayer()
     {
+        Debug.Log("tour+1");
         currentstate = new EndTurn(); 
         currentstate.DoState(allPlayers[playerIndex].move, this);
         playerIndex++;
@@ -132,6 +143,15 @@ public class GameplayManager : MonoBehaviour
         if (actualMove.isLast)
         {
             ChangePlayerOrder();
+            StartCoroutine("ChangeOrderBox");
+        }
+        else if (endPlayer != null)
+        {
+            StartCoroutine("ShowPlayerEnd");
+        }
+        else
+        {
+            StartCoroutine("ChangeTurnBox");
         }
         ButtonStart();
         ShowActualPlayer();
@@ -184,6 +204,7 @@ public class GameplayManager : MonoBehaviour
             player.move.index = allPlayers.IndexOf(player);
         }
         ShowActualPlayer();
+        
     }
 
     public void ResetMove()
@@ -245,7 +266,6 @@ public class GameplayManager : MonoBehaviour
 
     public void NextIsland()
     {
-        ChangePlayer();
         foreach (Player player in allPlayers)
         {
             player.move.caseNext[0] = allCases[0];
@@ -253,14 +273,14 @@ public class GameplayManager : MonoBehaviour
             player.move.isEnd = false;
         }
 
-      /*  if (allPlayers[0].move.isLast)
+        if (allPlayers[0].move.isLast)
         {
         }
         else
         {
             ChangePlayerOrder();
             playerIndex = 0;
-        }*/
+        }
         island[islandIndex].SetActive(true);
         island[islandIndex-1].SetActive(false);
         allCases.Clear();
@@ -279,43 +299,90 @@ public class GameplayManager : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         objectifOpen = true;
     }
+    
+    public void CloseObjectif()
+    {
+        objectifMenu.SetActive(false);
+    }
 
     public void GiveGold()
     {
-        playerGive.gold -= goldTrade;
-        playerReceive.gold += goldTrade;
-        goldTrade = 0;
-        menuTrade.SetActive(false);
+        playerGive.gold -= goldTrade[playerGive.index];
+        playerReceive.gold += goldTrade[playerGive.index];
+        menuTrade[playerGive.index].SetActive(false);
+        StartCoroutine("ShowGoldExchange");
+        tradeOpen = false;
     }
 
-    public void GoldChange(int value)
+    public void GoldChangeMore(int value)
     {
-        goldTrade += value;
-        if (goldTrade <=0)
+        goldTrade[value] += 1;
+        if (goldTrade[value] >= playerGive.gold)
         {
-            goldTrade = 0;
+            goldTrade[value] = playerGive.gold;
         }
-
-        if (goldTrade >= playerGive.gold)
-        {
-            goldTrade = playerGive.gold;
-        }
-        textGold.text = goldTrade.ToString();
+        textGold[value].text = goldTrade[value].ToString();
     }
 
-    public void OpenMenuTrade(PlayerPoint point)
+    public void GoldChangeLess(int value)
     {
-        foreach (Button button in buttonTrade)
+        goldTrade[value] -= 1;
+        if (goldTrade[value] <=0)
         {
-            if (EventSystem.current.currentSelectedGameObject == button.gameObject)
-            {
-                menuTrade.transform.rotation = button.gameObject.transform.rotation;
-            }
+            goldTrade[value] = 0;
         }
-        bool open = menuTrade.activeSelf;
-        textGold.text = "0";
-        menuTrade.SetActive(!open);
-        playerGive = point;
+        textGold[value].text = goldTrade[value].ToString();
+    }
+    
+    public void OpenMenuTrade(int index)
+    {
+        
+        switch (index)
+        {
+            case 0 :
+                if (tradeOpen == false)
+                {
+                    menuTrade[0].SetActive(true);
+                    tradeOpen =true;
+                }
+                break;
+            case 1:
+                
+                if (tradeOpen == false)
+                {
+                    menuTrade[1].SetActive(true);
+                    tradeOpen =true;
+                }
+               
+                break;
+            case 2 :
+                if (tradeOpen == false)
+                {
+                    menuTrade[2].SetActive(true);
+                    tradeOpen = true;
+                }
+              
+                break;
+            case 3 :
+                if (tradeOpen == false)
+                {
+                    menuTrade[3].SetActive(true);
+                    tradeOpen = true;
+                }
+                break;
+        }
+        textGold[index].text = "0";
+        goldTrade[index] = 0;
+        playerGive = allPlayers[index].point;
+    }
+
+    public void CloseTrade()
+    {
+        foreach (GameObject obj in menuTrade)
+        {
+            obj.SetActive(false);
+            tradeOpen = false;
+        }
     }
 
     public void TargetTrade(PlayerPoint point)
@@ -416,6 +483,87 @@ public class GameplayManager : MonoBehaviour
     public void ButtonObjectif()
     {
         StartCoroutine(OpenObjectif());
+    }
+
+    public void ButtonSetting()
+    {
+      menuSetting.SetActive(true);  
+    }
+
+    public void CloseSetting()
+    {
+        menuSetting.SetActive(false);
+    }
+
+    public void ButtonCard()
+    {
+        menuCardExpliquation.SetActive(true);
+    }
+
+    public void CloseCardExpliquation()
+    {
+        menuCardExpliquation.SetActive(false);
+    }
+
+    public void CancelMove()
+    {
+        currentstate = new CardPlay();
+        currentstate.DoState(actualMove, this);
+        verifMenu.SetActive(true);
+        verifMenu2.SetActive(true);
+        description.gameObject.SetActive(false);
+        actualMove.PlayerResetCase();
+    }
+    
+    IEnumerator ChangeTurnBox()
+    {
+        changeTurnBox.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        changeTurnBox.SetActive(false);
+    }
+
+    IEnumerator ChangeOrderBox()
+    {
+        changeOrderBox.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        changeOrderBox.SetActive(false);
+    }
+
+    IEnumerator ShowPlayerEnd()
+    {
+        int text = endPlayer.move.index + 1;
+        showPlayerEnd.text += text.ToString();
+        showPlayerEnd.gameObject.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        showPlayerEnd.gameObject.SetActive(false);
+    }
+
+    IEnumerator ShowGoldExchange()
+    {
+        int textReveive = playerReceive.index+1;
+        int textGive = playerGive.index+1;
+        int textGold = goldTrade[playerGive.index];
+        showExchange.text = "Le joueur " + textGive;
+        showExchange.text += " donne " + textGold + " d'or au joueur " + textReveive;
+        
+        showExchange.gameObject.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        showExchange.gameObject.SetActive(false);
+    }
+
+    public void SoundSlider()
+    {
+        audioSource.volume = sliderVolume.value;
+    }
+    
+    public void SFXSlider()
+    {
+        audioSource.volume = sliderSFX.value;
+    }
+
+    public void ReturnMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
 

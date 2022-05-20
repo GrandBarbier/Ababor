@@ -159,6 +159,8 @@ public class PlayerMovement : MonoBehaviour
                     if (hit.transform.gameObject == cases.gameObject && cases.isInRange)
                     {
                         hitObject = cases.gameObject;
+                        
+                        cases.ShowIfTarget();
                         child.transform.position = hitObject.transform.position;
                         caseNext[0] = cases;
                         indexCase = allNextCases.IndexOf(cases);
@@ -170,6 +172,10 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 menuVerif.SetActive(false);
+                foreach (GameObject cases in GameObject.FindGameObjectsWithTag("CaseShow"))
+                {
+                    cases.SetActive(false);
+                }
             }
         }
         allNextCases.Sort(_gameplayManager.SortByName);

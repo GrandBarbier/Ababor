@@ -21,6 +21,7 @@ public class CasesNeutral : MonoBehaviour
     [SerializeField] private GameplayManager _gameplayManager;
     [SerializeField] private EventManager _eventManager;
 
+    public GameObject showObject;
     
     public Renderer renderer;
 
@@ -39,6 +40,8 @@ public class CasesNeutral : MonoBehaviour
     public GameObject menuEnd;
     
     public CasesNeutral lastCase;
+
+    public AudioSource sound;
  
     // Start is called before the first frame update
     void Awake()
@@ -71,6 +74,7 @@ public class CasesNeutral : MonoBehaviour
 
     public void Outline(List<CasesNeutral> list, float remain, PlayerMovement player)
     {
+        Debug.Log(remain);
         if (remain > 0)
         {
             foreach (CasesNeutral obj in nextCases )
@@ -92,7 +96,7 @@ public class CasesNeutral : MonoBehaviour
                 marauder.StartSteps();
             }
             
-            for (int i = 0; i < player.actualMove-2; i++)
+            for (int i = 0; i < player.actualMove- player.actualMove; i++)
             {
                 foreach (var marauder in nextCases[i].allSteps)
                 {
@@ -108,7 +112,7 @@ public class CasesNeutral : MonoBehaviour
         allMat[1] = baseSecondMat;
         renderer.materials = allMat;
         isInRange = false;
-        
+        showObject.SetActive(false);
         foreach (var marauder in allSteps)
         {
             marauder.StopSteps();
@@ -143,7 +147,7 @@ public class CasesNeutral : MonoBehaviour
             _gameplayManager.cardManager.ResetIndexPlayer();
             _gameplayManager.currentstate = new CardPlay();
         }
-        
+        sound.Play();
     }
 
     public void NeutralCase()
@@ -217,8 +221,8 @@ public class CasesNeutral : MonoBehaviour
 
     public void LastCase()
     {
-      //  _gameplayManager.OpenEndMenu();
-      Debug.Log("connard");
+        _gameplayManager.endMenu.SetActive(true);
+        _gameplayManager.endCalcul.oui = true;
         objectif.lastCase = true;
     }
 
@@ -227,6 +231,15 @@ public class CasesNeutral : MonoBehaviour
         eventS.GetEvent();
         eventS.Invoke(eventS.eventName,0);
         _gameplayManager.ResetLast();
+    }
+
+    public void ShowIfTarget()
+    {
+        foreach (GameObject cases in GameObject.FindGameObjectsWithTag("CaseShow"))
+        {
+            cases.SetActive(false);
+        }
+        showObject.SetActive(true);
     }
     
     private void AddDescendantsWithTag(Transform parent, string tag, List<Marauder> list)
