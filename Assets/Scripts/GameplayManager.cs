@@ -12,22 +12,25 @@ public class GameplayManager : MonoBehaviour
 {
     public List<GameObject> players = new List<GameObject>();
     public List<GameObject> island = new List<GameObject>();
-    public GameObject verifMenu,verifMenu2,endMenu, menuTrade,description,objectifMenu,changeTurnBox,changeOrderBox,menuSetting,menuCardExpliquation;
+    public List<GameObject> menuTrade = new List<GameObject>();
+    public GameObject verifMenu,verifMenu2,endMenu,description,objectifMenu,changeTurnBox,changeOrderBox,menuSetting,menuCardExpliquation;
    
     public List<Button> buttonTrade;
     public Queue<Button> buttonQueue;
     
     public List<CasesNeutral> allCases = new List<CasesNeutral>();
 
-    public int playerIndex, treasure, turnWait, islandIndex, goldTrade, playerInTurn;
+    public int playerIndex, treasure, turnWait, islandIndex, playerInTurn, indexTrade;
+    public List<int> goldTrade;
 
-    public bool lastTurn,uiTurned,objectifOpen;
+    public bool lastTurn,uiTurned,tradeOpen,objectifOpen;
     
     public State currentstate;
     
     public Objectif objectif;
     
-    public TMP_Text endText,textGold,showPlayerEnd, showExchange;
+    public TMP_Text endText, showPlayerEnd, showExchange;
+    public List<TMP_Text> textGold = new List<TMP_Text>();
     
     public Queue<Player> playerQueue = new Queue<Player>();
     public List<Player> allPlayers = new List<Player>();
@@ -304,42 +307,82 @@ public class GameplayManager : MonoBehaviour
 
     public void GiveGold()
     {
-        playerGive.gold -= goldTrade;
-        playerReceive.gold += goldTrade;
-        menuTrade.SetActive(false);
+        playerGive.gold -= goldTrade[playerGive.index];
+        playerReceive.gold += goldTrade[playerGive.index];
+        menuTrade[playerGive.index].SetActive(false);
         StartCoroutine("ShowGoldExchange");
-        goldTrade = 0;
+        tradeOpen = false;
     }
 
-    public void GoldChange(int value)
+    public void GoldChangeMore(int value)
     {
-        goldTrade += value;
-        if (goldTrade <=0)
+        goldTrade[value] += 1;
+        if (goldTrade[value] >= playerGive.gold)
         {
-            goldTrade = 0;
+            goldTrade[value] = playerGive.gold;
         }
-
-        if (goldTrade >= playerGive.gold)
-        {
-            goldTrade = playerGive.gold;
-        }
-        textGold.text = goldTrade.ToString();
+        textGold[value].text = goldTrade[value].ToString();
     }
 
-    public void OpenMenuTrade(PlayerPoint point)
+    public void GoldChangeLess(int value)
     {
-        foreach (Button button in buttonTrade)
+        goldTrade[value] -= 1;
+        if (goldTrade[value] <=0)
         {
-            if (EventSystem.current.currentSelectedGameObject == button.gameObject)
-            {
-                menuTrade.transform.rotation = button.gameObject.transform.rotation;
-            }
+            goldTrade[value] = 0;
         }
-        bool open = menuTrade.activeSelf;
-        textGold.text = "0";
-        goldTrade = 0;
-        menuTrade.SetActive(!open);
-        playerGive = point;
+        textGold[value].text = goldTrade[value].ToString();
+    }
+    
+    public void OpenMenuTrade(int index)
+    {
+        
+        switch (index)
+        {
+            case 0 :
+                if (tradeOpen == false)
+                {
+                    menuTrade[0].SetActive(true);
+                    tradeOpen =true;
+                }
+                break;
+            case 1:
+                
+                if (tradeOpen == false)
+                {
+                    menuTrade[1].SetActive(true);
+                    tradeOpen =true;
+                }
+               
+                break;
+            case 2 :
+                if (tradeOpen == false)
+                {
+                    menuTrade[2].SetActive(true);
+                    tradeOpen = true;
+                }
+              
+                break;
+            case 3 :
+                if (tradeOpen == false)
+                {
+                    menuTrade[3].SetActive(true);
+                    tradeOpen = true;
+                }
+                break;
+        }
+        textGold[index].text = "0";
+        goldTrade[index] = 0;
+        playerGive = allPlayers[index].point;
+    }
+
+    public void CloseTrade()
+    {
+        foreach (GameObject obj in menuTrade)
+        {
+            obj.SetActive(false);
+            tradeOpen = false;
+        }
     }
 
     public void TargetTrade(PlayerPoint point)
@@ -499,7 +542,7 @@ public class GameplayManager : MonoBehaviour
     {
         int textReveive = playerReceive.index+1;
         int textGive = playerGive.index+1;
-        int textGold = goldTrade;
+        int textGold = goldTrade[playerGive.index];
         showExchange.text = "Le joueur " + textGive;
         showExchange.text += " donne " + textGold + " d'or au joueur " + textReveive;
         
