@@ -40,8 +40,6 @@ public class CasesNeutral : MonoBehaviour
     public GameObject menuEnd;
     
     public CasesNeutral lastCase;
-
-    public AudioSource sound;
  
     // Start is called before the first frame update
     void Awake()
@@ -147,7 +145,7 @@ public class CasesNeutral : MonoBehaviour
             _gameplayManager.cardManager.ResetIndexPlayer();
             _gameplayManager.currentstate = new CardPlay();
         }
-        sound.Play();
+        
     }
 
     public void NeutralCase()
