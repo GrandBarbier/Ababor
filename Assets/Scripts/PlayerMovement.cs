@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
             if (end)
             {
                 menuVerif.SetActive(false);
-                gameObject.transform.position = allNextCases[indexCase].transform.position + new Vector3(0, 0.1f, 0);
+                gameObject.transform.position = allNextCases[indexCase].playerSpot[index].transform.position;
                 point.numberCase = indexCase;
                 PlayerResetCase();
                 actualCase = caseNext[0];
@@ -161,7 +161,7 @@ public class PlayerMovement : MonoBehaviour
                         hitObject = cases.gameObject;
                         
                         cases.ShowIfTarget();
-                        child.transform.position = hitObject.transform.position;
+                        child.transform.position = cases.playerSpot[index].transform.position;
                         caseNext[0] = cases;
                         indexCase = allNextCases.IndexOf(cases);
                         menuVerif.SetActive(true);
