@@ -119,8 +119,9 @@ public class CardManager : MonoBehaviour
         else
         {
             target.move.caseNext[0] = target.move.caseNext[0].lastCase; 
+            Debug.Log("1blue");
         }
-        target.player.transform.position = target.move.caseNext[0].transform.position + Vector3.up;
+        target.player.transform.position = target.move.caseNext[0].playerSpot[target.move.index].transform.position;
         target.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
         verif = true;
@@ -138,9 +139,10 @@ public class CardManager : MonoBehaviour
         }
         else
         {
-            target.move.caseNext[0] = target.move.caseNext[0].lastCase.lastCase;   
+            target.move.caseNext[0] = target.move.caseNext[0].lastCase.lastCase;
+            Debug.Log("2blue");
         }
-        target.player.transform.position = target.move.caseNext[0].transform.position + Vector3.up;
+        target.player.transform.position = target.move.caseNext[0].playerSpot[target.move.index].transform.position;
         target.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
         verif = true;
@@ -185,7 +187,7 @@ public class CardManager : MonoBehaviour
     public void QueenGreen()
     {
         gmIndex = gameplayManager.playerIndex;
-        player.player.transform.position = target.move.caseNext[0].transform.position + Vector3.up;
+        player.player.transform.position = target.move.caseNext[0].playerSpot[player.move.index].transform.position;
         player.move.caseNext[0] = target.move.caseNext[0];
         player.move.caseNext[0].ActualCaseFunction();
         waitMenu.SetActive(false);
@@ -197,7 +199,7 @@ public class CardManager : MonoBehaviour
     public void QueenBlue()
     {
         gmIndex = gameplayManager.playerIndex;
-        player.player.transform.position = target.move.caseNext[0].transform.position + Vector3.up;
+        player.player.transform.position = target.move.caseNext[0].playerSpot[player.move.index].transform.position;
         player.move.caseNext[0] = target.move.caseNext[0];
         player.move.caseNext[0].ActualCaseFunction();
         waitMenu.SetActive(false);
@@ -231,8 +233,8 @@ public class CardManager : MonoBehaviour
          index = gameplayManager.playerIndex;
          player.move.isLast = false;
          target.move.isLast = false;
-         player.player.transform.position = target.move.caseNext[0].transform.position +Vector3.up;
-         target.player.transform.position = cases.transform.position + Vector3.up;
+         player.player.transform.position = target.move.caseNext[0].playerSpot[player.move.index].transform.position;
+         target.player.transform.position = cases.playerSpot[target.move.index].transform.position;
          player.move.caseNext[0] = target.move.caseNext[0];
          target.move.caseNext[0] = cases;
          verif = true;
@@ -248,8 +250,8 @@ public class CardManager : MonoBehaviour
         index = gameplayManager.playerIndex;
         player.move.isLast = false;
         target.move.isLast = false;
-        player.player.transform.position = target.move.caseNext[0].transform.position+ Vector3.up;
-        target.player.transform.position = cases.transform.position + Vector3.up;
+        player.player.transform.position = target.move.caseNext[0].playerSpot[player.move.index].transform.position;
+        target.player.transform.position = cases.playerSpot[target.move.index].transform.position;
         player.move.caseNext[0] = target.move.caseNext[0];
         target.move.caseNext[0] = cases;
         verif = true;

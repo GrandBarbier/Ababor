@@ -22,6 +22,8 @@ public class CasesNeutral : MonoBehaviour
     [SerializeField] private EventManager _eventManager;
 
     public GameObject showObject;
+    public GameObject menuEnd;
+    public List<GameObject> playerSpot;
     
     public Renderer renderer;
 
@@ -36,10 +38,10 @@ public class CasesNeutral : MonoBehaviour
     public Event eventS;
     
     public Objectif objectif;
-    
-    public GameObject menuEnd;
-    
+
     public CasesNeutral lastCase;
+    
+    
  
     // Start is called before the first frame update
     void Awake()
