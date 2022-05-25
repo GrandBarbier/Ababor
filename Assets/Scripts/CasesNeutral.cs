@@ -22,6 +22,8 @@ public class CasesNeutral : MonoBehaviour
     [SerializeField] private EventManager _eventManager;
 
     public GameObject showObject;
+    public GameObject menuEnd;
+    public List<GameObject> playerSpot;
     
     public Renderer renderer;
 
@@ -36,12 +38,10 @@ public class CasesNeutral : MonoBehaviour
     public Event eventS;
     
     public Objectif objectif;
-    
-    public GameObject menuEnd;
-    
-    public CasesNeutral lastCase;
 
-    public AudioSource sound;
+    public CasesNeutral lastCase;
+    
+    
  
     // Start is called before the first frame update
     void Awake()
@@ -147,7 +147,7 @@ public class CasesNeutral : MonoBehaviour
             _gameplayManager.cardManager.ResetIndexPlayer();
             _gameplayManager.currentstate = new CardPlay();
         }
-        sound.Play();
+        
     }
 
     public void NeutralCase()
