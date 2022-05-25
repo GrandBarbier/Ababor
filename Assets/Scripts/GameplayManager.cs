@@ -272,15 +272,7 @@ public class GameplayManager : MonoBehaviour
             player.player.transform.position = player.move.caseNext[0].transform.position;
             player.move.isEnd = false;
         }
-
-        if (allPlayers[0].move.isLast)
-        {
-        }
-        else
-        {
-            ChangePlayerOrder();
-            playerIndex = 0;
-        }
+        
         island[islandIndex].SetActive(true);
         island[islandIndex-1].SetActive(false);
         allCases.Clear();
@@ -288,6 +280,7 @@ public class GameplayManager : MonoBehaviour
         foreach (Player player in allPlayers)
         {
             player.move.caseNext[0] = allCases[0];
+            player.player.transform.position = player.move.caseNext[0].playerSpot[player.move.index].transform.position;
         }
         lastTurn = false;
         turnWait = -1;

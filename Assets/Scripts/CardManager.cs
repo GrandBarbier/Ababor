@@ -113,14 +113,14 @@ public class CardManager : MonoBehaviour
     public void OneBlue()
     {
         gmIndex = gameplayManager.playerIndex;
-        if (target.move.caseNext[0] == target.move.caseNext[0].lastCase)
+      /*  if (target.move.caseNext[0] == target.move.caseNext[0].lastCase)
         {
         }
         else
-        {
-            target.move.caseNext[0] = target.move.caseNext[0].lastCase; 
+        {*/
+            target.move.caseNext[0] = target.move.caseNext[0].lastCase;
             Debug.Log("1blue");
-        }
+      //  }
         target.player.transform.position = target.move.caseNext[0].playerSpot[target.move.index].transform.position;
         target.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
@@ -134,14 +134,14 @@ public class CardManager : MonoBehaviour
     public void TwoBlue()
     {
         gmIndex = gameplayManager.playerIndex;
-        if (target.move.caseNext[0] == target.move.caseNext[0].lastCase.lastCase)
+      /*  if (target.move.caseNext[0] == target.move.caseNext[0].lastCase.lastCase)
         {
         }
         else
-        {
+        {*/
             target.move.caseNext[0] = target.move.caseNext[0].lastCase.lastCase;
             Debug.Log("2blue");
-        }
+      //  }
         target.player.transform.position = target.move.caseNext[0].playerSpot[target.move.index].transform.position;
         target.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
