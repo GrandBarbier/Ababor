@@ -40,8 +40,8 @@ public class CasesNeutral : MonoBehaviour
     public Objectif objectif;
 
     public CasesNeutral lastCase;
-    
-    
+
+    public AudioSource soundCase;
  
     // Start is called before the first frame update
     void Awake()
@@ -147,7 +147,7 @@ public class CasesNeutral : MonoBehaviour
             _gameplayManager.cardManager.ResetIndexPlayer();
             _gameplayManager.currentstate = new CardPlay();
         }
-        
+        soundCase.Play();
     }
 
     public void NeutralCase()
@@ -162,6 +162,7 @@ public class CasesNeutral : MonoBehaviour
             _gameplayManager.cardManager.ResetIndexPlayer();
             _gameplayManager.currentstate = new CardPlay();
         }
+        soundCase.Play();
     }
 
     public void LoseCase()
@@ -184,6 +185,7 @@ public class CasesNeutral : MonoBehaviour
             _gameplayManager.cardManager.ResetIndexPlayer();
             _gameplayManager.currentstate = new CardPlay();
         }
+        soundCase.Play();
     }
 
     public void ShopCase()
@@ -191,6 +193,7 @@ public class CasesNeutral : MonoBehaviour
         shop.ShopOpen();
         _gameplayManager.activPlayer.point.numberShopCase++;
         _gameplayManager.ResetLast();
+        soundCase.Play();
     }
 
     public void EndCase()
@@ -217,6 +220,8 @@ public class CasesNeutral : MonoBehaviour
         {
             _gameplayManager.NextIsland();
         }
+
+        soundCase.Play();
     }
 
     public void LastCase()
@@ -231,6 +236,7 @@ public class CasesNeutral : MonoBehaviour
         eventS.GetEvent();
         eventS.Invoke(eventS.eventName,0);
         _gameplayManager.ResetLast();
+        soundCase.Play();
     }
 
     public void ShowIfTarget()

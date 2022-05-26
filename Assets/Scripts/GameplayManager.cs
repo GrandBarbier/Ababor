@@ -451,14 +451,16 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
-    public void ButtonObjectif()
+    public void ButtonObjectif(int rotation)
     {
         StartCoroutine(OpenObjectif());
+        objectifMenu.transform.rotation = new Quaternion(0, 0, rotation, 0);
     }
 
-    public void ButtonSetting()
+    public void ButtonSetting(int rotation)
     {
-      menuSetting.SetActive(true);  
+      menuSetting.SetActive(true);
+      menuSetting.transform.rotation = new Quaternion(0, 0, rotation, 0);
     }
 
     public void CloseSetting()
@@ -466,9 +468,10 @@ public class GameplayManager : MonoBehaviour
         menuSetting.SetActive(false);
     }
 
-    public void ButtonCard()
+    public void ButtonCard(int rotation)
     {
         menuCardExpliquation.SetActive(true);
+        menuCardExpliquation.transform.rotation = new  Quaternion(0,0,rotation,0) ;
     }
 
     public void CloseCardExpliquation()
@@ -530,6 +533,11 @@ public class GameplayManager : MonoBehaviour
     public void SFXSlider()
     {
         audioSource.volume = sliderSFX.value;
+    }
+
+    public void USound(AudioSource sound)
+    {
+        sound.Play();
     }
 
     public void ReturnMenu()
