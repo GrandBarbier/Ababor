@@ -42,7 +42,8 @@ public class CasesNeutral : MonoBehaviour
     public CasesNeutral lastCase;
 
     public AudioSource soundCase;
- 
+
+    public bool canEvent;
     // Start is called before the first frame update
     void Awake()
     {
@@ -64,6 +65,8 @@ public class CasesNeutral : MonoBehaviour
         {
             marauder.StopSteps();
         }
+
+        canEvent = true;
     }
 
     // Update is called once per frame
@@ -233,10 +236,28 @@ public class CasesNeutral : MonoBehaviour
 
     public void EventCase()
     {
-        eventS.GetEvent();
-        eventS.Invoke(eventS.eventName,0);
-        _gameplayManager.ResetLast();
-        soundCase.Play();
+        if (canEvent)
+        {
+            eventS.GetEvent();
+            eventS.Invoke(eventS.eventName, 0);
+            _gameplayManager.ResetLast();
+            soundCase.Play();
+            canEvent = false;
+        }
+        else
+        {
+            if (_gameplayManager.cardManager.numberClub == false)
+            {
+                _gameplayManager.ChangePlayer();
+            }
+            else
+            {
+                _gameplayManager.cardManager.numberClub = false;
+                _gameplayManager.cardManager.ResetIndexPlayer();
+                _gameplayManager.currentstate = new CardPlay();
+            }
+            soundCase.Play();
+        }
     }
 
     public void ShowIfTarget()

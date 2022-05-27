@@ -126,7 +126,7 @@ public class GameplayManager : MonoBehaviour
     
     public void ChangePlayer()
     {
-        Debug.Log("tour+1");
+      
         currentstate = new EndTurn(); 
         currentstate.DoState(allPlayers[playerIndex].move, this);
         playerIndex++;
@@ -179,6 +179,10 @@ public class GameplayManager : MonoBehaviour
 
     public void ChangePlayerOrder()
     {
+        foreach (CasesNeutral cases in allCases)
+        {
+            cases.canEvent = true;
+        }
         Debug.Log("changement ordre joueur");
         actualMove.isLast = false;
         allPlayers[0].move.isLast = true;
