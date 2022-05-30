@@ -98,7 +98,7 @@ public class Event : MonoBehaviour
         enabled = false;
     }
 
-    public void GoToCase()
+   /* public void GoToCase()
     {
         tmpDescription.text = "Tout les joueurs vont sur cette case";
         foreach (Player player in allPlayers)
@@ -144,11 +144,11 @@ public class Event : MonoBehaviour
             _gameplayManager.cardManager.ResetIndexPlayer();
             _gameplayManager.currentstate = new CardPlay();
         }
-    }
+    }*/
 
     public void HideCase()
     {
-        tmpDescription.text= "4 à 6 a effet sont caché jusqu'à ce qu'un joueur arrive dessus";
+        tmpDescription.text= "4 à 6 cases a effet sont caché jusqu'à ce qu'un joueur arrive dessus";
         _eventManager.HideCase();
     }
 
@@ -172,7 +172,7 @@ public class Event : MonoBehaviour
 
     public void GiveGoldRanking()
     {
-        tmpDescription.text = "DOnne de l'or a tout les joueurs en fonction du classement";
+        tmpDescription.text = "Donne de l'or a tout les joueurs en fonction du classement";
         _eventManager.GiveGoldRanking();
     }
     
@@ -181,5 +181,6 @@ public class Event : MonoBehaviour
         int rdm = Random.Range(0, allEvent.Count);
         eventName = allEvent[rdm];
         tmpDescription.transform.parent.gameObject.SetActive(true);
+        tmpDescription.transform.gameObject.SetActive(true);
     }
 }

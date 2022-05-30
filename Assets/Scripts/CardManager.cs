@@ -11,6 +11,7 @@ public class CardManager : MonoBehaviour
     public GameObject waitMenu;
     public GameObject targetMenu;
     public GameObject useCard;
+   
     
     public Image playerSelected;
     public Image targetSelected;
@@ -20,6 +21,7 @@ public class CardManager : MonoBehaviour
 
     public TMP_Text text;
     public TMP_Text textTarget;
+    public TMP_Text goldQueen;
     
     public int index, gmIndex;
     
@@ -66,6 +68,8 @@ public class CardManager : MonoBehaviour
             button.gameObject.SetActive(true);
             buttonTarget.gameObject.SetActive(true);
         }
+
+        goldQueen.text = "Or du trésor : " + gameplayManager.treasure.ToString();
     }
 
     public void OneGreen()
@@ -113,14 +117,15 @@ public class CardManager : MonoBehaviour
     public void OneBlue()
     {
         gmIndex = gameplayManager.playerIndex;
-        if (target.move.caseNext[0] == target.move.caseNext[0].lastCase)
+      /*  if (target.move.caseNext[0] == target.move.caseNext[0].lastCase)
         {
         }
         else
-        {
-            target.move.caseNext[0] = target.move.caseNext[0].lastCase; 
-        }
-        target.player.transform.position = target.move.caseNext[0].transform.position + Vector3.up;
+        {*/
+            target.move.caseNext[0] = target.move.caseNext[0].lastCase;
+            Debug.Log("1blue");
+      //  }
+        target.player.transform.position = target.move.caseNext[0].playerSpot[target.move.index].transform.position;
         target.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
         verif = true;
@@ -133,14 +138,9 @@ public class CardManager : MonoBehaviour
     public void TwoBlue()
     {
         gmIndex = gameplayManager.playerIndex;
-        if (target.move.caseNext[0] == target.move.caseNext[0].lastCase.lastCase)
-        {
-        }
-        else
-        {
-            target.move.caseNext[0] = target.move.caseNext[0].lastCase.lastCase;   
-        }
-        target.player.transform.position = target.move.caseNext[0].transform.position + Vector3.up;
+        target.move.caseNext[0] = target.move.caseNext[0].lastCase.lastCase;
+        Debug.Log("2blue");
+        target.player.transform.position = target.move.caseNext[0].playerSpot[target.move.index].transform.position;
         target.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
         verif = true;
@@ -185,7 +185,7 @@ public class CardManager : MonoBehaviour
     public void QueenGreen()
     {
         gmIndex = gameplayManager.playerIndex;
-        player.player.transform.position = target.move.caseNext[0].transform.position + Vector3.up;
+        player.player.transform.position = target.move.caseNext[0].playerSpot[player.move.index].transform.position;
         player.move.caseNext[0] = target.move.caseNext[0];
         player.move.caseNext[0].ActualCaseFunction();
         waitMenu.SetActive(false);
@@ -197,7 +197,7 @@ public class CardManager : MonoBehaviour
     public void QueenBlue()
     {
         gmIndex = gameplayManager.playerIndex;
-        player.player.transform.position = target.move.caseNext[0].transform.position + Vector3.up;
+        player.player.transform.position = target.move.caseNext[0].playerSpot[player.move.index].transform.position;
         player.move.caseNext[0] = target.move.caseNext[0];
         player.move.caseNext[0].ActualCaseFunction();
         waitMenu.SetActive(false);
@@ -222,6 +222,7 @@ public class CardManager : MonoBehaviour
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
         useCard.SetActive(true);
+        goldQueen.gameObject.SetActive(false);
     }
 
     public void KingGreen()
@@ -231,8 +232,8 @@ public class CardManager : MonoBehaviour
          index = gameplayManager.playerIndex;
          player.move.isLast = false;
          target.move.isLast = false;
-         player.player.transform.position = target.move.caseNext[0].transform.position +Vector3.up;
-         target.player.transform.position = cases.transform.position + Vector3.up;
+         player.player.transform.position = target.move.caseNext[0].playerSpot[player.move.index].transform.position;
+         target.player.transform.position = cases.playerSpot[target.move.index].transform.position;
          player.move.caseNext[0] = target.move.caseNext[0];
          target.move.caseNext[0] = cases;
          verif = true;
@@ -248,8 +249,8 @@ public class CardManager : MonoBehaviour
         index = gameplayManager.playerIndex;
         player.move.isLast = false;
         target.move.isLast = false;
-        player.player.transform.position = target.move.caseNext[0].transform.position+ Vector3.up;
-        target.player.transform.position = cases.transform.position + Vector3.up;
+        player.player.transform.position = target.move.caseNext[0].playerSpot[player.move.index].transform.position;
+        target.player.transform.position = cases.playerSpot[target.move.index].transform.position;
         player.move.caseNext[0] = target.move.caseNext[0];
         target.move.caseNext[0] = cases;
         verif = true;
@@ -431,6 +432,7 @@ public class CardManager : MonoBehaviour
         {
             gameplayManager.OpenVerifMenu();
         }
+        goldQueen.gameObject.SetActive(false);
     }
     
     public void OpenCardMenu(string stg, Player pl, string texte)
@@ -497,7 +499,7 @@ public class CardManager : MonoBehaviour
                 Debug.Log(3);
                 break;
         }
-        
+
         if (waitMenu.activeSelf == false|| stg == "Jack")
         {
             targetMenu.SetActive(true);
@@ -517,6 +519,11 @@ public class CardManager : MonoBehaviour
             player = pl;
         }
         targetSelected.gameObject.SetActive(true);
+        
+        if (functionName == "QueenYellow")
+        {
+            goldQueen.gameObject.SetActive(true);
+        }
     }
 
     public void ResetIndexPlayer()
