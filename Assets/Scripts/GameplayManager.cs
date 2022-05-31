@@ -49,8 +49,6 @@ public class GameplayManager : MonoBehaviour
 
     public EndMenu endCalcul;
 
-    public AudioSource soundScene;
-
   [SerializeField]  private AudioSource audioSource;
   [SerializeField]  private AudioSource sfxSource;
 
@@ -541,10 +539,9 @@ public class GameplayManager : MonoBehaviour
         audioSource.volume = sliderSFX.value;
     }
 
-    public void USound(AudioClip sound)
+    public void USound(AudioSource sound)
     {
-        soundScene.clip = sound;
-        soundScene.Play();
+        sound.Play();
     }
 
     public void ReturnMenu()
