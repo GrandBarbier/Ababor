@@ -10,7 +10,7 @@ public class Shop : MonoBehaviour
     
     public PlayerMovement playerMove;
 
-    public GameObject shopMenu;
+    public List<GameObject> shopMenu;
 
     private CasesNeutral caseScript;
     
@@ -23,8 +23,8 @@ public class Shop : MonoBehaviour
 
     public void ShopOpen()
     {
-        shopMenu.SetActive(true);
-        switch (_gameplayManager.actualPoint.index)
+        shopMenu[playerPoint.index].SetActive(true);
+      /*  switch (_gameplayManager.actualPoint.index)
         {
             case 0 :
                 shopMenu.transform.rotation = Quaternion.Euler(0,0,0);
@@ -42,12 +42,16 @@ public class Shop : MonoBehaviour
                 shopMenu.transform.rotation = Quaternion.Euler(0,0,180);
                 Debug.Log(3);
                 break;
-        }
+        }*/
     }
 
     public void ShopClose()
     {
-        shopMenu.SetActive(false);
+     /*   foreach (GameObject obj in shopMenu)
+        {
+            obj.SetActive(false);
+        }*/
+        shopMenu[playerPoint.index].SetActive(false);
         _gameplayManager.OpenVerifMenu();
         if (_gameplayManager.cardManager.numberClub == false)
         {
@@ -69,7 +73,7 @@ public class Shop : MonoBehaviour
             _gameplayManager.enabled = true;
             playerPoint.gold -= 10;
             playerMove.InitialMove++;
-            shopMenu.SetActive(false);
+            shopMenu[playerPoint.index].SetActive(false);
             if (_gameplayManager.cardManager.numberClub == false)
             {
                 _gameplayManager.ChangePlayer();
@@ -96,7 +100,7 @@ public class Shop : MonoBehaviour
 
 
             playerPoint.gold -= 5;
-            shopMenu.SetActive(false);
+            shopMenu[playerPoint.index].SetActive(false);
             if (_gameplayManager.cardManager.numberClub == false)
             {
                 _gameplayManager.ChangePlayer();

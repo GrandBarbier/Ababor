@@ -98,7 +98,7 @@ public class Event : MonoBehaviour
         enabled = false;
     }
 
-    public void GoToCase()
+   /* public void GoToCase()
     {
         tmpDescription.text = "Tout les joueurs vont sur cette case";
         foreach (Player player in allPlayers)
@@ -144,7 +144,7 @@ public class Event : MonoBehaviour
             _gameplayManager.cardManager.ResetIndexPlayer();
             _gameplayManager.currentstate = new CardPlay();
         }
-    }
+    }*/
 
     public void HideCase()
     {

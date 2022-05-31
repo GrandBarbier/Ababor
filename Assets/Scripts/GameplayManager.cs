@@ -126,7 +126,7 @@ public class GameplayManager : MonoBehaviour
     
     public void ChangePlayer()
     {
-        Debug.Log("tour+1");
+      
         currentstate = new EndTurn(); 
         currentstate.DoState(allPlayers[playerIndex].move, this);
         playerIndex++;
@@ -179,6 +179,10 @@ public class GameplayManager : MonoBehaviour
 
     public void ChangePlayerOrder()
     {
+        foreach (CasesNeutral cases in allCases)
+        {
+            cases.canEvent = true;
+        }
         Debug.Log("changement ordre joueur");
         actualMove.isLast = false;
         allPlayers[0].move.isLast = true;
@@ -272,15 +276,7 @@ public class GameplayManager : MonoBehaviour
             player.player.transform.position = player.move.caseNext[0].transform.position;
             player.move.isEnd = false;
         }
-
-        if (allPlayers[0].move.isLast)
-        {
-        }
-        else
-        {
-            ChangePlayerOrder();
-            playerIndex = 0;
-        }
+        
         island[islandIndex].SetActive(true);
         island[islandIndex-1].SetActive(false);
         allCases.Clear();
@@ -288,6 +284,7 @@ public class GameplayManager : MonoBehaviour
         foreach (Player player in allPlayers)
         {
             player.move.caseNext[0] = allCases[0];
+            player.player.transform.position = player.move.caseNext[0].playerSpot[player.move.index].transform.position;
         }
         lastTurn = false;
         turnWait = -1;
@@ -458,14 +455,16 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
-    public void ButtonObjectif()
+    public void ButtonObjectif(int rotation)
     {
         StartCoroutine(OpenObjectif());
+        objectifMenu.transform.rotation = new Quaternion(0, 0, rotation, 0);
     }
 
-    public void ButtonSetting()
+    public void ButtonSetting(int rotation)
     {
-      menuSetting.SetActive(true);  
+      menuSetting.SetActive(true);
+      menuSetting.transform.rotation = new Quaternion(0, 0, rotation, 0);
     }
 
     public void CloseSetting()
@@ -473,9 +472,10 @@ public class GameplayManager : MonoBehaviour
         menuSetting.SetActive(false);
     }
 
-    public void ButtonCard()
+    public void ButtonCard(int rotation)
     {
         menuCardExpliquation.SetActive(true);
+        menuCardExpliquation.transform.rotation = new  Quaternion(0,0,rotation,0) ;
     }
 
     public void CloseCardExpliquation()
@@ -537,6 +537,11 @@ public class GameplayManager : MonoBehaviour
     public void SFXSlider()
     {
         audioSource.volume = sliderSFX.value;
+    }
+
+    public void USound(AudioSource sound)
+    {
+        sound.Play();
     }
 
     public void ReturnMenu()
