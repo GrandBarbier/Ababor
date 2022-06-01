@@ -4621,16 +4621,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 266184662}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2500001, y: 2.843563, z: 1.2500001}
   m_Children: []
-  m_Father: {fileID: 1608922353}
-  m_RootOrder: 32
+  m_Father: {fileID: 681698751}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -70.2}
+  m_AnchoredPosition: {x: 0, y: -466.91315}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &266184664
@@ -8983,6 +8983,7 @@ GameObject:
   - component: {fileID: 615325996}
   - component: {fileID: 615325995}
   - component: {fileID: 615325994}
+  - component: {fileID: 615325997}
   m_Layer: 5
   m_Name: Button (4)
   m_TagString: Untagged
@@ -9065,6 +9066,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 615325997}
+        m_TargetAssemblyTypeName: ButtonPLayerMenu, Assembly-CSharp
+        m_MethodName: ClickedCard1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &615325995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9103,6 +9116,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 615325992}
   m_CullTransparentMesh: 1
+--- !u!114 &615325997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615325992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8207de448a056cc45bee10d4ef53afab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalSprite: {fileID: 21300000, guid: 1546696a5f46afd4a968a9ec9f7a9300, type: 3}
+  clickedSprite: {fileID: 21300000, guid: 334035ad0b4dcf843836f54855f4f143, type: 3}
+  imageButton: {fileID: 615325995}
+  card1Target:
+  - {fileID: 615325995}
+  - {fileID: 1266515569}
+  - {fileID: 1442163605}
+  - {fileID: 1801135957}
+  button1Target:
+  - {fileID: 615325997}
+  - {fileID: 1266515571}
+  - {fileID: 1442163607}
+  - {fileID: 1801135959}
 --- !u!1 &623726048
 GameObject:
   m_ObjectHideFlags: 0
@@ -11129,7 +11167,7 @@ RectTransform:
   - {fileID: 1442163603}
   - {fileID: 1801135955}
   - {fileID: 28712698}
-  - {fileID: 834489154}
+  - {fileID: 266184663}
   m_Father: {fileID: 1608922353}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13491,81 +13529,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 826430729}
   m_CullTransparentMesh: 1
---- !u!1 &834489153
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 834489154}
-  - component: {fileID: 834489156}
-  - component: {fileID: 834489155}
-  m_Layer: 5
-  m_Name: secondtarget (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &834489154
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 834489153}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2.2748501, z: 1}
-  m_Children: []
-  m_Father: {fileID: 681698751}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 353, y: -504.36057}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &834489155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 834489153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &834489156
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 834489153}
-  m_CullTransparentMesh: 1
 --- !u!1 &843616002
 GameObject:
   m_ObjectHideFlags: 0
@@ -13578,6 +13541,7 @@ GameObject:
   - component: {fileID: 843616006}
   - component: {fileID: 843616005}
   - component: {fileID: 843616004}
+  - component: {fileID: 843616007}
   m_Layer: 5
   m_Name: Button (6)
   m_TagString: Untagged
@@ -13672,6 +13636,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 843616007}
+        m_TargetAssemblyTypeName: ButtonPLayerMenu, Assembly-CSharp
+        m_MethodName: ClickedCard1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &843616005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13685,14 +13661,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9279469, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 43286b1072e57694c925cf1589d26640, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7d3500842194e7e49b835a6c3908fc85, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13710,6 +13686,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 843616002}
   m_CullTransparentMesh: 1
+--- !u!114 &843616007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843616002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8207de448a056cc45bee10d4ef53afab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalSprite: {fileID: 21300000, guid: 7d3500842194e7e49b835a6c3908fc85, type: 3}
+  clickedSprite: {fileID: 21300000, guid: 08603f36a859a414bbf12defbb28f76e, type: 3}
+  imageButton: {fileID: 843616005}
+  card1Target:
+  - {fileID: 1520877963}
+  - {fileID: 843616005}
+  - {fileID: 1332392095}
+  button1Target:
+  - {fileID: 1520877965}
+  - {fileID: 843616007}
+  - {fileID: 1332392097}
 --- !u!1 &849914108
 GameObject:
   m_ObjectHideFlags: 0
@@ -19801,6 +19800,7 @@ GameObject:
   - component: {fileID: 1266515570}
   - component: {fileID: 1266515569}
   - component: {fileID: 1266515568}
+  - component: {fileID: 1266515571}
   m_Layer: 5
   m_Name: Button (5)
   m_TagString: Untagged
@@ -19883,6 +19883,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1266515571}
+        m_TargetAssemblyTypeName: ButtonPLayerMenu, Assembly-CSharp
+        m_MethodName: ClickedCard1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1266515569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19921,6 +19933,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266515566}
   m_CullTransparentMesh: 1
+--- !u!114 &1266515571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266515566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8207de448a056cc45bee10d4ef53afab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalSprite: {fileID: 21300000, guid: f5e7f47d6f204a34da4255ce3a568136, type: 3}
+  clickedSprite: {fileID: 21300000, guid: dea4de323e91aaa48b7b3562cfb7ae5b, type: 3}
+  imageButton: {fileID: 1266515569}
+  card1Target:
+  - {fileID: 615325995}
+  - {fileID: 1266515569}
+  - {fileID: 1442163605}
+  - {fileID: 1801135957}
+  button1Target:
+  - {fileID: 615325997}
+  - {fileID: 1266515571}
+  - {fileID: 1442163607}
+  - {fileID: 1801135959}
 --- !u!1 &1269696828
 GameObject:
   m_ObjectHideFlags: 0
@@ -20577,7 +20614,7 @@ MonoBehaviour:
   hiddenCases: []
   basicCaseMat: {fileID: 2100000, guid: 357b36a1b75b3b04bb159f7a8ad202fb, type: 2}
   loseCaseMat: {fileID: 2100000, guid: 244eba6ae123b434cbe8c508856462c1, type: 2}
-  gainCaseMat: {fileID: 2100000, guid: f90e00bc971dff749af7bdd7f589e339, type: 2}
+  gainCaseMat: {fileID: 2100000, guid: 12aa8ba47c8c1874186f0949565f7dbd, type: 2}
   eventCaseMat: {fileID: 2100000, guid: e7ff526f5470e7a41a5c2b85aa58e389, type: 2}
   eventManagerFunction: []
 --- !u!114 &1306014711 stripped
@@ -21279,6 +21316,7 @@ GameObject:
   - component: {fileID: 1332392096}
   - component: {fileID: 1332392095}
   - component: {fileID: 1332392094}
+  - component: {fileID: 1332392097}
   m_Layer: 5
   m_Name: Button (7)
   m_TagString: Untagged
@@ -21373,6 +21411,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1332392097}
+        m_TargetAssemblyTypeName: ButtonPLayerMenu, Assembly-CSharp
+        m_MethodName: ClickedCard1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1332392095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21386,14 +21436,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.011921406, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a6a368adaecbc6c469ff47f1dd0dde32, type: 3}
+  m_Sprite: {fileID: 21300000, guid: add24f5afecc3d843b512c9e7acee9d9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -21411,6 +21461,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332392092}
   m_CullTransparentMesh: 1
+--- !u!114 &1332392097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332392092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8207de448a056cc45bee10d4ef53afab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalSprite: {fileID: 21300000, guid: add24f5afecc3d843b512c9e7acee9d9, type: 3}
+  clickedSprite: {fileID: 21300000, guid: 4b882a55203c42d41a0249dfee2bda0a, type: 3}
+  imageButton: {fileID: 1332392095}
+  card1Target:
+  - {fileID: 1520877963}
+  - {fileID: 843616005}
+  - {fileID: 1332392095}
+  button1Target:
+  - {fileID: 1520877965}
+  - {fileID: 843616007}
+  - {fileID: 1332392097}
 --- !u!1 &1342864625
 GameObject:
   m_ObjectHideFlags: 0
@@ -23115,6 +23188,7 @@ GameObject:
   - component: {fileID: 1442163606}
   - component: {fileID: 1442163605}
   - component: {fileID: 1442163604}
+  - component: {fileID: 1442163607}
   m_Layer: 5
   m_Name: Button (6)
   m_TagString: Untagged
@@ -23197,6 +23271,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1442163607}
+        m_TargetAssemblyTypeName: ButtonPLayerMenu, Assembly-CSharp
+        m_MethodName: ClickedCard1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1442163605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23235,6 +23321,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1442163602}
   m_CullTransparentMesh: 1
+--- !u!114 &1442163607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442163602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8207de448a056cc45bee10d4ef53afab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalSprite: {fileID: 21300000, guid: 7d3500842194e7e49b835a6c3908fc85, type: 3}
+  clickedSprite: {fileID: 21300000, guid: 08603f36a859a414bbf12defbb28f76e, type: 3}
+  imageButton: {fileID: 1442163605}
+  card1Target:
+  - {fileID: 615325995}
+  - {fileID: 1266515569}
+  - {fileID: 1442163605}
+  - {fileID: 1801135957}
+  button1Target:
+  - {fileID: 615325997}
+  - {fileID: 1266515571}
+  - {fileID: 1442163607}
+  - {fileID: 1801135959}
 --- !u!1 &1443635373
 GameObject:
   m_ObjectHideFlags: 0
@@ -24075,7 +24186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3770765139524685960, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.9400477
+      value: 7.9400463
       objectReference: {fileID: 0}
     - target: {fileID: 3897283163556684031, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -25936,6 +26047,7 @@ GameObject:
   - component: {fileID: 1520877964}
   - component: {fileID: 1520877963}
   - component: {fileID: 1520877962}
+  - component: {fileID: 1520877965}
   m_Layer: 5
   m_Name: Button (5)
   m_TagString: Untagged
@@ -26030,6 +26142,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1520877965}
+        m_TargetAssemblyTypeName: ButtonPLayerMenu, Assembly-CSharp
+        m_MethodName: ClickedCard1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1520877963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26043,14 +26167,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.06795359, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4804cf1035f4f8d48919526191508c7e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f5e7f47d6f204a34da4255ce3a568136, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -26068,6 +26192,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1520877960}
   m_CullTransparentMesh: 1
+--- !u!114 &1520877965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520877960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8207de448a056cc45bee10d4ef53afab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalSprite: {fileID: 21300000, guid: f5e7f47d6f204a34da4255ce3a568136, type: 3}
+  clickedSprite: {fileID: 21300000, guid: dea4de323e91aaa48b7b3562cfb7ae5b, type: 3}
+  imageButton: {fileID: 1520877963}
+  card1Target:
+  - {fileID: 1520877963}
+  - {fileID: 843616005}
+  - {fileID: 1332392095}
+  button1Target:
+  - {fileID: 1520877965}
+  - {fileID: 843616007}
+  - {fileID: 1332392097}
 --- !u!1 &1522608924
 GameObject:
   m_ObjectHideFlags: 0
@@ -28130,7 +28277,6 @@ RectTransform:
   - {fileID: 524169338}
   - {fileID: 1522608925}
   - {fileID: 659892018}
-  - {fileID: 266184663}
   - {fileID: 646766759}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -31094,7 +31240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1778762502
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31593,6 +31739,7 @@ GameObject:
   - component: {fileID: 1801135958}
   - component: {fileID: 1801135957}
   - component: {fileID: 1801135956}
+  - component: {fileID: 1801135959}
   m_Layer: 5
   m_Name: Button (7)
   m_TagString: Untagged
@@ -31675,6 +31822,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1801135959}
+        m_TargetAssemblyTypeName: ButtonPLayerMenu, Assembly-CSharp
+        m_MethodName: ClickedCard1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1801135957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31713,6 +31872,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1801135954}
   m_CullTransparentMesh: 1
+--- !u!114 &1801135959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801135954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8207de448a056cc45bee10d4ef53afab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalSprite: {fileID: 21300000, guid: add24f5afecc3d843b512c9e7acee9d9, type: 3}
+  clickedSprite: {fileID: 21300000, guid: 4b882a55203c42d41a0249dfee2bda0a, type: 3}
+  imageButton: {fileID: 1801135957}
+  card1Target:
+  - {fileID: 615325995}
+  - {fileID: 1266515569}
+  - {fileID: 1442163605}
+  - {fileID: 1801135957}
+  button1Target:
+  - {fileID: 615325997}
+  - {fileID: 1266515571}
+  - {fileID: 1442163607}
+  - {fileID: 1801135959}
 --- !u!1 &1805432506 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 30005330359495721, guid: 99c1c73f66453df46a81858544a4d19a, type: 3}
@@ -38768,7 +38952,7 @@ PrefabInstance:
     - target: {fileID: 7541256346092628484, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
       propertyPath: player1Target
       value: 
-      objectReference: {fileID: 834489155}
+      objectReference: {fileID: 0}
     - target: {fileID: 7541256346092628484, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
       propertyPath: playerSelected
       value: 
