@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     public GameObject settings;
+    public GameObject credit;
+
+    public AudioSource sound;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,5 +42,19 @@ public class MainMenu : MonoBehaviour
         settings.SetActive(false);
     }
 
-   
+    public void OpenCredit()
+    {
+        credit.SetActive(true);
+    }
+
+    public void CloseCredit()
+    {
+        credit.SetActive(false);
+    }
+
+    public void Sound(AudioClip clip)
+    {
+        sound.clip = clip;
+        sound.Play();
+    }
 }
