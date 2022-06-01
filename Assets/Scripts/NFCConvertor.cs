@@ -16,25 +16,24 @@ public class NFCConvertor : MonoBehaviour
         {
              case "1G":
                  description = "Avance d'une case";
-                 cardManager.OpenCardMenu1Target("OneGreen", player,description);
+                 cardManager.OpenCardMenu1Target("OneGreen", player,description, player.point.index);
                  cardManager.oneTarget = true;
                  break;
              
              case "2G":
                  description = "Avance de deux cases";
-                 cardManager.OpenCardMenu1Target("TwoGreen", player,description);
+                 cardManager.OpenCardMenu1Target("TwoGreen", player,description,player.point.index);
                  cardManager.oneTarget = true;
                  break;
              
              case ";G":
                  if (cardManager.oneTarget && cardManager.waitMenu.activeSelf)
                  {
-                      cardManager.OpenCardMenu1Target("Jack", player,description);
-                      Debug.Log("edr");
+                      cardManager.OpenCardMenu1Target("Jack", player,description,player.point.index);
                  }
                  else if (cardManager.waitMenu.activeSelf)
                  {
-                     cardManager.OpenCardMenu("Jack", player,description);
+                     cardManager.OpenCardMenu("Jack", player,description,player.point.index);
                  }
                  cardManager.CancelInvoke();
                  cardManager.waitMenu.SetActive(false);
@@ -42,13 +41,13 @@ public class NFCConvertor : MonoBehaviour
              
              case"<G":
                  description = "Vous vous déplacez vers votre cible";
-                 cardManager.OpenCardMenu1Target("QueenGreen", player,description);
+                 cardManager.OpenCardMenu1Target("QueenGreen", player,description,player.point.index);
                  cardManager.oneTarget = true;
                  break;
              
              case "=G":
                  description = "Vous échanger votre place avec un joueur";
-                 cardManager.OpenCardMenu1Target("KingGreen", player,description);
+                 cardManager.OpenCardMenu1Target("KingGreen", player,description,player.point.index);
                  cardManager.oneTarget = true;
                  break;
              
@@ -58,24 +57,24 @@ public class NFCConvertor : MonoBehaviour
              
              case "1B":
                  description = "Reculez d'une case";
-                 cardManager.OpenCardMenu1Target("OneBlue", player,description);
+                 cardManager.OpenCardMenu1Target("OneBlue", player,description,player.point.index);
                  cardManager.oneTarget = true;
                  break;
              
              case "2B":
                  description = "Reculez de 2 cases";
-                 cardManager.OpenCardMenu1Target("TwoBlue", player,description);
+                 cardManager.OpenCardMenu1Target("TwoBlue", player,description,player.point.index);
                  cardManager.oneTarget = true;
                  break;
              
              case ";B":
                  if (cardManager.oneTarget && cardManager.waitMenu.activeSelf)
                  {
-                     cardManager.OpenCardMenu1Target("Jack", player,description);
+                     cardManager.OpenCardMenu1Target("Jack", player,description,player.point.index);
                  }
                  else if (cardManager.waitMenu.activeSelf)
                  {
-                     cardManager.OpenCardMenu("Jack", player,description);
+                     cardManager.OpenCardMenu("Jack", player,description,player.point.index);
                  }
                  cardManager.CancelInvoke();
                  cardManager.waitMenu.SetActive(false);
@@ -83,13 +82,13 @@ public class NFCConvertor : MonoBehaviour
              
              case"<B":
                  description = "Un joueur en rejoins un autre";
-                 cardManager.OpenCardMenu("QueenBlue", player,description);
+                 cardManager.OpenCardMenu("QueenBlue", player,description,player.point.index);
                  cardManager.oneTarget = false;
                  break;
              
              case "=B":
                  description = "Echange la place de 2 joueurs";
-                 cardManager.OpenCardMenu("KingBlue", player,description);
+                 cardManager.OpenCardMenu("KingBlue", player,description,player.point.index);
                  cardManager.oneTarget = false;
                  break;
              
@@ -99,23 +98,23 @@ public class NFCConvertor : MonoBehaviour
              
              case "3R":
                  description = "Perd 3 d'or";
-                 cardManager.OpenCardMenu1Target("ThreeRed", player,description);
+                 cardManager.OpenCardMenu1Target("ThreeRed", player,description,player.point.index);
                  cardManager.oneTarget = true;
                  break;
              
              case "5R":
                  description = "Perd 5 d'or";
-                 cardManager.OpenCardMenu1Target("FiveRed", player,description);
+                 cardManager.OpenCardMenu1Target("FiveRed", player,description,player.point.index);
                  cardManager.oneTarget = true;
                  break;
              case ";R":
                  if (cardManager.oneTarget && cardManager.waitMenu.activeSelf)
                  {
-                     cardManager.OpenCardMenu1Target("Jack", player,description);
+                     cardManager.OpenCardMenu1Target("Jack", player,description,player.point.index);
                  }
                  else if (cardManager.waitMenu.activeSelf)
                  {
-                     cardManager.OpenCardMenu("Jack", player,description);
+                     cardManager.OpenCardMenu("Jack", player,description,player.point.index);
                  }
                  cardManager.CancelInvoke();
                  cardManager.waitMenu.SetActive(false);
@@ -123,13 +122,13 @@ public class NFCConvertor : MonoBehaviour
              
              case"<R":
                  description = "Un joueur donne 5 d'or a un autre joueur";
-                 cardManager.OpenCardMenu("QueenRed", player,description);
+                 cardManager.OpenCardMenu("QueenRed", player,description,player.point.index);
                  cardManager.oneTarget = false;
                  break;
              
              case "=R":
                  description = "Un joueur donne 3 d'or a tout les autres joueurs";
-                 cardManager.OpenCardMenu1Target("KingRed", player,description);
+                 cardManager.OpenCardMenu1Target("KingRed", player,description,player.point.index);
                  cardManager.oneTarget = true;
                  break;
              
@@ -138,23 +137,23 @@ public class NFCConvertor : MonoBehaviour
              
              case "3Y":
                  description = "Donne 3 d'or";
-                 cardManager.OpenCardMenu1Target("ThreeYellow", player,description);
+                 cardManager.OpenCardMenu1Target("ThreeYellow", player,description,player.point.index);
                  cardManager.oneTarget = true;
                  break;
              
              case "5Y":
                  description = "Donne 5 d'or";
-                 cardManager.OpenCardMenu1Target("FiveYellow", player,description);
+                 cardManager.OpenCardMenu1Target("FiveYellow", player,description,player.point.index);
                  cardManager.oneTarget = true;
                  break;
              case ";Y":
                  if (cardManager.oneTarget && cardManager.waitMenu.activeSelf)
                  {
-                     cardManager.OpenCardMenu1Target("Jack", player,description);
+                     cardManager.OpenCardMenu1Target("Jack", player,description,player.point.index);
                  }
                  else if (cardManager.waitMenu.activeSelf)
                  {
-                     cardManager.OpenCardMenu("Jack", player,description);
+                     cardManager.OpenCardMenu("Jack", player,description,player.point.index);
                  }
                  cardManager.CancelInvoke();
                  cardManager.waitMenu.SetActive(false);
@@ -162,12 +161,12 @@ public class NFCConvertor : MonoBehaviour
              
              case "<Y":
                  description = "Un joueur récupère le pot commun";
-                 cardManager.OpenCardMenu1Target("QueenYellow", player,description);
+                 cardManager.OpenCardMenu1Target("QueenYellow", player,description,player.point.index);
                  cardManager.oneTarget = true;
                  break;
              case "=Y":
                  description = "Tout les joueurs donne 5 d'or à un joueur";
-                 cardManager.OpenCardMenu1Target("KingYellow", player,description);
+                 cardManager.OpenCardMenu1Target("KingYellow", player,description,player.point.index);
                  cardManager.oneTarget = true;
                  break;
         }

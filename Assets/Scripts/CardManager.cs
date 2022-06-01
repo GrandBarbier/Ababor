@@ -301,64 +301,16 @@ public class CardManager : MonoBehaviour
     public void ButtonSelectPlayer(int index)
     {
         player = allPlayer[index];
-
-        switch (index)
-        {
-            case 0 :
-                playerSelected.color = Color.red;
-                break;
-            case 1 :
-                playerSelected.color = Color.blue;
-                break;
-            case 2 :
-                playerSelected.color = Color.yellow;
-                break;
-            case 3 :
-                playerSelected.color = Color.green;
-                break;
-        }
-
     }
 
-    public void ButtonSelectTarget(int index)
+   public void ButtonSelectTarget(int index)
     {
         target = allPlayer[index];
-        switch (index)
-        {
-            case 0 :
-                targetSelected.color = Color.red;
-                break;
-            case 1 :
-                targetSelected.color = Color.blue;
-                break;
-            case 2 :
-                targetSelected.color = Color.yellow;
-                break;
-            case 3 :
-                targetSelected.color = Color.green;
-                break;
-        }
     }
 
     public void ButtonSelect1Target(int index)
     {
         target = allPlayer[index];
-
-        switch (index)
-        {
-            case 0 :
-                player1Target.color = Color.red;
-                break;
-            case 1 :
-                player1Target.color = Color.blue;
-                break;
-            case 2 :
-                player1Target.color = Color.yellow;
-                break;
-            case 3 :
-                player1Target.color = Color.green;
-                break;
-        }
     }
 
     public void CallCardFunction()
@@ -435,25 +387,21 @@ public class CardManager : MonoBehaviour
         goldQueen.gameObject.SetActive(false);
     }
     
-    public void OpenCardMenu(string stg, Player pl, string texte)
+    public void OpenCardMenu(string stg, Player pl, string texte,int index)
     {
-        switch (pl.point.index)
+        switch (index)
         {
             case 0 :
                 menu.transform.rotation = Quaternion.Euler(0,0,0);
-                Debug.Log(0);
                 break;
             case 1:
                 menu.transform.rotation = Quaternion.Euler(0,0,0);
-                Debug.Log(1);
                 break;
             case 2:
-                menu.transform.rotation = Quaternion.Euler(0,0,180);
-                Debug.Log(2);
+                menu.transform.rotation = Quaternion.Euler(0, 180, 0);
                 break;
             case 3:
-                menu.transform.rotation = Quaternion.Euler(0,0,180);
-                Debug.Log(3);
+                menu.transform.rotation = Quaternion.Euler(0,180,0);
                 break;
         }
         
@@ -478,25 +426,21 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public void OpenCardMenu1Target(string stg, Player pl, string texte)
+    public void OpenCardMenu1Target(string stg, Player pl, string texte, int index)
     {
-        switch (pl.point.index)
+        switch (index)
         {
             case 0 :
-                menu.transform.rotation = Quaternion.Euler(0,0,0);
-                Debug.Log(0);
+                targetMenu.transform.rotation = Quaternion.Euler(0,0,0);
                 break;
             case 1:
-                menu.transform.rotation = Quaternion.Euler(0,0,0);
-                Debug.Log(1);
+                targetMenu.transform.rotation = Quaternion.Euler(0,0,0);
                 break;
             case 2:
-                menu.transform.rotation = Quaternion.Euler(0,0,180);
-                Debug.Log(2);
+                targetMenu.transform.rotation = new Quaternion(0,0,180,0);
                 break;
             case 3:
-                menu.transform.rotation = Quaternion.Euler(0,0,180);
-                Debug.Log(3);
+                targetMenu.transform.rotation = new Quaternion(0,0,180,0);
                 break;
         }
 
@@ -531,6 +475,8 @@ public class CardManager : MonoBehaviour
         gameplayManager.activPlayer.move.enabled = false;
         gameplayManager.playerIndex = gmIndex;
     }
+    
+    
 
     IEnumerator ShowThrowCard()
     {
