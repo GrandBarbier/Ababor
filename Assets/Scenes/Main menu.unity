@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5834,7 +5834,7 @@ MonoBehaviour:
   m_text: "Bienvenue dans Ababord, gloire et richesse vous attendent tout autant
     que trahison et coup bas. Pour vous aider le mod \u201CGuide\u201D est activ\xE9
     automatiquement. Vous pouvez le d\xE9sactiver en appuyant sur le Bouton \u201CGuide\u201D
-    (Mettre une image de l\u2019ic\xF4ne) durant la partie."
+    <sprite=6>  durant la partie."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -5843,7 +5843,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4284174151
   m_fontColor: {r: 0.2784314, g: 0.30980393, b: 0.35686275, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -5981,7 +5981,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4284174151
   m_fontColor: {r: 0.2784314, g: 0.30980393, b: 0.35686275, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -7559,9 +7559,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Une case \xE9v\xE9nement ne se d\xE9clenche qu\u2019une seule fois par
-    tour de table. L\u2019effet d\u2019un \xE9vent s\u2019affiche lors de son d\xE9clanchement,
-    et ce jusqu\u2019\xE0 la fin du tour du joueur l\u2019ayant d\xE9clench\xE9."
+  m_text: "Une case \xE9v\xE9nement <sprite=8> ne se d\xE9clenche qu\u2019une seule
+    fois par tour de table. L\u2019effet d\u2019un \xE9vent s\u2019affiche lors de
+    son d\xE9clanchement, et ce jusqu\u2019\xE0 la fin du tour du joueur l\u2019ayant
+    d\xE9clench\xE9."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -7570,7 +7571,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4284174151
   m_fontColor: {r: 0.2784314, g: 0.30980393, b: 0.35686275, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -11748,7 +11749,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Le Shop permet d\u2019acheter deux choses, soit une carte interaction
+  m_text: "Le Shop <sprite=3> permet d\u2019acheter deux choses, soit une carte interaction
     suppl\xE9mentaire pour ce tour, soit un d\xE9placement suppl\xE9mentaire qui
     dure jusqu\u2019\xE0 la fin de la partie."
   m_isRightToLeft: 0
@@ -11759,7 +11760,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4284174151
   m_fontColor: {r: 0.2784314, g: 0.30980393, b: 0.35686275, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -16289,14 +16290,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Un joueur vient d\u2019atteindre la derni\xE8re case de l\u2019\xEEle,
-    vous passerez tous \xE0 l\u2019\xEEle suivante sou deux conditions, soit 2 tours
-    sont pass\xE9 apr\xE8s qu\u2019un joueur soit arriv\xE9, soit un autre joueur
-    atteint \xE9galement la derni\xE8re case. Une fois fait, le tour est termin\xE9
-    et un nouveau tour commence sur l\u2019\xEEle suivante. Tout joueur arriv\xE9
-    sur la derni\xE8re case de l\u2019\xEEle ne peut plus se d\xE9placer, mais peut
-    jouer toutes ses cartes interactions jusqu\u2019\xE0 ce que la prochaine \xCEle
-    commence."
+  m_text: "Un joueur vient d\u2019atteindre la derni\xE8re case de l\u2019\xEEle
+    <sprite=7>, vous passerez tous \xE0 l\u2019\xEEle suivante sou deux conditions,
+    soit 2 tours sont pass\xE9 apr\xE8s qu\u2019un joueur soit arriv\xE9, soit un
+    autre joueur atteint \xE9galement la derni\xE8re case. Une fois fait, le tour
+    est termin\xE9 et un nouveau tour commence sur l\u2019\xEEle suivante. Tout joueur
+    arriv\xE9 sur la derni\xE8re case de l\u2019\xEEle ne peut plus se d\xE9placer,
+    mais peut jouer toutes ses cartes interactions jusqu\u2019\xE0 ce que la prochaine
+    \xCEle commence."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -16305,7 +16306,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4284174151
   m_fontColor: {r: 0.2784314, g: 0.30980393, b: 0.35686275, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -16552,8 +16553,9 @@ MonoBehaviour:
     \r\n\r\nLes objectifs sont consultables \xE0 tout moment via le bouton objectif
     dans le menu du jeu, cependant, il n\u2019y a aucune indication concernant quels
     objectifs sont remplis et par qui. Ces Information sont r\xE9v\xE9l\xE9es \xE0
-    la fin de la partie lors du comptage des points. Notez que chaque pi\xE8ce d\u2019or
-    compte comme 1pts de gloire."
+    la fin de la partie lors du comptage des points. Notez que  chaque pi\xE8ce d\u2019or
+    compte comme 1pts de gloire. Vous pouvez consulter les objectifs avec le bonton
+    <sprite=5>."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -16562,7 +16564,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4284174151
   m_fontColor: {r: 0.2784314, g: 0.30980393, b: 0.35686275, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -18469,7 +18471,7 @@ MonoBehaviour:
   m_text: "Durant le tour d\u2019un joueur, n\u2019importe qui peut jouer une carte
     interaction \xE0 tout moment sauf quand le joueur actif effectue son d\xE9placement.
     De plus, tout joueur peut donner de l\u2019or \xE0 un autre joueur en cliquant
-    sur l\u2019image de son Pirate dans son coin."
+    sur l\u2019image de son Pirate dans son coin <sprite=1>."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -18478,7 +18480,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4284174151
   m_fontColor: {r: 0.2784314, g: 0.30980393, b: 0.35686275, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -19351,7 +19353,7 @@ MonoBehaviour:
   m_text: "Tout d\u2019abord, distribuer 3 cartes interactions \xE0 chaque joueur
     en suivant l\u2019ordre de jeu, r\xE9p\xE9t\xE9 l\u2019actions \xE0 chaque nouveau
     tour de table. La liste des effets des cartes interactions sont consultables
-    avec le bouton \u201CCartes interactions\u201D."
+    avec le bouton \u201CCartes interactions\u201D <sprite=0>."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -19360,7 +19362,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4284174151
   m_fontColor: {r: 0.2784314, g: 0.30980393, b: 0.35686275, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -20143,9 +20145,8 @@ MonoBehaviour:
     l\u2019effet de la case d\u2019arriv\xE9 s\u2019effectuent, puis le tour du joueur
     actif se termine. Vous pouvez revenir \xE0 la phase de d\u2019interaction avec
     le bouton annulation. Les diff\xE9rentes cases sont les suivantes ; Case gain
-    d\u2019or (Image de case gain d\u2019or), Case Perte d\u2019or (image de case
-    perte d\u2019or), Case Shop (Image case shop), Case Ev\xE8nement (image case
-    \xE9v\xE9nements). "
+    d\u2019or <sprite=2>, Case Perte d\u2019or <sprite=5>, Case Shop <sprite=3>,
+    Case Ev\xE8nement <sprite=8>. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -20154,7 +20155,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4284174151
   m_fontColor: {r: 0.2784314, g: 0.30980393, b: 0.35686275, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -22528,10 +22529,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Vous pouvez \xE9changer de l\u2019or entre joueurs comme bon vous semble
-    hors des phases de d\xE9placements. Ainsi vous pouvez former des alliances ou
-    payer des faveurs entre vous. Notez que toute trahison ou flibusterie n\u2019entraine
-    pas de remboursement."
+  m_text: "Vous pouvez \xE9changer de l\u2019or entre joueurs hors des phases de
+    d\xE9placements. Ainsi vous pouvez former des alliances ou payer des faveurs
+    entre vous. Notez que toute trahison ou flibusterie n\u2019entraine pas de remboursement.
+    Votre icone  <sprite=1> ouvre le menu ."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -22540,7 +22541,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4284174151
   m_fontColor: {r: 0.2784314, g: 0.30980393, b: 0.35686275, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
