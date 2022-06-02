@@ -365,8 +365,6 @@ public class CardManager : MonoBehaviour
         menu.SetActive(false);
         text.gameObject.SetActive(false);
         text.text = null;
-        playerSelected.gameObject.SetActive(false);
-        targetSelected.gameObject.SetActive(false);
         if (waitMenu.activeSelf == false)
         {
             gameplayManager.OpenVerifMenu();
@@ -378,8 +376,6 @@ public class CardManager : MonoBehaviour
         targetMenu.SetActive(false);
         textTarget.gameObject.SetActive(false);
         textTarget.text = null;
-        playerSelected.gameObject.SetActive(false);
-        targetSelected.gameObject.SetActive(false);
         if (waitMenu.activeSelf == false)
         {
             gameplayManager.OpenVerifMenu();
@@ -462,7 +458,7 @@ public class CardManager : MonoBehaviour
             }
             player = pl;
         }
-        targetSelected.gameObject.SetActive(true);
+        
         
         if (functionName == "QueenYellow")
         {
