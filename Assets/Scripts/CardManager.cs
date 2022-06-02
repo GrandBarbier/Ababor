@@ -11,7 +11,6 @@ public class CardManager : MonoBehaviour
     public GameObject waitMenu;
     public GameObject targetMenu;
     public GameObject useCard;
-   
     
     public Image playerSelected;
     public Image targetSelected;
@@ -39,6 +38,8 @@ public class CardManager : MonoBehaviour
     public Button buttonTarget;
 
     public string functionName, lastName;
+
+    public HardwareManager hardManager;
 
     // Start is called before the first frame update
     void Start()
@@ -326,13 +327,10 @@ public class CardManager : MonoBehaviour
             {
                 functionName = lastName;
             }
-
             menu.SetActive(false);
-            targetSelected.gameObject.SetActive(false);
-            targetSelected.color = Color.white;
-            playerSelected.color = Color.white;
             waitMenu.SetActive(true);
         }
+      //  hardManager.
     }
 
     public void CallCardFunction1Target()
@@ -352,12 +350,10 @@ public class CardManager : MonoBehaviour
             {
                 functionName = lastName;
             }
-
             targetMenu.SetActive(false);
-            targetSelected.gameObject.SetActive(false);
-            targetSelected.color = Color.white;
             waitMenu.SetActive(true);
         }
+        
     }
 
     public void CloseMenu()
@@ -394,10 +390,10 @@ public class CardManager : MonoBehaviour
                 menu.transform.rotation = Quaternion.Euler(0,0,0);
                 break;
             case 2:
-                menu.transform.rotation = Quaternion.Euler(0, 180, 0);
+                menu.transform.rotation = new Quaternion(0, 0, 180,0);
                 break;
             case 3:
-                menu.transform.rotation = Quaternion.Euler(0,180,0);
+                menu.transform.rotation = new Quaternion(0,0,180,0);
                 break;
         }
         
@@ -407,7 +403,6 @@ public class CardManager : MonoBehaviour
             text.gameObject.SetActive(true);
             gameplayManager.verifMenu.SetActive(false);
             gameplayManager.verifMenu2.SetActive(false);
-            targetSelected.gameObject.SetActive(true);
             text.text = texte;
             if (functionName == "Jack")
             {
