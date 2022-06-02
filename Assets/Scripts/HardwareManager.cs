@@ -118,6 +118,20 @@ public class HardwareManager : MonoBehaviour
         LightController.ShutdownAllLights();
     }
 
+  /*  public void ShutLightsPlayer(int number)
+    {
+        switch (number)
+        {
+            case 0 :
+               
+                LightController.Colorize(lightsP2, LIGHT_COLOR.COLOR_BLUE, false);
+                LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_YELLOW, true);
+                LightController.Colorize(lightsP4, LIGHT_COLOR.COLOR_GREEN, true);
+                break;
+            
+        }
+    }*/
+    
     private void OnNewTagDetected(NFC_DEVICE_ID _device, NFCTag _tag)
     {
         if (cardManager.menu.activeSelf == false && cardManager.targetMenu.activeSelf == false && cardManager.numberClub == false && gameplayManager.currentstate.ToString() != "Moving")
