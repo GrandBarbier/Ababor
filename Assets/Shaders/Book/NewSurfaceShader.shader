@@ -1,14 +1,13 @@
-Shader "Stencil/Recive"
+Shader "custom/standard survace"
 {
     Properties
     {
         [IntRange] _StencilID ("Stencil ID", Range(0,255)) = 0
         [IntRange] _MaskID ("Mask ID", Range(0,255)) = 0
-            
+        
         [NoScaleOffset]Texture2D_51875ff1128d4bf99198737d4cf17e09("Texture2D", 2D) = "white" {}
         Vector1_cffadea08e4a41299ddce572227e9883("Metallic", Range(0, 1)) = 0
         Vector1_baedb450d65f4721b42886118dfc4d15("Smoothness", Range(0, 1)) = 0
-        [ToggleUI]Boolean_fb7aac74c05140d993b95edfb53b1c56("Alpha Clip", Float) = 1
         [HideInInspector][NoScaleOffset]unity_Lightmaps("unity_Lightmaps", 2DArray) = "" {}
         [HideInInspector][NoScaleOffset]unity_LightmapsInd("unity_LightmapsInd", 2DArray) = "" {}
         [HideInInspector][NoScaleOffset]unity_ShadowMasks("unity_ShadowMasks", 2DArray) = "" {}
@@ -18,9 +17,9 @@ Shader "Stencil/Recive"
         Tags
         {
             "RenderPipeline"="UniversalPipeline"
-            "RenderType"="Opaque"
+            "RenderType"="Transparent"
             "UniversalMaterialType" = "Lit"
-            "Queue"="AlphaTest"
+            "Queue"="Transparent"
         }
         Pass
         {
@@ -39,9 +38,9 @@ Shader "Stencil/Recive"
 
             // Render State
             Cull Back
-        Blend One Zero
+        Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
         ZTest LEqual
-        ZWrite On
+        ZWrite Off
 
             // Debug
             // <None>
@@ -77,6 +76,7 @@ Shader "Stencil/Recive"
             // GraphKeywords: <None>
 
             // Defines
+            #define _SURFACE_TYPE_TRANSPARENT 1
             #define _AlphaClip 1
             #define _NORMALMAP 1
             #define _NORMAL_DROPOFF_TS 1
@@ -259,7 +259,6 @@ Shader "Stencil/Recive"
         float4 Texture2D_51875ff1128d4bf99198737d4cf17e09_TexelSize;
         float Vector1_cffadea08e4a41299ddce572227e9883;
         float Vector1_baedb450d65f4721b42886118dfc4d15;
-        float Boolean_fb7aac74c05140d993b95edfb53b1c56;
         CBUFFER_END
 
         // Object and Global properties
@@ -268,11 +267,7 @@ Shader "Stencil/Recive"
         SAMPLER(samplerTexture2D_51875ff1128d4bf99198737d4cf17e09);
 
             // Graph Functions
-            
-        void Unity_Branch_float(float Predicate, float True, float False, out float Out)
-        {
-            Out = Predicate ? True : False;
-        }
+            // GraphFunctions: <None>
 
             // Graph Vertex
             struct VertexDescription
@@ -315,16 +310,13 @@ Shader "Stencil/Recive"
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.a;
             float _Property_4a0574801b834291bbad7d22b1136e8a_Out_0 = Vector1_cffadea08e4a41299ddce572227e9883;
             float _Property_bf1b5f14838d4e3b974038fec839b779_Out_0 = Vector1_baedb450d65f4721b42886118dfc4d15;
-            float _Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0 = Boolean_fb7aac74c05140d993b95edfb53b1c56;
-            float _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
-            Unity_Branch_float(_Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0, _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7, 1, _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3);
             surface.BaseColor = (_SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.xyz);
             surface.NormalTS = IN.TangentSpaceNormal;
             surface.Emission = float3(0, 0, 0);
             surface.Metallic = _Property_4a0574801b834291bbad7d22b1136e8a_Out_0;
             surface.Smoothness = _Property_bf1b5f14838d4e3b974038fec839b779_Out_0;
             surface.Occlusion = 1;
-            surface.Alpha = _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
+            surface.Alpha = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7;
             surface.AlphaClipThreshold = 0.5;
             return surface;
         }
@@ -383,9 +375,9 @@ Shader "Stencil/Recive"
 
             // Render State
             Cull Back
-        Blend One Zero
+        Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
         ZTest LEqual
-        ZWrite On
+        ZWrite Off
 
             // Debug
             // <None>
@@ -418,6 +410,7 @@ Shader "Stencil/Recive"
             // GraphKeywords: <None>
 
             // Defines
+            #define _SURFACE_TYPE_TRANSPARENT 1
             #define _AlphaClip 1
             #define _NORMALMAP 1
             #define _NORMAL_DROPOFF_TS 1
@@ -600,7 +593,6 @@ Shader "Stencil/Recive"
         float4 Texture2D_51875ff1128d4bf99198737d4cf17e09_TexelSize;
         float Vector1_cffadea08e4a41299ddce572227e9883;
         float Vector1_baedb450d65f4721b42886118dfc4d15;
-        float Boolean_fb7aac74c05140d993b95edfb53b1c56;
         CBUFFER_END
 
         // Object and Global properties
@@ -609,11 +601,7 @@ Shader "Stencil/Recive"
         SAMPLER(samplerTexture2D_51875ff1128d4bf99198737d4cf17e09);
 
             // Graph Functions
-            
-        void Unity_Branch_float(float Predicate, float True, float False, out float Out)
-        {
-            Out = Predicate ? True : False;
-        }
+            // GraphFunctions: <None>
 
             // Graph Vertex
             struct VertexDescription
@@ -656,16 +644,13 @@ Shader "Stencil/Recive"
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.a;
             float _Property_4a0574801b834291bbad7d22b1136e8a_Out_0 = Vector1_cffadea08e4a41299ddce572227e9883;
             float _Property_bf1b5f14838d4e3b974038fec839b779_Out_0 = Vector1_baedb450d65f4721b42886118dfc4d15;
-            float _Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0 = Boolean_fb7aac74c05140d993b95edfb53b1c56;
-            float _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
-            Unity_Branch_float(_Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0, _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7, 1, _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3);
             surface.BaseColor = (_SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.xyz);
             surface.NormalTS = IN.TangentSpaceNormal;
             surface.Emission = float3(0, 0, 0);
             surface.Metallic = _Property_4a0574801b834291bbad7d22b1136e8a_Out_0;
             surface.Smoothness = _Property_bf1b5f14838d4e3b974038fec839b779_Out_0;
             surface.Occlusion = 1;
-            surface.Alpha = _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
+            surface.Alpha = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7;
             surface.AlphaClipThreshold = 0.5;
             return surface;
         }
@@ -725,7 +710,7 @@ Shader "Stencil/Recive"
 
             // Render State
             Cull Back
-        Blend One Zero
+        Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
         ZTest LEqual
         ZWrite On
         ColorMask 0
@@ -754,6 +739,7 @@ Shader "Stencil/Recive"
             // GraphKeywords: <None>
 
             // Defines
+            #define _SURFACE_TYPE_TRANSPARENT 1
             #define _AlphaClip 1
             #define _NORMALMAP 1
             #define _NORMAL_DROPOFF_TS 1
@@ -879,7 +865,6 @@ Shader "Stencil/Recive"
         float4 Texture2D_51875ff1128d4bf99198737d4cf17e09_TexelSize;
         float Vector1_cffadea08e4a41299ddce572227e9883;
         float Vector1_baedb450d65f4721b42886118dfc4d15;
-        float Boolean_fb7aac74c05140d993b95edfb53b1c56;
         CBUFFER_END
 
         // Object and Global properties
@@ -888,11 +873,7 @@ Shader "Stencil/Recive"
         SAMPLER(samplerTexture2D_51875ff1128d4bf99198737d4cf17e09);
 
             // Graph Functions
-            
-        void Unity_Branch_float(float Predicate, float True, float False, out float Out)
-        {
-            Out = Predicate ? True : False;
-        }
+            // GraphFunctions: <None>
 
             // Graph Vertex
             struct VertexDescription
@@ -921,16 +902,13 @@ Shader "Stencil/Recive"
         SurfaceDescription SurfaceDescriptionFunction(SurfaceDescriptionInputs IN)
         {
             SurfaceDescription surface = (SurfaceDescription)0;
-            float _Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0 = Boolean_fb7aac74c05140d993b95edfb53b1c56;
             UnityTexture2D _Property_a1ac783082a04fbb8493f57229343a2f_Out_0 = UnityBuildTexture2DStructNoScale(Texture2D_51875ff1128d4bf99198737d4cf17e09);
             float4 _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0 = SAMPLE_TEXTURE2D(_Property_a1ac783082a04fbb8493f57229343a2f_Out_0.tex, _Property_a1ac783082a04fbb8493f57229343a2f_Out_0.samplerstate, IN.uv0.xy);
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_R_4 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.r;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_G_5 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.g;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_B_6 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.b;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.a;
-            float _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
-            Unity_Branch_float(_Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0, _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7, 1, _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3);
-            surface.Alpha = _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
+            surface.Alpha = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7;
             surface.AlphaClipThreshold = 0.5;
             return surface;
         }
@@ -988,7 +966,7 @@ Shader "Stencil/Recive"
 
             // Render State
             Cull Back
-        Blend One Zero
+        Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
         ZTest LEqual
         ZWrite On
         ColorMask 0
@@ -1017,6 +995,7 @@ Shader "Stencil/Recive"
             // GraphKeywords: <None>
 
             // Defines
+            #define _SURFACE_TYPE_TRANSPARENT 1
             #define _AlphaClip 1
             #define _NORMALMAP 1
             #define _NORMAL_DROPOFF_TS 1
@@ -1142,7 +1121,6 @@ Shader "Stencil/Recive"
         float4 Texture2D_51875ff1128d4bf99198737d4cf17e09_TexelSize;
         float Vector1_cffadea08e4a41299ddce572227e9883;
         float Vector1_baedb450d65f4721b42886118dfc4d15;
-        float Boolean_fb7aac74c05140d993b95edfb53b1c56;
         CBUFFER_END
 
         // Object and Global properties
@@ -1151,11 +1129,7 @@ Shader "Stencil/Recive"
         SAMPLER(samplerTexture2D_51875ff1128d4bf99198737d4cf17e09);
 
             // Graph Functions
-            
-        void Unity_Branch_float(float Predicate, float True, float False, out float Out)
-        {
-            Out = Predicate ? True : False;
-        }
+            // GraphFunctions: <None>
 
             // Graph Vertex
             struct VertexDescription
@@ -1184,16 +1158,13 @@ Shader "Stencil/Recive"
         SurfaceDescription SurfaceDescriptionFunction(SurfaceDescriptionInputs IN)
         {
             SurfaceDescription surface = (SurfaceDescription)0;
-            float _Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0 = Boolean_fb7aac74c05140d993b95edfb53b1c56;
             UnityTexture2D _Property_a1ac783082a04fbb8493f57229343a2f_Out_0 = UnityBuildTexture2DStructNoScale(Texture2D_51875ff1128d4bf99198737d4cf17e09);
             float4 _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0 = SAMPLE_TEXTURE2D(_Property_a1ac783082a04fbb8493f57229343a2f_Out_0.tex, _Property_a1ac783082a04fbb8493f57229343a2f_Out_0.samplerstate, IN.uv0.xy);
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_R_4 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.r;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_G_5 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.g;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_B_6 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.b;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.a;
-            float _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
-            Unity_Branch_float(_Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0, _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7, 1, _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3);
-            surface.Alpha = _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
+            surface.Alpha = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7;
             surface.AlphaClipThreshold = 0.5;
             return surface;
         }
@@ -1251,7 +1222,7 @@ Shader "Stencil/Recive"
 
             // Render State
             Cull Back
-        Blend One Zero
+        Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
         ZTest LEqual
         ZWrite On
 
@@ -1279,6 +1250,7 @@ Shader "Stencil/Recive"
             // GraphKeywords: <None>
 
             // Defines
+            #define _SURFACE_TYPE_TRANSPARENT 1
             #define _AlphaClip 1
             #define _NORMALMAP 1
             #define _NORMAL_DROPOFF_TS 1
@@ -1417,7 +1389,6 @@ Shader "Stencil/Recive"
         float4 Texture2D_51875ff1128d4bf99198737d4cf17e09_TexelSize;
         float Vector1_cffadea08e4a41299ddce572227e9883;
         float Vector1_baedb450d65f4721b42886118dfc4d15;
-        float Boolean_fb7aac74c05140d993b95edfb53b1c56;
         CBUFFER_END
 
         // Object and Global properties
@@ -1426,11 +1397,7 @@ Shader "Stencil/Recive"
         SAMPLER(samplerTexture2D_51875ff1128d4bf99198737d4cf17e09);
 
             // Graph Functions
-            
-        void Unity_Branch_float(float Predicate, float True, float False, out float Out)
-        {
-            Out = Predicate ? True : False;
-        }
+            // GraphFunctions: <None>
 
             // Graph Vertex
             struct VertexDescription
@@ -1460,17 +1427,14 @@ Shader "Stencil/Recive"
         SurfaceDescription SurfaceDescriptionFunction(SurfaceDescriptionInputs IN)
         {
             SurfaceDescription surface = (SurfaceDescription)0;
-            float _Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0 = Boolean_fb7aac74c05140d993b95edfb53b1c56;
             UnityTexture2D _Property_a1ac783082a04fbb8493f57229343a2f_Out_0 = UnityBuildTexture2DStructNoScale(Texture2D_51875ff1128d4bf99198737d4cf17e09);
             float4 _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0 = SAMPLE_TEXTURE2D(_Property_a1ac783082a04fbb8493f57229343a2f_Out_0.tex, _Property_a1ac783082a04fbb8493f57229343a2f_Out_0.samplerstate, IN.uv0.xy);
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_R_4 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.r;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_G_5 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.g;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_B_6 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.b;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.a;
-            float _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
-            Unity_Branch_float(_Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0, _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7, 1, _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3);
             surface.NormalTS = IN.TangentSpaceNormal;
-            surface.Alpha = _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
+            surface.Alpha = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7;
             surface.AlphaClipThreshold = 0.5;
             return surface;
         }
@@ -1552,6 +1516,7 @@ Shader "Stencil/Recive"
             // GraphKeywords: <None>
 
             // Defines
+            #define _SURFACE_TYPE_TRANSPARENT 1
             #define _AlphaClip 1
             #define _NORMALMAP 1
             #define _NORMAL_DROPOFF_TS 1
@@ -1682,7 +1647,6 @@ Shader "Stencil/Recive"
         float4 Texture2D_51875ff1128d4bf99198737d4cf17e09_TexelSize;
         float Vector1_cffadea08e4a41299ddce572227e9883;
         float Vector1_baedb450d65f4721b42886118dfc4d15;
-        float Boolean_fb7aac74c05140d993b95edfb53b1c56;
         CBUFFER_END
 
         // Object and Global properties
@@ -1691,11 +1655,7 @@ Shader "Stencil/Recive"
         SAMPLER(samplerTexture2D_51875ff1128d4bf99198737d4cf17e09);
 
             // Graph Functions
-            
-        void Unity_Branch_float(float Predicate, float True, float False, out float Out)
-        {
-            Out = Predicate ? True : False;
-        }
+            // GraphFunctions: <None>
 
             // Graph Vertex
             struct VertexDescription
@@ -1732,12 +1692,9 @@ Shader "Stencil/Recive"
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_G_5 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.g;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_B_6 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.b;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.a;
-            float _Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0 = Boolean_fb7aac74c05140d993b95edfb53b1c56;
-            float _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
-            Unity_Branch_float(_Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0, _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7, 1, _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3);
             surface.BaseColor = (_SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.xyz);
             surface.Emission = float3(0, 0, 0);
-            surface.Alpha = _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
+            surface.Alpha = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7;
             surface.AlphaClipThreshold = 0.5;
             return surface;
         }
@@ -1795,9 +1752,9 @@ Shader "Stencil/Recive"
 
             // Render State
             Cull Back
-        Blend One Zero
+        Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
         ZTest LEqual
-        ZWrite On
+        ZWrite Off
 
             // Debug
             // <None>
@@ -1821,6 +1778,7 @@ Shader "Stencil/Recive"
             // GraphKeywords: <None>
 
             // Defines
+            #define _SURFACE_TYPE_TRANSPARENT 1
             #define _AlphaClip 1
             #define _NORMALMAP 1
             #define _NORMAL_DROPOFF_TS 1
@@ -1946,7 +1904,6 @@ Shader "Stencil/Recive"
         float4 Texture2D_51875ff1128d4bf99198737d4cf17e09_TexelSize;
         float Vector1_cffadea08e4a41299ddce572227e9883;
         float Vector1_baedb450d65f4721b42886118dfc4d15;
-        float Boolean_fb7aac74c05140d993b95edfb53b1c56;
         CBUFFER_END
 
         // Object and Global properties
@@ -1955,11 +1912,7 @@ Shader "Stencil/Recive"
         SAMPLER(samplerTexture2D_51875ff1128d4bf99198737d4cf17e09);
 
             // Graph Functions
-            
-        void Unity_Branch_float(float Predicate, float True, float False, out float Out)
-        {
-            Out = Predicate ? True : False;
-        }
+            // GraphFunctions: <None>
 
             // Graph Vertex
             struct VertexDescription
@@ -1995,11 +1948,8 @@ Shader "Stencil/Recive"
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_G_5 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.g;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_B_6 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.b;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.a;
-            float _Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0 = Boolean_fb7aac74c05140d993b95edfb53b1c56;
-            float _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
-            Unity_Branch_float(_Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0, _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7, 1, _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3);
             surface.BaseColor = (_SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.xyz);
-            surface.Alpha = _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
+            surface.Alpha = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7;
             surface.AlphaClipThreshold = 0.5;
             return surface;
         }
@@ -2053,9 +2003,9 @@ Shader "Stencil/Recive"
         Tags
         {
             "RenderPipeline"="UniversalPipeline"
-            "RenderType"="Opaque"
+            "RenderType"="Transparent"
             "UniversalMaterialType" = "Lit"
-            "Queue"="AlphaTest"
+            "Queue"="Transparent"
         }
         Pass
         {
@@ -2067,9 +2017,9 @@ Shader "Stencil/Recive"
 
             // Render State
             Cull Back
-        Blend One Zero
+        Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
         ZTest LEqual
-        ZWrite On
+        ZWrite Off
 
             // Debug
             // <None>
@@ -2104,6 +2054,7 @@ Shader "Stencil/Recive"
             // GraphKeywords: <None>
 
             // Defines
+            #define _SURFACE_TYPE_TRANSPARENT 1
             #define _AlphaClip 1
             #define _NORMALMAP 1
             #define _NORMAL_DROPOFF_TS 1
@@ -2286,7 +2237,6 @@ Shader "Stencil/Recive"
         float4 Texture2D_51875ff1128d4bf99198737d4cf17e09_TexelSize;
         float Vector1_cffadea08e4a41299ddce572227e9883;
         float Vector1_baedb450d65f4721b42886118dfc4d15;
-        float Boolean_fb7aac74c05140d993b95edfb53b1c56;
         CBUFFER_END
 
         // Object and Global properties
@@ -2295,11 +2245,7 @@ Shader "Stencil/Recive"
         SAMPLER(samplerTexture2D_51875ff1128d4bf99198737d4cf17e09);
 
             // Graph Functions
-            
-        void Unity_Branch_float(float Predicate, float True, float False, out float Out)
-        {
-            Out = Predicate ? True : False;
-        }
+            // GraphFunctions: <None>
 
             // Graph Vertex
             struct VertexDescription
@@ -2342,16 +2288,13 @@ Shader "Stencil/Recive"
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.a;
             float _Property_4a0574801b834291bbad7d22b1136e8a_Out_0 = Vector1_cffadea08e4a41299ddce572227e9883;
             float _Property_bf1b5f14838d4e3b974038fec839b779_Out_0 = Vector1_baedb450d65f4721b42886118dfc4d15;
-            float _Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0 = Boolean_fb7aac74c05140d993b95edfb53b1c56;
-            float _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
-            Unity_Branch_float(_Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0, _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7, 1, _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3);
             surface.BaseColor = (_SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.xyz);
             surface.NormalTS = IN.TangentSpaceNormal;
             surface.Emission = float3(0, 0, 0);
             surface.Metallic = _Property_4a0574801b834291bbad7d22b1136e8a_Out_0;
             surface.Smoothness = _Property_bf1b5f14838d4e3b974038fec839b779_Out_0;
             surface.Occlusion = 1;
-            surface.Alpha = _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
+            surface.Alpha = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7;
             surface.AlphaClipThreshold = 0.5;
             return surface;
         }
@@ -2410,7 +2353,7 @@ Shader "Stencil/Recive"
 
             // Render State
             Cull Back
-        Blend One Zero
+        Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
         ZTest LEqual
         ZWrite On
         ColorMask 0
@@ -2438,6 +2381,7 @@ Shader "Stencil/Recive"
             // GraphKeywords: <None>
 
             // Defines
+            #define _SURFACE_TYPE_TRANSPARENT 1
             #define _AlphaClip 1
             #define _NORMALMAP 1
             #define _NORMAL_DROPOFF_TS 1
@@ -2563,7 +2507,6 @@ Shader "Stencil/Recive"
         float4 Texture2D_51875ff1128d4bf99198737d4cf17e09_TexelSize;
         float Vector1_cffadea08e4a41299ddce572227e9883;
         float Vector1_baedb450d65f4721b42886118dfc4d15;
-        float Boolean_fb7aac74c05140d993b95edfb53b1c56;
         CBUFFER_END
 
         // Object and Global properties
@@ -2572,11 +2515,7 @@ Shader "Stencil/Recive"
         SAMPLER(samplerTexture2D_51875ff1128d4bf99198737d4cf17e09);
 
             // Graph Functions
-            
-        void Unity_Branch_float(float Predicate, float True, float False, out float Out)
-        {
-            Out = Predicate ? True : False;
-        }
+            // GraphFunctions: <None>
 
             // Graph Vertex
             struct VertexDescription
@@ -2605,16 +2544,13 @@ Shader "Stencil/Recive"
         SurfaceDescription SurfaceDescriptionFunction(SurfaceDescriptionInputs IN)
         {
             SurfaceDescription surface = (SurfaceDescription)0;
-            float _Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0 = Boolean_fb7aac74c05140d993b95edfb53b1c56;
             UnityTexture2D _Property_a1ac783082a04fbb8493f57229343a2f_Out_0 = UnityBuildTexture2DStructNoScale(Texture2D_51875ff1128d4bf99198737d4cf17e09);
             float4 _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0 = SAMPLE_TEXTURE2D(_Property_a1ac783082a04fbb8493f57229343a2f_Out_0.tex, _Property_a1ac783082a04fbb8493f57229343a2f_Out_0.samplerstate, IN.uv0.xy);
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_R_4 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.r;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_G_5 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.g;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_B_6 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.b;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.a;
-            float _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
-            Unity_Branch_float(_Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0, _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7, 1, _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3);
-            surface.Alpha = _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
+            surface.Alpha = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7;
             surface.AlphaClipThreshold = 0.5;
             return surface;
         }
@@ -2672,7 +2608,7 @@ Shader "Stencil/Recive"
 
             // Render State
             Cull Back
-        Blend One Zero
+        Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
         ZTest LEqual
         ZWrite On
         ColorMask 0
@@ -2700,6 +2636,7 @@ Shader "Stencil/Recive"
             // GraphKeywords: <None>
 
             // Defines
+            #define _SURFACE_TYPE_TRANSPARENT 1
             #define _AlphaClip 1
             #define _NORMALMAP 1
             #define _NORMAL_DROPOFF_TS 1
@@ -2825,7 +2762,6 @@ Shader "Stencil/Recive"
         float4 Texture2D_51875ff1128d4bf99198737d4cf17e09_TexelSize;
         float Vector1_cffadea08e4a41299ddce572227e9883;
         float Vector1_baedb450d65f4721b42886118dfc4d15;
-        float Boolean_fb7aac74c05140d993b95edfb53b1c56;
         CBUFFER_END
 
         // Object and Global properties
@@ -2834,11 +2770,7 @@ Shader "Stencil/Recive"
         SAMPLER(samplerTexture2D_51875ff1128d4bf99198737d4cf17e09);
 
             // Graph Functions
-            
-        void Unity_Branch_float(float Predicate, float True, float False, out float Out)
-        {
-            Out = Predicate ? True : False;
-        }
+            // GraphFunctions: <None>
 
             // Graph Vertex
             struct VertexDescription
@@ -2867,16 +2799,13 @@ Shader "Stencil/Recive"
         SurfaceDescription SurfaceDescriptionFunction(SurfaceDescriptionInputs IN)
         {
             SurfaceDescription surface = (SurfaceDescription)0;
-            float _Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0 = Boolean_fb7aac74c05140d993b95edfb53b1c56;
             UnityTexture2D _Property_a1ac783082a04fbb8493f57229343a2f_Out_0 = UnityBuildTexture2DStructNoScale(Texture2D_51875ff1128d4bf99198737d4cf17e09);
             float4 _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0 = SAMPLE_TEXTURE2D(_Property_a1ac783082a04fbb8493f57229343a2f_Out_0.tex, _Property_a1ac783082a04fbb8493f57229343a2f_Out_0.samplerstate, IN.uv0.xy);
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_R_4 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.r;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_G_5 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.g;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_B_6 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.b;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.a;
-            float _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
-            Unity_Branch_float(_Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0, _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7, 1, _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3);
-            surface.Alpha = _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
+            surface.Alpha = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7;
             surface.AlphaClipThreshold = 0.5;
             return surface;
         }
@@ -2934,7 +2863,7 @@ Shader "Stencil/Recive"
 
             // Render State
             Cull Back
-        Blend One Zero
+        Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
         ZTest LEqual
         ZWrite On
 
@@ -2961,6 +2890,7 @@ Shader "Stencil/Recive"
             // GraphKeywords: <None>
 
             // Defines
+            #define _SURFACE_TYPE_TRANSPARENT 1
             #define _AlphaClip 1
             #define _NORMALMAP 1
             #define _NORMAL_DROPOFF_TS 1
@@ -3099,7 +3029,6 @@ Shader "Stencil/Recive"
         float4 Texture2D_51875ff1128d4bf99198737d4cf17e09_TexelSize;
         float Vector1_cffadea08e4a41299ddce572227e9883;
         float Vector1_baedb450d65f4721b42886118dfc4d15;
-        float Boolean_fb7aac74c05140d993b95edfb53b1c56;
         CBUFFER_END
 
         // Object and Global properties
@@ -3108,11 +3037,7 @@ Shader "Stencil/Recive"
         SAMPLER(samplerTexture2D_51875ff1128d4bf99198737d4cf17e09);
 
             // Graph Functions
-            
-        void Unity_Branch_float(float Predicate, float True, float False, out float Out)
-        {
-            Out = Predicate ? True : False;
-        }
+            // GraphFunctions: <None>
 
             // Graph Vertex
             struct VertexDescription
@@ -3142,17 +3067,14 @@ Shader "Stencil/Recive"
         SurfaceDescription SurfaceDescriptionFunction(SurfaceDescriptionInputs IN)
         {
             SurfaceDescription surface = (SurfaceDescription)0;
-            float _Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0 = Boolean_fb7aac74c05140d993b95edfb53b1c56;
             UnityTexture2D _Property_a1ac783082a04fbb8493f57229343a2f_Out_0 = UnityBuildTexture2DStructNoScale(Texture2D_51875ff1128d4bf99198737d4cf17e09);
             float4 _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0 = SAMPLE_TEXTURE2D(_Property_a1ac783082a04fbb8493f57229343a2f_Out_0.tex, _Property_a1ac783082a04fbb8493f57229343a2f_Out_0.samplerstate, IN.uv0.xy);
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_R_4 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.r;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_G_5 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.g;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_B_6 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.b;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.a;
-            float _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
-            Unity_Branch_float(_Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0, _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7, 1, _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3);
             surface.NormalTS = IN.TangentSpaceNormal;
-            surface.Alpha = _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
+            surface.Alpha = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7;
             surface.AlphaClipThreshold = 0.5;
             return surface;
         }
@@ -3234,6 +3156,7 @@ Shader "Stencil/Recive"
             // GraphKeywords: <None>
 
             // Defines
+            #define _SURFACE_TYPE_TRANSPARENT 1
             #define _AlphaClip 1
             #define _NORMALMAP 1
             #define _NORMAL_DROPOFF_TS 1
@@ -3364,7 +3287,6 @@ Shader "Stencil/Recive"
         float4 Texture2D_51875ff1128d4bf99198737d4cf17e09_TexelSize;
         float Vector1_cffadea08e4a41299ddce572227e9883;
         float Vector1_baedb450d65f4721b42886118dfc4d15;
-        float Boolean_fb7aac74c05140d993b95edfb53b1c56;
         CBUFFER_END
 
         // Object and Global properties
@@ -3373,11 +3295,7 @@ Shader "Stencil/Recive"
         SAMPLER(samplerTexture2D_51875ff1128d4bf99198737d4cf17e09);
 
             // Graph Functions
-            
-        void Unity_Branch_float(float Predicate, float True, float False, out float Out)
-        {
-            Out = Predicate ? True : False;
-        }
+            // GraphFunctions: <None>
 
             // Graph Vertex
             struct VertexDescription
@@ -3414,12 +3332,9 @@ Shader "Stencil/Recive"
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_G_5 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.g;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_B_6 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.b;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.a;
-            float _Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0 = Boolean_fb7aac74c05140d993b95edfb53b1c56;
-            float _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
-            Unity_Branch_float(_Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0, _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7, 1, _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3);
             surface.BaseColor = (_SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.xyz);
             surface.Emission = float3(0, 0, 0);
-            surface.Alpha = _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
+            surface.Alpha = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7;
             surface.AlphaClipThreshold = 0.5;
             return surface;
         }
@@ -3477,9 +3392,9 @@ Shader "Stencil/Recive"
 
             // Render State
             Cull Back
-        Blend One Zero
+        Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
         ZTest LEqual
-        ZWrite On
+        ZWrite Off
 
             // Debug
             // <None>
@@ -3504,6 +3419,7 @@ Shader "Stencil/Recive"
             // GraphKeywords: <None>
 
             // Defines
+            #define _SURFACE_TYPE_TRANSPARENT 1
             #define _AlphaClip 1
             #define _NORMALMAP 1
             #define _NORMAL_DROPOFF_TS 1
@@ -3629,7 +3545,6 @@ Shader "Stencil/Recive"
         float4 Texture2D_51875ff1128d4bf99198737d4cf17e09_TexelSize;
         float Vector1_cffadea08e4a41299ddce572227e9883;
         float Vector1_baedb450d65f4721b42886118dfc4d15;
-        float Boolean_fb7aac74c05140d993b95edfb53b1c56;
         CBUFFER_END
 
         // Object and Global properties
@@ -3638,11 +3553,7 @@ Shader "Stencil/Recive"
         SAMPLER(samplerTexture2D_51875ff1128d4bf99198737d4cf17e09);
 
             // Graph Functions
-            
-        void Unity_Branch_float(float Predicate, float True, float False, out float Out)
-        {
-            Out = Predicate ? True : False;
-        }
+            // GraphFunctions: <None>
 
             // Graph Vertex
             struct VertexDescription
@@ -3678,11 +3589,8 @@ Shader "Stencil/Recive"
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_G_5 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.g;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_B_6 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.b;
             float _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7 = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.a;
-            float _Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0 = Boolean_fb7aac74c05140d993b95edfb53b1c56;
-            float _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
-            Unity_Branch_float(_Property_2cc81d036bdb41ce8ee87215e65af1af_Out_0, _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7, 1, _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3);
             surface.BaseColor = (_SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_RGBA_0.xyz);
-            surface.Alpha = _Branch_f0c075dbbf0e479a857c0e113ef5c80c_Out_3;
+            surface.Alpha = _SampleTexture2D_f5a9d1f8b9ca4e4e9b83df13b3afb38f_A_7;
             surface.AlphaClipThreshold = 0.5;
             return surface;
         }
