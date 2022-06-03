@@ -11,7 +11,6 @@ public class CardManager : MonoBehaviour
     public GameObject waitMenu;
     public GameObject targetMenu;
     public GameObject useCard;
-   
     
     public Image playerSelected;
     public Image targetSelected;
@@ -39,6 +38,8 @@ public class CardManager : MonoBehaviour
     public Button buttonTarget;
 
     public string functionName, lastName;
+
+    public HardwareManager hardManager;
 
     // Start is called before the first frame update
     void Start()
@@ -301,64 +302,16 @@ public class CardManager : MonoBehaviour
     public void ButtonSelectPlayer(int index)
     {
         player = allPlayer[index];
-
-        switch (index)
-        {
-            case 0 :
-                playerSelected.color = Color.red;
-                break;
-            case 1 :
-                playerSelected.color = Color.blue;
-                break;
-            case 2 :
-                playerSelected.color = Color.yellow;
-                break;
-            case 3 :
-                playerSelected.color = Color.green;
-                break;
-        }
-
     }
 
-    public void ButtonSelectTarget(int index)
+   public void ButtonSelectTarget(int index)
     {
         target = allPlayer[index];
-        switch (index)
-        {
-            case 0 :
-                targetSelected.color = Color.red;
-                break;
-            case 1 :
-                targetSelected.color = Color.blue;
-                break;
-            case 2 :
-                targetSelected.color = Color.yellow;
-                break;
-            case 3 :
-                targetSelected.color = Color.green;
-                break;
-        }
     }
 
     public void ButtonSelect1Target(int index)
     {
         target = allPlayer[index];
-
-        switch (index)
-        {
-            case 0 :
-                player1Target.color = Color.red;
-                break;
-            case 1 :
-                player1Target.color = Color.blue;
-                break;
-            case 2 :
-                player1Target.color = Color.yellow;
-                break;
-            case 3 :
-                player1Target.color = Color.green;
-                break;
-        }
     }
 
     public void CallCardFunction()
@@ -374,13 +327,10 @@ public class CardManager : MonoBehaviour
             {
                 functionName = lastName;
             }
-
             menu.SetActive(false);
-            targetSelected.gameObject.SetActive(false);
-            targetSelected.color = Color.white;
-            playerSelected.color = Color.white;
             waitMenu.SetActive(true);
         }
+      //  hardManager.
     }
 
     public void CallCardFunction1Target()
@@ -400,12 +350,10 @@ public class CardManager : MonoBehaviour
             {
                 functionName = lastName;
             }
-
             targetMenu.SetActive(false);
-            targetSelected.gameObject.SetActive(false);
-            targetSelected.color = Color.white;
             waitMenu.SetActive(true);
         }
+        
     }
 
     public void CloseMenu()
@@ -413,8 +361,6 @@ public class CardManager : MonoBehaviour
         menu.SetActive(false);
         text.gameObject.SetActive(false);
         text.text = null;
-        playerSelected.gameObject.SetActive(false);
-        targetSelected.gameObject.SetActive(false);
         if (waitMenu.activeSelf == false)
         {
             gameplayManager.OpenVerifMenu();
@@ -426,8 +372,6 @@ public class CardManager : MonoBehaviour
         targetMenu.SetActive(false);
         textTarget.gameObject.SetActive(false);
         textTarget.text = null;
-        playerSelected.gameObject.SetActive(false);
-        targetSelected.gameObject.SetActive(false);
         if (waitMenu.activeSelf == false)
         {
             gameplayManager.OpenVerifMenu();
@@ -435,25 +379,21 @@ public class CardManager : MonoBehaviour
         goldQueen.gameObject.SetActive(false);
     }
     
-    public void OpenCardMenu(string stg, Player pl, string texte)
+    public void OpenCardMenu(string stg, Player pl, string texte,int index)
     {
-        switch (pl.point.index)
+        switch (index)
         {
             case 0 :
                 menu.transform.rotation = Quaternion.Euler(0,0,0);
-                Debug.Log(0);
                 break;
             case 1:
                 menu.transform.rotation = Quaternion.Euler(0,0,0);
-                Debug.Log(1);
                 break;
             case 2:
-                menu.transform.rotation = Quaternion.Euler(0,0,180);
-                Debug.Log(2);
+                menu.transform.rotation = new Quaternion(0, 0, 180,0);
                 break;
             case 3:
-                menu.transform.rotation = Quaternion.Euler(0,0,180);
-                Debug.Log(3);
+                menu.transform.rotation = new Quaternion(0,0,180,0);
                 break;
         }
         
@@ -463,7 +403,6 @@ public class CardManager : MonoBehaviour
             text.gameObject.SetActive(true);
             gameplayManager.verifMenu.SetActive(false);
             gameplayManager.verifMenu2.SetActive(false);
-            targetSelected.gameObject.SetActive(true);
             text.text = texte;
             if (functionName == "Jack")
             {
@@ -478,25 +417,21 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public void OpenCardMenu1Target(string stg, Player pl, string texte)
+    public void OpenCardMenu1Target(string stg, Player pl, string texte, int index)
     {
-        switch (pl.point.index)
+        switch (index)
         {
             case 0 :
-                menu.transform.rotation = Quaternion.Euler(0,0,0);
-                Debug.Log(0);
+                targetMenu.transform.rotation = Quaternion.Euler(0,0,0);
                 break;
             case 1:
-                menu.transform.rotation = Quaternion.Euler(0,0,0);
-                Debug.Log(1);
+                targetMenu.transform.rotation = Quaternion.Euler(0,0,0);
                 break;
             case 2:
-                menu.transform.rotation = Quaternion.Euler(0,0,180);
-                Debug.Log(2);
+                targetMenu.transform.rotation = new Quaternion(0,0,180,0);
                 break;
             case 3:
-                menu.transform.rotation = Quaternion.Euler(0,0,180);
-                Debug.Log(3);
+                targetMenu.transform.rotation = new Quaternion(0,0,180,0);
                 break;
         }
 
@@ -518,7 +453,7 @@ public class CardManager : MonoBehaviour
             }
             player = pl;
         }
-        targetSelected.gameObject.SetActive(true);
+        
         
         if (functionName == "QueenYellow")
         {
@@ -531,6 +466,8 @@ public class CardManager : MonoBehaviour
         gameplayManager.activPlayer.move.enabled = false;
         gameplayManager.playerIndex = gmIndex;
     }
+    
+    
 
     IEnumerator ShowThrowCard()
     {

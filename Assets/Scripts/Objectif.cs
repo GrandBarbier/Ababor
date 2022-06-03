@@ -31,8 +31,7 @@ public class Objectif : MonoBehaviour
     public bool lastCase;
     
     public List<TMP_Text> text;
-    public List<TMP_Text> text2;
-   // public List<TMP_Text> score;
+    // public List<TMP_Text> score;
     
 
     private void Awake()
