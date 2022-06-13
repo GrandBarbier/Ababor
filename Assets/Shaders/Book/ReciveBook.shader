@@ -13,7 +13,7 @@ Shader "Custom/ReciveBook"
           "RenderType"="Opaque"
           "RenderPipline" = "UniversalPipline"
           "Queue" = "Geometry"
-      }   
+      }
       
       Pass
       {
@@ -23,7 +23,7 @@ Shader "Custom/ReciveBook"
         Stencil
         {
             Ref [_StencilID]
-            Comp equal
+            Comp greater
             Pass keep
             fail keep
         }
@@ -67,6 +67,6 @@ Shader "Custom/ReciveBook"
             return color;
         }
         ENDHLSL
-      }   
+      }
   }
 }
