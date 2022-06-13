@@ -19,6 +19,7 @@ public class PlayerPoint : MonoBehaviour
     
     public List<bool> objectifVerif;
     public bool isEvent;
+    public bool playedCard;
     
     // Start is called before the first frame update
     void Start()

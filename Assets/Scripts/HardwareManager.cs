@@ -75,7 +75,6 @@ public class HardwareManager : MonoBehaviour
         if (gameplayManager.currentstate.ToString() == "CardPlay")
         {
             canNFC = true;
-            Colorize();
         }
         else
         {
@@ -84,6 +83,25 @@ public class HardwareManager : MonoBehaviour
         }
     }
 
+    public void OnApplicationFocus(bool hasFocus)
+    {
+        Debug.Log("testing thing");
+        Colorize();
+        switch (nbPlayers)
+        {
+            case 4:
+                NFCController.StartPollingAsync(allAntennas4P);
+                break;
+            case 3:
+                NFCController.StartPollingAsync(allAntennas3P);
+                break;
+            default:
+                Debug.Log("Error nb player");
+                break;
+        }
+    }
+    
+
     void OnDisable()  
     {
         NFCController.StopPolling();
@@ -91,7 +109,7 @@ public class HardwareManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        ShutLights();
+        LightController.ShutdownAllLights();
     }
 
     public void Colorize()
@@ -99,16 +117,46 @@ public class HardwareManager : MonoBehaviour
         switch (nbPlayers)
         {
             case 4:
-                LightController.Colorize(lightsP1, LIGHT_COLOR.COLOR_RED, true);
-                LightController.Colorize(lightsP2, LIGHT_COLOR.COLOR_BLUE, true);
-                LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_YELLOW, true);
-                LightController.Colorize(lightsP4, LIGHT_COLOR.COLOR_GREEN, true);
+                if (cardManager.playerPlayed[0] == false)
+                {
+                    LightController.Colorize(lightsP1, LIGHT_COLOR.COLOR_RED, true);
+                    Debug.Log("a1");
+                }
+
+                if (cardManager.playerPlayed[1] == false)
+                {
+                    LightController.Colorize(lightsP2, LIGHT_COLOR.COLOR_BLUE, true);
+                    Debug.Log("a2");
+                }
+
+                if (cardManager.playerPlayed[2] == false)
+                {
+                    LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_YELLOW, true);
+                    Debug.Log("a3");
+                }
+
+                if (cardManager.playerPlayed[3] == false)
+                {
+                    LightController.Colorize(lightsP4, LIGHT_COLOR.COLOR_GREEN, true);
+                    Debug.Log("a4");
+                }
                 break;
             
             case 3:
-                LightController.Colorize(lightsP1, LIGHT_COLOR.COLOR_RED, true);
-                LightController.Colorize(lightsP2, LIGHT_COLOR.COLOR_BLUE, true);
-                LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_YELLOW, true);
+                if (cardManager.playerPlayed[0] == false)
+                {
+                    LightController.Colorize(lightsP1, LIGHT_COLOR.COLOR_RED, true);
+                }
+
+                if (cardManager.playerPlayed[1] == false)
+                {
+                    LightController.Colorize(lightsP2, LIGHT_COLOR.COLOR_BLUE, true);
+                }
+
+                if (cardManager.playerPlayed[2] == false)
+                {
+                    LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_YELLOW, true);
+                }
                 break;
         }
     }
@@ -118,19 +166,25 @@ public class HardwareManager : MonoBehaviour
         LightController.ShutdownAllLights();
     }
 
-  /*  public void ShutLightsPlayer(int number)
+    public void ShutLightsPlayer(int number)
     {
         switch (number)
         {
             case 0 :
-               
-                LightController.Colorize(lightsP2, LIGHT_COLOR.COLOR_BLUE, false);
-                LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_YELLOW, true);
-                LightController.Colorize(lightsP4, LIGHT_COLOR.COLOR_GREEN, true);
+                LightController.Colorize(lightsP1, LIGHT_COLOR.COLOR_BLACK, true);
                 break;
-            
+            case 1 :
+                LightController.Colorize(lightsP2, LIGHT_COLOR.COLOR_BLACK, true);
+                break;
+            case 2 :
+                LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_BLACK, true);
+                break;
+            case 3 :
+                LightController.Colorize(lightsP4, LIGHT_COLOR.COLOR_BLACK, true);
+                break;
         }
-    }*/
+        Colorize();
+    }
     
     private void OnNewTagDetected(NFC_DEVICE_ID _device, NFCTag _tag)
     {
@@ -142,7 +196,6 @@ public class HardwareManager : MonoBehaviour
             card = _tag.Data;
             if (canNFC)
                 nfcConvertor.Conversion(_tag, ComparePlayer(_device));
-            Debug.Log("detect");
         }
     }
 
