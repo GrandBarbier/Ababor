@@ -18,7 +18,7 @@ public class CasesNeutral : MonoBehaviour
     public Material[] allMat;
     public List<Marauder> allSteps = new List<Marauder>();
     
-    [SerializeField] public GameplayManager _gameplayManager;
+    [SerializeField] private GameplayManager _gameplayManager;
     [SerializeField] private EventManager _eventManager;
 
     public GameObject showObject;
@@ -230,11 +230,14 @@ public class CasesNeutral : MonoBehaviour
 
     public void LastCase()
     {
+        
         objectif.lastCase = true;
-        Invoke(_gameplayManager.objectif.actualLateObjectif[0], 0);
-        Invoke(_gameplayManager.objectif.actualLateObjectif[1], 0);
-        // _gameplayManager.endMenu.SetActive(true);
-        // _gameplayManager.endCalcul.oui = true;
+        foreach (string stg in objectif.actualLateObjectif)
+        {
+            objectif.Invoke(stg,0);
+        }
+        _gameplayManager.endMenu.SetActive(true);
+        _gameplayManager.endCalcul.oui = true;
     }
 
     public void EventCase()
