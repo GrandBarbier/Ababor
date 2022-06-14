@@ -18,7 +18,7 @@ public class CasesNeutral : MonoBehaviour
     public Material[] allMat;
     public List<Marauder> allSteps = new List<Marauder>();
     
-    [SerializeField] private GameplayManager _gameplayManager;
+    [SerializeField] public GameplayManager _gameplayManager;
     [SerializeField] private EventManager _eventManager;
 
     public GameObject showObject;
@@ -222,6 +222,7 @@ public class CasesNeutral : MonoBehaviour
         else
         {
             _gameplayManager.NextIsland();
+            _gameplayManager.ChangePlayer();
         }
 
         soundCase.Play();
@@ -229,9 +230,11 @@ public class CasesNeutral : MonoBehaviour
 
     public void LastCase()
     {
-        _gameplayManager.endMenu.SetActive(true);
-        _gameplayManager.endCalcul.oui = true;
         objectif.lastCase = true;
+        Invoke(_gameplayManager.objectif.actualLateObjectif[0], 0);
+        Invoke(_gameplayManager.objectif.actualLateObjectif[1], 0);
+        // _gameplayManager.endMenu.SetActive(true);
+        // _gameplayManager.endCalcul.oui = true;
     }
 
     public void EventCase()

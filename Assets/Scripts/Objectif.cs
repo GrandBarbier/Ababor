@@ -14,6 +14,7 @@ public class Objectif : MonoBehaviour
     public List<string> allEarlyObjectifs;
     public List<string> actualObjectif;
     public List<string> baseObjectif;
+    public List<string> actualLateObjectif;
     
     public List<string> descriptionsEarly;
     public List<string> descriptionMid;
@@ -72,6 +73,7 @@ public class Objectif : MonoBehaviour
         {
             int rdm = Random.Range(0, allLateObjectifs.Count);
             actualObjectif.Add(allLateObjectifs[rdm]);
+            actualLateObjectif.Add(allLateObjectifs[rdm]);
             allLateObjectifs.Remove(allLateObjectifs[rdm]);
             actualDescription.Add(descriptionLate[rdm]);
             descriptionLate.Remove(descriptionLate[rdm]);
@@ -149,6 +151,7 @@ public class Objectif : MonoBehaviour
                 player.objectifVerif[baseObjectif.IndexOf("ShopLate")] = true;
             }
         }
+        Debug.Log("late");
     }
 
     public void GoldEarly()
@@ -201,6 +204,7 @@ public class Objectif : MonoBehaviour
                 player.objectifVerif[baseObjectif.IndexOf("GoldLate")] = true;
             }
         }
+        Debug.Log("late");
     }
 
     public void LoseEarly()
@@ -244,13 +248,16 @@ public class Objectif : MonoBehaviour
         int best = Mathf.Max(intList.ToArray());
         foreach (PlayerPoint player in allPlayerPoint )
         {
+            Debug.Log(best);
             if (best == player.numberLoseCase && lastCase)
             {
+                Debug.Log("late1");
                 best = player.numberLoseCase;
                 player.point += 30;
                 player.objectifVerif[actualObjectif.IndexOf("LoseLate")] = true;
             }
         }
+       
     }
 
     public void MoveEarly()
@@ -328,7 +335,6 @@ public class Objectif : MonoBehaviour
             {
                 obj.point += 20;
                 obj.objectifVerif[actualObjectif.IndexOf("EventMid")] = true;
-                
             }
         }
     }
@@ -350,5 +356,6 @@ public class Objectif : MonoBehaviour
                 player.objectifVerif[actualObjectif.IndexOf("EventLate")] = true;
             }
         }
+        Debug.Log("late");
     }
 }

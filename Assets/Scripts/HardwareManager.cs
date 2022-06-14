@@ -46,7 +46,7 @@ public class HardwareManager : MonoBehaviour
     public CardManager cardManager;
 
     private string card;
-    
+
     void Start()
     {
         nbPlayers = gameplayManager.allPlayers.Count;
@@ -142,7 +142,7 @@ public class HardwareManager : MonoBehaviour
                 }
                 break;
             
-            case 3:
+           /* case 3:
                 if (cardManager.playerPlayed[0] == false)
                 {
                     LightController.Colorize(lightsP1, LIGHT_COLOR.COLOR_RED, true);
@@ -157,7 +157,7 @@ public class HardwareManager : MonoBehaviour
                 {
                     LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_YELLOW, true);
                 }
-                break;
+                break;*/
         }
     }
     
