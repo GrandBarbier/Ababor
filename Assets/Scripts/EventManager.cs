@@ -225,7 +225,7 @@ public class EventManager : MonoBehaviour
             if (allPlayers[1].point.gold == allPlayers[0].point.gold)
             {
                 allPlayers[1].point.gold += 10;
-                if (allPlayers[2].point.gold == allPlayers[1].point.gold)
+                if (allPlayers[2].point.gold == allPlayers[1].point.gold && allPlayers[2].point.gold == allPlayers[0].point.gold)
                 {
                     allPlayers[2].point.gold += 10;
                 }
@@ -254,10 +254,10 @@ public class EventManager : MonoBehaviour
             if (allPlayers[1].point.gold == allPlayers[0].point.gold)
             {
                 allPlayers[1].point.gold += 10;
-                if (allPlayers[2].point.gold == allPlayers[1].point.gold)
+                if (allPlayers[2].point.gold == allPlayers[1].point.gold && allPlayers[2].point.gold == allPlayers[0].point.gold)
                 {
                     allPlayers[2].point.gold += 10;
-                    if (allPlayers[3].point.gold == allPlayers[2].point.gold)
+                    if (allPlayers[3].point.gold == allPlayers[2].point.gold && allPlayers[3].point.gold == allPlayers[1].point.gold && allPlayers[3].point.gold == allPlayers[0].point.gold)
                     {
                         allPlayers[3].point.gold += 10;
                     }
@@ -285,7 +285,7 @@ public class EventManager : MonoBehaviour
                 if (allPlayers[2].point.gold == allPlayers[1].point.gold)
                 {
                     allPlayers[2].point.gold += 8;
-                    if (allPlayers[3].point.gold == allPlayers[2].point.gold)
+                    if (allPlayers[3].point.gold == allPlayers[2].point.gold && allPlayers[3].point.gold == allPlayers[1].point.gold)
                     {
                         allPlayers[3].point.gold += 8;
                     }
