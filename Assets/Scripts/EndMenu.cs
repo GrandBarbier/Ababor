@@ -59,12 +59,12 @@ public class EndMenu : MonoBehaviour
 
             if (textGoal[0].text != goal.descriptionsEarly[0])
             {
-                textGoal[0].text = goal.descriptionsEarly[0];
-                textGoal[1].text = goal.descriptionsEarly[1];
-                textGoal[2].text = goal.descriptionMid[0];
-                textGoal[3].text = goal.descriptionMid[1];
-                textGoal[4].text = goal.descriptionLate[0];
-                textGoal[5].text = goal.descriptionLate[1];
+                textGoal[0].text = goal.actualDescription[0];
+                textGoal[1].text = goal.actualDescription[1];
+                textGoal[2].text = goal.actualDescription[2];
+                textGoal[3].text = goal.actualDescription[3];
+                textGoal[4].text = goal.actualDescription[4];
+                textGoal[5].text = goal.actualDescription[5];
             }
 
             objectivesPoint[0] = _gameplayManager.objectif.scoreEarly[0];
@@ -97,12 +97,12 @@ public class EndMenu : MonoBehaviour
             
             if (textGoal[0].text != goal.descriptionsEarly[0])
             {
-                textGoal[0].text = goal.descriptionsEarly[0];
-                textGoal[1].text = goal.descriptionsEarly[1];
-                textGoal[2].text = goal.descriptionMid[0];
-                textGoal[3].text = goal.descriptionMid[1];
-                textGoal[4].text = goal.descriptionLate[0];
-                textGoal[5].text = goal.descriptionLate[1];
+                textGoal[0].text = goal.actualDescription[0];
+                textGoal[1].text = goal.actualDescription[1];
+                textGoal[2].text = goal.actualDescription[2];
+                textGoal[3].text = goal.actualDescription[3];
+                textGoal[4].text = goal.actualDescription[4];
+                textGoal[5].text = goal.actualDescription[5];
             }
             
             objectivesPoint[0] = _gameplayManager.objectif.scoreEarly[0];

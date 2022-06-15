@@ -52,10 +52,13 @@ public class Objectif : MonoBehaviour
         {
             int rdm = Random.Range(0, allEarlyObjectifs.Count);
             actualDescription.Add(descriptionsEarly[rdm]);
-            descriptionsEarly.Remove(descriptionsEarly[rdm]);
+            Debug.Log(rdm);
             allScore.Add(scoreEarly[rdm]);
-            scoreEarly.Remove(scoreEarly[rdm]);
+            Debug.Log(rdm);
             actualObjectif.Add(allEarlyObjectifs[rdm]);
+            Debug.Log(rdm);
+            descriptionsEarly.Remove(descriptionsEarly[rdm]);
+            scoreEarly.Remove(scoreEarly[rdm]);
             allEarlyObjectifs.Remove(allEarlyObjectifs[rdm]);
            
         }
@@ -63,10 +66,10 @@ public class Objectif : MonoBehaviour
         {
             int rdm = Random.Range(0, allMidObjectifs.Count);
             actualDescription.Add(descriptionMid[rdm]);
-            descriptionMid.Remove(descriptionMid[rdm]);
             allScore.Add(scoreMid[rdm]);
-            scoreMid.Remove(scoreMid[rdm]);
             actualObjectif.Add(allMidObjectifs[rdm]);
+            descriptionMid.Remove(descriptionMid[rdm]);
+            scoreMid.Remove(scoreMid[rdm]);
             allMidObjectifs.Remove(allMidObjectifs[rdm]);
            
         }
@@ -75,11 +78,11 @@ public class Objectif : MonoBehaviour
         {
             int rdm = Random.Range(0, allLateObjectifs.Count);
             actualDescription.Add(descriptionLate[rdm]);
-            descriptionLate.Remove(descriptionLate[rdm]);
             allScore.Add(scoreLate[rdm]);
-            scoreLate.Remove(scoreLate[rdm]);
             actualObjectif.Add(allLateObjectifs[rdm]);
             actualLateObjectif.Add(allLateObjectifs[rdm]);
+            descriptionLate.Remove(descriptionLate[rdm]);
+            scoreLate.Remove(scoreLate[rdm]);
             allLateObjectifs.Remove(allLateObjectifs[rdm]);
            
         }
@@ -113,7 +116,7 @@ public class Objectif : MonoBehaviour
         {
             if (obj.numberShopCase == 1 && verif == false)
             {
-                obj.point += 10;
+              
                 verif = true;
                 obj.objectifVerif[baseObjectif.IndexOf("ShopEarly")] = true;
             }
@@ -131,7 +134,7 @@ public class Objectif : MonoBehaviour
             bool verif = obj.objectifVerif[baseObjectif.IndexOf("ShopMid")];   
             if (obj.numberShopCase >= 2 && verif == false)
             {
-                obj.point += 20;
+              
                 obj.objectifVerif[baseObjectif.IndexOf("ShopMid")] = true;
             }
         }
@@ -150,7 +153,7 @@ public class Objectif : MonoBehaviour
             if (best == player.numberShopCase && lastCase)
             {
                 best = player.numberShopCase;
-                player.point += 30;
+               
                 player.objectifVerif[baseObjectif.IndexOf("ShopLate")] = true;
             }
         }
@@ -164,7 +167,7 @@ public class Objectif : MonoBehaviour
         {
             if (obj.numberGainCase == 1 && verif == false)
             {
-                obj.point += 10;
+               
                 verif = true;
                 obj.objectifVerif[baseObjectif.IndexOf("GoldEarly")] = true;
             }
@@ -182,7 +185,7 @@ public class Objectif : MonoBehaviour
             bool verif = obj.objectifVerif[baseObjectif.IndexOf("GoldMid")];   
             if (obj.numberGainCase >= 2 && verif == false)
             {
-                obj.point += 20;
+             
                 obj.objectifVerif[baseObjectif.IndexOf("GoldMid")] = true;
             }
         }
@@ -202,9 +205,8 @@ public class Objectif : MonoBehaviour
             if (best == player.numberGainCase && lastCase)
             {
                 best = player.numberGainCase;
-                player.point += 30;
+              
                 player.objectifVerif[baseObjectif.IndexOf("GoldLate")] = true;
-                actualObjectif.Remove("GoldLate");
             }
         }
         Debug.Log("late");
@@ -217,7 +219,7 @@ public class Objectif : MonoBehaviour
         {
             if (obj.numberLoseCase == 1 && verif == false)
             {
-                obj.point += 10;
+                
                 verif = true;
                 obj.objectifVerif[baseObjectif.IndexOf("LoseEarly")] = true;
             }
@@ -235,7 +237,7 @@ public class Objectif : MonoBehaviour
             bool verif = obj.objectifVerif[baseObjectif.IndexOf("LoseMid")];   
             if (obj.numberLoseCase >= 2 && verif == false)
             {
-                obj.point += 20;
+               
                 obj.objectifVerif[baseObjectif.IndexOf("LoseMid")] = true;
             }
         }
@@ -256,9 +258,8 @@ public class Objectif : MonoBehaviour
             {
                 
                 best = player.numberLoseCase;
-                player.point += 30;
+                
                 player.objectifVerif[actualObjectif.IndexOf("LoseLate")] = true;
-                actualObjectif.Remove("LoseLate");
             }
         }
        
@@ -271,7 +272,7 @@ public class Objectif : MonoBehaviour
         {
             if (obj.numberCase >= 7 && verif == false)
             {
-                obj.point += 10; 
+                
                 verif = true;
             }
         }
@@ -288,7 +289,7 @@ public class Objectif : MonoBehaviour
             bool verif = obj.objectifVerif[actualObjectif.IndexOf("MoveMid")];   
             if (obj.numberCase >= 13 && verif == false)
             {
-                obj.point += 20;
+                
                 obj.objectifVerif[actualObjectif.IndexOf("MoveMid")] = true;
             }
         }
@@ -307,7 +308,7 @@ public class Objectif : MonoBehaviour
             if (best == player.numberCase && lastCase)
             {
                 best = player.numberCase;
-                player.point += 30;
+                
             }
         }
     }
@@ -319,7 +320,7 @@ public class Objectif : MonoBehaviour
         {
             if (obj.numberEventCase >= 1 && verif == false)
             {
-                obj.point += 10;
+                
                 verif = true;
                 obj.objectifVerif[actualObjectif.IndexOf("EventEarly")] = true;
             }
@@ -337,7 +338,7 @@ public class Objectif : MonoBehaviour
             bool verif = obj.objectifVerif[actualObjectif.IndexOf("EventMid")];  
             if (obj.numberEventCase >= 2 && verif == false)
             {
-                obj.point += 20;
+            
                 obj.objectifVerif[actualObjectif.IndexOf("EventMid")] = true;
             }
         }
@@ -356,9 +357,7 @@ public class Objectif : MonoBehaviour
             if (best == player.numberEventCase && lastCase)
             {
                 best = player.numberEventCase;
-                player.point += 30;
                 player.objectifVerif[actualObjectif.IndexOf("EventLate")] = true;
-                actualObjectif.Remove("EventLate");
             }
         }
         Debug.Log("late");

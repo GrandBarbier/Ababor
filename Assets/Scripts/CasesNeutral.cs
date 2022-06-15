@@ -65,7 +65,6 @@ public class CasesNeutral : MonoBehaviour
         {
             marauder.StopSteps();
         }
-
         canEvent = true;
     }
 
@@ -264,6 +263,7 @@ public class CasesNeutral : MonoBehaviour
             }
             soundCase.Play();
         }
+        _gameplayManager.activPlayer.point.numberEventCase++;
     }
 
     public void ShowIfTarget()
