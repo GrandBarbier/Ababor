@@ -941,11 +941,11 @@ PrefabInstance:
       objectReference: {fileID: 1530007458}
     - target: {fileID: 1659564447471117491, guid: 47a56ba8d8cc643449c132e4a0598848, type: 3}
       propertyPath: actualMove
-      value: 3
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1659564447471117491, guid: 47a56ba8d8cc643449c132e4a0598848, type: 3}
       propertyPath: InitialMove
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1659564447471117491, guid: 47a56ba8d8cc643449c132e4a0598848, type: 3}
       propertyPath: caseNext.Array.data[0]
@@ -1210,9 +1210,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1839752551}
-        m_TargetAssemblyTypeName: GameplayManager, Assembly-CSharp
-        m_MethodName: ChangeIsleButton
+      - m_Target: {fileID: 1306014711}
+        m_TargetAssemblyTypeName: Objectif, Assembly-CSharp
+        m_MethodName: LoseLate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4117,7 +4117,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.245717, y: -431.12042}
+  m_AnchoredPosition: {x: -7.245717, y: -382}
   m_SizeDelta: {x: 800, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &248550851
@@ -4433,11 +4433,11 @@ PrefabInstance:
       objectReference: {fileID: 2129300747}
     - target: {fileID: 1659564447471117491, guid: 47a56ba8d8cc643449c132e4a0598848, type: 3}
       propertyPath: actualMove
-      value: 3
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1659564447471117491, guid: 47a56ba8d8cc643449c132e4a0598848, type: 3}
       propertyPath: InitialMove
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1659564447471117491, guid: 47a56ba8d8cc643449c132e4a0598848, type: 3}
       propertyPath: caseNext.Array.data[0]
@@ -6568,7 +6568,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454007260}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8832799, y: 0.8832799, z: 0.8832799}
   m_Children:
@@ -6586,11 +6586,11 @@ RectTransform:
   - {fileID: 95837536}
   - {fileID: 254287888}
   m_Father: {fileID: 1608922353}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 35}
+  m_AnchoredPosition: {x: 0, y: 1}
   m_SizeDelta: {x: -480, y: -679.29987}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &454007262
@@ -7474,7 +7474,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8116163873411360330, guid: 5dee4bf60e62fa04a8d8a1c6d97dd86e, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8116163873411360330, guid: 5dee4bf60e62fa04a8d8a1c6d97dd86e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11300,7 +11300,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681698750}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.79999995, y: 0.35167146, z: 0.79999995}
   m_Children:
@@ -11313,11 +11313,11 @@ RectTransform:
   - {fileID: 28712698}
   - {fileID: 266184663}
   m_Father: {fileID: 1608922353}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 94}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -559.4727, y: -637.4905}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &681698752
@@ -14717,72 +14717,6 @@ RectTransform:
   m_AnchoredPosition: {x: -59.905304, y: -65.08234}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &881008964
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2106914407145559646, guid: f4fa081e4ba148941b09476fdfd41253, type: 3}
-      propertyPath: gameplayManager
-      value: 
-      objectReference: {fileID: 1839752551}
-    - target: {fileID: 3225608616620040290, guid: f4fa081e4ba148941b09476fdfd41253, type: 3}
-      propertyPath: m_Name
-      value: CamPlane (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3225608616620040290, guid: f4fa081e4ba148941b09476fdfd41253, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3225608616620040319, guid: f4fa081e4ba148941b09476fdfd41253, type: 3}
-      propertyPath: m_RootOrder
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 3225608616620040319, guid: f4fa081e4ba148941b09476fdfd41253, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -4.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 3225608616620040319, guid: f4fa081e4ba148941b09476fdfd41253, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3225608616620040319, guid: f4fa081e4ba148941b09476fdfd41253, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 9.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 3225608616620040319, guid: f4fa081e4ba148941b09476fdfd41253, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3225608616620040319, guid: f4fa081e4ba148941b09476fdfd41253, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3225608616620040319, guid: f4fa081e4ba148941b09476fdfd41253, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3225608616620040319, guid: f4fa081e4ba148941b09476fdfd41253, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3225608616620040319, guid: f4fa081e4ba148941b09476fdfd41253, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3225608616620040319, guid: f4fa081e4ba148941b09476fdfd41253, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3225608616620040319, guid: f4fa081e4ba148941b09476fdfd41253, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2106914407145559646, guid: f4fa081e4ba148941b09476fdfd41253, type: 3}
-  m_SourcePrefab: {fileID: 100100000, guid: f4fa081e4ba148941b09476fdfd41253, type: 3}
 --- !u!1 &891840520
 GameObject:
   m_ObjectHideFlags: 0
@@ -20520,7 +20454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4947905662929228052, guid: 910957450568a4a4299193558c2a4fbe, type: 3}
       propertyPath: m_RootOrder
-      value: 34
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 4947905662929228052, guid: 910957450568a4a4299193558c2a4fbe, type: 3}
       propertyPath: m_AnchorMax.x
@@ -20662,7 +20596,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1294159471
 GameObject:
@@ -20883,6 +20817,17 @@ MonoBehaviour:
   gainCaseMat: {fileID: 2100000, guid: 12aa8ba47c8c1874186f0949565f7dbd, type: 2}
   eventCaseMat: {fileID: 2100000, guid: e7ff526f5470e7a41a5c2b85aa58e389, type: 2}
   eventManagerFunction: []
+--- !u!114 &1306014710 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7996281355349608391, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
+  m_PrefabInstance: {fileID: 9163520322296796743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306014707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd434c99f3455384b8ed1455669ce66a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1306014711 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
@@ -23182,7 +23127,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1414754113
 GameObject:
@@ -24342,6 +24287,66 @@ PrefabInstance:
       propertyPath: tmpDescription
       value: 
       objectReference: {fileID: 672310661}
+    - target: {fileID: 3275889216143433737, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
+      propertyPath: allEvent.Array.size
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275889216143433737, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
+      propertyPath: allEvent.Array.data[7]
+      value: GiveGoldRanking
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275889216143433737, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
+      propertyPath: allEvent.Array.data[8]
+      value: GiveGoldRanking
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275889216143433737, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
+      propertyPath: allEvent.Array.data[9]
+      value: GiveGoldRanking
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275889216143433737, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
+      propertyPath: allEvent.Array.data[10]
+      value: GiveGoldRanking
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275889216143433737, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
+      propertyPath: allEvent.Array.data[11]
+      value: GiveGoldRanking
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275889216143433737, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
+      propertyPath: allEvent.Array.data[12]
+      value: GiveGoldRanking
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275889216143433737, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
+      propertyPath: allEvent.Array.data[13]
+      value: GiveGoldRanking
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275889216143433737, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
+      propertyPath: allEvent.Array.data[14]
+      value: GiveGoldRanking
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275889216143433737, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
+      propertyPath: allEvent.Array.data[15]
+      value: GiveGoldRanking
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275889216143433737, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
+      propertyPath: allEvent.Array.data[16]
+      value: GiveGoldRanking
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275889216143433737, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
+      propertyPath: allEvent.Array.data[17]
+      value: GiveGoldRanking
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275889216143433737, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
+      propertyPath: allEvent.Array.data[18]
+      value: GiveGoldRanking
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275889216143433737, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
+      propertyPath: allEvent.Array.data[19]
+      value: GiveGoldRanking
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275889216143433737, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
+      propertyPath: allEvent.Array.data[20]
+      value: GiveGoldRanking
+      objectReference: {fileID: 0}
     - target: {fileID: 3379167846554278966, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
@@ -24452,7 +24457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3770765139524685960, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.9400463
+      value: 7.9400477
       objectReference: {fileID: 0}
     - target: {fileID: 3897283163556684031, guid: 7b01bb7d957c19b49be66849126ab50f, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -26851,11 +26856,11 @@ PrefabInstance:
       objectReference: {fileID: 2117149632}
     - target: {fileID: 1659564447471117491, guid: 47a56ba8d8cc643449c132e4a0598848, type: 3}
       propertyPath: actualMove
-      value: 3
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1659564447471117491, guid: 47a56ba8d8cc643449c132e4a0598848, type: 3}
       propertyPath: InitialMove
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1659564447471117491, guid: 47a56ba8d8cc643449c132e4a0598848, type: 3}
       propertyPath: caseNext.Array.data[0]
@@ -27228,7 +27233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22457152, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 22457152, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -28623,9 +28628,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 2083949059}
   - {fileID: 454007261}
   - {fileID: 681698751}
+  - {fileID: 2083949059}
   - {fileID: 173396069}
   - {fileID: 1269696829}
   - {fileID: 2010886514}
@@ -29473,11 +29478,11 @@ PrefabInstance:
       objectReference: {fileID: 700824127}
     - target: {fileID: 1659564447471117491, guid: 47a56ba8d8cc643449c132e4a0598848, type: 3}
       propertyPath: actualMove
-      value: 3
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1659564447471117491, guid: 47a56ba8d8cc643449c132e4a0598848, type: 3}
       propertyPath: InitialMove
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1659564447471117491, guid: 47a56ba8d8cc643449c132e4a0598848, type: 3}
       propertyPath: caseNext.Array.data[0]
@@ -36748,7 +36753,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8.000051, y: -1250.5991}
+  m_AnchoredPosition: {x: -8.000051, y: -977}
   m_SizeDelta: {x: 800, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1999981460
@@ -37496,7 +37501,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2082469915
 GameObject:
@@ -37767,7 +37772,7 @@ RectTransform:
   m_LocalScale: {x: 1.464853, y: 1.10725, z: 1.03}
   m_Children: []
   m_Father: {fileID: 1608922353}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -39356,6 +39361,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 266184664}
     - target: {fileID: 7541256346092628484, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7541256346092628484, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
       propertyPath: targetMenu
       value: 
       objectReference: {fileID: 681698750}
@@ -39363,6 +39372,10 @@ PrefabInstance:
       propertyPath: textTarget
       value: 
       objectReference: {fileID: 741869851}
+    - target: {fileID: 7541256346092628484, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
+      propertyPath: hardManager
+      value: 
+      objectReference: {fileID: 1306014710}
     - target: {fileID: 7541256346092628484, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
       propertyPath: buttonTarget
       value: 
@@ -39383,10 +39396,18 @@ PrefabInstance:
       propertyPath: targetSelected
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7541256346092628484, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
+      propertyPath: playerPlayed.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7996281355349608391, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
       propertyPath: text
       value: 
       objectReference: {fileID: 2010886512}
+    - target: {fileID: 7996281355349608391, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7996281355349608391, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
       propertyPath: nbPlayers
       value: 4
@@ -39877,7 +39898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163520321838035758, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 9163520321838035758, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
       propertyPath: m_LocalPosition.x
@@ -40133,23 +40154,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
       propertyPath: descriptionMid.Array.data[0]
-      value: " Les joueurs qui ont achet\xE9 2 fois ou plus au marchand gagne <color=#ffff00ff>20
-        points</color"
+      value: " Les joueurs qui sont all\xE9e plus de 2 fois sur des cases gain d'or
+        gagne <color=#ffff00ff>20 points</color>"
       objectReference: {fileID: 0}
     - target: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
       propertyPath: descriptionMid.Array.data[1]
-      value: " Les joueurs qui ont declench\xE9 2 \xE9v\xE8nements gagne <color=#ffff00ff>20
-        points</color>"
-      objectReference: {fileID: 0}
-    - target: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
-      propertyPath: descriptionMid.Array.data[2]
       value: " Les joueurs qui sont all\xE9e plus de 2 fois sur des cases perte d'or
         gagne <color=#ffff00ff>20 points</color>"
       objectReference: {fileID: 0}
     - target: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
+      propertyPath: descriptionMid.Array.data[2]
+      value: " Les joueurs qui ont declench\xE9 2 \xE9v\xE8nements gagne <color=#ffff00ff>20
+        points</color>"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
       propertyPath: descriptionMid.Array.data[3]
-      value: " Les joueurs qui sont all\xE9e plus de 2 fois sur des cases gain d'or
-        gagne <color=#ffff00ff>20 points</color>"
+      value: " Les joueurs qui ont achet\xE9 2 fois ou plus au marchand gagne <color=#ffff00ff>20
+        points</color"
       objectReference: {fileID: 0}
     - target: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
       propertyPath: descriptionsEarly.Array.size
@@ -40161,23 +40182,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
       propertyPath: descriptionLate.Array.data[0]
-      value: " Le joueur qui a achet\xE9 le plus de fois au shop gagne <color=#ffff00ff>30
-        points</color>"
+      value: " Le joueur qui est all\xE9 le plus de fois sur des cases gain d'or
+        gagne <color=#ffff00ff>30 points</color>"
       objectReference: {fileID: 0}
     - target: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
       propertyPath: descriptionLate.Array.data[1]
-      value: " Le joueur qui a d\xE9clench\xE9 le plus d'event gagne <color=#ffff00ff>30
-        points</color>"
-      objectReference: {fileID: 0}
-    - target: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
-      propertyPath: descriptionLate.Array.data[2]
       value: " Le joueur qui est all\xE9 le plus de fois sur des cases perte d'or
         gagne <color=#ffff00ff>30 points</color>"
       objectReference: {fileID: 0}
     - target: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
+      propertyPath: descriptionLate.Array.data[2]
+      value: " Le joueur qui a d\xE9clench\xE9 le plus d'event gagne <color=#ffff00ff>30
+        points</color>"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
       propertyPath: descriptionLate.Array.data[3]
-      value: " Le joueur qui est all\xE9 le plus de fois sur des cases gain d'or
-        gagne <color=#ffff00ff>30 points</color>"
+      value: " Le joueur qui a achet\xE9 le plus de fois au shop gagne <color=#ffff00ff>30
+        points</color>"
       objectReference: {fileID: 0}
     - target: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
       propertyPath: allLateObjectifs.Array.data[1]
@@ -40189,23 +40210,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
       propertyPath: descriptionsEarly.Array.data[0]
-      value: " Le premier joueur a achet\xE9 dans un shop gagne <color=#ffff00ff>
-        10 points </color>"
-      objectReference: {fileID: 0}
-    - target: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
-      propertyPath: descriptionsEarly.Array.data[1]
-      value: " Le premier joueur qui d\xE9clenche un event gagne <color=#ffff00ff>10
+      value: "Le premier joueur a all\xE9e sur une case gain d'or gagne <color=#ffff00ff>10
         points</color>"
       objectReference: {fileID: 0}
     - target: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
-      propertyPath: descriptionsEarly.Array.data[2]
+      propertyPath: descriptionsEarly.Array.data[1]
       value: " Le premier joueur qui est all\xE9e sur une case perte d'or gagne <color=#ffff00ff>10
         points</color"
       objectReference: {fileID: 0}
     - target: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
-      propertyPath: descriptionsEarly.Array.data[3]
-      value: "Le premier joueur a all\xE9e sur une case gain d'or gagne <color=#ffff00ff>10
+      propertyPath: descriptionsEarly.Array.data[2]
+      value: " Le premier joueur qui d\xE9clenche un event gagne <color=#ffff00ff>10
         points</color>"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9163520321838035759, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}
+      propertyPath: descriptionsEarly.Array.data[3]
+      value: " Le premier joueur a achet\xE9 dans un shop gagne <color=#ffff00ff>
+        10 points </color>"
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6252815433902197027, guid: 347cfc7b26029b54c9ae71f59eabb775, type: 3}

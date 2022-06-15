@@ -156,6 +156,7 @@ public class GameplayManager : MonoBehaviour
         }
         ButtonStart();
         ShowActualPlayer();
+        cardManager.hardManager.Colorize();
     }
 
     public void ButtonYes()
@@ -209,8 +210,13 @@ public class GameplayManager : MonoBehaviour
         {
             player.move.index = allPlayers.IndexOf(player);
         }
+
+        for (int i = 0; i < cardManager.playerPlayed.Count; i++)
+        {
+            cardManager.playerPlayed[i] = false;
+        }
         ShowActualPlayer();
-        
+        cardManager.hardManager.Colorize();
     }
 
     public void ResetMove()
@@ -228,15 +234,6 @@ public class GameplayManager : MonoBehaviour
        // Debug.Log("testing");
     }
 
-   /*public void OpenEndMenu()
-    {
-       endMenu.SetActive(true);
-       for (int i = 0; i < allPlayers.Count; i++)
-       {
-           endCalcul.PointCalcul(allPlayers[i].point,i);
-       }
-    }*/
-    
     public void ButtonVerifMenuMove()
     {
         currentstate = new Moving();
