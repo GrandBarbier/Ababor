@@ -29,6 +29,7 @@ public class CardManager : MonoBehaviour
     public bool numberClub; // use to fix problem of number club card
     public bool headBlueGreen; // use to fix problem fix blue/green heads card 
     public bool openMove;
+    public List<bool> playerPlayed;
     
     public Player player;
     public List<Player> allPlayer;
@@ -40,6 +41,7 @@ public class CardManager : MonoBehaviour
     public string functionName, lastName;
 
     public HardwareManager hardManager;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +49,11 @@ public class CardManager : MonoBehaviour
         gameplayManager = FindObjectOfType<GameplayManager>();
         player = gameplayManager.allPlayers[0];
         allPlayer = gameplayManager.allPlayers;
+        foreach (Player pl in allPlayer)
+        {
+            playerPlayed.Add(pl.point.playedCard);
+        }
+        hardManager.Colorize();
     }
 
     // Update is called once per frame
@@ -129,6 +136,7 @@ public class CardManager : MonoBehaviour
         target.player.transform.position = target.move.caseNext[0].playerSpot[target.move.index].transform.position;
         target.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
+        numberClub = true;
         verif = true;
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
@@ -145,6 +153,7 @@ public class CardManager : MonoBehaviour
         target.move.caseNext[0].ActualCaseFunction();
         gameplayManager.playerIndex = gmIndex;
         verif = true;
+        numberClub = true;
         waitMenu.SetActive(false);
         gameplayManager.OpenVerifMenu();
         gameplayManager.playerIndex--;
@@ -316,6 +325,7 @@ public class CardManager : MonoBehaviour
 
     public void CallCardFunction()
     {
+        
         if (player == target)
         {
             Debug.Log("non");
@@ -330,11 +340,13 @@ public class CardManager : MonoBehaviour
             menu.SetActive(false);
             waitMenu.SetActive(true);
         }
-      //  hardManager.
+        playerPlayed[player.point.index] = true;
+        hardManager.ShutLightsPlayer(player.point.index);
     }
 
     public void CallCardFunction1Target()
     {
+        
         if (  functionName == "QueenGreen" && target == player)
         {
             Debug.Log("non");
@@ -353,7 +365,8 @@ public class CardManager : MonoBehaviour
             targetMenu.SetActive(false);
             waitMenu.SetActive(true);
         }
-        
+        playerPlayed[player.point.index] = true;
+        hardManager.ShutLightsPlayer(player.point.index);
     }
 
     public void CloseMenu()

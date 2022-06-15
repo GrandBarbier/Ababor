@@ -222,6 +222,7 @@ public class CasesNeutral : MonoBehaviour
         else
         {
             _gameplayManager.NextIsland();
+            _gameplayManager.ChangePlayer();
         }
 
         soundCase.Play();
@@ -229,9 +230,14 @@ public class CasesNeutral : MonoBehaviour
 
     public void LastCase()
     {
+        
+        objectif.lastCase = true;
+        foreach (string stg in objectif.actualLateObjectif)
+        {
+            objectif.Invoke(stg,0);
+        }
         _gameplayManager.endMenu.SetActive(true);
         _gameplayManager.endCalcul.oui = true;
-        objectif.lastCase = true;
     }
 
     public void EventCase()

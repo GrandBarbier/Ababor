@@ -14,6 +14,7 @@ public class Objectif : MonoBehaviour
     public List<string> allEarlyObjectifs;
     public List<string> actualObjectif;
     public List<string> baseObjectif;
+    public List<string> actualLateObjectif;
     
     public List<string> descriptionsEarly;
     public List<string> descriptionMid;
@@ -50,33 +51,37 @@ public class Objectif : MonoBehaviour
         for (int i = 0; i <= allPlayerPoint.Count/3; i++)
         {
             int rdm = Random.Range(0, allEarlyObjectifs.Count);
-            actualObjectif.Add(allEarlyObjectifs[rdm]);
-            allEarlyObjectifs.Remove(allEarlyObjectifs[rdm]);
             actualDescription.Add(descriptionsEarly[rdm]);
             descriptionsEarly.Remove(descriptionsEarly[rdm]);
             allScore.Add(scoreEarly[rdm]);
             scoreEarly.Remove(scoreEarly[rdm]);
+            actualObjectif.Add(allEarlyObjectifs[rdm]);
+            allEarlyObjectifs.Remove(allEarlyObjectifs[rdm]);
+           
         }
         for (int i = 0; i <= allPlayerPoint.Count/3; i++)
         {
             int rdm = Random.Range(0, allMidObjectifs.Count);
-            actualObjectif.Add(allMidObjectifs[rdm]);
-            allMidObjectifs.Remove(allMidObjectifs[rdm]);
             actualDescription.Add(descriptionMid[rdm]);
             descriptionMid.Remove(descriptionMid[rdm]);
             allScore.Add(scoreMid[rdm]);
             scoreMid.Remove(scoreMid[rdm]);
+            actualObjectif.Add(allMidObjectifs[rdm]);
+            allMidObjectifs.Remove(allMidObjectifs[rdm]);
+           
         }
         
         for (int i = 0; i <= allPlayerPoint.Count/3; i++)
         {
             int rdm = Random.Range(0, allLateObjectifs.Count);
-            actualObjectif.Add(allLateObjectifs[rdm]);
-            allLateObjectifs.Remove(allLateObjectifs[rdm]);
             actualDescription.Add(descriptionLate[rdm]);
             descriptionLate.Remove(descriptionLate[rdm]);
             allScore.Add(scoreLate[rdm]);
             scoreLate.Remove(scoreLate[rdm]);
+            actualObjectif.Add(allLateObjectifs[rdm]);
+            actualLateObjectif.Add(allLateObjectifs[rdm]);
+            allLateObjectifs.Remove(allLateObjectifs[rdm]);
+           
         }
         
         
@@ -149,6 +154,7 @@ public class Objectif : MonoBehaviour
                 player.objectifVerif[baseObjectif.IndexOf("ShopLate")] = true;
             }
         }
+        Debug.Log("late");
     }
 
     public void GoldEarly()
@@ -195,12 +201,13 @@ public class Objectif : MonoBehaviour
         {
             if (best == player.numberGainCase && lastCase)
             {
-                Debug.Log("zerda");
                 best = player.numberGainCase;
                 player.point += 30;
                 player.objectifVerif[baseObjectif.IndexOf("GoldLate")] = true;
+                actualObjectif.Remove("GoldLate");
             }
         }
+        Debug.Log("late");
     }
 
     public void LoseEarly()
@@ -244,13 +251,17 @@ public class Objectif : MonoBehaviour
         int best = Mathf.Max(intList.ToArray());
         foreach (PlayerPoint player in allPlayerPoint )
         {
+            Debug.Log(best);
             if (best == player.numberLoseCase && lastCase)
             {
+                
                 best = player.numberLoseCase;
                 player.point += 30;
                 player.objectifVerif[actualObjectif.IndexOf("LoseLate")] = true;
+                actualObjectif.Remove("LoseLate");
             }
         }
+       
     }
 
     public void MoveEarly()
@@ -328,7 +339,6 @@ public class Objectif : MonoBehaviour
             {
                 obj.point += 20;
                 obj.objectifVerif[actualObjectif.IndexOf("EventMid")] = true;
-                
             }
         }
     }
@@ -348,7 +358,9 @@ public class Objectif : MonoBehaviour
                 best = player.numberEventCase;
                 player.point += 30;
                 player.objectifVerif[actualObjectif.IndexOf("EventLate")] = true;
+                actualObjectif.Remove("EventLate");
             }
         }
+        Debug.Log("late");
     }
 }
