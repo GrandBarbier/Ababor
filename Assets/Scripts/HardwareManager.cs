@@ -120,29 +120,25 @@ public class HardwareManager : MonoBehaviour
                 if (cardManager.playerPlayed[0] == false)
                 {
                     LightController.Colorize(lightsP1, LIGHT_COLOR.COLOR_RED, true);
-                    Debug.Log("a1");
                 }
 
                 if (cardManager.playerPlayed[1] == false)
                 {
                     LightController.Colorize(lightsP2, LIGHT_COLOR.COLOR_BLUE, true);
-                    Debug.Log("a2");
                 }
 
                 if (cardManager.playerPlayed[2] == false)
                 {
                     LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_YELLOW, true);
-                    Debug.Log("a3");
                 }
 
                 if (cardManager.playerPlayed[3] == false)
                 {
                     LightController.Colorize(lightsP4, LIGHT_COLOR.COLOR_GREEN, true);
-                    Debug.Log("a4");
                 }
                 break;
             
-           /* case 3:
+            case 3:
                 if (cardManager.playerPlayed[0] == false)
                 {
                     LightController.Colorize(lightsP1, LIGHT_COLOR.COLOR_RED, true);
@@ -157,7 +153,7 @@ public class HardwareManager : MonoBehaviour
                 {
                     LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_YELLOW, true);
                 }
-                break;*/
+                break;
         }
     }
     
