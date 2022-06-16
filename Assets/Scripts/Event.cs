@@ -166,13 +166,13 @@ public class Event : MonoBehaviour
 
     public void SwitchGainAndLoseCases()
     {
-        tmpDescription.text = "Echange les cases gain et perte";
+        tmpDescription.text = "Echange les cases gain d'or et perte d'or";
         _eventManager.SwitchGainAndLoseCases();
     }
 
     public void GiveGoldRanking()
     {
-        tmpDescription.text = "Donne de l'or a tout les joueurs en fonction du classement";
+        tmpDescription.text = "Donne de l'or a tout les joueurs en fonction de leur or";
         _eventManager.GiveGoldRanking();
     }
     
