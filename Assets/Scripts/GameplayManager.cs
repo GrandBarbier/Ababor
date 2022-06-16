@@ -49,6 +49,8 @@ public class GameplayManager : MonoBehaviour
 
     public EndMenu endCalcul;
 
+    public List<AudioClip> allMusic;
+    
     public AudioSource soundScene;
 
   [SerializeField]  private AudioSource audioSource;
@@ -85,6 +87,9 @@ public class GameplayManager : MonoBehaviour
         currentstate.DoState(allPlayers[playerIndex].move, this);
         ShowActualPlayer();
         SoundSlider();
+
+        audioSource.clip = allMusic[0];
+        audioSource.Play();
     }
 
     // Update is called once per frame
@@ -287,6 +292,8 @@ public class GameplayManager : MonoBehaviour
         }
         lastTurn = false;
         turnWait = -1;
+        audioSource.clip = allMusic[islandIndex];
+        audioSource.Play();
     }
 
     public IEnumerator OpenObjectif()
