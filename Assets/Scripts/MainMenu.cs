@@ -9,6 +9,10 @@ public class MainMenu : MonoBehaviour
     public GameObject settings;
     public GameObject credit;
 
+    public GameObject summary;
+    private GameObject temp;
+    public GameObject pdfTutorial;
+    
     public AudioSource sound;
     // Start is called before the first frame update
     void Start()
@@ -56,5 +60,25 @@ public class MainMenu : MonoBehaviour
     {
         sound.clip = clip;
         sound.Play();
+    }
+
+    public void OpenTutoText(GameObject text)
+    {
+        temp = text;
+        text.SetActive(true);
+        summary.SetActive(false);
+    }
+
+    public void SummaryBackButton()
+    {
+        if (summary.activeInHierarchy)
+        {
+            pdfTutorial.SetActive(false);
+        }
+        else
+        {
+            temp.SetActive(false);
+            summary.SetActive(true);
+        }
     }
 }
