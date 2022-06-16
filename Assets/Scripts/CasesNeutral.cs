@@ -202,7 +202,7 @@ public class CasesNeutral : MonoBehaviour
     {
         if (_gameplayManager.lastTurn == false)
         {
-            _gameplayManager.turnWait = 3;
+            _gameplayManager.turnWait = 2;
             _gameplayManager.islandIndex++;
             _gameplayManager.lastTurn = true;
             _gameplayManager.endPlayer = _gameplayManager.activPlayer;
