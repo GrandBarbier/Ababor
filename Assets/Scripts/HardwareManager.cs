@@ -167,16 +167,30 @@ public class HardwareManager : MonoBehaviour
         switch (number)
         {
             case 0 :
-                LightController.Colorize(lightsP1, LIGHT_COLOR.COLOR_BLACK, true);
+                if (cardManager.shopBuyed[0] ==false)
+                {
+                    LightController.Colorize(lightsP1, LIGHT_COLOR.COLOR_BLACK, true);
+                }
                 break;
             case 1 :
-                LightController.Colorize(lightsP2, LIGHT_COLOR.COLOR_BLACK, true);
+                if (cardManager.shopBuyed[1] == false)
+                {
+                    LightController.Colorize(lightsP2, LIGHT_COLOR.COLOR_BLACK, true);
+                }
                 break;
+            
             case 2 :
-                LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_BLACK, true);
+                if (cardManager.shopBuyed[2] == false)
+                {
+                    LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_BLACK, true);
+                }
                 break;
+            
             case 3 :
-                LightController.Colorize(lightsP4, LIGHT_COLOR.COLOR_BLACK, true);
+                if (cardManager.shopBuyed[3] == false)
+                {
+                    LightController.Colorize(lightsP4, LIGHT_COLOR.COLOR_BLACK, true);
+                }
                 break;
         }
         Colorize();
