@@ -18,17 +18,20 @@ public class EndMenu : MonoBehaviour
     public List<TMP_Text> textGoal;
     public List<int> objectivesPoint;
     public List<TMP_Text> textObjPts;
+
+    public List<Image> placementMid1 = new List<Image>(4);
+    public List<Image> placementMid2 = new List<Image>(4);
+
     
     public List<Image> placement = new List<Image>(6);
     
     public Objectif goal;
     
-    private float step = 2f;
-    private float scaleFactor = 0.0012f;
+    [SerializeField]private float step = 2f;
+    [SerializeField]private float scaleFactor = 0.0012f;
 
-    private float alpha1 = 0f;
-    private float alpha2 = 0f;
-    private float alpha3 = 0f;
+    private float alpha = 0f;
+
 
     private bool once = true;
     public bool oui;
@@ -42,86 +45,20 @@ public class EndMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (_gameplayManager.allPlayers.Count == 4)
-        {
-            if (textPoint[0].text != _gameplayManager.allPlayers[0].point.ToString())
-            {
-                textPoint[0].text = _gameplayManager.allPlayers[0].point.gold.ToString();
-                textPoint[1].text = _gameplayManager.allPlayers[1].point.gold.ToString();
-                textPoint[2].text = _gameplayManager.allPlayers[2].point.gold.ToString();
-                textPoint[3].text = _gameplayManager.allPlayers[3].point.gold.ToString();
-
-                _gameplayManager.allPlayers[0].point.point += _gameplayManager.allPlayers[0].point.gold;
-                _gameplayManager.allPlayers[1].point.point += _gameplayManager.allPlayers[1].point.gold;
-                _gameplayManager.allPlayers[2].point.point += _gameplayManager.allPlayers[2].point.gold;
-                _gameplayManager.allPlayers[3].point.point += _gameplayManager.allPlayers[3].point.gold;
-            }
-
-            if (textGoal[0].text != goal.descriptionsEarly[0])
-            {
-                textGoal[0].text = goal.actualDescription[0];
-                textGoal[1].text = goal.actualDescription[1];
-                textGoal[2].text = goal.actualDescription[2];
-                textGoal[3].text = goal.actualDescription[3];
-                textGoal[4].text = goal.actualDescription[4];
-                textGoal[5].text = goal.actualDescription[5];
-            }
-
-            objectivesPoint[0] = _gameplayManager.objectif.scoreEarly[0];
-            objectivesPoint[1] = _gameplayManager.objectif.scoreEarly[1];
-            objectivesPoint[2] = _gameplayManager.objectif.scoreMid[0];
-            objectivesPoint[3] = _gameplayManager.objectif.scoreMid[1];
-            objectivesPoint[4] = _gameplayManager.objectif.scoreLate[0];
-            objectivesPoint[5] = _gameplayManager.objectif.scoreLate[1];
-
-            textObjPts[0].text = objectivesPoint[0].ToString() + "pts";
-            textObjPts[1].text = objectivesPoint[1].ToString() + "pts";
-            textObjPts[2].text = objectivesPoint[2].ToString() + "pts";
-            textObjPts[3].text = objectivesPoint[3].ToString() + "pts";
-            textObjPts[4].text = objectivesPoint[4].ToString() + "pts";
-            textObjPts[5].text = objectivesPoint[5].ToString() + "pts";
-        }
-
-        if (_gameplayManager.allPlayers.Count == 3)
-        {
-            if (textPoint[0].text != _gameplayManager.allPlayers[0].point.ToString())
-            {
-                textPoint[0].text = _gameplayManager.allPlayers[0].point.gold.ToString(); 
-                textPoint[1].text = _gameplayManager.allPlayers[1].point.gold.ToString();
-                textPoint[2].text = _gameplayManager.allPlayers[2].point.gold.ToString();
-
-                _gameplayManager.allPlayers[0].point.point += _gameplayManager.allPlayers[0].point.gold;
-                _gameplayManager.allPlayers[1].point.point += _gameplayManager.allPlayers[1].point.gold;
-                _gameplayManager.allPlayers[2].point.point += _gameplayManager.allPlayers[2].point.gold;
-            }
-            
-            if (textGoal[0].text != goal.descriptionsEarly[0])
-            {
-                textGoal[0].text = goal.actualDescription[0];
-                textGoal[1].text = goal.actualDescription[1];
-                textGoal[2].text = goal.actualDescription[2];
-                textGoal[3].text = goal.actualDescription[3];
-                textGoal[4].text = goal.actualDescription[4];
-                textGoal[5].text = goal.actualDescription[5];
-            }
-            
-            objectivesPoint[0] = _gameplayManager.objectif.scoreEarly[0];
-            objectivesPoint[1] = _gameplayManager.objectif.scoreEarly[1];
-            objectivesPoint[2] = _gameplayManager.objectif.scoreMid[0];
-            objectivesPoint[3] = _gameplayManager.objectif.scoreMid[1];
-            objectivesPoint[4] = _gameplayManager.objectif.scoreLate[0];
-            objectivesPoint[5] = _gameplayManager.objectif.scoreLate[1];
-            
-            textObjPts[0].text = objectivesPoint[0].ToString() + "pts";
-            textObjPts[1].text = objectivesPoint[1].ToString() + "pts";
-            textObjPts[2].text = objectivesPoint[2].ToString() + "pts";
-            textObjPts[3].text = objectivesPoint[3].ToString() + "pts";
-            textObjPts[4].text = objectivesPoint[4].ToString() + "pts";
-            textObjPts[5].text = objectivesPoint[5].ToString() + "pts";
+        for (int i = 0; i < _gameplayManager.allPlayers.Count; i++) 
+            textPoint[i].text = _gameplayManager.allPlayers[i].point.gold.ToString();
+        
+        foreach (var player in _gameplayManager.allPlayers) 
+            player.point.point += player.point.gold;
+     
+        for (int i = 0; i < 6; i++) {
+            textGoal[i].text = goal.actualDescription[i];
+            objectivesPoint[i] = _gameplayManager.objectif.allScore[i];
+            textObjPts[i].text = objectivesPoint[i].ToString() + "pts"; 
         }
     }
 
-    // Update is called once per frame
+        // Update is called once per frame
     void Update()
     {
         if (oui && heads.transform.position != downGameObject.transform.position)
@@ -129,64 +66,67 @@ public class EndMenu : MonoBehaviour
             MoveDown();
             ScaleDown();
         }
-        else if (heads.transform.position == downGameObject.transform.position && alpha3 < 0.90)
-            ShowObj();
-        else if (once && alpha3 > 0.90)
+        else if (heads.transform.position == downGameObject.transform.position && once)
         {
-            ShowFacesOnObj();
+            ShowObj();
             once = false;
         }
     }
 
     private void ShowObj()
     {
-        if (alpha1 < 0.9)
+        for (int i = 0; i < 3; i++)
         {
-            alpha1 += 0.02f;
-            backgrounds[0].color = new Color(1, 1, 1, alpha1);
-            backgrounds[1].color = new Color(1, 1, 1, alpha1);
-            textGoal[0].color = new Color(1, 1, 1, alpha1);
-            textGoal[1].color = new Color(1, 1, 1, alpha1);
-            textGoal[6].color = new Color(textGoal[6].color.r, textGoal[6].color.g, textGoal[6].color.b, alpha1);
-            textObjPts[0].color = new Color(textObjPts[0].color.r, textObjPts[0].color.g, textObjPts[0].color.b, alpha1);
-            textObjPts[1].color = new Color(textObjPts[0].color.r, textObjPts[0].color.g, textObjPts[0].color.b, alpha1);
+            while (alpha < 0.9)
+            {
+                alpha += 0.02f;
+                backgrounds[i*2].color = new Color(1,1,1,alpha);
+                backgrounds[i*2+1].color = new Color(1,1,1, alpha);
+                textGoal[i*2].color = new Color(1,1,1, alpha);
+                textGoal[i*2+1].color = new Color(1,1,1, alpha);
+                textGoal[i+6].color = new Color(1,1,1, alpha);
+                textObjPts[i*2].color = new Color(1,1,1, alpha);
+                textObjPts[i*2+1].color = new Color(1,1,1, alpha);
+            }
+            alpha = 0;
         }
-        else if (alpha2 < 0.9)
-        {
-            alpha2 += 0.02f;
-            backgrounds[2].color = new Color(1, 1, 1, alpha2);
-            backgrounds[3].color = new Color(1, 1, 1, alpha2);
-            textGoal[2].color = new Color(1, 1, 1, alpha2);
-            textGoal[3].color = new Color(1, 1, 1, alpha2);
-            textGoal[7].color = new Color(textGoal[7].color.r, textGoal[7].color.g, textGoal[7].color.b, alpha2);
-            textObjPts[2].color = new Color(textObjPts[0].color.r, textObjPts[0].color.g, textObjPts[0].color.b, alpha1);
-            textObjPts[3].color = new Color(textObjPts[0].color.r, textObjPts[0].color.g, textObjPts[0].color.b, alpha1);
-        }
-        else if (alpha3 < 0.9)
-        {
-            alpha3 += 0.02f;
-            backgrounds[4].color = new Color(1, 1, 1, alpha3);
-            backgrounds[5].color = new Color(1, 1, 1, alpha3);
-            textGoal[4].color = new Color(1, 1, 1, alpha3);
-            textGoal[5].color = new Color(1, 1, 1, alpha3);
-            textGoal[8].color = new Color(textGoal[8].color.r, textGoal[8].color.g, textGoal[8].color.b, alpha3);
-            textObjPts[4].color = new Color(textObjPts[0].color.r, textObjPts[0].color.g, textObjPts[0].color.b, alpha1);
-            textObjPts[5].color = new Color(textObjPts[0].color.r, textObjPts[0].color.g, textObjPts[0].color.b, alpha1);
-        }
+        ShowFacesOnObj();
     }
 
     private void ShowFacesOnObj()
     {
-        for (int i = 0; i < allPlayers.Count; i++)
+        int indexMid1 = 0;
+        int indexMid2 = 0;
+        for (int i = 0; i < allPlayers[0].point.objectifVerif.Count; i++)
         {
-            for (int j = 0; j < allPlayers[i].point.objectifVerif.Count; j++)
+            for (int j = 0; j < allPlayers.Count; j++)
             {
-                if (allPlayers[i].point.objectifVerif[j])
+                if (allPlayers[j].point.objectifVerif[i])
                 {
-                    placement[j].sprite = allPlayers[i].player.GetComponent<SpriteRenderer>().sprite;
-                    placement[j].gameObject.SetActive(true);
-                    allPlayers[i].point.point += objectivesPoint[j];
-                    textPoint[i].text = allPlayers[i].point.point.ToString();                }
+                    if (i == 2)
+                    {
+                        placementMid1[indexMid1].sprite = allPlayers[j].player.GetComponent<SpriteRenderer>().sprite;
+                        placementMid1[indexMid1].gameObject.SetActive(true);
+                        allPlayers[j].point.point += objectivesPoint[i];
+                        textPoint[j].text = allPlayers[j].point.point.ToString();
+                        indexMid1++;
+                    }
+                    else if (i == 3)
+                    {
+                        placementMid2[indexMid2].sprite = allPlayers[j].player.GetComponent<SpriteRenderer>().sprite;
+                        placementMid2[indexMid2].gameObject.SetActive(true);
+                        allPlayers[j].point.point += objectivesPoint[i];
+                        textPoint[j].text = allPlayers[j].point.point.ToString();
+                        indexMid2++;
+                    }
+                    else
+                    {
+                        placement[i].sprite = allPlayers[j].player.GetComponent<SpriteRenderer>().sprite;
+                        placement[i].gameObject.SetActive(true);
+                        allPlayers[j].point.point += objectivesPoint[i];
+                        textPoint[j].text = allPlayers[j].point.point.ToString();
+                    }
+                }
             }
         }
     }
