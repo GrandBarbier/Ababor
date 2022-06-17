@@ -65,7 +65,6 @@ public class CasesNeutral : MonoBehaviour
         {
             marauder.StopSteps();
         }
-
         canEvent = true;
     }
 
@@ -203,7 +202,7 @@ public class CasesNeutral : MonoBehaviour
     {
         if (_gameplayManager.lastTurn == false)
         {
-            _gameplayManager.turnWait = 3;
+            _gameplayManager.turnWait = 2;
             _gameplayManager.islandIndex++;
             _gameplayManager.lastTurn = true;
             _gameplayManager.endPlayer = _gameplayManager.activPlayer;
@@ -264,6 +263,7 @@ public class CasesNeutral : MonoBehaviour
             }
             soundCase.Play();
         }
+        _gameplayManager.activPlayer.point.numberEventCase++;
     }
 
     public void ShowIfTarget()
