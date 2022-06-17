@@ -85,8 +85,8 @@ public class EndMenu : MonoBehaviour
                 textGoal[i*2].color = new Color(1,1,1, alpha);
                 textGoal[i*2+1].color = new Color(1,1,1, alpha);
                 textGoal[i+6].color = new Color(1,1,1, alpha);
-                textObjPts[i*2].color = new Color(1,1,1, alpha);
-                textObjPts[i*2+1].color = new Color(1,1,1, alpha);
+                textObjPts[i*2].color = new Color(1,0,0,alpha);
+                textObjPts[i*2+1].color = new Color(1,0,0, alpha);
             }
             alpha = 0;
         }
