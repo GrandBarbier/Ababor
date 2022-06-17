@@ -30,6 +30,7 @@ public class CardManager : MonoBehaviour
     public bool headBlueGreen; // use to fix problem fix blue/green heads card 
     public bool openMove;
     public List<bool> playerPlayed;
+    public List<bool> shopBuyed;
     
     public Player player;
     public List<Player> allPlayer;
@@ -342,6 +343,10 @@ public class CardManager : MonoBehaviour
         }
         playerPlayed[player.point.index] = true;
         hardManager.ShutLightsPlayer(player.point.index);
+        if (shopBuyed[player.point.index])
+        {
+            shopBuyed[player.point.index] = false;
+        }
     }
 
     public void CallCardFunction1Target()
@@ -367,6 +372,10 @@ public class CardManager : MonoBehaviour
         }
         playerPlayed[player.point.index] = true;
         hardManager.ShutLightsPlayer(player.point.index);
+        if (shopBuyed[player.point.index])
+        {
+            shopBuyed[player.point.index] = false;
+        }
     }
 
     public void CloseMenu()

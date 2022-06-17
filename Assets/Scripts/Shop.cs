@@ -24,25 +24,6 @@ public class Shop : MonoBehaviour
     public void ShopOpen()
     {
         shopMenu[playerPoint.index].SetActive(true);
-      /*  switch (_gameplayManager.actualPoint.index)
-        {
-            case 0 :
-                shopMenu.transform.rotation = Quaternion.Euler(0,0,0);
-                Debug.Log(0);
-                break;
-            case 1:
-                shopMenu.transform.rotation = Quaternion.Euler(0,0,0);
-                Debug.Log(1);
-                break;
-            case 2:
-                shopMenu.transform.rotation = Quaternion.Euler(0,0,180);
-                Debug.Log(2);
-                break;
-            case 3:
-                shopMenu.transform.rotation = Quaternion.Euler(0,0,180);
-                Debug.Log(3);
-                break;
-        }*/
     }
 
     public void ShopClose()
@@ -101,6 +82,14 @@ public class Shop : MonoBehaviour
 
             playerPoint.gold -= 5;
             shopMenu[playerPoint.index].SetActive(false);
+            _gameplayManager.cardManager.playerPlayed[playerPoint.index] = false;
+            _gameplayManager.cardManager.hardManager.Colorize();
+          
+            if (_gameplayManager.cardManager.playerPlayed[playerPoint.index] == false)
+            {
+                _gameplayManager.cardManager.shopBuyed[playerPoint.index] = true;
+            }
+            
             if (_gameplayManager.cardManager.numberClub == false)
             {
                 _gameplayManager.ChangePlayer();
