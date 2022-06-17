@@ -85,7 +85,7 @@ public class HardwareManager : MonoBehaviour
 
     public void OnApplicationFocus(bool hasFocus)
     {
-        Debug.Log("testing thing");
+//        Debug.Log("testing thing");
         Colorize();
         switch (nbPlayers)
         {
