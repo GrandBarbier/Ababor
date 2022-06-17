@@ -9,7 +9,9 @@ using Random = UnityEngine.Random;
 public class CasesNeutral : MonoBehaviour
 {
     public bool isInRange;
-  
+
+    public Animator kraken;
+    
     public List<CasesNeutral> nextCases;
     
     public Material baseMat;
@@ -264,6 +266,11 @@ public class CasesNeutral : MonoBehaviour
             soundCase.Play();
         }
         _gameplayManager.activPlayer.point.numberEventCase++;
+        if (kraken != null)
+        {
+            kraken.enabled = true;
+        }
+        
     }
 
     public void ShowIfTarget()
