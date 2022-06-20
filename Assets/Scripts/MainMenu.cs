@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject settings;
     public GameObject credit;
-
+    public GameObject tuto;
     public GameObject summary;
     private GameObject temp;
     public GameObject pdfTutorial;
@@ -62,6 +62,12 @@ public class MainMenu : MonoBehaviour
         sound.Play();
     }
 
+    public void OpenTuto()
+    {
+        tuto.SetActive(true);
+    }
+    
+    
     public void OpenTutoText(GameObject text)
     {
         temp = text;

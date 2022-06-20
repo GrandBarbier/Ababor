@@ -47,7 +47,7 @@ public class HardwareManager : MonoBehaviour
 
     private string card;
 
-    void Start()
+    void Awake()
     {
         nbPlayers = gameplayManager.allPlayers.Count;
         
