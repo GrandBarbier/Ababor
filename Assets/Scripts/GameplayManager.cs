@@ -53,6 +53,8 @@ public class GameplayManager : MonoBehaviour
     
     public AudioSource soundScene;
 
+    public List<Marauder> allSteps;
+    
   [SerializeField]  private AudioSource audioSource;
   [SerializeField]  private AudioSource sfxSource;
 
@@ -90,6 +92,11 @@ public class GameplayManager : MonoBehaviour
 
         audioSource.clip = allMusic[0];
         audioSource.Play();
+
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Steps"))
+        {
+            allSteps.Add(obj.GetComponent<Marauder>());
+        }
     }
 
     // Update is called once per frame
@@ -232,6 +239,14 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
+    public void ResetSteps()
+    {
+        foreach (Marauder step in allSteps)
+        {
+            step.StopSteps();
+        }
+    }
+
     public void OpenVerifMenu()
     {
         verifMenu.SetActive(true);
@@ -293,6 +308,12 @@ public class GameplayManager : MonoBehaviour
         turnWait = -1;
         audioSource.clip = allMusic[islandIndex];
         audioSource.Play();
+        allSteps.Clear();
+        
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Steps"))
+        {
+            allSteps.Add(obj.GetComponent<Marauder>());
+        }
     }
 
     public IEnumerator OpenObjectif()

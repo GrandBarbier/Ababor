@@ -1,38 +1,12 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1102 &-5306898189328744505
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Kraken_Animation_Island-Early_2
-  m_Speed: 0.75
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 5714871750860430894, guid: ad9264b38b547af4f97e52b94e80079d, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kraken animation
+  m_Name: Kraken animation 2
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -84,11 +58,8 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: -5306898189328744505}
-    m_Position: {x: 370, y: 120, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: 8822988640062440925}
-    m_Position: {x: 400, y: 350, z: 0}
+    m_Position: {x: 360, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 488212891759911678}
     m_Position: {x: 500, y: 470, z: 0}
@@ -101,7 +72,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 950, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: -5306898189328744505}
+  m_DefaultState: {fileID: 8822988640062440925}
 --- !u!1102 &7914972001992167393
 AnimatorState:
   serializedVersion: 6
