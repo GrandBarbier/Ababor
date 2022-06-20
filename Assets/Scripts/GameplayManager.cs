@@ -97,6 +97,8 @@ public class GameplayManager : MonoBehaviour
         {
             allSteps.Add(obj.GetComponent<Marauder>());
         }
+        
+        cardManager.hardManager.Colorize();
     }
 
     // Update is called once per frame

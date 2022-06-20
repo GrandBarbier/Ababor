@@ -403,7 +403,7 @@ public class CardManager : MonoBehaviour
     
     public void OpenCardMenu(string stg, Player pl, string texte,int index)
     {
-        switch (index)
+        switch (pl.point.index)
         {
             case 0 :
                 menu.transform.rotation = Quaternion.Euler(0,0,0);
@@ -441,7 +441,7 @@ public class CardManager : MonoBehaviour
 
     public void OpenCardMenu1Target(string stg, Player pl, string texte, int index)
     {
-        switch (index)
+        switch (pl.point.index)
         {
             case 0 :
                 targetMenu.transform.rotation = Quaternion.Euler(0,0,0);

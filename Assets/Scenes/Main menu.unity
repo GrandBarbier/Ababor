@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4960,7 +4960,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 344623023}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 12.795999, y: 10.831672, z: 10.088}
   m_Children:
@@ -4983,10 +4983,10 @@ RectTransform:
   - {fileID: 337121474}
   m_Father: {fileID: 1274404320}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -152.92618, y: 0}
+  m_AnchoredPosition: {x: -131, y: 75}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &345915360
@@ -7483,10 +7483,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Bienvenue dans Ababord, gloire et richesse vous attendent tout autant
-    que trahison et coup bas. Pour vous aider le mod \u201CGuide\u201D est activ\xE9
+  m_text: "Bienvenue dans Ababor ! ici, gloire et richesse vous attendent tout autant
+    que trahisons et coups bas. Pour vous aider, le mode \u201CGuide\u201D est activ\xE9
     automatiquement. Vous pouvez le d\xE9sactiver en appuyant sur le Bouton \u201CGuide\u201D
-    <sprite=6>  durant la partie."
+    <sprite=6> durant la partie."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -9642,10 +9642,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Une case \xE9v\xE9nement <sprite=8> ne se d\xE9clenche qu\u2019une seule
-    fois par tour de table. L\u2019effet d\u2019un \xE9vent s\u2019affiche lors de
-    son d\xE9clanchement, et ce jusqu\u2019\xE0 la fin du tour du joueur l\u2019ayant
-    d\xE9clench\xE9."
+  m_text: "Marin d'eau douce, vous avez activ\xE9 une case \xE9v\xE9nement <sprite=8>!
+    L\u2019effet d\u2019un \xE9v\xE8nement s\u2019affiche lors de son d\xE9clenchement."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -10995,8 +10993,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 838207971}
-  m_Horizontal: 1
-  m_Vertical: 0
+  m_Horizontal: 0
+  m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
   m_Inertia: 1
@@ -11075,17 +11073,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838207970}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.976312, y: 1, z: 1}
   m_Children:
   - {fileID: 1615493883}
   m_Father: {fileID: 835025793}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 54.849373, y: 0}
+  m_AnchoredPosition: {x: -0.00004204866, y: 0}
   m_SizeDelta: {x: 214.78656, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &838207972
@@ -14118,7 +14116,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -22.848907, y: 0}
+  m_AnchoredPosition: {x: -22.8, y: 10.4}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1058931103
@@ -14880,9 +14878,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Le Shop <sprite=3> permet d\u2019acheter deux choses, soit une carte interaction
-    suppl\xE9mentaire pour ce tour, soit un d\xE9placement suppl\xE9mentaire qui
-    dure jusqu\u2019\xE0 la fin de la partie."
+  m_text: "Le Marchand propose deux articles: soit une carte interaction suppl\xE9mentaire
+    \xE0 jouer pour ce tour uniquement, soit un point d\xE9placement suppl\xE9mentaire
+    qui dure jusqu\u2019\xE0 la fin de la partie."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -17654,7 +17652,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1274404319}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.625, y: 0.625, z: 0.625}
   m_Children:
@@ -21100,10 +21098,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Maintenant bous avez un d\xE9placement suppl\xE9mentaire, vous pouvez
-    vous d\xE9placer de 1 \xE0 4 cases. Cet achat peut \xEAtre r\xE9p\xE9t\xE9 autant
-    de fois que vous pouvez passer sur une case Shop et permet d\u2019augmenter sa
-    limite de d\xE9placement maximal \xE0 chaque fois."
+  m_text: "Hissez les voiles, vous avez un point de d\xE9placement suppl\xE9mentaire
+    ! Vous pouvez d\xE9sormais vous d\xE9placer de 1 \xE0 4 cases. \nCet achat peut
+    \xEAtre r\xE9p\xE9t\xE9 \xE0 chaque fois que vous rencontrez un Marchand. Bient\xF4t,
+    vous filerez comme le vent ! "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -21483,7 +21481,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -25.948792, y: 34.41739}
+  m_AnchoredPosition: {x: -25.9, y: 65.1}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1468815664
@@ -22780,10 +22778,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Durant le tour d\u2019un joueur, n\u2019importe qui peut jouer une carte
-    interaction \xE0 tout moment sauf quand le joueur actif effectue son d\xE9placement.
-    De plus, tout joueur peut donner de l\u2019or \xE0 un autre joueur en cliquant
-    sur l\u2019image de son Pirate dans son coin <sprite=1>."
+  m_text: "Durant le jeu, vous pouvez jouer une carte interaction \xE0 tout moment,
+    sauf quand le joueur actif effectue son d\xE9placement.\nServez-vous en pour
+    saborder les plans de vos coll\xE8gues pirates !"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -23662,10 +23659,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Tout d\u2019abord, distribuer 3 cartes interactions \xE0 chaque joueur
-    en suivant l\u2019ordre de jeu, r\xE9p\xE9t\xE9 l\u2019actions \xE0 chaque nouveau
-    tour de table. La liste des effets des cartes interactions sont consultables
-    avec le bouton \u201CCartes interactions\u201D <sprite=0>."
+  m_text: "Tout d\u2019abord, distribuez 3 cartes \"Interaction\" \xE0 chaque joueur
+    en suivant l\u2019ordre de jeu, ce que vous ferez \xE0 chaque nouveau tour de
+    table. La liste des effets des cartes est consultables avec le bouton \u201CCartes
+    interactions\u201D <sprite=0>."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -27545,9 +27542,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Vous pouvez \xE9changer de l\u2019or entre joueurs hors des phases de
-    d\xE9placements. Ainsi vous pouvez former des alliances ou payer des faveurs
-    entre vous. Notez que toute trahison ou flibusterie n\u2019entraine pas de remboursement.
-    Votre icone  <sprite=1> ouvre le menu ."
+    d\xE9placements. Ainsi, vous pouvez former des alliances ou payer des faveurs
+    entre vous. Attention, le Code des Pirates ne pr\xE9voit pas de remboursement
+    en cas de trahison ou de flibusterie ! Votre icone  <sprite=1> ouvre le menu
+    ."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -28986,9 +28984,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Vous avez une carte interaction suppl\xE9mentaire. Si votre main n'est
-    pas vide, jouez n'importe quelle carte, ne jetez pas les autres. Vous pouvez
-    jouer le reste de vos cartes normalement."
+  m_text: "Vous avez une carte interaction suppl\xE9mentaire ! Vous pouvez donc en
+    jouer deux ce tour ci avant de d\xE9fausser le reste. \nSi vous avez d\xE9j\xE0
+    jou\xE9 votre premi\xE8re carte, consid\xE9rez celle-ci comme une seconde chance
+    !"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -29942,8 +29941,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.951094, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 12, y: 13.2}
+  m_SizeDelta: {x: 90, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2104642119
 MonoBehaviour:

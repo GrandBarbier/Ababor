@@ -49,7 +49,7 @@ public class HardwareManager : MonoBehaviour
 
     void Awake()
     {
-        nbPlayers = gameplayManager.allPlayers.Count;
+       // nbPlayers = gameplayManager.allPlayers.Count;
         
         NFCController.OnNewTag = OnNewTagDetected;
         NFCController.OnTagRemoved = OnTagRemoveDetected;
