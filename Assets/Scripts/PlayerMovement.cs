@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public List<CasesNeutral> caseNext;
     public List<CasesNeutral> allNextCases;
 
-    private CasesNeutral actualCase;
+   [SerializeField] private CasesNeutral actualCase;
 
     public int actualMove = 5;
     public int InitialMove;
@@ -115,12 +115,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayerResetCase() // Reset the color of all cases
     {
+        actualCase.ResetColor();
+        _gameplayManager.ResetSteps();
         foreach (CasesNeutral cases in allNextCases)
         {
             cases.ResetColor(); 
         }
-
-        actualCase.ResetColor();
     }
 
     public int FindCase()
