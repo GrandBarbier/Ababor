@@ -54,6 +54,8 @@ public class GameplayManager : MonoBehaviour
     public AudioSource soundScene;
 
     public List<Marauder> allSteps;
+
+    public HardwareManager hardManager;
     
   [SerializeField]  private AudioSource audioSource;
   [SerializeField]  private AudioSource sfxSource;
@@ -77,6 +79,7 @@ public class GameplayManager : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 15;
         activPlayer = allPlayers[0];
         foreach (Player player in allPlayers)
         {
@@ -97,8 +100,6 @@ public class GameplayManager : MonoBehaviour
         {
             allSteps.Add(obj.GetComponent<Marauder>());
         }
-        
-        cardManager.hardManager.Colorize();
     }
 
     // Update is called once per frame
@@ -196,33 +197,28 @@ public class GameplayManager : MonoBehaviour
 
     public void ChangePlayerOrder()
     {
-        foreach (CasesNeutral cases in allCases)
+        foreach (CasesNeutral cases in allCases)//enlever
         {
             cases.canEvent = true;
         }
         Debug.Log("changement ordre joueur");
         actualMove.isLast = false;
         allPlayers[0].move.isLast = true;
+        moveQueue.Enqueue(allPlayers[0].move);
+        moveQueue.Dequeue();
+        
         playerQueue.Enqueue(allPlayers[0]);
         playerQueue.Dequeue();
         allPlayers = playerQueue.ToList();
-        moveQueue.Enqueue(allPlayers[0].move);
-        moveQueue.Dequeue();
+
         testmove = moveQueue.ToList();
         buttonTrade.Add(buttonTrade[0]);
         buttonTrade.RemoveAt(0);
         turnWait--;
-        if (playerIndex >= allPlayers.Count)
-        {
-            playerIndex = 0;
-        }
+        playerIndex = 0;
         for (int i = 0; i < allPlayers.Count; i++)
         {
             allPlayers[i].move.index = i;
-        }
-        foreach (Player player in allPlayers)
-        {
-            player.move.index = allPlayers.IndexOf(player);
         }
 
         for (int i = 0; i < cardManager.playerPlayed.Count; i++)
