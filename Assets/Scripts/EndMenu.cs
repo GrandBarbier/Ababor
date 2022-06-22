@@ -36,6 +36,8 @@ public class EndMenu : MonoBehaviour
     private bool once = true;
     public bool oui;
 
+    public GameObject button;
+
     private void Awake()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>();
@@ -129,6 +131,7 @@ public class EndMenu : MonoBehaviour
                 }
             }
         }
+        button.SetActive(true);
     }
     
     private void MoveDown()
