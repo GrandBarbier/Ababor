@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -51,20 +52,25 @@ public class GameplayManager : MonoBehaviour
 
     public List<AudioClip> allMusic;
     
-    public AudioSource soundScene;
+    public AudioSource UiSound;
 
     public List<Marauder> allSteps;
 
     public HardwareManager hardManager;
     
-  [SerializeField]  private AudioSource audioSource;
+  [SerializeField]  private AudioSource musicAudioSource;
   [SerializeField]  private AudioSource sfxSource;
 
-  [SerializeField]  private Slider sliderVolume;
-  [SerializeField]  private Slider sliderSFX;
+  [SerializeField] private AudioMixer mixer;
+
+  [SerializeField]  private Slider musicSlider;
+  [SerializeField]  private Slider sfxSlider;
+
+  private const string MIXER_MUSIC = "MusicVolume";
+  private const string MIXER_SFX = "SfxVolume";
+  private const string MIXER_UI = "UiVolume";
     void Awake()
-    { 
-        
+    {
         GetCases();
         for (int i = 0; i < players.Count; i++)
         {
@@ -75,6 +81,19 @@ public class GameplayManager : MonoBehaviour
             allPlayers.Add(pl);
         }
         currentstate = new CardPlay();
+        
+        musicSlider.onValueChanged.AddListener(SetMusicVolume);
+        sfxSlider.onValueChanged.AddListener(SetSfxVolume);
+    }
+
+    void SetMusicVolume(float value)
+    {
+        mixer.SetFloat(MIXER_MUSIC, Mathf.Log10(value) * 20);
+    }
+    void SetSfxVolume(float value)
+    {
+        mixer.SetFloat(MIXER_SFX, Mathf.Log10(value) * 20);
+        mixer.SetFloat(MIXER_UI, Mathf.Log10(value) * 20);
     }
 
     void Start()
@@ -91,10 +110,10 @@ public class GameplayManager : MonoBehaviour
         testmove = moveQueue.ToList();
         currentstate.DoState(allPlayers[playerIndex].move, this);
         ShowActualPlayer();
-        SoundSlider();
+        //son???
 
-        audioSource.clip = allMusic[0];
-        audioSource.Play();
+        musicAudioSource.clip = allMusic[0];
+        musicAudioSource.Play();
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Steps"))
         {
@@ -304,8 +323,8 @@ public class GameplayManager : MonoBehaviour
         }
         lastTurn = false;
         turnWait = -1;
-        audioSource.clip = allMusic[islandIndex];
-        audioSource.Play();
+        musicAudioSource.clip = allMusic[islandIndex];
+        musicAudioSource.Play();
         allSteps.Clear();
         
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Steps"))
@@ -552,21 +571,11 @@ public class GameplayManager : MonoBehaviour
         yield return new WaitForSeconds(5f);
         showExchange.gameObject.SetActive(false);
     }
-
-    public void SoundSlider()
-    {
-        audioSource.volume = sliderVolume.value;
-    }
     
-    public void SFXSlider()
-    {
-        audioSource.volume = sliderSFX.value;
-    }
-
     public void USound(AudioClip sound)
     {
-        soundScene.clip = sound;
-        soundScene.Play();
+        UiSound.clip = sound;
+        UiSound.Play();
     }
 
     public void ReturnMenu()
