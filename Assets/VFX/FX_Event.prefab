@@ -19435,6 +19435,7 @@ GameObject:
   - component: {fileID: 1160954558187628653}
   - component: {fileID: 8170523006161152899}
   - component: {fileID: 8600913528483048526}
+  - component: {fileID: 3009268684846903057}
   m_Layer: 0
   m_Name: FX_Event
   m_TagString: Untagged
@@ -19451,7 +19452,7 @@ Transform:
   m_GameObject: {fileID: 8696453053920827210}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.808943, y: -1.0899992, z: -2.04}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_Children:
   - {fileID: 566825628659662670}
   - {fileID: 1621581696443825674}
@@ -24245,6 +24246,20 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &3009268684846903057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8696453053920827210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 102753e4ab9609045b60d65cf460dd99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ps: {fileID: 8170523006161152899}
+  time: 3
 --- !u!1 &8975136385628258189
 GameObject:
   m_ObjectHideFlags: 0

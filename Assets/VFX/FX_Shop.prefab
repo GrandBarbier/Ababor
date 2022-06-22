@@ -9723,6 +9723,7 @@ GameObject:
   - component: {fileID: 1938611629514330940}
   - component: {fileID: 1938611629514330915}
   - component: {fileID: 1938611629514330914}
+  - component: {fileID: 930408578089324605}
   m_Layer: 0
   m_Name: FX_Shop
   m_TagString: Untagged
@@ -14533,6 +14534,20 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &930408578089324605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938611629514330913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 102753e4ab9609045b60d65cf460dd99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ps: {fileID: 1938611629514330915}
+  time: 3
 --- !u!1 &3357474188397906260
 GameObject:
   m_ObjectHideFlags: 0
