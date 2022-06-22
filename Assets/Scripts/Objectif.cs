@@ -157,7 +157,7 @@ public class Objectif : MonoBehaviour
                 best = player.numberShopCase;
                
                 player.objectifVerif[baseObjectif.IndexOf("ShopLate")] = true;
-                Debug.Log("obj" + baseObjectif.IndexOf("ShopLate"));
+                Debug.Log("obj wtf");
             }
         }
     }
@@ -212,7 +212,7 @@ public class Objectif : MonoBehaviour
                 best = player.numberGainCase;
               
                 player.objectifVerif[baseObjectif.IndexOf("GoldLate")] = true;
-                Debug.Log("obj" + baseObjectif.IndexOf("GoldLate") );
+                Debug.Log("obj wtf g");
             }
         }
     }
@@ -267,7 +267,7 @@ public class Objectif : MonoBehaviour
                 best = player.numberLoseCase;
                 
                 player.objectifVerif[actualObjectif.IndexOf("LoseLate")] = true;
-                Debug.Log("obj" + baseObjectif.IndexOf("LoseLate") );
+                Debug.Log("obj wtf l");
             }
         }
        
@@ -368,7 +368,7 @@ public class Objectif : MonoBehaviour
             {
                 best = player.numberEventCase;
                 player.objectifVerif[actualObjectif.IndexOf("EventLate")] = true;
-                Debug.Log("obj" + baseObjectif.IndexOf("EventLate"));
+                Debug.Log("obj wtf e");
             }
         }
         Debug.Log("late");
