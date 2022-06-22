@@ -26,6 +26,8 @@ public class Event : MonoBehaviour
     public List<CasesNeutral> allCase, casesToUnhide;
 
     public Material basicCaseMat,loseCaseMat,gainCaseMat;
+
+    public GameObject lossParticle, gainParticle;
     
     
     // Start is called before the first frame update
@@ -57,6 +59,7 @@ public class Event : MonoBehaviour
         int rdm = Random.Range(0, allCase.Count);
         allCase[rdm].nameFunction = "LoseCase";
         allCase[rdm].baseSecondMat = loseCaseMat;
+        Instantiate(lossParticle, allCase[rdm].gameObject.transform.position,lossParticle.transform.rotation);
         allCase[rdm].ResetColor();
         if (_gameplayManager.cardManager.numberClub == false)
         {
@@ -84,6 +87,7 @@ public class Event : MonoBehaviour
         int rdm = Random.Range(0, allCase.Count);
         allCase[rdm].nameFunction = "GainCase";
         allCase[rdm].baseSecondMat = gainCaseMat;
+        Instantiate(gainParticle, allCase[rdm].gameObject.transform.position, gainParticle.transform.rotation);
         allCase[rdm].ResetColor();
         if (_gameplayManager.cardManager.numberClub == false)
         {

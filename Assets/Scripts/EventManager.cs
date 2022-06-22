@@ -17,6 +17,8 @@ public class EventManager : MonoBehaviour
     public Material basicCaseMat, loseCaseMat, gainCaseMat, eventCaseMat;
     public List<string> eventManagerFunction;
 
+    public GameObject eventParticle;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -61,6 +63,7 @@ public class EventManager : MonoBehaviour
         {
             int i = Random.Range(0, neutralCases.Count);
             neutralCases[i].nameFunction = "EventCase";
+            Instantiate(eventParticle, neutralCases[i].gameObject.transform.position, eventParticle.transform.rotation);
             neutralCases[i].baseSecondMat = eventCaseMat;
             neutralCases[i].ResetColor();
             neutralCases.Clear();
