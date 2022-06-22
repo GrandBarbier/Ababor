@@ -98,7 +98,7 @@ public class GameplayManager : MonoBehaviour
 
     void Start()
     {
-        Application.targetFrameRate = 15;
+        Application.targetFrameRate = 20;
         activPlayer = allPlayers[0];
         foreach (Player player in allPlayers)
         {

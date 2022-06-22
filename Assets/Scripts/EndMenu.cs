@@ -38,6 +38,8 @@ public class EndMenu : MonoBehaviour
 
     public GameObject button;
 
+    public AudioClip victorySound;
+
     private void Awake()
     {
         _gameplayManager = FindObjectOfType<GameplayManager>();
@@ -132,6 +134,8 @@ public class EndMenu : MonoBehaviour
             }
         }
         button.SetActive(true);
+        _gameplayManager.UiSound.clip = victorySound;
+        _gameplayManager.UiSound.Play();
     }
     
     private void MoveDown()

@@ -28,7 +28,7 @@ public class MainMenu : MonoBehaviour
     
     public void ThreePlayerGame()
     {
-        SceneManager.LoadScene("SceneThree");
+        SceneManager.LoadScene("Scene Three");
     }
 
     public void FourPLayerGame()

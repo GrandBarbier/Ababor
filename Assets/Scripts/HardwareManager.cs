@@ -68,6 +68,11 @@ public class HardwareManager : MonoBehaviour
                 Debug.Log("Error nb player");
                 break;
         }
+        LightController.Colorize(lightsP1, LIGHT_COLOR.COLOR_RED, true);
+        LightController.Colorize(lightsP2, LIGHT_COLOR.COLOR_BLUE, true);
+        LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_YELLOW, true);
+        if (gameplayManager.allPlayers.Count >= 4)
+            LightController.Colorize(lightsP4, LIGHT_COLOR.COLOR_GREEN, true);
     }
 
     private void FixedUpdate()
@@ -81,11 +86,7 @@ public class HardwareManager : MonoBehaviour
             canNFC = false;
             ShutLights();
         }
-        LightController.Colorize(lightsP1, LIGHT_COLOR.COLOR_RED, true);
-        LightController.Colorize(lightsP2, LIGHT_COLOR.COLOR_BLUE, true);
-        LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_YELLOW, true);
-        if (gameplayManager.allPlayers.Count >= 4)
-            LightController.Colorize(lightsP4, LIGHT_COLOR.COLOR_GREEN, true);
+       
     }
 
     public void OnApplicationFocus(bool hasFocus)
@@ -124,29 +125,35 @@ public class HardwareManager : MonoBehaviour
 
     public void Colorize()
     {
+        Debug.Log("a");
         if (cardManager.playerPlayed != null)
         {
+            Debug.Log("b");
             switch (nbPlayers)
             {
                 case 4:
                     if (cardManager.playerPlayed[0] == false)
                     {
                         LightController.Colorize(lightsP1, LIGHT_COLOR.COLOR_RED, true);
+                        Debug.Log("c");
                     }
 
                     if (cardManager.playerPlayed[1] == false)
                     {
                         LightController.Colorize(lightsP2, LIGHT_COLOR.COLOR_BLUE, true);
+                        Debug.Log("c");
                     }
 
                     if (cardManager.playerPlayed[2] == false)
                     {
                         LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_YELLOW, true);
+                        Debug.Log("c");
                     }
 
                     if (cardManager.playerPlayed[3] == false)
                     {
                         LightController.Colorize(lightsP4, LIGHT_COLOR.COLOR_GREEN, true);
+                        Debug.Log("c");
                     }
 
                     break;
@@ -155,16 +162,19 @@ public class HardwareManager : MonoBehaviour
                     if (cardManager.playerPlayed[0] == false)
                     {
                         LightController.Colorize(lightsP1, LIGHT_COLOR.COLOR_RED, true);
+                        Debug.Log("d");
                     }
 
                     if (cardManager.playerPlayed[1] == false)
                     {
                         LightController.Colorize(lightsP2, LIGHT_COLOR.COLOR_BLUE, true);
+                        Debug.Log("d");
                     }
 
                     if (cardManager.playerPlayed[2] == false)
                     {
                         LightController.Colorize(lightsP3, LIGHT_COLOR.COLOR_YELLOW, true);
+                        Debug.Log("d");
                     }
 
                     break;
