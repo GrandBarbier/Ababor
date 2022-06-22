@@ -70,8 +70,7 @@ public class GameplayManager : MonoBehaviour
   private const string MIXER_SFX = "SfxVolume";
   private const string MIXER_UI = "UiVolume";
     void Awake()
-    { 
-        
+    {
         GetCases();
         for (int i = 0; i < players.Count; i++)
         {
