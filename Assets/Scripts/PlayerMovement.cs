@@ -39,6 +39,10 @@ public class PlayerMovement : MonoBehaviour
     
     public bool isLast;
 
+    public bool isLastPlayer()
+    {
+        return index >= _gameplayManager.players.Count;
+    }
     public PlayerPoint point;
     
     public int index, indexCase;
