@@ -576,6 +576,7 @@ public class GameplayManager : MonoBehaviour
     {
         UiSound.clip = sound;
         UiSound.Play();
+        Debug.Log("sound");
     }
 
     public void ReturnMenu()
