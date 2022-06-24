@@ -90,16 +90,27 @@ public class GameplayManager : MonoBehaviour
         
         musicSlider.onValueChanged.AddListener(SetMusicVolume);
         sfxSlider.onValueChanged.AddListener(SetSfxVolume);
+        SetVolumes();
     }
 
+    void SetVolumes()
+    {
+        musicSlider.value = PlayerPrefs.GetFloat(MIXER_MUSIC);
+        sfxSlider.value = PlayerPrefs.GetFloat(MIXER_SFX);
+    }
+    
     void SetMusicVolume(float value)
     {
         mixer.SetFloat(MIXER_MUSIC, Mathf.Log10(value) * 20);
+        PlayerPrefs.SetFloat(MIXER_MUSIC, value);
+        PlayerPrefs.Save();
     }
     void SetSfxVolume(float value)
     {
         mixer.SetFloat(MIXER_SFX, Mathf.Log10(value) * 20);
         mixer.SetFloat(MIXER_UI, Mathf.Log10(value) * 20);
+        PlayerPrefs.SetFloat(MIXER_SFX, value);
+        PlayerPrefs.Save();
     }
 
     void Start()
