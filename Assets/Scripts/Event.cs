@@ -162,7 +162,7 @@ public class Event : MonoBehaviour
         _eventManager.AddOneEvent();
     }
 
-    public void RemoveLoseCaeses()
+    public void RemoveLoseCases()
     {
         tmpDescription.text = "Enlève une case perte d'or";
         _eventManager.RemoveLoseCases();
