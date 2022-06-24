@@ -167,7 +167,7 @@ public class Objectif : MonoBehaviour
         bool verif = false;
         foreach (PlayerPoint obj in allPlayerPoint )
         {
-            if (obj.numberGainCase == 1 && verif == false && boolVerif[baseObjectif.IndexOf("GoldEarly")] == false)
+            if (obj.numberGainCase == 2 && verif == false && boolVerif[baseObjectif.IndexOf("GoldEarly")] == false)
             {
                
                 verif = true;
@@ -187,7 +187,7 @@ public class Objectif : MonoBehaviour
         foreach (PlayerPoint obj in allPlayerPoint )
         {
             bool verif = obj.objectifVerif[baseObjectif.IndexOf("GoldMid")];   
-            if (obj.numberGainCase >= 2 && verif == false)
+            if (obj.numberGainCase >= 4 && verif == false)
             {
              
                 obj.objectifVerif[baseObjectif.IndexOf("GoldMid")] = true;
@@ -241,7 +241,7 @@ public class Objectif : MonoBehaviour
         foreach (PlayerPoint obj in allPlayerPoint )
         {
             bool verif = obj.objectifVerif[baseObjectif.IndexOf("LoseMid")];   
-            if (obj.numberLoseCase >= 2 && verif == false)
+            if (obj.numberLoseCase >= 3 && verif == false)
             {
                
                 obj.objectifVerif[baseObjectif.IndexOf("LoseMid")] = true;
@@ -345,7 +345,7 @@ public class Objectif : MonoBehaviour
         foreach (PlayerPoint obj in allPlayerPoint )
         {
             bool verif = obj.objectifVerif[actualObjectif.IndexOf("EventMid")];  
-            if (obj.numberEventCase >= 2 && verif == false)
+            if (obj.numberEventCase >= 3 && verif == false)
             {
             
                 obj.objectifVerif[actualObjectif.IndexOf("EventMid")] = true;

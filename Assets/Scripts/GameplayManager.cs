@@ -70,6 +70,11 @@ public class GameplayManager : MonoBehaviour
   private const string MIXER_SFX = "SfxVolume";
   private const string MIXER_UI = "UiVolume";
   
+  
+  public GameObject tuto;
+  public GameObject summary;
+  private GameObject temp;
+  public GameObject pdfTutorial;
     void Awake()
     {
         GetCases();
@@ -588,11 +593,38 @@ public class GameplayManager : MonoBehaviour
     {
         UiSound.clip = sound;
         UiSound.Play();
+        Debug.Log("sound");
     }
 
     public void ReturnMenu()
     {
         SceneManager.LoadScene(0);
+    }
+    
+    public void OpenTuto()
+    {
+        tuto.SetActive(true);
+    }
+    
+    
+    public void OpenTutoText(GameObject text)
+    {
+        temp = text;
+        text.SetActive(true);
+        summary.SetActive(false);
+    }
+
+    public void SummaryBackButton()
+    {
+        if (summary.activeInHierarchy)
+        {
+            pdfTutorial.SetActive(false);
+        }
+        else
+        {
+            temp.SetActive(false);
+            summary.SetActive(true);
+        }
     }
 }
 

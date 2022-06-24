@@ -18,6 +18,9 @@ public class EventManager : MonoBehaviour
     public List<string> eventManagerFunction;
 
     public GameObject eventParticle;
+    public GameObject loseParticle;
+    public GameObject gainParticle;
+    public GameObject neutralParticle;
 
     // Start is called before the first frame update
     void Awake()
@@ -99,6 +102,7 @@ public class EventManager : MonoBehaviour
             loseCases[i].nameFunction = "NeutralCase";
             loseCases[i].baseSecondMat = basicCaseMat;
             loseCases[i].ResetColor();
+            Instantiate(neutralParticle, loseCases[i].transform.position, neutralParticle.transform.rotation);
         }
 
         if (_gameplayManager.cardManager.numberClub == false)
@@ -122,12 +126,14 @@ public class EventManager : MonoBehaviour
                 cases.nameFunction = "LoseCase";
                 cases.baseSecondMat = loseCaseMat;
                 cases.ResetColor();
+                Instantiate(loseParticle, cases.transform.position, gainParticle.transform.rotation);
             }
             else if (cases.nameFunction == "LoseCase")
             {
                 cases.nameFunction = "GainCase";
                 cases.baseSecondMat = gainCaseMat;
                 cases.ResetColor();
+                Instantiate(gainParticle, cases.transform.position, loseParticle.transform.rotation);
             }
         }
 
@@ -163,7 +169,7 @@ public class EventManager : MonoBehaviour
             int rdm = Random.Range(0, nonNeutralCases.Count);
             nonNeutralCases[rdm].baseSecondMat = basicCaseMat;
             nonNeutralCases[rdm].ResetColor();
-
+            Instantiate(neutralParticle, nonNeutralCases[rdm].transform.position, neutralParticle.transform.rotation);
             //activate fog particle system
             hiddenCases.Add(nonNeutralCases[rdm]);
             nonNeutralCases.RemoveAt(rdm);
