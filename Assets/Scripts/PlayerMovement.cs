@@ -49,7 +49,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        transform.position = caseNext[0].transform.position;
         actualCase = caseNext[0];
     }
 

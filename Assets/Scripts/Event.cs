@@ -28,8 +28,8 @@ public class Event : MonoBehaviour
     public Material basicCaseMat,loseCaseMat,gainCaseMat;
 
     public GameObject lossParticle, gainParticle;
-    
-    
+
+    public AudioClip loseCase, gainCase;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -60,6 +60,7 @@ public class Event : MonoBehaviour
         allCase[rdm].nameFunction = "LoseCase";
         allCase[rdm].baseSecondMat = loseCaseMat;
         Instantiate(lossParticle, allCase[rdm].gameObject.transform.position,lossParticle.transform.rotation);
+        allCase[rdm].soundCase.clip = loseCase;
         allCase[rdm].ResetColor();
         if (_gameplayManager.cardManager.numberClub == false)
         {
@@ -89,6 +90,7 @@ public class Event : MonoBehaviour
         allCase[rdm].baseSecondMat = gainCaseMat;
         Instantiate(gainParticle, allCase[rdm].gameObject.transform.position, gainParticle.transform.rotation);
         allCase[rdm].ResetColor();
+        allCase[rdm].soundCase.clip = gainCase;
         if (_gameplayManager.cardManager.numberClub == false)
         {
             _gameplayManager.ChangePlayer();

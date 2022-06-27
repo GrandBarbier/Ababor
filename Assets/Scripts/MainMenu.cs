@@ -12,28 +12,27 @@ public class MainMenu : MonoBehaviour
     public GameObject summary;
     private GameObject temp;
     public GameObject pdfTutorial;
-    
+
     public AudioSource sound;
+
+    public GameObject loadingScreen;
+    public GameObject loadingSprite;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-       
-    }
-    
-    public void ThreePlayerGame()
-    {
-        SceneManager.LoadScene("Scene Three");
+
     }
 
-    public void FourPLayerGame()
+    public void LaunchGame(int id)
     {
-        SceneManager.LoadScene("Scen Expo");
+        StartCoroutine(LoadScenePl(id));
     }
 
     public void OpenSettings()
@@ -66,8 +65,8 @@ public class MainMenu : MonoBehaviour
     {
         tuto.SetActive(true);
     }
-    
-    
+
+
     public void OpenTutoText(GameObject text)
     {
         temp = text;
@@ -87,4 +86,19 @@ public class MainMenu : MonoBehaviour
             summary.SetActive(true);
         }
     }
+
+
+    IEnumerator LoadScenePl(int id)
+    {
+        float rotate = 0;
+        loadingScreen.SetActive(true);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(id);
+        while (!operation.isDone)
+        { 
+            loadingSprite.transform.Rotate(new Vector3(0,0,rotate));
+            rotate = 45 * Time.deltaTime;
+            yield return null;
+        }
+    }
+
 }

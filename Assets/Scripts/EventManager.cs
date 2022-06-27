@@ -22,6 +22,10 @@ public class EventManager : MonoBehaviour
     public GameObject gainParticle;
     public GameObject neutralParticle;
 
+    public AudioClip gainCase;
+    public AudioClip loseCase;
+    public AudioClip neutralCase;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -69,6 +73,7 @@ public class EventManager : MonoBehaviour
             Instantiate(eventParticle, neutralCases[i].gameObject.transform.position, eventParticle.transform.rotation);
             neutralCases[i].baseSecondMat = eventCaseMat;
             neutralCases[i].ResetColor();
+            neutralCases[i].soundCase.clip = null;
             neutralCases.Clear();
         }
 
@@ -102,6 +107,7 @@ public class EventManager : MonoBehaviour
             loseCases[i].nameFunction = "NeutralCase";
             loseCases[i].baseSecondMat = basicCaseMat;
             loseCases[i].ResetColor();
+            loseCases[i].soundCase.clip = neutralCase;
             Instantiate(neutralParticle, loseCases[i].transform.position, neutralParticle.transform.rotation);
         }
 
@@ -127,6 +133,7 @@ public class EventManager : MonoBehaviour
                 cases.baseSecondMat = loseCaseMat;
                 cases.ResetColor();
                 Instantiate(loseParticle, cases.transform.position, gainParticle.transform.rotation);
+                cases.soundCase.clip = loseCase;
             }
             else if (cases.nameFunction == "LoseCase")
             {
@@ -134,6 +141,7 @@ public class EventManager : MonoBehaviour
                 cases.baseSecondMat = gainCaseMat;
                 cases.ResetColor();
                 Instantiate(gainParticle, cases.transform.position, loseParticle.transform.rotation);
+                cases.soundCase.clip = gainCase;
             }
         }
 
@@ -195,18 +203,21 @@ public class EventManager : MonoBehaviour
             caseToUnhide.baseSecondMat = gainCaseMat;
             //deactivate fog particle
             caseToUnhide.ResetColor();
+            Instantiate(neutralParticle, caseToUnhide.transform.position, neutralParticle.transform.rotation);
         }
         else if (caseToUnhide.nameFunction == "LoseCase")
         {
             caseToUnhide.baseSecondMat = loseCaseMat;
             //deactivate fog particle
             caseToUnhide.ResetColor();
+            Instantiate(neutralParticle, caseToUnhide.transform.position, neutralParticle.transform.rotation);
         }
         else if (caseToUnhide.nameFunction == "EventCase")
         {
             caseToUnhide.baseSecondMat = eventCaseMat;
             //deactivate fog particle
             caseToUnhide.ResetColor();
+            Instantiate(neutralParticle, caseToUnhide.transform.position, neutralParticle.transform.rotation);
         }
     }
 
