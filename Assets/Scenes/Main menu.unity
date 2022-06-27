@@ -4074,7 +4074,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1374801306}
   m_HandleRect: {fileID: 309276138}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
@@ -16493,7 +16493,7 @@ AudioSource:
   m_GameObject: {fileID: 1164127168}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7636604756008886261, guid: 33950380a7e09e34e93f9b2f8ef13571, type: 2}
   m_audioClip: {fileID: 8300000, guid: 93685e5b57f86e24098bc678d60f7520, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.7
@@ -22470,6 +22470,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1535772227}
   m_CullTransparentMesh: 1
+--- !u!1 &1536119609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1536119611}
+  - component: {fileID: 1536119610}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1536119610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536119609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95ba9242a2a77fa48952643e0bb235f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 33950380a7e09e34e93f9b2f8ef13571, type: 2}
+  musicSlider: {fileID: 1976064265}
+  sfxSlider: {fileID: 268510676}
+--- !u!4 &1536119611
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536119609}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 686.5253, y: 514.4714, z: 149.969}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1543468359
 GameObject:
   m_ObjectHideFlags: 0
@@ -28794,7 +28840,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1815769349}
   m_HandleRect: {fileID: 117776647}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
