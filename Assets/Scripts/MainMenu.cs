@@ -72,6 +72,8 @@ public class MainMenu : MonoBehaviour
         temp = text;
         text.SetActive(true);
         summary.SetActive(false);
+        pdfTutorial.GetComponentInChildren<ScrollRect>().enabled = false;
+
     }
 
     public void SummaryBackButton()
@@ -84,6 +86,7 @@ public class MainMenu : MonoBehaviour
         {
             temp.SetActive(false);
             summary.SetActive(true);
+            pdfTutorial.GetComponentInChildren<ScrollRect>().enabled = true;
         }
     }
 
