@@ -89,8 +89,7 @@ public class MainMenu : MonoBehaviour
             pdfTutorial.GetComponentInChildren<ScrollRect>().enabled = true;
         }
     }
-
-
+    
     IEnumerator LoadScenePl(int id)
     {
         float rotate = 0;

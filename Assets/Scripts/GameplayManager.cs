@@ -75,6 +75,9 @@ public class GameplayManager : MonoBehaviour
   public GameObject summary;
   private GameObject temp;
   public GameObject pdfTutorial;
+  public GameObject loadingScreen;
+  public GameObject loadingSprite;
+  
     void Awake()
     {
         GetCases();
@@ -598,7 +601,8 @@ public class GameplayManager : MonoBehaviour
 
     public void ReturnMenu()
     {
-        SceneManager.LoadScene(0);
+        hardManager.ShutLights();
+        StartCoroutine(LoadSceneMenu());
     }
     
     public void OpenTuto()
@@ -624,6 +628,19 @@ public class GameplayManager : MonoBehaviour
         {
             temp.SetActive(false);
             summary.SetActive(true);
+        }
+    }
+    
+    IEnumerator LoadSceneMenu()
+    {
+        float rotate = 0;
+        loadingScreen.SetActive(true);
+        AsyncOperation operation = SceneManager.LoadSceneAsync("Main menu");
+        while (!operation.isDone)
+        { 
+            loadingSprite.transform.Rotate(new Vector3(0,0,rotate));
+            rotate = 45 * Time.deltaTime;
+            yield return null;
         }
     }
 }
