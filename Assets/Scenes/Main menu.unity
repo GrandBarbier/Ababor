@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1499,7 +1499,7 @@ RectTransform:
   m_GameObject: {fileID: 117776646}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 65572412}
   m_RootOrder: 0
@@ -1529,7 +1529,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: cc08cf266eda78540995f360ba2e368a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4547,7 +4547,7 @@ RectTransform:
   m_GameObject: {fileID: 309276137}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 213984003}
   m_RootOrder: 0
@@ -4577,7 +4577,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: cc08cf266eda78540995f360ba2e368a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7634,7 +7634,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Bienvenue dans Ababor ! ici, gloire et richesse vous attendent tout autant
+  m_text: "Bienvenue dans Ababor ! Ici, gloire et richesse vous attendent, ainsi
     que trahisons et coups bas. Pour vous aider, le mode \u201CGuide\u201D est activ\xE9
     automatiquement. Vous pouvez le d\xE9sactiver en appuyant sur le Bouton \u201CGuide\u201D
     <sprite=6> durant la partie."
@@ -9793,8 +9793,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Marin d'eau douce, vous avez activ\xE9 une case \xE9v\xE9nement <sprite=8>!
-    L\u2019effet d\u2019un \xE9v\xE8nement s\u2019affiche lors de son d\xE9clenchement."
+  m_text: "Les cases Ev\xE8nement <sprite=8> am\xE8nent des modificateurs al\xE9atoires,
+    qui pimenteront votre partie ! \nUn seul \xE9v\xE8nement peut \xEAtre activ\xE9
+    par tour."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -15029,8 +15030,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Le Marchand propose deux articles: soit une carte interaction suppl\xE9mentaire
-    \xE0 jouer pour ce tour uniquement, soit un point d\xE9placement suppl\xE9mentaire
+  m_text: "Les cases Marchand <sprite=8> proposent deux articles: soit une carte
+    interaction suppl\xE9mentaire, soit un point d\xE9placement suppl\xE9mentaire
     qui dure jusqu\u2019\xE0 la fin de la partie."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -15299,7 +15300,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Event
+  m_text: "Ev\xE8nement"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -16172,8 +16173,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 8bdcc06fca6072746a56aa6fd11c0385, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -19845,8 +19846,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: bfb38c0b58f96ff469843d0944670b2e, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -20631,7 +20632,7 @@ RectTransform:
   m_GameObject: {fileID: 1425876801}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.719847, y: 0.410583, z: 1}
+  m_LocalScale: {x: 1.04, y: 0.410583, z: 1}
   m_Children: []
   m_Father: {fileID: 539925448}
   m_RootOrder: 0
@@ -21249,10 +21250,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Hissez les voiles, vous avez un point de d\xE9placement suppl\xE9mentaire
-    ! Vous pouvez d\xE9sormais vous d\xE9placer de 1 \xE0 4 cases. \nCet achat peut
-    \xEAtre r\xE9p\xE9t\xE9 \xE0 chaque fois que vous rencontrez un Marchand. Bient\xF4t,
-    vous filerez comme le vent ! "
+  m_text: "Lorsque vous achetez un point de d\xE9placement au marchand <sprite=3>,
+    vous pouvez avancer d'une case plus loin lors de votre mouvement !\nCet achat
+    peut \xEAtre r\xE9p\xE9t\xE9 \xE0 chaque fois que vous rencontrez un Marchand."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -22976,8 +22976,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Durant le jeu, vous pouvez jouer une carte interaction \xE0 tout moment,
-    sauf quand le joueur actif effectue son d\xE9placement.\nServez-vous en pour
-    saborder les plans de vos coll\xE8gues pirates !"
+    sauf quand le joueur actif effectue son d\xE9placement.\n\nVous ne pouvez jouer
+    qu'une carte par tour, apr\xE8s quoi vous vous d\xE9fausserez des deux autres."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -23856,10 +23856,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Tout d\u2019abord, distribuez 3 cartes \"Interaction\" \xE0 chaque joueur
-    en suivant l\u2019ordre de jeu, ce que vous ferez \xE0 chaque nouveau tour de
-    table. La liste des effets des cartes est consultables avec le bouton \u201CCartes
-    interactions\u201D <sprite=0>."
+  m_text: "Au d\xE9but de chaque tour, distribuez 3 cartes Interaction \xE0 chaque
+    joueur.\nLes effets des cartes peuvent \xEAtre consul\xE9s \xE0 tout moment en
+    cliquant sur la l\xE9gende  <sprite=0>."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
@@ -26621,8 +26620,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: bfb38c0b58f96ff469843d0944670b2e, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -28238,8 +28237,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 8bdcc06fca6072746a56aa6fd11c0385, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -29184,10 +29183,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Vous avez une carte interaction suppl\xE9mentaire ! Vous pouvez donc en
-    jouer deux ce tour ci avant de d\xE9fausser le reste. \nSi vous avez d\xE9j\xE0
-    jou\xE9 votre premi\xE8re carte, consid\xE9rez celle-ci comme une seconde chance
-    !"
+  m_text: "Lorsque vous achetez une carte Interaction suppl\xE9mentaire au marchand
+    <sprite=3>, vous pouvez en piocher une imm\xE9diatement, et vous pourrez en jouer
+    deux \xE0 ce tour au lieu d'une seule. \nSi vous avez d\xE9j\xE0 jou\xE9 votre
+    premi\xE8re carte, consid\xE9rez celle-ci comme une seconde chance !"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
   m_sharedMaterial: {fileID: -5791185584877052724, guid: 895dcd644ca5fee4db7e695c16dfdd10, type: 2}
