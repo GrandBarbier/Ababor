@@ -162,7 +162,6 @@ public class PlayerMovement : MonoBehaviour
                     if (hit.transform.gameObject == cases.gameObject && cases.isInRange)
                     {
                         hitObject = cases.gameObject;
-                        
                         cases.ShowIfTarget();
                         child.transform.position = cases.playerSpot[index].transform.position;
                         caseNext[0] = cases;
