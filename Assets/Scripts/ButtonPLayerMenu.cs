@@ -33,12 +33,6 @@ public class ButtonPLayerMenu : MonoBehaviour
             imageButton.sprite = clickedSprite;
             ResetOtherCard1();
         }
-        else
-        {
-            imageButton.sprite = originalSprite;
-            ResetOtherCard1();
-        }
-        
     }
 
     public void ResetOtherCard1()
