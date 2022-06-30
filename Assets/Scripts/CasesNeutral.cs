@@ -45,6 +45,9 @@ public class CasesNeutral : MonoBehaviour
 
     public AudioSource soundCase;
 
+    public AudioClip originalSound;
+    public AudioClip cantEventSound;
+
     public bool canEvent;
     // Start is called before the first frame update
     void Awake()
@@ -73,7 +76,10 @@ public class CasesNeutral : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (canEvent == false)
+        {
+            soundCase.clip = cantEventSound;
+        }
     }
 
     public void Outline(List<CasesNeutral> list, float remain, PlayerMovement player)
@@ -244,6 +250,7 @@ public class CasesNeutral : MonoBehaviour
     {
         if (canEvent)
         {
+            soundCase.clip = originalSound;
             eventS.GetEvent();
             eventS.Invoke(eventS.eventName, 0);
             _gameplayManager.ResetLast();
