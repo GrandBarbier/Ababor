@@ -55,8 +55,10 @@ public class EndMenu : MonoBehaviour
         foreach (var player in _gameplayManager.allPlayers) 
             player.point.point += player.point.gold;
      
-        for (int i = 0; i < 6; i++) {
-            textGoal[i].text = goal.actualDescription[i];
+        for (int i = 0; i < 6; i++)
+        {
+            textGoal[i].text = goal.actualDescription[i].Remove(goal.actualDescription[i].IndexOf("gagne"));
+            
             objectivesPoint[i] = _gameplayManager.objectif.allScore[i];
             textObjPts[i].text = objectivesPoint[i].ToString() + "pts"; 
         }

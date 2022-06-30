@@ -78,7 +78,6 @@ public class CasesNeutral : MonoBehaviour
 
     public void Outline(List<CasesNeutral> list, float remain, PlayerMovement player)
     {
-        Debug.Log(remain);
         if (remain > 0)
         {
             foreach (CasesNeutral obj in nextCases )
