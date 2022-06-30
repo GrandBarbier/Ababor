@@ -33,6 +33,7 @@ public class Objectif : MonoBehaviour
     public List<bool> boolVerif ;
     
     public List<TMP_Text> text;
+    public List<TMP_Text> point;
     // public List<TMP_Text> score;
     
 
@@ -53,12 +54,12 @@ public class Objectif : MonoBehaviour
         {
             int rdm = Random.Range(0, allEarlyObjectifs.Count);
             actualDescription.Add(descriptionsEarly[rdm]);
-            Debug.Log(rdm);
+            
             allScore.Add(scoreEarly[rdm]);
-            Debug.Log(rdm);
+            
             actualObjectif.Add(allEarlyObjectifs[rdm]);
             baseObjectif.Add(allEarlyObjectifs[rdm]);
-            Debug.Log(rdm);
+            
             descriptionsEarly.Remove(descriptionsEarly[rdm]);
             scoreEarly.Remove(scoreEarly[rdm]);
             allEarlyObjectifs.Remove(allEarlyObjectifs[rdm]);
@@ -100,6 +101,7 @@ public class Objectif : MonoBehaviour
         for (int i = 0; i < text.Count; i++)
         {
             text[i].text = actualDescription[i];
+            point[i].text = allScore[i] + " PTS";
         }
     }
 
