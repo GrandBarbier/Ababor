@@ -101,7 +101,7 @@ public class Objectif : MonoBehaviour
         for (int i = 0; i < text.Count; i++)
         {
             text[i].text = actualDescription[i];
-            point[i].text = allScore[i] + " PTS";
+            point[i].text = allScore[i].ToString() ;
         }
     }
 

@@ -57,8 +57,7 @@ public class EndMenu : MonoBehaviour
      
         for (int i = 0; i < 6; i++)
         {
-            textGoal[i].text = goal.actualDescription[i].Remove(goal.actualDescription[i].IndexOf("gagne"));
-            
+            textGoal[i].text = goal.actualDescription[i];
             objectivesPoint[i] = _gameplayManager.objectif.allScore[i];
             textObjPts[i].text = objectivesPoint[i].ToString() + "pts"; 
         }

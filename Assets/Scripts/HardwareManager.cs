@@ -225,8 +225,8 @@ public class HardwareManager : MonoBehaviour
     {
         if (cardManager.menu.activeSelf == false && cardManager.targetMenu.activeSelf == false && cardManager.numberClub == false && gameplayManager.currentstate.ToString() != "Moving")
         {
-            text.text = ComparePlayer(_device).player + " " + _tag.Data + " " + _tag.Type.ToString() + " added on " +
-                        _device.ToString();
+           // text.text = ComparePlayer(_device).player + " " + _tag.Data + " " + _tag.Type.ToString() + " added on " +
+                      //  _device.ToString();
             descriptionEvent.SetActive(false);
             card = _tag.Data;
             if (canNFC)

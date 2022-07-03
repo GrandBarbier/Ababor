@@ -27,6 +27,7 @@ public class NFCConvertor : MonoBehaviour
                  break;
              
              case ";G":
+                 description = "Annulez et copiez la dernière carte jouer";
                  if (cardManager.oneTarget && cardManager.waitMenu.activeSelf)
                  {
                       cardManager.OpenCardMenu1Target("Jack", player,description,player.point.index);
@@ -68,6 +69,7 @@ public class NFCConvertor : MonoBehaviour
                  break;
              
              case ";B":
+                 description = "Annulez et copiez la dernière carte jouer";
                  if (cardManager.oneTarget && cardManager.waitMenu.activeSelf)
                  {
                      cardManager.OpenCardMenu1Target("Jack", player,description,player.point.index);
@@ -108,6 +110,7 @@ public class NFCConvertor : MonoBehaviour
                  cardManager.oneTarget = true;
                  break;
              case ";R":
+                 description = "Annulez et copiez la dernière carte jouer";
                  if (cardManager.oneTarget && cardManager.waitMenu.activeSelf)
                  {
                      cardManager.OpenCardMenu1Target("Jack", player,description,player.point.index);
@@ -147,6 +150,7 @@ public class NFCConvertor : MonoBehaviour
                  cardManager.oneTarget = true;
                  break;
              case ";Y":
+                 description = "Annulez et copiez la dernière carte jouer";
                  if (cardManager.oneTarget && cardManager.waitMenu.activeSelf)
                  {
                      cardManager.OpenCardMenu1Target("Jack", player,description,player.point.index);

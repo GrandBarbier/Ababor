@@ -93,7 +93,8 @@ public class GameplayManager : MonoBehaviour
         
         musicSlider.onValueChanged.AddListener(SetMusicVolume);
         sfxSlider.onValueChanged.AddListener(SetSfxVolume);
-        SetVolumes();
+       SetMusicVolume(1);
+       SetSfxVolume(1);
     }
 
     void SetVolumes()
